@@ -17,8 +17,7 @@
       --link-color: #111;
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       
-      /* Hover Effect Colors (Day Mode) */
-      --highlight-bg: #E3E3E3;
+      /* Tooltip Colors */
       --tooltip-bg: #050505;
       --tooltip-text: #fff;
       
@@ -36,8 +35,7 @@
       --secondary-text: #a0a0a0;
       --link-color: #fff;
       
-      /* Hover Effect Colors (Night Mode) */
-      --highlight-bg: #2a2a2a;
+      /* Tooltip Colors (Night Mode) */
       --tooltip-bg: #ffffff;
       --tooltip-text: #000000;
     }
@@ -117,7 +115,7 @@
       color: var(--secondary-text);
       font-weight: 400; 
       margin-top: 24px; 
-      margin-bottom: 24px; /* Reduced bottom margin to bring highlighting closer */
+      margin-bottom: 24px; 
     }
     
     h4.label.mt-large { margin-top: 60px; }
@@ -151,25 +149,8 @@
     */
     .job-list {
       position: relative;
-      /* Remove default gaps, handle spacing via padding in items */
       display: flex;
       flex-direction: column;
-    }
-
-    /* The Moving Highlight Background */
-    .hover-bg {
-      position: absolute;
-      left: -20px; /* Expands slightly left */
-      width: calc(100% + 40px); /* Expands left and right */
-      background-color: var(--highlight-bg);
-      border-radius: 8px;
-      z-index: 0;
-      pointer-events: none; /* Let mouse clicks pass through */
-      
-      /* Smooth movement */
-      transition: top 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                  height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
-                  background-color 0.3s ease;
     }
 
     /* The Floating Tooltip */
@@ -219,10 +200,10 @@
       grid-template-columns: 1fr 1fr;
       column-gap: 80px;
       
-      /* Padding creates the spacing now, instead of margin */
+      /* Padding maintains vertical spacing */
       padding: 24px 0; 
       
-      z-index: 1; /* Above the highlight */
+      z-index: 1; 
       cursor: default;
     }
     
@@ -253,7 +234,7 @@
 
     /* Mobile: Disable hover effects */
     @media (max-width: 768px) {
-      .hover-bg, .hover-tooltip { display: none !important; }
+      .hover-tooltip { display: none !important; }
       .job-row { padding: 0; margin-bottom: 40px; }
       .job-list { display: block; }
     }
@@ -332,12 +313,11 @@
     <!-- JOB LIST WRAPPER FOR HOVER EFFECTS -->
     <div class="job-list animated fadeIn three">
         
-        <!-- Animated Background & Tooltip -->
-        <div class="hover-bg" id="hover-bg"></div>
+        <!-- Tooltip ONLY (No Gray Background) -->
         <div class="hover-tooltip" id="hover-tooltip">Loading tooltip...</div>
 
         <!-- Job 1 -->
-        <div class="job-row" data-tooltip="95% growth in AI SDK demo usage during sales">
+        <div class="job-row" data-tooltip="95% growth in demo usage during sales">
           <div class="job-company">
             <h2><a href="https://dropbox.tech/machine-learning/mobius-labs-aana-dropbox-multimodal-understanding" target="_blank">Mobius Labs acquired by Dropbox</a></h2>
           </div>  
@@ -348,7 +328,7 @@
         </div>
 
         <!-- Job 2 -->
-        <div class="job-row" data-tooltip="63% reduction in time across keyword, AI, navigation search">
+        <div class="job-row" data-tooltip="Led design system overhaul">
           <div class="job-company">
             <h2><a href="https://canarymail.io/" target="_blank">Canary Mail</a></h2>
           </div>  
@@ -426,22 +406,16 @@
       document.getElementById("counter").innerHTML = days + " days";
   }, 1000);
 
-  // 3. HOVER SPOTLIGHT LOGIC
+  // 3. HOVER TOOLTIP LOGIC (No background movement)
   const jobRows = document.querySelectorAll('.job-row');
-  const highlight = document.getElementById('hover-bg');
   const tooltip = document.getElementById('hover-tooltip');
   
-  function updateHighlight(element) {
-      // 1. Move Highlight
-      highlight.style.top = element.offsetTop + "px";
-      highlight.style.height = element.offsetHeight + "px";
-      
-      // 2. Update Tooltip Text
+  function updateTooltip(element) {
+      // 1. Update Tooltip Text
       const text = element.getAttribute('data-tooltip');
       tooltip.innerText = text;
       
-      // 3. Move Tooltip (Center vertically relative to the row)
-      // We use (offsetTop + offsetHeight/2) to find the center line
+      // 2. Move Tooltip (Center vertically relative to the row)
       const centerLine = element.offsetTop + (element.offsetHeight / 2);
       tooltip.style.top = centerLine + "px";
       tooltip.style.opacity = "1";
@@ -449,16 +423,15 @@
 
   // Initialize on the first item
   if (jobRows.length > 0) {
-      // Wait a tick for layout to settle
       setTimeout(() => {
-          updateHighlight(jobRows[0]);
+          updateTooltip(jobRows[0]);
       }, 100);
   }
 
   // Add event listeners
   jobRows.forEach(row => {
       row.addEventListener('mouseenter', function() {
-          updateHighlight(this);
+          updateTooltip(this);
       });
   });
 
