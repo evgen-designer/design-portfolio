@@ -19,7 +19,7 @@
       
       /* Layout Dimensions */
       --max-width: 1148px;
-      --sidebar-width: 220px;
+      --sidebar-width: 220px; /* EXACT 220px SPACE */
       --top-spacing: 120px;
       --bottom-spacing: 140px;
     }
@@ -54,19 +54,21 @@
       margin: 0 auto;
       padding-top: var(--top-spacing);
       padding-bottom: var(--bottom-spacing);
-      padding-left: 20px;
-      padding-right: 20px;
       
+      /* Removed padding-left/right so the grid is exactly 220px from the edge */
       display: grid;
-      /* Left column (Icon) | Right Column (Content) */
+      
+      /* Left column (Icon/Space) = 220px | Right Column (Content) = Rest */
       grid-template-columns: var(--sidebar-width) 1fr; 
     }
 
-    /* Mobile Responsive: Stack columns */
+    /* Mobile Responsive: Stack columns & add padding back for small screens */
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr;
         padding-top: 60px;
+        padding-left: 20px;
+        padding-right: 20px;
       }
       .icon-col {
         margin-bottom: 40px;
@@ -119,6 +121,7 @@
     */
     .icon-col {
       padding-top: 10px; /* Align visually with H1 */
+      /* Defines the content inside the 220px sidebar */
     }
 
     .theme-toggle {
@@ -134,11 +137,11 @@
     .theme-toggle svg {
       width: 24px;
       height: 24px;
+      display: block;
     }
 
     /* 
       STRICT VISIBILITY LOGIC 
-      This ensures the circle (sun) is NEVER visible in Day mode
     */
 
     /* Default (Day Mode) */
@@ -147,7 +150,7 @@
       fill: #333;
     }
     body.day .icon-sun {
-      display: none !important; /* Forces the sun (and its circle) to vanish */
+      display: none !important; 
     }
 
     /* Night Mode */
@@ -224,7 +227,7 @@
 
 <div class="container animated fadeIn one">
   
-  <!-- LEFT COLUMN: Theme Toggle -->
+  <!-- LEFT COLUMN (Sidebar): Exactly 220px wide -->
   <div class="icon-col">
     <div id="theme-btn" class="theme-toggle">
         
@@ -233,9 +236,8 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
 
-        <!-- NIGHT ICON: SUN (Hidden in Day Mode via CSS) -->
+        <!-- NIGHT ICON: SUN WITH RAYS -->
         <svg class="icon-sun" viewBox="0 0 24 24">
-             <!-- This circle is ONLY visible when body class is 'night' -->
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
