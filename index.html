@@ -40,10 +40,7 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       font-family: var(--font-family);
-      
-      /* CHANGED: Base font size from 18px to 16px */
       font-size: 16px; 
-      
       line-height: 1.6;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
@@ -79,7 +76,6 @@
       ---------------------------------------
     */
     h1 {
-      /* CHANGED: from 32px to 20px */
       font-size: 20px;
       font-weight: 700;
       margin-bottom: 32px;
@@ -102,8 +98,9 @@
       border-bottom: 1px solid var(--link-color);
     }
 
+    /* CHANGED: Reduced spacer height significantly */
     .spacer48 {
-      height: 48px;
+      height: 16px; 
     }
 
     h4.label {
@@ -111,11 +108,10 @@
       letter-spacing: 1.5px;
       text-transform: uppercase;
       color: var(--secondary-text);
-      
-      /* CHANGED: Regular weight (not bold) */
       font-weight: 400; 
       
-      margin-top: 60px;
+      /* CHANGED: Reduced margin-top to bring it closer to text above */
+      margin-top: 24px; 
       margin-bottom: 40px;
     }
 
@@ -124,7 +120,7 @@
       ---------------------------------------
     */
     .icon-col {
-      padding-top: 5px; /* Adjusted slightly to align with the smaller H1 */
+      padding-top: 5px; 
     }
 
     .theme-toggle {
@@ -143,9 +139,7 @@
       display: block;
     }
 
-    /* 
-      STRICT VISIBILITY LOGIC 
-    */
+    /* STRICT VISIBILITY LOGIC */
     body.day .icon-moon {
       display: block !important;
       fill: #333;
@@ -171,17 +165,19 @@
       grid-template-columns: 1fr 1fr;
       margin-bottom: 40px;
       max-width: 580px;
+      
+      /* CHANGED: Added large gap to separate columns and force wrapping */
+      column-gap: 80px; 
     }
     
     .job-company h2 {
-      /* CHANGED: From 20px to 16px */
       font-size: 16px;
       font-weight: 700;
       margin: 0;
+      line-height: 1.4; /* Improves readability when text wraps */
     }
     
     .job-details h3 {
-      /* Adjusted to 16px to match the Company Name size change */
       font-size: 16px;
       font-weight: 400;
       margin: 0;
