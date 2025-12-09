@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Eugene Evgen - AI-Powered Product Designer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <style>
+    /* 
+      1. BASIC SETUP & VARIABLES 
+      ---------------------------------------
+    */
+    :root {
+      --bg-color: #F6F6F6;
+      --text-color: #111;
+      --secondary-text: #777;
+      --link-color: #111;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      
+      /* Layout Dimensions */
+      --max-width: 1148px;
+      --sidebar-width: 220px;
+      --top-spacing: 120px;
+      --bottom-spacing: 140px;
+    }
+
+    /* Dark Mode Variables */
+    body.night {
+      --bg-color: #1a1a1a;
+      --text-color: #f0f0f0;
+      --secondary-text: #a0a0a0;
+      --link-color: #fff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-family);
+      font-size: 18px;
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* 
+      2. LAYOUT GRID 
+      ---------------------------------------
+    */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding-top: var(--top-spacing);
+      padding-bottom: var(--bottom-spacing);
+      padding-left: 20px;
+      padding-right: 20px;
+      
+      display: grid;
+      /* Left column (Icon) | Right Column (Content) */
+      grid-template-columns: var(--sidebar-width) 1fr; 
+    }
+
+    /* Mobile Responsive: Stack columns */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding-top: 60px;
+      }
+      .icon-col {
+        margin-bottom: 40px;
+      }
+    }
+
+    /* 
+      3. TYPOGRAPHY & ELEMENTS 
+      ---------------------------------------
+    */
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 24px;
+      max-width: 580px; /* Limits line length for readability */
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    a:hover {
+      border-bottom: 1px solid var(--link-color);
+    }
+
+    .spacer48 {
+      height: 48px;
+    }
+
+    h4.label {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--secondary-text);
+      margin-top: 60px;
+      margin-bottom: 40px;
+    }
+
+    /* 
+      4. ICON (Day/Night Toggle) 
+      ---------------------------------------
+    */
+    .icon-col {
+      padding-top: 10px; /* Align visually with H1 */
+    }
+
+    .theme-toggle {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      transition: opacity 0.2s;
+    }
+
+    /* Strict sizing for SVGs */
+    .theme-toggle svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    /* 
+       Mode Logic:
+       .icon-moon is shown in Day Mode (Crescent Moon)
+       .icon-sun is shown in Night Mode (Sun with rays)
+    */
+    
+    .icon-sun { display: none; }
+    .icon-moon { display: block; fill: #333; }
+
+    /* When body has class 'night' */
+    body.night .icon-sun { 
+      display: block; 
+      fill: #fff; 
+      stroke: #fff; 
+    }
+    body.night .icon-moon { display: none; }
+
+    /* 
+      5. JOB LIST GRID 
+      ---------------------------------------
+    */
+    .job-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* Equal width columns for Company and Role */
+      margin-bottom: 40px;
+      max-width: 580px; /* Align with paragraph width */
+    }
+    
+    .job-company h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+    }
+    
+    .job-details h3 {
+      font-size: 18px;
+      font-weight: 400;
+      margin: 0;
+    }
+    .job-details h4 {
+      font-size: 14px;
+      color: var(--secondary-text);
+      font-weight: 400;
+      margin: 4px 0 0 0;
+    }
+    
+    #rdio-psa {
+      font-size: 12px;
+      color: var(--secondary-text);
+      margin-top: 4px;
+    }
+
+    /* 
+      6. ANIMATIONS 
+      ---------------------------------------
+    */
+    .animated {
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+    .fadeIn {
+      animation-name: fadeIn;
+    }
+    
+    /* Stagger delays */
+    .one { animation-delay: 0.1s; }
+    .two { animation-delay: 0.5s; }
+    .three { animation-delay: 0.9s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
+</head>
+
+<body class="day">
+
+<div class="container animated fadeIn one">
+  
+  <!-- LEFT COLUMN: Theme Toggle -->
+  <div class="icon-col">
+    <div id="theme-btn" class="theme-toggle">
+        
+        <!-- Day Mode Icon: CRESCENT MOON (No circle/dot next to it) -->
+        <svg class="icon-moon" viewBox="0 0 24 24" width="24" height="24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+
+        <!-- Night Mode Icon: SUN WITH RAYS -->
+        <svg class="icon-sun" viewBox="0 0 24 24" width="24" height="24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN: Content -->
+  <div class="content-col">
+    <h1>Hi, I'm Eugene.</h1>
+
+    <div class="animated fadeIn two">
+      <p>
+        Some people call me Evgen. I’ve been designing at 
+        <a href="https://www.gocanopy.tech/" target="_blank">GoCanopy</a> for the last 
+        <span id="counter">...</span>.
+      </p>
+
+      <p>
+        My research-driven prototype helped secure a Fortune 500 client and advance our institutional real estate investing platform with AI capabilities - analytical, forecasting, agentic, generative, and conversational.
+      </p>
+
+      <p>
+        I live in Porto, Portugal. You can keep up with me on 
+        <a href="https://www.threads.com/@bucklajean" target="_blank">Threads</a> or 
+        <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank">LinkedIn</a>.
+      </p>
+
+      <div class="spacer48"></div>
+    </div>
+
+    <h4 class="label animated fadeIn three">PREVIOUSLY</h4> 
+
+    <!-- Job 1 -->
+    <div class="job-row animated fadeIn three">
+      <div class="job-company">
+        <h2><a href="https://dropbox.tech/machine-learning/mobius-labs-aana-dropbox-multimodal-understanding" target="_blank">Mobius Labs acquired by Dropbox</a></h2>
+      </div>  
+      <div class="job-details">
+        <h3>Senior Product Designer</h3>
+        <h4>2022-2023</h4>
+      </div>
+    </div>
+
+    <!-- Job 2 -->
+    <div class="job-row animated fadeIn three">
+      <div class="job-company">
+        <h2><a href="https://canarymail.io/" target="_blank">Canary Mail</a></h2>
+      </div>  
+      <div class="job-details">
+        <h3>Senior Product Designer</h3>
+        <h4>2025</h4>
+      </div>
+    </div>  
+
+    <!-- Job 3 -->
+    <div class="job-row animated fadeIn three">
+      <div class="job-company">
+        <h2><a href="https://www.monocleapp.co/" target="_blank">Monocle</a></h2>
+      </div>  
+      <div class="job-details">
+        <h3>Senior Product Designer</h3>
+        <h4>2024</h4>
+      </div>
+    </div> 
+
+    <!-- Job 4 -->
+    <div class="job-row animated fadeIn three">
+      <div class="job-company">
+        <h2><a href="https://xebia.com/" target="_blank">Xebia</a></h2>
+      </div>  
+      <div class="job-details">
+        <h3>Senior UI Designer</h3>
+        <h4>2017-2021</h4>
+      </div>
+    </div> 
+
+  </div> <!-- End Content Col -->
+</div> <!-- End Container -->
+
+<!-- SCRIPTS -->
+<script>
+  // 1. Day / Night Mode Toggle
+  const themeBtn = document.getElementById('theme-btn');
+  const body = document.body;
+
+  themeBtn.addEventListener('click', function() {
+      if (body.classList.contains('day')) {
+          body.classList.remove('day');
+          body.classList.add('night');
+      } else {
+          body.classList.remove('night');
+          body.classList.add('day');
+      }
+  });
+
+  // 2. Counter
+  // Start date: Sep 4, 2024 09:00:00
+  var startDate = new Date("Sep 4, 2024 09:00:00").getTime();
+
+  var timer = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = now - startDate;
+      
+      // Only calculate days
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      
+      // Update HTML
+      document.getElementById("counter").innerHTML = days + " days";
+  }, 1000);
+</script>
+
+</body>
+</html>
