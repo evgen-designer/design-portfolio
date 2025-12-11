@@ -5,9 +5,54 @@
   <title>Eugene Evgen - AI-Driven Product Designer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
+  <!-- 1. PRECONNECT (Performance) -->
+  <link rel="preconnect" href="https://www.google-analytics.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.clarity.ms">
+
+  <!-- 2. FAVICONS -->
+  <link rel="icon" href="images/favicon.ico" sizes="any">
+  <link rel="icon" href="images/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <!-- 3. SEO META TAGS -->
+  <meta name="description" content="Portfolio of Eugene Evgen, an AI-driven Product Designer helping companies like GoCanopy and Dropbox build next-gen interfaces.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://evgendesigner.com/">
+
+  <!-- 4. SOCIAL PREVIEWS (Open Graph / Facebook) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Eugene Evgen - AI-Driven Product Designer">
+  <meta property="og:description" content="Design for AI, forecasting, and multimodal interfaces.">
+  <meta property="og:image" content="https://evgendesigner.com/images/social-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- 5. TWITTER CARDS -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Eugene Evgen - AI-Driven Product Designer">
+  <meta name="twitter:description" content="Design for AI, forecasting, and multimodal interfaces.">
+  <meta name="twitter:image" content="https://evgendesigner.com/images/social-preview.png">
+
+  <!-- 6. STRUCTURED DATA (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Eugene Evgen",
+    "url": "https://evgendesigner.com/",
+    "image": "https://evgendesigner.com/images/profile-avatar.png",
+    "jobTitle": "Product Designer",
+    "sameAs": [
+      "https://www.linkedin.com/in/evgen-designer/",
+      "https://www.threads.com/@bucklajean"
+    ]
+  }
+  </script>
+  
   <style>
     /* 
-      1. BASIC SETUP & VARIABLES 
+      BASIC SETUP & VARIABLES 
       ---------------------------------------
     */
     :root {
@@ -56,7 +101,38 @@
     }
 
     /* 
-      2. LAYOUT GRID 
+      TOP NAV (AVATAR) 
+      ---------------------------------------
+    */
+    .top-nav {
+      position: absolute;
+      top: 40px;
+      left: 40px; 
+      z-index: 100;
+    }
+
+    .profile-wrapper {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 2px solid var(--bg-color);
+      transition: transform 0.2s ease;
+    }
+
+    .profile-wrapper:hover {
+      transform: scale(1.05);
+    }
+
+    .profile-circle {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 
+      LAYOUT GRID 
       ---------------------------------------
     */
     .container {
@@ -74,15 +150,19 @@
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr;
-        padding-top: 60px;
+        padding-top: 80px; 
       }
       .icon-col {
         margin-bottom: 40px;
       }
+      .top-nav {
+        top: 20px;
+        left: 20px;
+      }
     }
 
     /* 
-      3. TYPOGRAPHY & ELEMENTS 
+      TYPOGRAPHY & ELEMENTS 
       ---------------------------------------
     */
     h1 {
@@ -122,7 +202,6 @@
     
     h4.label.mt-large { margin-top: 60px; }
 
-    /* Footer text style */
     .footer-text {
       font-size: 14px;
       color: var(--secondary-text);
@@ -130,7 +209,7 @@
     }
 
     /* 
-      4. ICON (Day/Night Toggle) 
+      ICON (Day/Night Toggle) 
       ---------------------------------------
     */
     .icon-col { padding-top: 5px; }
@@ -146,14 +225,13 @@
     }
     .theme-toggle svg { width: 24px; height: 24px; display: block; }
 
-    /* VISIBILITY LOGIC */
     body.day .icon-moon { display: block !important; fill: #333; }
     body.day .icon-sun { display: none !important; }
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
     /* 
-      5. JOB LIST CONTAINER & ANIMATIONS
+      JOB LIST CONTAINER & ANIMATIONS
       ---------------------------------------
     */
     .job-list {
@@ -224,35 +302,12 @@
       margin: 4px 0 0 0;
     }
 
-    /* 
-       SPACING FIX: 
-       This class mimics the padding-top of .job-row so 
-       "OTHER THAN DESIGN" text starts at the exact same vertical 
-       distance from the label as "Mobius Labs" does.
-    */
     .text-content-padding {
         padding-top: 6px;
     }
     
-    #rdio-psa {
-      font-size: 12px;
-      color: var(--secondary-text);
-      margin-top: 4px;
-    }
-
-    /* 
-      MOBILE STYLES 
-      ---------------------------------------
-    */
+    /* Mobile Styles */
     @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr;
-        padding-top: 60px;
-      }
-      .icon-col {
-        margin-bottom: 40px;
-      }
-
       .hover-tooltip { display: none !important; }
 
       .job-row {
@@ -273,14 +328,56 @@
         line-height: 1.5;
       }
       
-      /* Reset padding on mobile if needed, or keep it consistent */
       .text-content-padding {
           padding-top: 0;
       }
     }
 
     /* 
-      6. GENERAL ANIMATIONS 
+      COOKIE BANNER STYLES 
+      ---------------------------------------
+    */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--text-color); /* Inverted colors */
+      color: var(--bg-color);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      z-index: 9999;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      font-size: 14px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    .cookie-banner.visible {
+      transform: translateY(0);
+    }
+
+    .cookie-btn {
+      background: var(--bg-color);
+      color: var(--text-color);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      transition: opacity 0.2s;
+    }
+
+    .cookie-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* 
+      GENERAL ANIMATIONS 
       ---------------------------------------
     */
     .animated {
@@ -303,9 +400,16 @@
 
 <body class="day">
 
+<!-- TOP NAV (Avatar) -->
+<header class="top-nav animated fadeIn one">
+    <div class="profile-wrapper">
+        <img src="images/profile-avatar.png" alt="Eugene Evgen" class="profile-circle">
+    </div>
+</header>
+
 <div class="container animated fadeIn one">
   
-  <!-- LEFT COLUMN: Sidebar -->
+  <!-- LEFT COLUMN: Sidebar (Theme Toggle) -->
   <div class="icon-col">
     <div id="theme-btn" class="theme-toggle">
         <svg class="icon-moon" viewBox="0 0 24 24">
@@ -405,7 +509,6 @@
     <!-- NEW SECTION -->
     <h4 class="label mt-large animated fadeIn four">OTHER THAN DESIGN</h4>
 
-    <!-- Added 'text-content-padding' to match spacing of job rows -->
     <div class="animated fadeIn four text-content-padding">
         <p>
             I learned Swift in just 6 months and, in 2025, collaborated with 
@@ -429,9 +532,20 @@
   </div> <!-- End Content Col -->
 </div> <!-- End Container -->
 
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" class="cookie-banner">
+    <span>I use cookies to analyze traffic and improve experience. Is that cool?</span>
+    <button id="accept-cookies" class="cookie-btn">Accept</button>
+    <button id="decline-cookies" class="cookie-btn" style="background:transparent; color:inherit; border:1px solid currentColor;">Decline</button>
+</div>
+
 <!-- SCRIPTS -->
 <script>
-  // 1. Day / Night Mode Toggle
+  /* 
+     1. UI LOGIC (Theme, Counter, Tooltips) 
+     --------------------------------------- 
+  */
+  // Theme Toggle
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
 
@@ -445,7 +559,7 @@
       }
   });
 
-  // 2. Counter
+  // Date Counter
   var startDate = new Date("Sep 4, 2024 09:00:00").getTime();
   var timer = setInterval(function() {
       var now = new Date().getTime();
@@ -454,7 +568,7 @@
       document.getElementById("counter").innerHTML = days + " days";
   }, 1000);
 
-  // 3. HOVER TOOLTIP LOGIC (Desktop Only)
+  // Hover Tooltips
   const jobRows = document.querySelectorAll('.job-row');
   const tooltip = document.getElementById('hover-tooltip');
   
@@ -467,7 +581,7 @@
       tooltip.style.opacity = "1";
   }
 
-  // Initialize on the first item if strictly desktop width
+  // Initialize on first item (Desktop)
   if (window.innerWidth > 768 && jobRows.length > 0) {
       setTimeout(() => {
           updateTooltip(jobRows[0]);
@@ -481,6 +595,59 @@
           }
       });
   });
+
+  /* 
+     2. ANALYTICS & COOKIE CONSENT 
+     --------------------------------------- 
+  */
+  const banner = document.getElementById('cookie-banner');
+  const acceptBtn = document.getElementById('accept-cookies');
+  const declineBtn = document.getElementById('decline-cookies');
+  
+  // Check localStorage for consent status
+  if (!localStorage.getItem('cookieConsent')) {
+    // Show banner after short delay
+    setTimeout(() => banner.classList.add('visible'), 1500);
+  } else if (localStorage.getItem('cookieConsent') === 'accepted') {
+    // Already accepted -> Load Analytics
+    loadAnalytics();
+  }
+
+  // Handle Accept
+  acceptBtn.addEventListener('click', () => {
+    localStorage.setItem('cookieConsent', 'accepted');
+    banner.classList.remove('visible');
+    loadAnalytics();
+  });
+
+  // Handle Decline
+  declineBtn.addEventListener('click', () => {
+    localStorage.setItem('cookieConsent', 'declined');
+    banner.classList.remove('visible');
+  });
+
+  // Analytics Loader Function
+  function loadAnalytics() {
+    console.log("Consent granted. Loading analytics...");
+
+    // 1. Google Analytics (G-CP2M6FKBXK)
+    const gaScript = document.createElement('script');
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CP2M6FKBXK';
+    gaScript.async = true;
+    document.head.appendChild(gaScript);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CP2M6FKBXK');
+
+    // 2. Microsoft Clarity (ujw6gp5k0v)
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ujw6gp5k0v");
+  }
 
 </script>
 
