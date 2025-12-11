@@ -106,8 +106,29 @@
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-    /* GENERAL STYLES */
-    h1 { font-size: 20px; font-weight: 700; margin-bottom: 32px; margin-top: 0; }
+    /* TYPOGRAPHY */
+    h1 { font-size: 20px; font-weight: 700; margin-bottom: 24px; margin-top: 0; line-height: 1.3; }
+
+    /* BADGES */
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      border: 1px solid var(--divider-color);
+      color: var(--secondary-text);
+      background: transparent;
+      white-space: nowrap;
+    }
+
     p { margin-bottom: 24px; max-width: 580px; }
     a { color: var(--link-color); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
     a:hover { border-bottom: 1px solid var(--link-color); }
@@ -131,24 +152,13 @@
     .hover-tooltip a { color: inherit; text-decoration: underline; font-weight: 600; cursor: pointer; }
     .hover-tooltip a:hover { opacity: 0.8; }
 
-    /* 
-      JOB ROW:
-      We use CSS Grid. On mobile, we force the description block 
-      to span all columns (grid-column: 1 / -1).
-    */
     .job-row { position: relative; display: grid; grid-template-columns: 1fr 1fr; column-gap: 80px; padding: 24px 0; cursor: default; }
     .job-company h2 { font-size: 16px; font-weight: 700; margin: 0; line-height: 1.4; }
     .job-details h3 { font-size: 16px; font-weight: 400; margin: 0; }
     .job-details h4 { font-size: 14px; color: var(--secondary-text); font-weight: 400; margin: 4px 0 0 0; }
     .text-content-padding { padding-top: 6px; }
 
-    /* 
-      MOBILE DESCRIPTION BLOCK 
-      Hidden by default (Desktop). Shown only on Mobile.
-    */
-    .job-description-mobile {
-      display: none; 
-    }
+    .job-description-mobile { display: none; }
 
     /* ANIMATIONS */
     .animated { animation-duration: 1s; animation-fill-mode: both; }
@@ -162,25 +172,15 @@
       .icon-col { margin-bottom: 40px; }
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
-      
-      /* Force hide the hover tooltip on mobile to avoid the "bug" */
       .hover-tooltip { display: none !important; }
       
       .job-row { column-gap: 20px; margin-bottom: 0; padding-bottom: 24px; }
       .job-row::after { content: attr(data-tooltip); grid-column: 1 / -1; display: block; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); line-height: 1.5; }
       
-      /* Show and style the mobile description block */
       .job-description-mobile {
-        display: block;
-        grid-column: 1 / -1; /* Spans full width */
-        margin-top: 16px;
-        padding-top: 16px;
-        border-top: 1px solid var(--divider-color);
-        font-size: 14px;
-        color: var(--secondary-text);
-        line-height: 1.5;
+        display: block; grid-column: 1 / -1; margin-top: 16px; padding-top: 16px;
+        border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); line-height: 1.5;
       }
-      
       .text-content-padding { padding-top: 0; }
     }
   </style>
@@ -221,6 +221,17 @@
     <div class="content-col">
       <h1>Hi, I'm Eugene — AI-driven product designer.</h1>
 
+      <!-- NEW BADGES -->
+      <div class="badge-row">
+        <span class="badge">V0</span>
+        <span class="badge">Figma Make</span>
+        <span class="badge">Cursor</span>
+        <span class="badge">Nano Banana</span>
+        <span class="badge">Gemini 3 Pro</span>
+        <span class="badge">Claude</span>
+        <span class="badge">GPT</span>
+      </div>
+
       <div>
         <p>
           Some people call me Evgen. I’ve been designing at 
@@ -260,17 +271,14 @@
             <div class="job-details"><h3>Senior Product Designer</h3><h4>2024</h4></div>
           </div> 
 
-          <!-- XEBIA ROW -->
-          <!-- We DO NOT use data-tooltip for this row to prevent duplication/CSS content issues -->
           <div class="job-row">
             <div class="job-company"><h2><a href="https://xebia.com/" target="_blank">Xebia</a></h2></div>  
             <div class="job-details">
                 <h3>Senior UI Designer</h3>
                 <h4>2017-2021</h4>
             </div>
-            <!-- HARDCODED MOBILE DESCRIPTION (Visible only on Mobile) -->
             <div class="job-description-mobile">
-                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
+                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
             </div>
           </div> 
       </div>
@@ -344,8 +352,6 @@
   // 4. Tooltip & Links Injection (Desktop Only)
   const jobRows = document.querySelectorAll('.job-row');
   const tooltip = document.getElementById('hover-tooltip');
-  
-  // Custom HTML content for the Xebia row tooltip (DESKTOP)
   const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
 
   function updateTooltip(element) {
@@ -360,8 +366,6 @@
       const centerLine = element.offsetTop + (element.offsetHeight / 2);
       tooltip.style.top = centerLine + "px"; tooltip.style.opacity = "1";
   }
-
-  // NOTE: Mobile injection logic REMOVED. We hardcoded the HTML above.
 
   if (window.innerWidth > 768 && jobRows.length > 0) { setTimeout(() => { updateTooltip(jobRows[0]); }, 100); }
   jobRows.forEach(row => { 
