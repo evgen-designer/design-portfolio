@@ -137,7 +137,10 @@
     .flow-node.bot { top: 72%; opacity: 0.6; transform: scale(0.9); }
 
     .node-icon { width: 24px; height: 24px; border-radius: 50%; background: #eee; flex-shrink: 0; }
-    .blue-icon { background: #0E9CFF; }
+    
+    /* Monochromatic Active Icon */
+    .active-icon { background: #111; }
+    
     .node-lines { flex-grow: 1; display: flex; flex-direction: column; gap: 4px; }
     .node-line { height: 6px; border-radius: 4px; background: #f0f0f0; width: 60%; }
     .node-line.short { width: 40%; }
@@ -145,7 +148,7 @@
     /* Dark mode adjustments for mockups */
     body.night .node-line { background: #444; }
     body.night .node-icon { background: #444; }
-    body.night .blue-icon { background: #0E9CFF; }
+    body.night .active-icon { background: #fff; }
 
     /* Hover animation for nodes */
     .work-card:hover .flow-node.top { top: 16%; opacity: 0.4; }
@@ -167,13 +170,13 @@
     .chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 60px; }
     .bar { width: 20px; background: #eee; border-radius: 4px 4px 0 0; transition: height 0.4s ease; }
     .bar:nth-child(1) { height: 40%; }
-    .bar:nth-child(2) { height: 70%; background: #0E9CFF; }
+    .bar:nth-child(2) { height: 70%; background: #111; }
     .bar:nth-child(3) { height: 50%; }
     .bar:nth-child(4) { height: 80%; }
     .bar:nth-child(5) { height: 60%; }
     
     body.night .bar { background: #444; }
-    body.night .bar:nth-child(2) { background: #0E9CFF; }
+    body.night .bar:nth-child(2) { background: #fff; }
 
     .work-card:hover .widget-sub { top: 5px; opacity: 0.3; }
     .work-card:hover .bar:nth-child(2) { height: 90%; }
@@ -281,7 +284,7 @@
                            <div class="node-lines"><div class="node-line"></div></div>
                        </div>
                        <div class="flow-node mid">
-                           <div class="node-icon blue-icon"></div>
+                           <div class="node-icon active-icon"></div>
                            <div class="node-lines">
                                <div class="node-line" style="width: 80%"></div>
                                <div class="node-line short"></div>
@@ -310,7 +313,7 @@
                         <div class="dash-widget widget-sub"></div>
                         <div class="dash-widget widget-main">
                              <div style="display: flex; gap: 8px; align-items: center;">
-                                 <div class="node-icon blue-icon" style="width: 16px; height: 16px;"></div>
+                                 <div class="node-icon active-icon" style="width: 16px; height: 16px;"></div>
                                  <div class="node-line" style="width: 80px; height: 6px;"></div>
                              </div>
                              <div class="chart-bars">
