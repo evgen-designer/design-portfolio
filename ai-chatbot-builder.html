@@ -38,15 +38,21 @@
     .logo-circle:hover { transform: scale(1.05); }
     .logo-circle img { width: 100%; height: 100%; object-fit: cover; display: block;}
     
-    /* BACK BUTTON STYLE */
+    /* BACK BUTTON STYLE (Secondary/Ghost) */
     .btn-back { 
         display: flex; align-items: center; gap: 8px;
-        background-color: var(--btn-bg); color: var(--btn-text) !important; 
-        padding: 10px 20px; border-radius: 100px; 
-        font-weight: 600; font-size: 14px; text-decoration: none; 
-        transition: transform 0.2s ease, opacity 0.2s ease; 
+        background-color: transparent; 
+        color: var(--text-color) !important; 
+        padding: 10px 16px; border-radius: 100px; 
+        font-weight: 500; font-size: 15px; text-decoration: none; 
+        transition: background-color 0.2s ease, opacity 0.2s ease; 
     }
-    .btn-back:hover { transform: translateY(-1px); opacity: 0.9; }
+    .btn-back:hover { 
+        background-color: rgba(0,0,0,0.05); 
+    }
+    body.night .btn-back:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
     .btn-back svg { width: 16px; height: 16px; fill: currentColor; }
 
     /* LAYOUT */
@@ -147,11 +153,18 @@
 </head>
 <body class="day">
 
+<div class="mobile-overlay">
+    <a href="/" class="mobile-link">Experience</a>
+    <a href="works.html" class="mobile-link">Works</a>
+    <a href="contact.html" class="mobile-link">Contact</a>
+    <a href="Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank">Download CV</a>
+</div>
+
 <div class="container">
   <header class="main-header">
     <a href="/" class="logo-circle"><img src="images/profile-avatar.png" alt="Eugene Evgen"></a>
     
-    <!-- Changed Nav: Only "Back to works" -->
+    <!-- Changed Nav: Only "Back to works" (Secondary Style) -->
     <a href="works.html" class="btn-back">
         <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Back to works
