@@ -82,7 +82,7 @@
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 16px 0; }
     .intro { font-size: 18px; color: var(--secondary-text); margin-bottom: 32px; max-width: 580px; }
 
-    /* Hero Image */
+    /* Hero Image & Badge */
     .hero-image {
         width: 100%; height: auto;
         background-color: var(--image-bg);
@@ -90,10 +90,35 @@
         margin-bottom: 60px;
         border: 1px solid var(--divider-color);
         overflow: hidden;
+        position: relative; 
     }
     .hero-image img { width: 100%; height: auto; display: block; }
 
-    /* 2-Column Meta Grid */
+    .hero-badge {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 100px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        z-index: 10;
+        letter-spacing: 0.02em;
+    }
+
+    /* Meta Grid (Top Section) */
+    .meta-grid {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 24px; margin-bottom: 40px;
+        padding-bottom: 40px; border-bottom: 1px solid var(--divider-color);
+    }
+    .meta-item h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-label); margin: 0 0 8px 0; font-weight: 600; }
+    .meta-item p { font-size: 15px; margin: 0; font-weight: 600; }
+
+    /* 2-Column Lists Grid */
     .role-results-grid {
         display: grid; grid-template-columns: 1fr 1fr;
         gap: 40px; margin-bottom: 80px;
@@ -104,7 +129,10 @@
     .role-list { list-style: none; padding: 0; margin: 0; }
     .role-list li { 
         font-size: 15px; color: var(--secondary-text); margin-bottom: 8px; 
-        position: relative; padding-left: 0;
+        position: relative; padding-left: 12px;
+    }
+    .role-list li::before {
+        content: "•"; position: absolute; left: 0; color: var(--text-color);
     }
 
     /* Big Text Slide */
@@ -128,7 +156,7 @@
         margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px;
     }
     
-    .process-step { margin-bottom: 80px; }
+    .process-step { margin-bottom: 60px; }
     .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
 
     .media-block {
@@ -138,10 +166,28 @@
         overflow: hidden;
         margin: 24px 0;
         border: 1px solid var(--divider-color);
+        display: flex; align-items: center; justify-content: center;
+        min-height: 240px;
     }
     .media-block img { width: 100%; height: auto; display: block; }
+    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
     
     .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
+
+    /* Footer Contact CTA */
+    .footer-cta { margin-top: 100px; text-align: center; }
+    .btn-contact {
+        display: inline-block;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        padding: 16px 32px;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
 
     /* Animations */
     .animated { animation-duration: 0.8s; animation-fill-mode: both; }
@@ -151,10 +197,8 @@
     @media (max-width: 768px) {
       .content-grid { grid-template-columns: 1fr; }
       .icon-col { margin-bottom: 20px; }
-      
-      /* Mobile Nav Adjustments */
       .nav-links { display: flex; } 
-      
+      .meta-grid { grid-template-columns: 1fr; gap: 24px; }
       .role-results-grid { grid-template-columns: 1fr; gap: 32px; }
       h1 { font-size: 28px; }
       .text-slide { font-size: 24px; padding: 40px 24px; }
@@ -188,17 +232,29 @@
 
        <span class="case-tag">AI INTERACTION DESIGN</span>
        <h1>Empowering enterprise investment teams to scale portfolio decisions with AI</h1>
-       <p class="intro">I was tasked to design an AI-powered Asset Management experience for an enterprise real-estate investment platform, transforming fragmented portfolio data into real-time.</p>
+       <p class="intro">I was tasked to design an AI-powered Asset Management experience for an enterprise real-estate investment platform, transforming fragmented portfolio data into real-time insights.</p>
 
        <div class="hero-image">
+           <div class="hero-badge">Won Fortune 500 client</div>
            <img src="images/gocanopy-01.png" alt="GoCanopy Investment Platform Interface">
        </div>
 
-       <!-- 2 Columns: Role & Results -->
-       <div class="role-results-grid">
-           <div class="role-results-item">
+       <!-- Section 1: Meta Grid (High Level) -->
+       <div class="meta-grid">
+           <div class="meta-item">
                <h4>My Role</h4>
                <p>Lead Product Designer</p>
+           </div>
+           <div class="meta-item">
+               <h4>Timeframe</h4>
+               <p>2 Months</p>
+           </div>
+       </div>
+
+       <!-- Section 2: Detailed Lists (2 Columns) -->
+       <div class="role-results-grid">
+           <div class="role-results-item">
+               <h4>Key Responsibilities</h4>
                <ul class="role-list">
                    <li>User research, workflow analysis, and problem framing</li>
                    <li>End-to-end UX & UI design (MVP → prototype)</li>
@@ -268,6 +324,11 @@
            <div class="media-block">
                <img src="images/gocanopy-08.png" alt="Implementation Support">
            </div>
+       </div>
+
+       <!-- Contact CTA -->
+       <div class="footer-cta">
+           <a href="contact.html" class="btn-contact">Contact me</a>
        </div>
 
     </div>
