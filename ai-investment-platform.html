@@ -57,10 +57,6 @@
     body.night .btn-back:hover { background-color: rgba(255,255,255,0.1); }
     .btn-back svg { width: 16px; height: 16px; fill: currentColor; }
 
-    /* MOBILE MENU (Hidden) */
-    .mobile-menu-btn { display: none; }
-    .mobile-overlay { display: none; }
-
     /* LAYOUT */
     .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
     .content-grid { display: grid; grid-template-columns: var(--sidebar-width) 1fr; width: 100%; }
@@ -79,15 +75,14 @@
         font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block;
     }
 
-    h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 16px 0; }
-    .intro { font-size: 18px; color: var(--secondary-text); margin-bottom: 32px; max-width: 580px; }
-
+    h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
+    
     /* Hero Image & Badge */
     .hero-image {
         width: 100%; height: auto;
         background-color: var(--image-bg);
         border-radius: 12px;
-        margin-bottom: 60px;
+        margin-bottom: 32px;
         border: 1px solid var(--divider-color);
         overflow: hidden;
         position: relative; 
@@ -109,59 +104,94 @@
         letter-spacing: 0.02em;
         transition: background-color 0.3s, color 0.3s;
     }
-    
     /* Dark Mode specific badge color */
     body.night .hero-badge {
         background-color: #54D1FF;
         color: #000;
     }
 
-    /* 2-Column Details Grid */
-    .detail-grid {
-        display: grid; grid-template-columns: 1fr 1fr;
-        gap: 60px; margin-bottom: 80px;
-        padding-bottom: 40px; border-bottom: 1px solid var(--divider-color);
-    }
-    
-    .section-label { 
-        font-size: 11px; text-transform: uppercase; letter-spacing: 1px; 
-        color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; 
-    }
-    
-    .detail-text { font-size: 16px; color: var(--text-color); margin-bottom: 24px; line-height: 1.6; }
-    .detail-text.highlight { font-weight: 600; font-size: 18px; margin-bottom: 40px; }
-
-    .key-focus-area { margin-top: 24px; margin-bottom: 40px; }
-    .key-focus-label { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 12px; display: block; letter-spacing: 0.5px; }
-
-    .detail-list { list-style: none; padding: 0; margin: 0; }
-    .detail-list li { 
-        font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; 
-        position: relative; padding-left: 18px; line-height: 1.5;
-    }
-    .detail-list li::before {
-        content: "•"; position: absolute; left: 0; color: var(--text-color);
-    }
-
-    /* Big Text Slide */
+    /* Slides (Problem Statement & Figma) */
     .text-slide {
         background-color: var(--slide-bg);
         color: var(--slide-text);
         padding: 60px 40px;
         border-radius: 12px;
-        font-size: 32px;
-        font-weight: 700;
+        font-size: 24px;
+        font-weight: 500;
         text-align: center;
-        line-height: 1.3;
-        margin: 60px 0;
+        line-height: 1.4;
+        margin: 0 0 80px 0;
         transition: background-color 0.3s, color 0.3s;
+    }
+    .text-slide.secondary {
+        /* Variation for the second slide */
+        font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px;
+    }
+
+    /* --- NEW GRID LAYOUT (Example 4) --- */
+    .project-details {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 80px;
+        border-bottom: 1px solid var(--divider-color);
+        padding-bottom: 40px;
+    }
+
+    .details-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+    }
+    
+    .details-row.top {
+        padding-bottom: 40px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid var(--divider-color);
+    }
+
+    .section-label { 
+        font-size: 11px; text-transform: uppercase; letter-spacing: 1px; 
+        color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; 
+    }
+    
+    .task-description {
+        font-size: 16px;
+        color: var(--text-color);
+        line-height: 1.6;
+        font-weight: 600;
+    }
+
+    .timeframe-large {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    .detail-list { list-style: none; padding: 0; margin: 0; }
+    .detail-list li { 
+        font-size: 15px; color: var(--secondary-text); margin-bottom: 12px; 
+        position: relative; padding-left: 14px; line-height: 1.5;
+    }
+    .detail-list li::before {
+        content: "•"; position: absolute; left: 0; color: var(--text-color);
+    }
+
+    .numbered-list { list-style: none; padding: 0; margin: 0; counter-reset: result-counter; }
+    .numbered-list li {
+        font-size: 15px; color: var(--secondary-text); margin-bottom: 12px;
+        position: relative; padding-left: 20px; line-height: 1.5;
+    }
+    .numbered-list li::before {
+        counter-increment: result-counter;
+        content: counter(result-counter) ".";
+        position: absolute; left: 0; color: var(--text-color); font-weight: 600;
     }
 
     /* Process Section */
     .process-header {
         font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; 
         color: var(--secondary-text); font-weight: 600; 
-        margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px;
+        margin-top: 40px; margin-bottom: 40px; padding-top: 20px;
     }
     
     .process-step { margin-bottom: 60px; }
@@ -206,9 +236,9 @@
       .content-grid { grid-template-columns: 1fr; }
       .icon-col { margin-bottom: 20px; }
       .nav-links { display: flex; } 
-      .detail-grid { grid-template-columns: 1fr; gap: 40px; }
+      .details-row, .details-row.top { grid-template-columns: 1fr; gap: 40px; }
       h1 { font-size: 28px; }
-      .text-slide { font-size: 24px; padding: 40px 24px; }
+      .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
     }
   </style>
 </head>
@@ -239,48 +269,60 @@
 
        <span class="case-tag">AI INTERACTION DESIGN</span>
        <h1>Empowering enterprise investment teams to scale portfolio decisions with AI</h1>
-       <p class="intro">I was tasked to design an AI-powered Asset Management experience for an enterprise real-estate investment platform, transforming fragmented portfolio data into real-time insights.</p>
+       
+       <!-- Removed Intro Text -->
 
        <div class="hero-image">
            <div class="hero-badge">Won Fortune 500 client</div>
            <img src="images/gocanopy-01.png" alt="GoCanopy Investment Platform Interface">
        </div>
 
-       <!-- Updated 2-Column Detail Grid -->
-       <div class="detail-grid">
+       <!-- Problem Statement Slide -->
+       <div class="text-slide">
+           "Real estate investment teams lose time and decision quality due to highly fragmented, inconsistent data scattered across drives, inboxes, PDFs, spreadsheets, and manual processes."
+       </div>
+
+       <!-- Project Details (Split Layout) -->
+       <div class="project-details">
            
-           <!-- Column 1: Task -->
-           <div class="detail-item">
-               <h4 class="section-label">MY TASK</h4>
-               <p class="detail-text">
-                   Lead the design of an MVP prototype to be delivered within 2 months for an in-office enterprise client presentation in London. The goal was to define a new Asset Management experience on top of an existing real estate investment platform, unifying fragmented data sources into a single, decision-ready workflow.
-               </p>
-               
-               <span class="key-focus-label">Key focus areas:</span>
-               <ul class="detail-list">
-                   <li>User research, workflow analysis, and problem framing</li>
-                   <li>End-to-end UX & UI design (clickable Figma prototype)</li>
-                   <li>AI-assisted insight design & data visualization</li>
-               </ul>
+           <!-- Top Row -->
+           <div class="details-row top">
+               <div class="detail-item">
+                   <h4 class="section-label">MY TASK</h4>
+                   <p class="task-description">
+                       Lead the design of an MVP prototype to be delivered within 2 months for an in-office enterprise client presentation in London. The goal was to define a new Asset Management experience on top of an existing real estate investment platform, unifying fragmented data sources into a single, decision-ready workflow.
+                   </p>
+               </div>
+               <div class="detail-item">
+                   <h4 class="section-label">TASK TIMEFRAME</h4>
+                   <p class="timeframe-large">2 months</p>
+               </div>
            </div>
 
-           <!-- Column 2: Timeframe & Results -->
-           <div class="detail-item">
-               <h4 class="section-label">TASK TIMEFRAME</h4>
-               <p class="detail-text highlight">2 months</p>
-
-               <h4 class="section-label" style="margin-top: 40px;">RESULTS</h4>
-               <ul class="detail-list">
-                   <li>Helped secure a Fortune 500 enterprise client partnership</li>
-                   <li>Reduced manual reporting effort by ~60% by centralizing portfolio data into a single workflow</li>
-                   <li>Improved decision turnaround time by 2-3x with real-time portfolio visibility</li>
-               </ul>
+           <!-- Bottom Row -->
+           <div class="details-row bottom">
+               <div class="detail-item">
+                   <h4 class="section-label">KEY FOCUS AREAS</h4>
+                   <ul class="detail-list">
+                       <li>User research, workflow analysis, and problem framing</li>
+                       <li>End-to-end UX & UI design (clickable Figma prototype)</li>
+                       <li>AI-assisted insight design & data visualization</li>
+                   </ul>
+               </div>
+               <div class="detail-item">
+                   <h4 class="section-label">RESULTS</h4>
+                   <ul class="numbered-list">
+                       <li>Helped secure a Fortune 500 enterprise client partnership</li>
+                       <li>Reduced manual reporting effort by ~60% by centralizing portfolio data into a single workflow</li>
+                       <li>Improved decision turnaround time by 2-3x with real-time portfolio visibility</li>
+                   </ul>
+               </div>
            </div>
 
        </div>
 
-       <!-- Big Text Slide -->
-       <div class="text-slide">
+       <!-- Big Text Slide 2 -->
+       <div class="text-slide secondary">
            My Figma prototype helped win a Fortune 500 enterprise client deal
        </div>
 
