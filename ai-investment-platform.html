@@ -80,7 +80,15 @@
     }
 
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 16px 0; }
-    .intro { font-size: 18px; color: var(--secondary-text); margin-bottom: 32px; max-width: 580px; }
+    
+    /* Intro Paragraph */
+    .intro { 
+        font-size: 18px; 
+        color: var(--secondary-text); 
+        margin-bottom: 32px; 
+        max-width: 580px; 
+        line-height: 1.5;
+    }
 
     /* Hero Image & Badge */
     .hero-image {
@@ -116,32 +124,35 @@
         color: #000;
     }
 
-    /* Meta Grid (Top Section - Role & Timeframe) */
-    .meta-grid {
-        display: grid; grid-template-columns: 1fr 1fr;
-        gap: 24px; 
-        margin-bottom: 32px; /* Spacing before line */
-        padding-bottom: 32px; border-bottom: 1px solid var(--divider-color);
+    /* --- NEW TASK / RESULTS GRID --- */
+    .task-results-grid {
+        display: grid; 
+        grid-template-columns: 1fr 1fr;
+        gap: 60px; 
+        margin-bottom: 80px;
+        padding-bottom: 40px; 
+        border-bottom: 1px solid var(--divider-color);
     }
-    .meta-item h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-label); margin: 0 0 8px 0; font-weight: 600; }
-    .meta-item p { font-size: 18px; margin: 0; font-weight: 700; color: var(--text-color); }
-
-    /* 2-Column Lists Grid (Responsibilities & Results) */
-    .role-results-grid {
-        display: grid; grid-template-columns: 1fr 1fr;
-        gap: 40px; margin-bottom: 80px;
-        padding-bottom: 40px; border-bottom: 1px solid var(--divider-color);
-    }
-    .role-results-item h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
     
-    .role-list { list-style: none; padding: 0; margin: 0; }
-    .role-list li { 
-        font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; 
+    .section-label { 
+        font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-label); 
+        margin: 0 0 16px 0; font-weight: 600; 
+    }
+    
+    .task-text { font-size: 15px; margin-bottom: 24px; color: var(--text-color); }
+    .focus-label { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--text-color); }
+    
+    .clean-list { list-style: none; padding: 0; margin: 0 0 24px 0; }
+    .clean-list li { 
+        font-size: 15px; color: var(--secondary-text); margin-bottom: 8px; 
         position: relative; padding-left: 14px; line-height: 1.5;
     }
-    .role-list li::before {
+    .clean-list li::before {
         content: "•"; position: absolute; left: 0; color: var(--text-color);
     }
+
+    .timeframe { font-size: 15px; color: var(--text-color); font-weight: 500; }
+    .timeframe strong { font-weight: 600; }
 
     /* Big Text Slide */
     .text-slide {
@@ -206,8 +217,8 @@
       .content-grid { grid-template-columns: 1fr; }
       .icon-col { margin-bottom: 20px; }
       .nav-links { display: flex; } 
-      .meta-grid { grid-template-columns: 1fr; gap: 24px; }
-      .role-results-grid { grid-template-columns: 1fr; gap: 32px; }
+      
+      .task-results-grid { grid-template-columns: 1fr; gap: 40px; }
       h1 { font-size: 28px; }
       .text-slide { font-size: 24px; padding: 40px 24px; }
     }
@@ -240,6 +251,8 @@
 
        <span class="case-tag">AI INTERACTION DESIGN</span>
        <h1>Empowering enterprise investment teams to scale portfolio decisions with AI</h1>
+       
+       <!-- Reverted Intro Text -->
        <p class="intro">Lead the end-to-end design of an MVP that transformed fragmented portfolio data into a single, decision-ready workflow for enterprise stakeholders.</p>
 
        <div class="hero-image">
@@ -247,37 +260,33 @@
            <img src="images/gocanopy-01.png" alt="GoCanopy Investment Platform Interface">
        </div>
 
-       <!-- Section 1: Meta Grid (Role & Timeframe) -->
-       <div class="meta-grid">
-           <div class="meta-item">
-               <h4>MY ROLE</h4>
-               <p>Lead Product Designer</p>
-           </div>
-           <div class="meta-item">
-               <h4>TIMEFRAME</h4>
-               <p>2 Months</p>
-           </div>
-       </div>
-
-       <!-- Section 2: Detailed Lists (Key Responsibilities & Results) -->
-       <div class="role-results-grid">
-           <div class="role-results-item">
-               <h4>KEY RESPONSIBILITIES</h4>
-               <ul class="role-list">
+       <!-- New Structure: Task (Left) vs Results (Right) -->
+       <div class="task-results-grid">
+           
+           <div class="task-col">
+               <h4 class="section-label">MY TASK</h4>
+               <p class="task-text">Lead the end-to-end design of an MVP that transformed fragmented portfolio data into a single, decision-ready workflow for enterprise stakeholders.</p>
+               
+               <p class="focus-label">Key focus areas:</p>
+               <ul class="clean-list">
                    <li>User research, workflow analysis, and problem framing</li>
                    <li>End-to-end UX & UI design (MVP → prototype)</li>
                    <li>AI-assisted insight design and data visualization</li>
                    <li>Prototyping, stakeholder presentations and alignment</li>
                </ul>
+
+               <p class="timeframe">Timeframe: <strong>2 months</strong></p>
            </div>
-           <div class="role-results-item">
-               <h4>RESULTS</h4>
-               <ul class="role-list">
+
+           <div class="results-col">
+               <h4 class="section-label">RESULTS</h4>
+               <ul class="clean-list">
                    <li>Helped secure a Fortune 500 enterprise client partnership</li>
                    <li>Reduced manual reporting effort by ~60% by centralizing portfolio data into a single workflow</li>
                    <li>Improved decision turnaround time by 2-3x with real-time portfolio visibility</li>
                </ul>
            </div>
+
        </div>
 
        <!-- Big Text Slide -->
