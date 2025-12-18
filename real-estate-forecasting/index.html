@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <title>Real Estate Forecasting - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" sizes="any">
-  <link rel="icon" href="images/icon-192.png" type="image/png">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
     /* VARIABLES */
@@ -33,21 +33,10 @@
     
     .nav-links { display: flex; align-items: center; gap: 24px; padding-right: 4px; }
 
-    /* BACK BUTTON STYLE (Secondary/Ghost) */
-    .btn-back { 
-        display: flex; align-items: center; gap: 8px;
-        background-color: transparent; 
-        color: var(--text-color) !important; 
-        padding: 10px 16px; border-radius: 100px; 
-        font-weight: 500; font-size: 15px; text-decoration: none; 
-        transition: background-color 0.2s ease, opacity 0.2s ease; 
-    }
-    .btn-back:hover { 
-        background-color: rgba(0,0,0,0.05); 
-    }
-    body.night .btn-back:hover {
-        background-color: rgba(255,255,255,0.1);
-    }
+    /* BACK BUTTON */
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 16px; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: background-color 0.2s ease, opacity 0.2s ease; }
+    .btn-back:hover { background-color: rgba(0,0,0,0.05); }
+    body.night .btn-back:hover { background-color: rgba(255,255,255,0.1); }
     .btn-back svg { width: 16px; height: 16px; fill: currentColor; }
 
     /* LAYOUT */
@@ -61,7 +50,7 @@
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-    /* Case Specific */
+    /* CASE STUDY */
     .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 16px 0; }
     .intro { font-size: 18px; color: var(--secondary-text); margin-bottom: 32px; max-width: 540px; }
@@ -86,10 +75,7 @@
     @media (max-width: 768px) {
       .content-grid { grid-template-columns: 1fr; }
       .icon-col { margin-bottom: 20px; }
-      
-      /* Mobile Nav Adjustments */
-      .nav-links { display: flex; } /* Always show Back button */
-      
+      .nav-links { display: flex; } 
       .meta-grid { grid-template-columns: 1fr; gap: 32px; }
       h1 { font-size: 28px; }
     }
@@ -99,11 +85,10 @@
 
 <div class="container">
   <header class="main-header">
-    <a href="/" class="logo-circle"><img src="images/profile-avatar.png" alt="Eugene Evgen"></a>
+    <a href="/" class="logo-circle"><img src="/images/profile-avatar.png" alt="Eugene Evgen"></a>
     
-    <!-- "Back to works" (Secondary Style) - Visible on all devices -->
     <div class="nav-links">
-        <a href="works.html" class="btn-back">
+        <a href="/works/" class="btn-back">
             <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Back to works
         </a>
@@ -125,37 +110,20 @@
        <p class="intro">Research-powered prototype shaping new AI analytical capabilities for a Fortune 500 client.</p>
 
        <div class="project-links">
-           <a href="#" class="external-link">
-               View Prototype
-               <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-           </a>
+           <a href="#" class="external-link">View Prototype <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
        </div>
 
-       <div class="hero-image">
-           <!-- Placeholder for Hero Image -->
-       </div>
+       <div class="hero-image"></div>
 
        <div class="meta-grid">
-           <div class="meta-item">
-               <h4>My Role</h4>
-               <p>Senior Product Designer</p>
-           </div>
-           <div class="meta-item">
-               <h4>Timeline</h4>
-               <p>3 Months</p>
-           </div>
-           <div class="meta-item">
-               <h4>Team</h4>
-               <p>Alex Rivera <span>Head of AI</span></p>
-               <p>Sarah Chen <span>Frontend Lead</span></p>
-           </div>
+           <div class="meta-item"><h4>My Role</h4><p>Senior Product Designer</p></div>
+           <div class="meta-item"><h4>Timeline</h4><p>3 Months</p></div>
+           <div class="meta-item"><h4>Team</h4><p>Alex Rivera <span>Head of AI</span></p><p>Sarah Chen <span>Frontend Lead</span></p></div>
        </div>
 
        <div class="case-section">
            <h2>The Challenge</h2>
-           <p>
-               Traditional real estate investment relies heavily on historical data spreadsheets. Our client wanted to leverage their vast dataset to predict future market trends, but the raw data was overwhelming for agents.
-           </p>
+           <p>Traditional real estate investment relies heavily on historical data spreadsheets. Our client wanted to leverage their vast dataset to predict future market trends, but the raw data was overwhelming for agents.</p>
        </div>
 
        <div class="media-block" style="height: 400px; background-color: var(--code-bg);">
@@ -164,9 +132,7 @@
 
        <div class="case-section">
            <h2>The Solution</h2>
-           <p>
-               We designed a "Confidence Interval" interface. Instead of showing a single predicted number, the AI presents a range of probable outcomes. Agents can toggle variables (interest rates, migration patterns) to see how the forecast shifts in real-time.
-           </p>
+           <p>We designed a "Confidence Interval" interface. Instead of showing a single predicted number, the AI presents a range of probable outcomes. Agents can toggle variables (interest rates, migration patterns) to see how the forecast shifts in real-time.</p>
        </div>
 
     </div>
