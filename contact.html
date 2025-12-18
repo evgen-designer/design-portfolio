@@ -20,7 +20,7 @@
       --input-bg: #ffffff;
       --input-border: #e5e5e5;
       --input-placeholder: #999;
-      --input-focus: #111; /* Changed from Blue to Black */
+      --input-focus: #111;
       --submit-btn-bg: #222;
       --submit-btn-text: #fff;
     }
@@ -32,7 +32,7 @@
       --input-bg: #262626;
       --input-border: #333333;
       --input-placeholder: #666;
-      --input-focus: #fff; /* Changed from Blue to White */
+      --input-focus: #fff;
       --submit-btn-bg: #333;
       --submit-btn-text: #fff;
     }
@@ -140,8 +140,7 @@
         font-weight: 600;
         font-size: 14px;
         padding: 12px;
-        /* CHANGE: Capsule shape */
-        border-radius: 100px;
+        border-radius: 100px; /* Capsule Shape */
         border: 1px solid transparent;
         cursor: pointer;
         margin-top: 8px;
@@ -155,7 +154,7 @@
         transform: translateY(0);
     }
 
-    /* CHANGE: Styles for the text under button */
+    /* Note under button */
     .form-note {
         font-size: 13px;
         color: var(--secondary-text);
@@ -206,14 +205,14 @@
        
        <h1>How can I help?</h1>
        
-       <form action="mailto:ievgen.contact@gmail.com" method="post" enctype="text/plain">
+       <!-- Formspree Integration -->
+       <form action="https://formspree.io/f/xvzpopyl" method="POST">
            <input type="text" name="name" placeholder="Your name*" required>
            <input type="email" name="email" placeholder="your@email.com*" required>
            
            <div class="select-wrapper">
                <select name="subject" required>
                    <option value="" disabled selected>What is this about?</option>
-                   <!-- CHANGE: Updated Options -->
                    <option value="MVP">New product / MVP</option>
                    <option value="Redesign">Redesign or optimization</option>
                    <option value="Research">UX research & validation</option>
@@ -223,12 +222,10 @@
                </select>
            </div>
            
-           <!-- CHANGE: Updated Placeholder -->
            <textarea name="message" placeholder="Tell me about your product, goals, or challenges… where do you need help right now?" required></textarea>
            
            <button type="submit">Send it</button>
            
-           <!-- CHANGE: Text under button -->
            <p class="form-note">No pressure — just a quick conversation to see if we’re a good fit.</p>
        </form>
 
