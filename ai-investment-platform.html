@@ -214,16 +214,30 @@
     
     .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
-    /* Footer Contact CTA */
-    .footer-cta { margin-top: 100px; text-align: center; }
+    /* Footer Contact CTA - Updated */
+    .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
+    
+    .footer-title {
+        font-size: 32px; font-weight: 700; line-height: 1.2;
+        color: var(--text-color); margin: 0 0 16px 0;
+    }
+    .footer-subtitle {
+        font-size: 16px; color: var(--secondary-text);
+        max-width: 620px; margin: 0 auto 32px auto;
+        line-height: 1.6;
+    }
+
     .btn-contact {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 42px; /* Fixed height matching top bar buttons */
+        padding: 0 24px;
         background-color: var(--btn-bg);
         color: var(--btn-text);
-        padding: 16px 32px;
         border-radius: 100px;
-        font-weight: 600;
-        font-size: 16px;
+        font-weight: 500;
+        font-size: 15px;
         text-decoration: none;
         transition: transform 0.2s ease, opacity 0.2s ease;
     }
@@ -240,6 +254,7 @@
       .nav-links { display: flex; } 
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
       h1 { font-size: 28px; }
+      .footer-title { font-size: 28px; }
       .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
       .media-block {
           min-height: auto; 
@@ -379,9 +394,11 @@
            </div>
        </div>
 
-       <!-- Contact CTA -->
+       <!-- Updated Footer CTA -->
        <div class="footer-cta">
-           <a href="contact.html" class="btn-contact">Contact me</a>
+           <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
+           <p class="footer-subtitle">I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery.<br>AI-powered workflows, fast iterations, real business impact.</p>
+           <a href="contact.html" class="btn-contact">Let’s design your product</a>
        </div>
 
     </div>
