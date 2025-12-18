@@ -112,13 +112,14 @@
     h4.label.mt-large { margin-top: 60px; }
     .footer-text { font-size: 14px; color: var(--secondary-text); margin-top: 60px; }
 
-    /* --- MINI CARDS (HOME PAGE) --- */
+    /* --- FULL WIDTH MINI CARDS --- */
     .recent-work-grid { 
         display: grid; 
         grid-template-columns: repeat(4, 1fr); 
         gap: 12px; 
-        margin-top: 48px;
-        margin-bottom: 48px;
+        width: 100%; /* Full container width */
+        margin-top: 60px;
+        margin-bottom: 60px;
     }
     
     .mini-card {
@@ -134,7 +135,7 @@
     .mini-card:hover { transform: translateY(-2px); border-color: rgba(120, 120, 120, 0.3); }
 
     .mini-visual {
-        height: 100px;
+        height: 120px; /* Slightly taller for visual impact */
         width: 100%;
         background-color: var(--bg-color);
         background-image: radial-gradient(var(--pattern-dot) 1.5px, transparent 1.5px);
@@ -148,7 +149,7 @@
     .mini-img { width: 100%; height: 100%; object-fit: cover; }
 
     /* CSS UI Elements (Scaled for Mini Cards) */
-    .ui-scale-wrapper { transform: scale(0.5); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .ui-scale-wrapper { transform: scale(0.6); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
     
     /* Flow Nodes */
     .flow-node { background: var(--ui-elem-bg); border: 1px solid var(--ui-elem-border); padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 8px; width: 180px; position: absolute; }
@@ -169,9 +170,8 @@
     body.night .active-icon, body.night .bar:nth-child(2) { background: #fff; }
 
     /* More Works Button Card */
-    .more-card { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 100px; background-color: var(--card-bg); color: var(--text-color); font-size: 13px; font-weight: 600; text-align: center; border: 1px solid var(--card-border); border-radius: 12px; gap: 6px; transition: background-color 0.2s; }
+    .more-card { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 100px; background-color: var(--card-bg); color: var(--text-color); font-size: 14px; font-weight: 600; text-align: center; border: 1px solid var(--card-border); border-radius: 12px; gap: 6px; transition: background-color 0.2s; }
     .more-card:hover { background-color: var(--bg-color); border-bottom: 1px solid var(--card-border); } 
-    /* ^ Fix to prevent border-bottom link underline on hover */
 
     /* JOB LIST & TOOLTIP */
     .job-list { position: relative; display: flex; flex-direction: column; }
@@ -198,6 +198,10 @@
     @media (max-width: 768px) {
       .content-grid { grid-template-columns: 1fr; }
       .icon-col { margin-bottom: 40px; }
+      
+      /* Hide the empty sidebar spacing on mobile for the resume section */
+      .icon-col.mobile-hide { display: none; margin-bottom: 0; }
+
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .hover-tooltip { display: none !important; }
@@ -241,6 +245,7 @@
     <div class="mobile-menu-btn">Menu</div>
   </header>
 
+  <!-- BLOCK 1: INTRO (With Sidebar for Toggle) -->
   <div class="content-grid animated fadeIn two">
     <div class="icon-col">
       <div id="theme-btn" class="theme-toggle">
@@ -252,7 +257,6 @@
     <div class="content-col">
       <h1>Hi, I'm Eugene — AI-Driven Product Designer.</h1>
 
-      <!-- NEW BADGES -->
       <div class="badge-row">
         <span class="badge">V0</span>
         <span class="badge">Figma Make</span>
@@ -282,51 +286,59 @@
           <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank">LinkedIn</a>.
         </p>
       </div>
+    </div>
+  </div> 
 
-      <!-- NEW SECTION: 4 CARDS IN 1 ROW -->
-      <div class="recent-work-grid">
-          <!-- 1. Investment Platform -->
-          <a href="/ai-investment-platform/" class="mini-card" title="AI Investment Platform">
-              <div class="mini-visual">
-                  <img src="/images/gocanopy-01.png" alt="AI Platform" class="mini-img">
+  <!-- BLOCK 2: FULL WIDTH CARDS (Independent of Grid) -->
+  <div class="recent-work-grid animated fadeIn two">
+      <!-- 1. Investment Platform -->
+      <a href="/ai-investment-platform/" class="mini-card" title="AI Investment Platform">
+          <div class="mini-visual">
+              <img src="/images/gocanopy-01.png" alt="AI Platform" class="mini-img">
+          </div>
+      </a>
+
+      <!-- 2. Chatbot Builder -->
+      <a href="/ai-chatbot-builder/" class="mini-card" title="AI Chatbot Builder">
+          <div class="mini-visual">
+              <div class="ui-scale-wrapper">
+                  <div class="flow-node mid">
+                      <div class="node-icon active-icon"></div>
+                      <div class="node-line"></div>
+                  </div>
               </div>
-          </a>
+          </div>
+      </a>
 
-          <!-- 2. Chatbot Builder -->
-          <a href="/ai-chatbot-builder/" class="mini-card" title="AI Chatbot Builder">
-              <div class="mini-visual">
-                  <div class="ui-scale-wrapper">
-                      <div class="flow-node mid">
-                          <div class="node-icon active-icon"></div>
-                          <div class="node-line"></div>
+      <!-- 3. Forecasting -->
+      <a href="/real-estate-forecasting/" class="mini-card" title="Real Estate Forecasting">
+          <div class="mini-visual">
+              <div class="ui-scale-wrapper">
+                  <div class="dash-widget">
+                      <div style="display: flex; gap: 8px; align-items: center;">
+                         <div class="node-icon active-icon" style="width: 14px; height: 14px;"></div>
+                         <div class="node-line" style="width: 50%;"></div>
+                      </div>
+                      <div class="chart-bars">
+                          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
                       </div>
                   </div>
               </div>
-          </a>
+          </div>
+      </a>
 
-          <!-- 3. Forecasting -->
-          <a href="/real-estate-forecasting/" class="mini-card" title="Real Estate Forecasting">
-              <div class="mini-visual">
-                  <div class="ui-scale-wrapper">
-                      <div class="dash-widget">
-                          <div style="display: flex; gap: 8px; align-items: center;">
-                             <div class="node-icon active-icon" style="width: 14px; height: 14px;"></div>
-                             <div class="node-line" style="width: 50%;"></div>
-                          </div>
-                          <div class="chart-bars">
-                              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </a>
+      <!-- 4. More Works Button -->
+      <a href="/works/" class="more-card">
+          More works →
+      </a>
+  </div>
 
-          <!-- 4. More Works Button -->
-          <a href="/works/" class="more-card">
-              More works →
-          </a>
-      </div>
+  <!-- BLOCK 3: RESUME/FOOTER (Empty Sidebar for Alignment) -->
+  <div class="content-grid animated fadeIn two">
+    <!-- Helper class 'mobile-hide' removes margin on mobile -->
+    <div class="icon-col mobile-hide"></div>
 
+    <div class="content-col">
       <h4 class="label">PREVIOUSLY</h4> 
 
       <div class="job-list">
@@ -354,7 +366,7 @@
                 <h4>2017-2021</h4>
             </div>
             <div class="job-description-mobile">
-                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
+                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
             </div>
           </div> 
       </div>
@@ -428,7 +440,7 @@
   // 4. Tooltip & Links Injection (Desktop Only)
   const jobRows = document.querySelectorAll('.job-row');
   const tooltip = document.getElementById('hover-tooltip');
-  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
+  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
 
   function updateTooltip(element) {
       const isXebia = element.querySelector('h2 a').href.includes('xebia');
