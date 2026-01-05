@@ -90,6 +90,21 @@
     /* BADGE: Yellow in Day, Cyan in Night */
     .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
     body.night .hero-badge { background-color: #54D1FF; color: #000; }
+    
+    /* NEW PROJECT LINKS (Figma/Prototype) */
+    .project-links-row { display: flex; gap: 32px; margin-top: -12px; margin-bottom: 60px; flex-wrap: wrap; }
+    .project-link { 
+      color: var(--text-color); 
+      font-weight: 700; 
+      text-decoration: none; 
+      font-size: 16px; 
+      display: inline-flex; 
+      align-items: center; 
+      transition: opacity 0.2s ease; 
+    }
+    .project-link:hover { opacity: 0.6; }
+    .project-link span { margin-left: 6px; font-size: 18px; line-height: 1; font-weight: 400; }
+
 
     .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 12px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
     .text-slide.secondary { font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px; }
@@ -177,10 +192,20 @@
        <span class="case-tag">AI INTERACTION DESIGN</span>
        <h1>Transforming a neglected AI SKD web demo into a vital sales tool for a Computer Vision startup (acquired by Dropbox)</h1>
        
-       <!-- ADDED CLASS: inset-black -->
+       <!-- HERO IMAGE -->
        <div class="hero-image inset-black">
            <div class="hero-badge">Increased demo usage in sales by 95%</div>
            <img src="/images/mobius-01.gif" alt="Mobius Labs SDK Web Demo Interface">
+       </div>
+       
+       <!-- NEW LINKS (Figma & Prototype) -->
+       <div class="project-links-row">
+           <a href="https://www.figma.com/design/r26vZkH1PYtGXlqtgzxXZ9/Mobius-Labs-demo--acquired-by-Dropbox-?node-id=5303-16381&t=uAQ66HwtP7NMOGEW-1" target="_blank" class="project-link">
+               View Figma Link <span>↗</span>
+           </a>
+           <a href="https://www.figma.com/proto/r26vZkH1PYtGXlqtgzxXZ9/Mobius-Labs-demo--acquired-by-Dropbox-?node-id=5303-16381&t=oBlHyjvRJUuDOUyN-1&scaling=min-zoom&content-scaling=fixed&page-id=5303%3A16380&starting-point-node-id=5303%3A16381" target="_blank" class="project-link">
+               View Prototype <span>↗</span>
+           </a>
        </div>
 
        <h4 class="section-label">CHALLENGE</h4>
@@ -275,7 +300,6 @@
            </div>
            
            <div class="media-block">
-               <!-- FIXED YOUTUBE LINK SYNTAX -->
                <iframe src="https://www.youtube.com/embed/JjPqlSbk6qo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
            </div>
        </div>
