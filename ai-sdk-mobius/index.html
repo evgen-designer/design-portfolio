@@ -67,10 +67,28 @@
 
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
     
+    /* STANDARD HERO IMAGE */
     .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 12px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
     .hero-image img { width: 100%; height: auto; display: block; }
 
-    .hero-badge { position: absolute; top: 16px; right: 16px; background-color: var(--btn-bg); color: var(--btn-text); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
+    /* --- SPECIAL STYLE FOR MOBIUS (INSET + BLACK BG) --- */
+    .hero-image.inset-black {
+        background-color: #000; /* Always Black */
+        padding: 40px; /* This padding makes the image smaller (zoomed out) */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .hero-image.inset-black img {
+        width: 100%; 
+        height: auto;
+        object-fit: contain; /* Ensures NO CUT */
+        border-radius: 6px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Adds depth */
+    }
+
+    /* BADGE: Yellow in Day, Cyan in Night */
+    .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
     body.night .hero-badge { background-color: #54D1FF; color: #000; }
 
     .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 12px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
@@ -100,13 +118,11 @@
 
     .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
     
-    /* Support for Images, Local Video, and Youtube Iframes */
     .media-block img, 
     .media-block video { width: 100%; height: auto; display: block; }
     .media-block iframe { width: 100%; aspect-ratio: 16 / 9; display: block; border: 0; }
     
     .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
-    
     .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
     .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
@@ -129,6 +145,8 @@
       .footer-title { font-size: 28px; }
       .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
       .media-block { min-height: auto; }
+      /* Less padding on mobile for hero image */
+      .hero-image.inset-black { padding: 20px; }
     }
   </style>
 </head>
@@ -159,9 +177,9 @@
        <span class="case-tag">AI INTERACTION DESIGN</span>
        <h1>Transforming a neglected AI SKD web demo into a vital sales tool for a Computer Vision startup (acquired by Dropbox)</h1>
        
-       <div class="hero-image">
+       <!-- ADDED CLASS: inset-black -->
+       <div class="hero-image inset-black">
            <div class="hero-badge">Increased demo usage in sales by 95%</div>
-           <!-- Placeholder for your hero image -->
            <img src="/images/mobius-01.gif" alt="Mobius Labs SDK Web Demo Interface">
        </div>
 
@@ -212,7 +230,6 @@
        </div>
 
        <div class="media-block">
-            <!-- Placeholder for a high impact visual/prototype screen -->
             <img src="/images/mobius-02.png" alt="Mobius Redesigned Interface">
        </div>
        
@@ -257,9 +274,8 @@
                <img src="/images/mobius-07.png" alt="Redesign Prototypes">
            </div>
            
-           <!-- Added YouTube Video Embed with your ID -->
            <div class="media-block">
-               <iframe src="https://www.youtube.com/embed/JjPqlSbk6qo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+               <iframe src=" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
            </div>
        </div>
 
