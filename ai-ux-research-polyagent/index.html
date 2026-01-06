@@ -101,8 +101,35 @@
 
     .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
     .media-block img { width: 100%; height: auto; display: block; }
-    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
+
+    /* === MEDIA UTILITIES (New) === */
+    .force-white-bg { background-color: #ffffff !important; }
+    .force-white-bg img { border: 1px solid rgba(0,0,0,0.05); } /* Subtle border on white */
+
+    .vertical-media {
+        flex-direction: column !important;
+        padding: 0;
+    }
+
+    .horizontal-media {
+        flex-direction: row !important;
+        gap: 20px;
+        padding: 40px; /* Padding for the white background */
+        align-items: center;
+    }
+    .horizontal-media img {
+        width: 50%;
+        height: auto;
+    }
     
+    @media (max-width: 600px) {
+        .horizontal-media { flex-direction: column !important; padding: 20px; }
+        .horizontal-media img { width: 100%; }
+    }
+    /* === END MEDIA UTILITIES === */
+
+
+    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
     .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
     .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
@@ -112,10 +139,10 @@
     .btn-contact { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 24px; background-color: var(--btn-bg); color: var(--btn-text); border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease; }
     .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
 
-    /* NEW STATS CARD STYLES */
+    /* STATS CARD STYLES */
     .stats-card {
         width: 100%;
-        background-color: #D6EE90; /* Lime Green */
+        background-color: #D6EE90;
         border-radius: 8px;
         padding: 60px 20px;
         margin: 24px 0;
@@ -124,34 +151,11 @@
         align-items: center;
         justify-content: center;
         gap: 40px;
-        color: #000000; /* Force black text always */
+        color: #000000;
     }
-
-    .stat-row {
-        display: flex;
-        align-items: center;
-        max-width: 500px;
-        width: 100%;
-    }
-
-    .stat-value {
-        font-size: 32px;
-        font-weight: 600;
-        text-align: right;
-        width: 40%;
-        padding-right: 24px;
-        border-right: 1px solid rgba(0,0,0,0.5); /* The line separator */
-        line-height: 1.2;
-        flex-shrink: 0;
-    }
-
-    .stat-label {
-        font-size: 16px;
-        font-weight: 400;
-        padding-left: 24px;
-        width: 60%;
-        line-height: 1.4;
-    }
+    .stat-row { display: flex; align-items: center; max-width: 500px; width: 100%; }
+    .stat-value { font-size: 32px; font-weight: 600; text-align: right; width: 40%; padding-right: 24px; border-right: 1px solid rgba(0,0,0,0.5); line-height: 1.2; flex-shrink: 0; }
+    .stat-label { font-size: 16px; font-weight: 400; padding-left: 24px; width: 60%; line-height: 1.4; }
     
     @media (max-width: 600px) {
         .stat-value { font-size: 28px; width: 35%; padding-right: 16px; }
@@ -254,7 +258,7 @@
            Validated market fit early and avoided a 3-month AI MVP after discovering limited demand for automation among real estate agents.
        </div>
 
-       <!-- REPLACED IMAGE WITH STATS SLIDE -->
+       <!-- STATS SLIDE -->
        <div class="stats-card">
            <div class="stat-row">
                <div class="stat-value">98 hrs</div>
@@ -273,14 +277,14 @@
                <div class="stat-label">Total number of leads agreed for interviews</div>
            </div>
        </div>
-       <!-- END STATS SLIDE -->
        
        <h4 class="process-header">OVERVIEW OF MY RESEARCH PROCESS</h4>
 
        <div class="process-step">
            <h3>Step 1 — Research framing & assumptions:</h3>
            <p>Defined 3 testable assumptions and translated them into a focused interview script centered on real agent workflows and decision triggers.</p>
-           <div class="media-block">
+           <!-- STEP 1: FORCE WHITE BG -->
+           <div class="media-block force-white-bg">
                <img src="/images/polyagent-03.png" alt="Research Framing">
            </div>
        </div>
@@ -288,23 +292,28 @@
        <div class="process-step">
            <h3>Step 2 — Recruiting U.S. realtors:</h3>
            <p>Built a multi-channel recruitment strategy that secured qualified real estate agents across 6 U.S. states within a limited research budget.</p>
-           <div class="media-block">
-               <img src="/images/polyagent-04-1.png" alt="Recruitment Strategy">
+           <!-- STEP 2: VERTICAL STACK -->
+           <div class="media-block vertical-media">
+               <img src="/images/polyagent-04-1.png" alt="Recruitment Strategy Part 1">
+               <img src="/images/polyagent-04-2.gif" alt="Recruitment Strategy Part 2">
            </div>
        </div>
 
        <div class="process-step">
            <h3>Step 3 — Interviews:</h3>
            <p>Conducted 10 in-depth interviews with U.S. realtors to uncover lead-handling behaviors, automation pain points, and willingness to pay.</p>
-           <div class="media-block">
-               <img src="/images/polyagent-05-1.gif" alt="Interview Process">
+           <!-- STEP 3: HORIZONTAL STACK + FORCE WHITE BG -->
+           <div class="media-block horizontal-media force-white-bg">
+               <img src="/images/polyagent-05-1.gif" alt="Interview GIF">
+               <img src="/images/polyagent-05-2.png" alt="Interview Screen">
            </div>
        </div>
 
        <div class="process-step">
            <h3>Step 4 — Data synthesis & analysis:</h3>
            <p>Synthesized interview data through affinity mapping and customer profiling to clearly validate or invalidate each core assumption.</p>
-           <div class="media-block">
+           <!-- STEP 4: FORCE WHITE BG -->
+           <div class="media-block force-white-bg">
                <img src="/images/polyagent-06.gif" alt="Data Synthesis">
            </div>
        </div>
