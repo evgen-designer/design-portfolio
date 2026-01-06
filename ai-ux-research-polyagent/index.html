@@ -70,7 +70,7 @@
     .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 12px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
     .hero-image img { width: 100%; height: auto; display: block; }
 
-    /* UPDATED BADGE STYLE: Yellow background, Black text */
+    /* BADGE STYLE: Yellow background, Black text */
     .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
     body.night .hero-badge { background-color: #54D1FF; color: #000; }
 
@@ -111,6 +111,52 @@
 
     .btn-contact { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 24px; background-color: var(--btn-bg); color: var(--btn-text); border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease; }
     .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    /* NEW STATS CARD STYLES */
+    .stats-card {
+        width: 100%;
+        background-color: #D6EE90; /* Lime Green */
+        border-radius: 8px;
+        padding: 60px 20px;
+        margin: 24px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        color: #000000; /* Force black text always */
+    }
+
+    .stat-row {
+        display: flex;
+        align-items: center;
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .stat-value {
+        font-size: 32px;
+        font-weight: 600;
+        text-align: right;
+        width: 40%;
+        padding-right: 24px;
+        border-right: 1px solid rgba(0,0,0,0.5); /* The line separator */
+        line-height: 1.2;
+        flex-shrink: 0;
+    }
+
+    .stat-label {
+        font-size: 16px;
+        font-weight: 400;
+        padding-left: 24px;
+        width: 60%;
+        line-height: 1.4;
+    }
+    
+    @media (max-width: 600px) {
+        .stat-value { font-size: 28px; width: 35%; padding-right: 16px; }
+        .stat-label { font-size: 15px; width: 65%; padding-left: 16px; }
+    }
 
     .animated { animation-duration: 0.8s; animation-fill-mode: both; }
     .fadeIn { animation-name: fadeIn; }
@@ -208,9 +254,26 @@
            Validated market fit early and avoided a 3-month AI MVP after discovering limited demand for automation among real estate agents.
        </div>
 
-       <div class="media-block">
-            <img src="/images/polyagent-02.png" alt="Research Findings Summary">
+       <!-- REPLACED IMAGE WITH STATS SLIDE -->
+       <div class="stats-card">
+           <div class="stat-row">
+               <div class="stat-value">98 hrs</div>
+               <div class="stat-label">My time spent for this research</div>
+           </div>
+           <div class="stat-row">
+               <div class="stat-value">300$</div>
+               <div class="stat-label">Budget spent to pay realtors for interviews</div>
+           </div>
+           <div class="stat-row">
+               <div class="stat-value">40%</div>
+               <div class="stat-label">Free interviews</div>
+           </div>
+           <div class="stat-row">
+               <div class="stat-value">34</div>
+               <div class="stat-label">Total number of leads agreed for interviews</div>
+           </div>
        </div>
+       <!-- END STATS SLIDE -->
        
        <h4 class="process-header">OVERVIEW OF MY RESEARCH PROCESS</h4>
 
