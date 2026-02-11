@@ -78,35 +78,20 @@
     
     /* Centered Content Layout */
     .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
-    .content-col { width: 100%; max-width: 640px; } /* Limits width for readability since sidebar is gone */
+    .content-col { width: 100%; max-width: 640px; }
 
     /* HEADER */
-    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px 8px 16px; margin-bottom: 40px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
+    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px 10px 20px; margin-bottom: 40px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
     
-    .header-left { display: flex; align-items: center; gap: 16px; }
+    /* Left Side: Navigation */
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a.text-link { text-decoration: none; color: var(--text-color); font-weight: 500; font-size: 15px; border-bottom: none; transition: opacity 0.2s; }
+    .nav-links a.text-link:hover { opacity: 0.6; }
 
-    /* MESH GRADIENT LOGO */
-    .gradient-logo { 
-        width: 40px; height: 40px; border-radius: 50%; 
-        background: radial-gradient(circle at 30% 30%, #54D1FF, #4D55FF, #9B4DFF);
-        background-size: 200% 200%;
-        animation: meshMove 6s ease infinite;
-        cursor: pointer;
-        transition: transform 0.3s ease, filter 0.3s ease;
-        display: block;
-        flex-shrink: 0;
-    }
-    .gradient-logo:hover { 
-        transform: scale(1.1); 
-        filter: hue-rotate(20deg) brightness(1.2);
-    }
-    @keyframes meshMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    
-    /* THEME TOGGLE (Now in Header) */
+    /* Right Side: Actions */
+    .header-right { display: flex; align-items: center; gap: 16px; }
+
+    /* Theme Toggle */
     .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
     .theme-toggle:hover { opacity: 1; }
     .theme-toggle svg { width: 20px; height: 20px; display: block; }
@@ -115,14 +100,12 @@
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-    .nav-links { display: flex; align-items: center; gap: 24px; padding-right: 4px; }
-    .nav-links a.text-link { text-decoration: none; color: var(--text-color); font-weight: 500; font-size: 15px; border-bottom: none; transition: opacity 0.2s; }
-    .nav-links a.text-link:hover { opacity: 0.6; }
+    /* CV Button */
     .btn-cv { background-color: var(--btn-bg); color: var(--btn-text) !important; padding: 10px 20px; border-radius: 100px; font-weight: 600; font-size: 14px; text-decoration: none; border: none; transition: transform 0.2s ease, opacity 0.2s ease; }
     .btn-cv:hover { transform: translateY(-1px); opacity: 0.9; }
 
     /* MOBILE MENU */
-    .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; color: var(--text-color); padding-right: 8px; }
+    .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; color: var(--text-color); margin-left: 8px; padding-right: 8px; }
     .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
     .mobile-overlay.active { opacity: 1; pointer-events: all; }
     .mobile-link { font-size: 24px; font-weight: 600; text-decoration: none; color: var(--text-color); }
@@ -276,6 +259,7 @@
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
+      .btn-cv { display: none; } /* Hide in header on mobile */
       .hover-tooltip { display: none !important; }
       
       .recent-work-grid { 
@@ -314,21 +298,20 @@
 <div class="container">
   
   <header class="main-header">
-    <div class="header-left">
-        <a href="/" class="gradient-logo"></a>
-        <div id="theme-btn" class="theme-toggle">
-            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </div>
-    </div>
-    
     <nav class="nav-links">
       <a href="/" class="text-link" style="opacity: 0.5; cursor: default;">Experience</a>
       <a href="/works/" class="text-link">Works</a>
       <a href="/contact/" class="text-link">Contact</a>
-      <a href="/Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
     </nav>
-    <div class="mobile-menu-btn">Menu</div>
+    
+    <div class="header-right">
+        <div id="theme-btn" class="theme-toggle">
+            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </div>
+        <a href="/Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
+        <div class="mobile-menu-btn">Menu</div>
+    </div>
   </header>
 
   <!-- MAIN BANNER (New) -->
@@ -440,7 +423,7 @@
                 <h4>2017-2021</h4>
             </div>
             <div class="job-description-mobile">
-                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
+                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
             </div>
           </div> 
       </div>
@@ -514,7 +497,7 @@
   // 4. Tooltip & Links Injection (Desktop Only)
   const jobRows = document.querySelectorAll('.job-row');
   const tooltip = document.getElementById('hover-tooltip');
-  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
+  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
 
   function updateTooltip(element) {
       const isXebia = element.querySelector('h2 a').href.includes('xebia');
@@ -526,8 +509,6 @@
           tooltip.style.pointerEvents = "none";
       }
       const centerLine = element.offsetTop + (element.offsetHeight / 2);
-      // Tooltip positioning logic (centered relative to sidebar)
-      // Since layout changed, we position relative to the row
       tooltip.style.left = "-220px";
       tooltip.style.top = centerLine + "px"; tooltip.style.opacity = "1";
   }
