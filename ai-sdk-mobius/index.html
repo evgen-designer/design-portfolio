@@ -45,13 +45,10 @@
     /* HEADER */
     .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px 10px 20px; margin-bottom: 60px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
     
-    /* Left Side: Navigation */
-    .nav-links { display: flex; align-items: center; gap: 24px; }
-    .nav-links a.text-link { text-decoration: none; color: var(--text-color); font-weight: 500; font-size: 15px; border-bottom: none; transition: opacity 0.2s; }
-    .nav-links a.text-link:hover { opacity: 0.6; }
-
-    /* Right Side: Actions */
-    .header-right { display: flex; align-items: center; gap: 16px; }
+    /* Back Button */
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; }
+    .btn-back:hover { opacity: 0.6; }
+    .btn-back svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
     /* Theme Toggle */
     .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
@@ -62,12 +59,7 @@
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-    /* CV Button */
-    .btn-cv { background-color: var(--btn-bg); color: var(--btn-text) !important; padding: 10px 20px; border-radius: 100px; font-weight: 600; font-size: 14px; text-decoration: none; border: none; transition: transform 0.2s ease, opacity 0.2s ease; }
-    .btn-cv:hover { transform: translateY(-1px); opacity: 0.9; }
-
-    /* MOBILE MENU */
-    .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; color: var(--text-color); margin-left: 8px; padding-right: 8px; }
+    .mobile-menu-btn { display: none; }
 
     /* CASE STUDY STYLES */
     .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
@@ -154,10 +146,6 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .mobile-menu-btn { display: block; }
-      .btn-cv { display: none; } /* Hide in header on mobile */
-
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
       h1 { font-size: 28px; }
       .footer-title { font-size: 28px; }
@@ -171,19 +159,14 @@
 
 <div class="container">
   <header class="main-header">
-    <nav class="nav-links">
-      <a href="/" class="text-link">Experience</a>
-      <a href="/works/" class="text-link">Works</a>
-      <a href="/contact/" class="text-link">Contact</a>
-    </nav>
+    <a href="/works/" class="btn-back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to works
+    </a>
     
-    <div class="header-right">
-        <div id="theme-btn" class="theme-toggle">
-            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </div>
-        <a href="/Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
-        <div class="mobile-menu-btn">Menu</div>
+    <div id="theme-btn" class="theme-toggle">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
     </div>
   </header>
 
