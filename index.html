@@ -48,7 +48,7 @@
       --header-bg: rgba(255, 255, 255, 0.6); --header-border: rgba(0, 0, 0, 0.05);
       --btn-bg: #111; --btn-text: #fff;
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --container-width: 800px; --sidebar-width: 220px; --top-spacing: 40px; --bottom-spacing: 140px;
+      --container-width: 800px; --top-spacing: 40px; --bottom-spacing: 140px;
       --tooltip-bg: #050505; --tooltip-text: #fff;
       
       /* Card Variables for Home */
@@ -57,7 +57,7 @@
       --ui-elem-bg: #ffffff; --ui-elem-border: #f0f0f0; 
       
       /* Badge Colors */
-      --badge-bg: #FFD500; /* Yellow for Day */
+      --badge-bg: #FFD500; 
     }
     body.night {
       --bg-color: #1a1a1a; --text-color: #f0f0f0; --secondary-text: #a0a0a0; --link-color: #fff; --divider-color: #333;
@@ -68,18 +68,53 @@
       --pattern-dot: #333;
       --ui-elem-bg: #2a2a2a; --ui-elem-border: #383838;
       
-      /* Badge Colors */
-      --badge-bg: #54D1FF; /* Cyan for Night */
+      --badge-bg: #54D1FF; 
     }
     * { box-sizing: border-box; }
     body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
 
-    /* HEADER */
-    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; margin-bottom: 60px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
-    a.logo-circle { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0; transition: transform 0.2s ease; display: block; border: none !important; }
-    a.logo-circle:hover { transform: scale(1.05); border: none !important; }
-    .logo-circle img { width: 100%; height: 100%; object-fit: cover; display: block;}
+    /* LAYOUT */
+    .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
     
+    /* Centered Content Layout */
+    .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .content-col { width: 100%; max-width: 640px; } /* Limits width for readability since sidebar is gone */
+
+    /* HEADER */
+    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px 8px 16px; margin-bottom: 40px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
+    
+    .header-left { display: flex; align-items: center; gap: 16px; }
+
+    /* MESH GRADIENT LOGO */
+    .gradient-logo { 
+        width: 40px; height: 40px; border-radius: 50%; 
+        background: radial-gradient(circle at 30% 30%, #54D1FF, #4D55FF, #9B4DFF);
+        background-size: 200% 200%;
+        animation: meshMove 6s ease infinite;
+        cursor: pointer;
+        transition: transform 0.3s ease, filter 0.3s ease;
+        display: block;
+        flex-shrink: 0;
+    }
+    .gradient-logo:hover { 
+        transform: scale(1.1); 
+        filter: hue-rotate(20deg) brightness(1.2);
+    }
+    @keyframes meshMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    /* THEME TOGGLE (Now in Header) */
+    .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
+    .theme-toggle:hover { opacity: 1; }
+    .theme-toggle svg { width: 20px; height: 20px; display: block; }
+    body.day .icon-moon { display: block !important; fill: #333; }
+    body.day .icon-sun { display: none !important; }
+    body.night .icon-moon { display: none !important; }
+    body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
+
     .nav-links { display: flex; align-items: center; gap: 24px; padding-right: 4px; }
     .nav-links a.text-link { text-decoration: none; color: var(--text-color); font-weight: 500; font-size: 15px; border-bottom: none; transition: opacity 0.2s; }
     .nav-links a.text-link:hover { opacity: 0.6; }
@@ -93,16 +128,16 @@
     .mobile-link { font-size: 24px; font-weight: 600; text-decoration: none; color: var(--text-color); }
     .mobile-btn-cv { font-size: 18px; padding: 14px 28px; }
 
-    /* LAYOUT */
-    .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
-    .content-grid { display: grid; grid-template-columns: var(--sidebar-width) 1fr; width: 100%; }
-    .icon-col { padding-top: 5px; }
-    .theme-toggle { width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; margin-left: 22px; }
-    .theme-toggle svg { width: 24px; height: 24px; display: block; }
-    body.day .icon-moon { display: block !important; fill: #333; }
-    body.day .icon-sun { display: none !important; }
-    body.night .icon-moon { display: none !important; }
-    body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
+    /* MAIN BANNER */
+    .main-banner {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin-bottom: 60px;
+        display: block;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        border: 1px solid var(--card-border);
+    }
 
     h1 { font-size: 20px; font-weight: 700; margin-bottom: 24px; margin-top: 0; line-height: 1.3; }
 
@@ -115,14 +150,13 @@
       margin-top: -16px; 
       margin-bottom: 32px;
       line-height: 1.5;
-      max-width: 600px;
     }
 
     /* BADGES (Skills) */
     .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
     .badge { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; border: 1px solid var(--divider-color); color: var(--secondary-text); background: transparent; white-space: nowrap; }
 
-    p { margin-bottom: 24px; max-width: 580px; }
+    p { margin-bottom: 24px; }
     a { color: var(--link-color); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
     a:hover { border-bottom: 1px solid var(--link-color); }
     .spacer48 { height: 16px; }
@@ -150,7 +184,6 @@
         text-decoration: none;
         transition: transform 0.2s ease, border-color 0.2s ease;
         position: relative;
-        /* Desktop: slightly landscape aspect ratio */
         aspect-ratio: 4 / 3; 
     }
     .mini-card:hover { transform: translateY(-2px); border-color: rgba(120, 120, 120, 0.3); }
@@ -158,7 +191,7 @@
     /* VISUAL AREA (Fills the card completely) */
     .mini-visual {
         width: 100%;
-        height: 100%; /* Force fill */
+        height: 100%; 
         background-color: var(--bg-color);
         background-image: radial-gradient(var(--pattern-dot) 1.5px, transparent 1.5px);
         background-size: 20px 20px;
@@ -184,39 +217,35 @@
       position: absolute;
       top: 50%; 
       left: 50%;
-      transform: translate(-50%, -40%); /* Start slightly lower */
+      transform: translate(-50%, -40%); 
       background-color: var(--badge-bg); 
       color: #000;
       padding: 8px 16px;
-      /* UPDATED: Rounded Rectangle instead of Capsule */
       border-radius: 8px; 
       font-size: 12px;
       font-weight: 700;
       text-align: center;
       line-height: 1.3;
-      opacity: 0; /* Hidden by default */
+      opacity: 0; 
       transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       z-index: 10;
-      pointer-events: none; /* Allows click to pass through to the link */
+      pointer-events: none; 
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       width: max-content;
       max-width: 90%;
     }
 
-    /* Reveal Badge on Hover */
     .mini-card:hover .mini-badge {
       opacity: 1;
-      transform: translate(-50%, -50%); /* Move to center */
+      transform: translate(-50%, -50%); 
     }
 
-    /* MORE WORKS BUTTON */
     .more-card { 
         display: flex; align-items: center; justify-content: center; 
         background-color: var(--card-bg); color: var(--text-color); 
         font-size: 14px; font-weight: 600; text-align: center; 
         border: 1px solid var(--card-border); border-radius: 12px; gap: 6px; 
         transition: background-color 0.2s;
-        /* Match aspect ratio of other cards */
         aspect-ratio: 4 / 3; 
         height: auto; 
     }
@@ -245,25 +274,16 @@
 
     /* MOBILE BREAKPOINT */
     @media (max-width: 768px) {
-      .content-grid { grid-template-columns: 1fr; }
-      .icon-col { margin-bottom: 40px; }
-      
-      /* Hide the empty sidebar spacing on mobile */
-      .icon-col.mobile-hide { display: none; margin-bottom: 0; }
-
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .hover-tooltip { display: none !important; }
       
-      /* Mini Grid: 2x2 on Mobile */
       .recent-work-grid { 
           grid-template-columns: 1fr 1fr; 
           gap: 12px;
           margin-top: 40px; 
           margin-bottom: 40px; 
       }
-
-      /* UPDATED: SQUARE ASPECT RATIO FOR MOBILE */
       .mini-card, .more-card { 
           aspect-ratio: 1 / 1; 
       }
@@ -276,8 +296,6 @@
         border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); line-height: 1.5;
       }
       .text-content-padding { padding-top: 0; }
-
-      /* Mobile adjustment for subtitle */
       p.intro-subtitle { font-size: 15px; margin-top: -12px; }
     }
   </style>
@@ -296,7 +314,13 @@
 <div class="container">
   
   <header class="main-header">
-    <a href="/" class="logo-circle"><img src="/images/profile-avatar.png" alt="Eugene Evgen"></a>
+    <div class="header-left">
+        <a href="/" class="gradient-logo"></a>
+        <div id="theme-btn" class="theme-toggle">
+            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </div>
+    </div>
     
     <nav class="nav-links">
       <a href="/" class="text-link" style="opacity: 0.5; cursor: default;">Experience</a>
@@ -307,15 +331,11 @@
     <div class="mobile-menu-btn">Menu</div>
   </header>
 
+  <!-- MAIN BANNER (New) -->
+  <img src="/images/main-banner.png" alt="Main Banner" class="main-banner animated fadeIn">
+
   <!-- BLOCK 1: INTRO -->
   <div class="content-grid animated fadeIn two">
-    <div class="icon-col">
-      <div id="theme-btn" class="theme-toggle">
-          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-      </div>
-    </div>
-
     <div class="content-col">
       <!-- 1. HEADER (Updated Name) -->
       <h1>Hi, I'm Eugene Evgen — Lead Product Designer for AI-driven fintech & proptech SaaS.</h1>
@@ -392,9 +412,6 @@
 
   <!-- BLOCK 3: RESUME/FOOTER -->
   <div class="content-grid animated fadeIn two">
-    <!-- Helper class 'mobile-hide' removes margin on mobile -->
-    <div class="icon-col mobile-hide"></div>
-
     <div class="content-col">
       <h4 class="label">PREVIOUSLY</h4> 
 
@@ -423,7 +440,7 @@
                 <h4>2017-2021</h4>
             </div>
             <div class="job-description-mobile">
-                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
+                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
             </div>
           </div> 
       </div>
@@ -497,7 +514,7 @@
   // 4. Tooltip & Links Injection (Desktop Only)
   const jobRows = document.querySelectorAll('.job-row');
   const tooltip = document.getElementById('hover-tooltip');
-  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
+  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
 
   function updateTooltip(element) {
       const isXebia = element.querySelector('h2 a').href.includes('xebia');
@@ -509,6 +526,9 @@
           tooltip.style.pointerEvents = "none";
       }
       const centerLine = element.offsetTop + (element.offsetHeight / 2);
+      // Tooltip positioning logic (centered relative to sidebar)
+      // Since layout changed, we position relative to the row
+      tooltip.style.left = "-220px";
       tooltip.style.top = centerLine + "px"; tooltip.style.opacity = "1";
   }
 
