@@ -250,6 +250,26 @@
 
     .job-description-mobile { display: none; }
 
+    /* New Yellow Badge Style */
+.badge-yellow {
+  background-color: #FFD500; 
+  color: #000;
+  font-size: 10px; 
+  font-weight: 700; 
+  padding: 3px 8px; 
+  border-radius: 100px; 
+  white-space: nowrap; 
+  border: none;
+  display: inline-block;
+  transform: translateY(-2px); /* Visual alignment with text */
+}
+
+/* Dark Mode color for the yellow badge */
+body.night .badge-yellow { 
+  background-color: #54D1FF; 
+  color: #000; 
+}
+
     /* ANIMATIONS */
     .animated { animation-duration: 1s; animation-fill-mode: both; }
     .fadeIn { animation-name: fadeIn; }
@@ -404,16 +424,16 @@
           </div>
 
           <!-- Mobius Labs (Badge Added) -->
-          <div class="job-row" data-tooltip="Increased AI SDK web demo usage during sales by 95%.">
-            <div class="job-company">
-                <h2 style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                    <a href="https://dropbox.tech/machine-learning/mobius-labs-aana-dropbox-multimodal-understanding" target="_blank">Mobius Labs</a>
-                    <span class="badge" style="margin: 0;">Acquired by Dropbox</span>
-                </h2>
-                <h4>Enterprise AI SDK</h4>
-            </div>  
-            <div class="job-details"><h3>Senior Product Designer</h3><h4>2022</h4></div>
-          </div>
+<div class="job-row" data-tooltip="Increased AI SDK web demo usage during sales by 95%.">
+  <div class="job-company">
+      <h2 style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <a href="https://dropbox.tech/machine-learning/mobius-labs-aana-dropbox-multimodal-understanding" target="_blank">Mobius Labs</a>
+          <span class="badge-yellow">Acquired by Dropbox</span>
+      </h2>
+      <h4>Enterprise AI SDK</h4>
+  </div>  
+  <div class="job-details"><h3>Senior Product Designer</h3><h4>2022</h4></div>
+</div>
 
           <!-- BladeInsight -->
           <div class="job-row" data-tooltip="Improved operator task efficiency by up to 34% for autonomous drone inspection software.">
