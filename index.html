@@ -297,10 +297,26 @@ body.night .badge-yellow {
       .job-row::after { content: attr(data-tooltip); grid-column: 1 / -1; display: block; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); line-height: 1.5; }
       
       .job-description-mobile {
-        display: block; grid-column: 1 / -1; margin-top: 16px; padding-top: 16px;
-        border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); line-height: 1.5;
-      }
-      .text-content-padding { padding-top: 0; }
+  display: block; grid-column: 1 / -1; margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); line-height: 1.5;
+}
+
+/* 🔧 ADD THESE LINES RIGHT HERE */
+.job-row.no-tooltip::after {
+  content: none;
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.job-list .job-row:last-child .job-description-mobile {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+/* 🔧 END */
+
+.text-content-padding { padding-top: 0; }
       p.intro-subtitle { font-size: 15px; margin-top: -12px; }
     }
   </style>
