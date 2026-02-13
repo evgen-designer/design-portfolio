@@ -81,12 +81,18 @@
     .content-col { width: 100%; max-width: 640px; }
 
     /* HEADER */
-    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px 10px 32px; margin-bottom: 40px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
+    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 32px 10px 32px; margin-bottom: 40px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
     
     /* Left Side: Navigation */
     .nav-links { display: flex; align-items: center; gap: 24px; }
     .nav-links a.text-link { text-decoration: none; color: var(--text-color); font-weight: 500; font-size: 15px; border-bottom: none; transition: opacity 0.2s; }
     .nav-links a.text-link:hover { opacity: 0.6; }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
 
     /* Right Side: Actions */
     .header-right { display: flex; align-items: center; gap: 16px; }
@@ -344,21 +350,28 @@ body.night .badge-yellow {
 <div class="container">
   
   <header class="main-header">
+  <!-- LEFT -->
+  <div class="header-left">
     <nav class="nav-links">
       <a href="/" class="text-link" style="opacity: 0.5; cursor: default;">Experience</a>
       <a href="/works/" class="text-link">Works</a>
       <a href="/contact/" class="text-link">Contact</a>
     </nav>
-    
-    <div class="header-right">
-        <div id="theme-btn" class="theme-toggle">
-            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </div>
-        <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
-        <div class="mobile-menu-btn">Menu</div>
+
+    <!-- Mobile only -->
+    <div class="mobile-menu-btn">Menu</div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="header-right">
+    <div id="theme-btn" class="theme-toggle">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
     </div>
-  </header>
+
+    <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
+  </div>
+</header>
 
   <!-- MAIN BANNER (New) -->
   <img src="/images/hero-banner.png" alt="Main Banner" class="main-banner animated fadeIn">
