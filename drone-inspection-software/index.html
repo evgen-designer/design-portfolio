@@ -115,10 +115,9 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     /* TASK SPECIFIC STYLES */
-    .results-card { background-color: #3CA972; padding: 40px; border-radius: 12px; margin-top: 40px; }
-    .results-card .section-label { color: rgba(0,0,0,0.4); }
-    .results-card li { color: #fff; }
-    .results-card li::before { color: rgba(255,255,255,0.7); }
+    .results-card { background-color: #3CA972; padding: 40px; border-radius: 12px; margin-top: 16px; margin-bottom: 40px; }
+    .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
+    .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
 
     @media (max-width: 768px) {
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -126,6 +125,7 @@
       .footer-title { font-size: 28px; }
       .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
       .media-block { min-height: auto; }
+      .results-card li { font-size: 20px; padding-left: 28px; }
     }
   </style>
 </head>
@@ -179,34 +179,27 @@
            </div>
 
            
-               <div>
-                   <h4 class="section-label">KEY FOCUS AREAS</h4>
-                   <ul class="detail-list">
-                       <li>Field user research & contextual observation</li>
-                       <li>Information architecture & workflow automation</li>
-                       <li>End-to-end UX & UI design (100+ high-fidelity screens)</li>
-                       <li>Outdoor-readability & accessibility design</li>
-                       <li>Cross-platform integration (tablet → web platform)</li>
-                   </ul>
-               </div>
-               <div class="results-card">
-                   <h4 class="section-label">KEY RESULTS</h4>
-                   <ul class="numbered-list">
-                       <li>Increased inspection efficiency by up to 34%</li>
-                       <li>Reduced inspection errors and improved operator confidence</li>
-                       <li>Enabled potential annual savings of €1.4M across the client base through faster inspection surveys</li>
-                   </ul>
-               </div>
+           <div style="margin-bottom: 40px;">
+               <h4 class="section-label">KEY FOCUS AREAS</h4>
+               <ul class="detail-list">
+                   <li>Field user research & contextual observation</li>
+                   <li>Information architecture & workflow automation</li>
+                   <li>End-to-end UX & UI design (100+ high-fidelity screens)</li>
+                   <li>Outdoor-readability & accessibility design</li>
+                   <li>Cross-platform integration (tablet → web platform)</li>
+               </ul>
+           </div>
+           
+           <h4 class="section-label">KEY RESULTS</h4>
+           <div class="results-card">
+               <ul class="numbered-list">
+                   <li>Increased inspection efficiency by up to 34%</li>
+                   <li>Reduced inspection errors and improved operator confidence</li>
+                   <li>Enabled potential annual savings of €1.4M across the client base through faster inspection surveys</li>
+               </ul>
+           </div>
+           
 
-       </div>
-
-      <h4 class="section-label">KEY RESULTS</h4>
-       <div class="text-slide">
-         <ul class="numbered-list">
-                       <li>Increased inspection efficiency by up to 34%</li>
-                       <li>Reduced inspection errors and improved operator confidence</li>
-                       <li>Enabled potential annual savings of €1.4M across the client base through faster inspection surveys</li>
-                   </ul>
        </div>
 
        <h4 class="process-header">OVERVIEW OF MY DESIGN PROCESS</h4>
