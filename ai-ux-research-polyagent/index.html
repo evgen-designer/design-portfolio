@@ -166,12 +166,18 @@
     .fadeIn { animation-name: fadeIn; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* TASK SPECIFIC STYLES */
+    .results-card { background-color: #B0409E; padding: 40px; border-radius: 12px; margin-top: 16px; margin-bottom: 40px; }
+    .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
+    .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
+
     @media (max-width: 768px) {
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
       h1 { font-size: 28px; }
       .footer-title { font-size: 28px; }
       .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
       .media-block { min-height: auto; }
+      .results-card li { font-size: 20px; padding-left: 28px; }
     }
   </style>
 </head>
@@ -220,33 +226,29 @@
                <p class="text-highlight">6 weeks</p>
            </div>
 
-           <div class="split-grid">
-               <div>
-                   <h4 class="section-label">KEY FOCUS AREAS</h4>
-                   <ul class="detail-list">
-                       <li>User research & assumption testing</li>
-                       <li>Recruitment strategy & research ops</li>
-                       <li>Interview design & facilitation</li>
-                       <li>Affinity mapping & synthesis</li>
-                       <li>Founder decision support</li>
-                   </ul>
-               </div>
-               <div>
-                   <h4 class="section-label">ALL RESULTS</h4>
-                   <ul class="numbered-list">
-                       <li>Validated that only ~30% of interviewed realtors experienced sufficient pain to justify AI automation</li>
-                       <li>Identified that the core problem was situational and dependent on agent volume and business maturity</li>
-                       <li>Enabled the founder to pause a 3-month AI MVP development before committing engineering resources</li>
-                       <li>Prevented building an over-scoped product misaligned with the true addressable market</li>
-                   </ul>
-               </div>
+           
+           <div style="margin-bottom: 40px;">
+               <h4 class="section-label">KEY FOCUS AREAS</h4>
+               <ul class="detail-list">
+                   <li>User research & assumption testing</li>
+                   <li>Recruitment strategy & research ops</li>
+                   <li>Interview design & facilitation</li>
+                   <li>Affinity mapping & synthesis</li>
+                   <li>Founder decision support</li>
+               </ul>
            </div>
+           
+           <h4 class="section-label">KEY RESULTS</h4>
+           <div class="results-card">
+               <ul class="numbered-list">
+                   <li>Validated that only ~30% of interviewed realtors experienced sufficient pain to justify AI automation</li>
+                   <li>Identified that the core problem was situational and dependent on agent volume and business maturity</li>
+                   <li>Enabled the founder to pause a 3-month AI MVP development before committing engineering resources</li>
+                   <li>Prevented building an over-scoped product misaligned with the true addressable market</li>
+               </ul>
+           </div>
+           
 
-       </div>
-
-       <h4 class="section-label">CORE RESULT</h4>
-       <div class="text-slide secondary" style="margin-top: 16px;">
-           Validated market fit early and avoided a 3-month AI MVP after discovering limited demand for automation among real estate agents.
        </div>
 
        <!-- STATS SLIDE -->
@@ -311,6 +313,11 @@
            <div class="media-block force-white-bg">
                <img src="/images/polyagent-06.gif" alt="Data Synthesis">
            </div>
+       </div>
+
+       <h4 class="section-label">CORE RESULT</h4>
+       <div class="text-slide secondary" style="margin-top: 16px;">
+           Validated market fit early and avoided a 3-month AI MVP after discovering limited demand for automation among real estate agents.
        </div>
 
        <div class="footer-cta">
