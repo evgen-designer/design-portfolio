@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AI Web Demo Redesign - Eugene Evgen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/icon-192.png" type="image/png">
+  
+  <style>
+    /* VARIABLES */
+    :root {
+      --bg-color: #F6F6F6; --text-color: #111; --secondary-text: #777; --link-color: #111; --divider-color: #e5e5e5;
+      --header-bg: rgba(255, 255, 255, 0.6); --header-border: rgba(0, 0, 0, 0.05);
+      --btn-bg: #111; --btn-text: #fff;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --container-width: 800px; --top-spacing: 40px; --bottom-spacing: 140px;
+      
+      --meta-label: #888;
+      --image-bg: #e0e0e0;
+      --code-bg: #fff;
+      --slide-bg: #111;
+      --slide-text: #fff;
+    }
+    body.night {
+      --bg-color: #1a1a1a; --text-color: #f0f0f0; --secondary-text: #a0a0a0; --link-color: #fff; --divider-color: #333;
+      --header-bg: rgba(40, 40, 40, 0.6); --header-border: rgba(255, 255, 255, 0.1); --btn-bg: #fff; --btn-text: #000;
+      
+      --meta-label: #666;
+      --image-bg: #2a2a2a;
+      --code-bg: #222;
+      --slide-bg: #fff;
+      --slide-text: #000;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
+
+    /* LAYOUT */
+    .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
+    
+    /* Centered Content Layout */
+    .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .content-col { width: 100%; max-width: 680px; }
+
+    /* HEADER */
+    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 32px 10px 32px; margin-bottom: 60px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
+    
+    /* Back Button */
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; }
+    .btn-back:hover { opacity: 0.6; }
+    .btn-back svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Theme Toggle */
+    .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
+    .theme-toggle:hover { opacity: 1; }
+    .theme-toggle svg { width: 20px; height: 20px; display: block; }
+    body.day .icon-moon { display: block !important; fill: #333; }
+    body.day .icon-sun { display: none !important; }
+    body.night .icon-moon { display: none !important; }
+    body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
+
+    .mobile-menu-btn { display: none; }
+
+    /* CASE STUDY STYLES */
+    .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
+
+    h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
+    
+    .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 12px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
+    .hero-image img { width: 100%; height: auto; display: block; }
+
+    .hero-image.inset-black {
+        background-color: #000; 
+        padding: 40px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .hero-image.inset-black img {
+        width: 100%; 
+        height: auto;
+        object-fit: contain; 
+        border-radius: 6px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
+    body.night .hero-badge { background-color: #54D1FF; color: #000; }
+    
+    .project-links-row { display: flex; gap: 32px; margin-top: -12px; margin-bottom: 60px; flex-wrap: wrap; }
+    .project-link { 
+      color: var(--text-color); 
+      font-weight: 700; 
+      text-decoration: none; 
+      font-size: 16px; 
+      display: inline-flex; 
+      align-items: center; 
+      transition: opacity 0.2s ease; 
+    }
+    .project-link:hover { opacity: 0.6; }
+    .project-link span { margin-left: 6px; font-size: 18px; line-height: 1; font-weight: 400; }
+
+    .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 12px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
+    .text-slide.secondary { font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px; }
+
+    .project-details-wrapper { margin-bottom: 80px; }
+    .detail-block { margin-bottom: 40px; }
+    .detail-block.last-top { padding-bottom: 40px; border-bottom: 1px solid var(--divider-color); margin-bottom: 40px; }
+
+    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
+    
+    .text-highlight { font-size: 20px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin: 0; max-width: 680px; }
+
+    .detail-list { list-style: none; padding: 0; margin: 0; }
+    .detail-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 18px; line-height: 1.6; }
+    .detail-list li::before { content: "•"; position: absolute; left: 0; color: var(--secondary-text); font-weight: bold; }
+    
+    .numbered-list { list-style: none; padding: 0; margin: 0; counter-reset: result-counter; }
+    .numbered-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 20px; line-height: 1.6; }
+    .numbered-list li::before { counter-increment: result-counter; content: counter(result-counter) "."; position: absolute; left: 0; color: var(--secondary-text); font-weight: 500; }
+
+    .process-header { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px; }
+    
+    .process-step { margin-bottom: 60px; }
+    .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
+
+    .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
+    
+    .media-block img, 
+    .media-block video { width: 100%; height: auto; display: block; }
+    .media-block iframe { width: 100%; aspect-ratio: 16 / 9; display: block; border: 0; }
+
+    /* Responsive YouTube embed fallback (keeps everything else intact) */
+    .media-block.video-embed { padding: 0; }
+    @supports not (aspect-ratio: 16 / 9) {
+      .media-block.video-embed { position: relative; height: 0; padding-bottom: 56.25%; min-height: 0; }
+      .media-block.video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    }
+    
+    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
+    .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
+
+    .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
+    .footer-title { font-size: 32px; font-weight: 700; line-height: 1.2; color: var(--text-color); margin: 0 0 16px 0; }
+    .footer-subtitle { font-size: 16px; color: var(--secondary-text); max-width: 620px; margin: 0 auto 32px auto; line-height: 1.6; }
+
+    .btn-contact { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 24px; background-color: var(--btn-bg); color: var(--btn-text); border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease; }
+    .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    .animated { animation-duration: 0.8s; animation-fill-mode: both; }
+    .fadeIn { animation-name: fadeIn; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* TASK SPECIFIC STYLES */
+    .results-card { background-color: #6936CC; padding: 40px; border-radius: 12px; margin-top: 16px; margin-bottom: 40px; }
+    .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
+    .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .split-grid { grid-template-columns: 1fr; gap: 40px; }
+      h1 { font-size: 28px; }
+      .footer-title { font-size: 28px; }
+      .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
+      .media-block { min-height: auto; }
+      .hero-image.inset-black { padding: 20px; }
+      .results-card li { font-size: 20px; padding-left: 28px; }
+    }
+  </style>
+</head>
+<body class="day">
+
+<div class="container">
+  <header class="main-header">
+    <a href="/works/" class="btn-back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to works
+    </a>
+    
+    <div id="theme-btn" class="theme-toggle">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </div>
+  </header>
+
+  <div class="content-grid animated fadeIn">
+    <div class="content-col">
+
+       <span class="case-tag">AI INTERACTION DESIGN</span>
+       <h1>Transforming a neglected AI SKD web demo into a vital sales tool for a Computer Vision startup (acquired by Dropbox)</h1>
+       
+       <!-- HERO IMAGE -->
+       <div class="hero-image inset-black">
+           <div class="hero-badge">Increased demo usage in sales by 95%</div>
+           <img src="/images/mobius-01.gif" alt="Mobius Labs SDK Web Demo Interface">
+       </div>
+       
+       <!-- NEW LINKS (Figma & Prototype) -->
+       <div class="project-links-row">
+           <a href="https://www.figma.com/design/r26vZkH1PYtGXlqtgzxXZ9/Mobius-Labs-demo--acquired-by-Dropbox-?node-id=5303-16381&t=uAQ66HwtP7NMOGEW-1" target="_blank" class="project-link">
+               View Figma link <span>↗</span>
+           </a>
+           <a href="https://www.figma.com/proto/r26vZkH1PYtGXlqtgzxXZ9/Mobius-Labs-demo--acquired-by-Dropbox-?node-id=5303-16381&t=oBlHyjvRJUuDOUyN-1&scaling=min-zoom&content-scaling=fixed&page-id=5303%3A16380&starting-point-node-id=5303%3A16381" target="_blank" class="project-link">
+               View prototype <span>↗</span>
+           </a>
+       </div>
+
+       <h4 class="section-label">CHALLENGE</h4>
+       <div class="text-slide">
+           Despite having powerful computer vision technology, the company’s public web demo was feature-heavy rather than industry-oriented & benefit-driven, leading the sales team to avoid using it in live customer meetings.
+       </div>
+
+       <div class="project-details-wrapper">
+           
+           <div class="detail-block">
+               <h4 class="section-label">MY TASK</h4>
+               <p class="text-highlight">
+                   Led the end-to-end redesign of the Mobius Labs SDK web demo to align with industry-specific needs. Bridged Product and Sales by defining industry personas, creating a scalable design system, and delivering an interactive demo product that enabled the sales team to showcase the real-time capabilities of Mobius AI during client pitches.
+               </p>
+           </div>
+
+           <div class="detail-block last-top">
+               <h4 class="section-label">TASK TIMEFRAME</h4>
+               <p class="text-highlight">5 months</p>
+           </div>
+
+           
+           <div style="margin-bottom: 40px;">
+               <h4 class="section-label">KEY FOCUS AREAS</h4>
+               <ul class="detail-list">
+                   <li>Internal UX auditing & "New Hire" usability testing</li>
+                   <li>Sales team interviews & Industry Persona definition</li>
+                   <li>Design System creation (MUI + Figma + Storybook)</li>
+                   <li>High-fidelity prototyping</li>
+               </ul>
+           </div>
+           
+           <h4 class="section-label">KEY RESULTS</h4>
+           <div class="results-card">
+               <ul class="numbered-list">
+                   <li>Increased demo usage in sales meetings by 95%</li>
+                   <li>Accelerated design production speed by implementing a unified MUI-based Design System</li>
+                   <li>Established a "new hire testing loop" agreement with HR to secure continuous, free user feedback</li>
+               </ul>
+           </div>
+           
+
+       </div>
+
+       <div class="media-block">
+            <img src="/images/mobius-02.png" alt="Mobius Redesigned Interface">
+       </div>
+       
+       <h4 class="process-header">OVERVIEW OF MY DESIGN PROCESS</h4>
+
+       <div class="process-step">
+           <h3>Step 1 - Internal UX review workshop:</h3>
+           <p>Conducted "labor illusion" experiments and usability tests with new employees during my first two weeks, identifying that users were overwhelmed by technical jargon and confusing onboarding.</p>
+           <div class="media-block">
+               <img src="/images/mobius-03.png" alt="UX Workshop and Analysis">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 2 - Sales team interviews & deal analysis:</h3>
+           <p>Interviewed 4 experts most involved in sales process (sales specialists, CEO and tech lead) and analyzed 30+ HubSpot deals to understand the disconnect. Discovered that while the product demo sold "features," clients were buying "solutions" specific to their industry.</p>
+           <div class="media-block">
+               <img src="/images/mobius-04.png" alt="HubSpot Deal Analysis">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 3 - Defining industry personas:</h3>
+           <p>Synthesized research into 4 key industry personas (Content Licensing, Internet-to-Print, Broadcasting, Marketing) to ensure the new design spoke the language of the decision-makers, not just developers.</p>
+           <div class="media-block">
+               <img src="/images/mobius-05.png" alt="Industry Personas">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 4 - Building the infrastructure:</h3>
+           <p>Created a comprehensive Design System (Figma library with MUI-based components linked to Storybook) to eliminate messy custom add-ons and inconsistent fonts, streamlining the implementation process.</p>
+           <div class="media-block">
+               <img src="/images/mobius-06.png" alt="Design System & Storybook">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 5 - Strategic redesign & vertical prototyping:</h3>
+           <p>Executed the “industry-oriented” redesign with improved contrast and clear, step-by-step processes.</p>
+           <div class="media-block">
+               <img src="/images/mobius-07.png" alt="Redesign Prototypes">
+           </div>
+           
+           <div class="media-block video-embed">
+               <iframe
+                 src="https://www.youtube.com/embed/JjPqlSbk6qo"
+                 title="YouTube video player"
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                 allowfullscreen>
+               </iframe>
+           </div>
+       </div>
+
+       <h4 class="section-label">CORE RESULT</h4>
+       <div class="text-slide secondary" style="margin-top: 16px;">
+           The redesigned demo product drove a 95% increase in usage during sales meetings.
+       </div>
+
+       <div class="footer-cta">
+           <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
+           <p class="footer-subtitle">I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery.<br>AI-powered workflows, fast iterations, real business impact.</p>
+           <a href="/contact/" class="btn-contact">Let’s design your product</a>
+       </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const themeBtn = document.getElementById('theme-btn');
+  const body = document.body;
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'night') { body.classList.remove('day'); body.classList.add('night'); } 
+  else { body.classList.add('day'); }
+
+  themeBtn.addEventListener('click', function() {
+      if (body.classList.contains('day')) {
+          body.classList.remove('day'); body.classList.add('night'); localStorage.setItem('theme', 'night');
+      } else {
+          body.classList.remove('night'); body.classList.add('day'); localStorage.setItem('theme', 'day');
+      }
+  });
+</script>
+</body>
+</html>
