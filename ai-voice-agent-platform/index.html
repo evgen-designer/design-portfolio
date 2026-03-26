@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>AI Web Demo Redesign - Eugene Evgen</title>
+  <title>Synthflow AI Audit - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/images/favicon.ico" sizes="any">
   <link rel="icon" href="/images/icon-192.png" type="image/png">
@@ -154,8 +154,11 @@
 
     /* TASK SPECIFIC STYLES */
     .results-card { background-color: #6936CC; padding: 40px; border-radius: 12px; margin-top: 16px; margin-bottom: 40px; }
-    .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
+    .results-card li { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.5; padding-left: 32px; }
     .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
+
+    /* Sub-list utility for long badges */
+    .hero-badge.long-text { max-width: 320px; text-align: right; border-radius: 16px; }
 
     @media (max-width: 768px) {
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -164,7 +167,8 @@
       .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
       .media-block { min-height: auto; }
       .hero-image.inset-black { padding: 20px; }
-      .results-card li { font-size: 20px; padding-left: 28px; }
+      .results-card li { font-size: 18px; padding-left: 28px; }
+      .hero-badge.long-text { max-width: 90%; text-align: center; border-radius: 100px; }
     }
   </style>
 </head>
@@ -187,27 +191,27 @@
     <div class="content-col">
 
        <span class="case-tag">AI INTERACTION DESIGN</span>
-       <h1>Transforming a neglected AI SKD web demo into a vital sales tool for a Computer Vision startup (acquired by Dropbox)</h1>
+       <h1>Simplifying AI agent setup for an enterprise Voice AI platform through a focused UX audit</h1>
        
        <!-- HERO IMAGE -->
        <div class="hero-image inset-black">
-           <div class="hero-badge">Increased demo usage in sales by 95%</div>
-           <img src="/images/mobius-01.gif" alt="Mobius Labs SDK Web Demo Interface">
+           <div class="hero-badge long-text">Reduced friction in the agent setup flow by identifying low-cost, high-impact improvements for first-time users</div>
+           <img src="/images/synthflow-01.png" alt="Synthflow AI Agent Setup Experience">
        </div>
        
-       <!-- NEW LINKS (Figma & Prototype) -->
+       <!-- LINKS -->
        <div class="project-links-row">
-           <a href="https://www.figma.com/design/r26vZkH1PYtGXlqtgzxXZ9/Mobius-Labs-demo--acquired-by-Dropbox-?node-id=5303-16381&t=uAQ66HwtP7NMOGEW-1" target="_blank" class="project-link">
-               View Figma link <span>↗</span>
+           <a href="https://www.figma.com/proto/audit--Synthflow-AI-?node-id=1-1040&t=KVJP7NrERe69N1J0-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" class="project-link">
+               View case study deck <span>↗</span>
            </a>
-           <a href="https://www.figma.com/proto/r26vZkH1PYtGXlqtgzxXZ9/Mobius-Labs-demo--acquired-by-Dropbox-?node-id=5303-16381&t=oBlHyjvRJUuDOUyN-1&scaling=min-zoom&content-scaling=fixed&page-id=5303%3A16380&starting-point-node-id=5303%3A16381" target="_blank" class="project-link">
+           <a href="https://www.figma.com/proto/audit--Synthflow-AI-?node-id=1-1040&t=KVJP7NrERe69N1J0-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" class="project-link">
                View prototype <span>↗</span>
            </a>
        </div>
 
        <h4 class="section-label">CHALLENGE</h4>
        <div class="text-slide">
-           Despite having powerful computer vision technology, the company’s public web demo was feature-heavy rather than industry-oriented & benefit-driven, leading the sales team to avoid using it in live customer meetings.
+           Synthflow offers powerful AI agent capabilities for voice-based workflows, but the setup experience exposed prompts, actions, variables, and settings all at once. For first-time users, this created cognitive overload and made the product feel architecture-driven rather than goal-driven.
        </div>
 
        <div class="project-details-wrapper">
@@ -215,97 +219,151 @@
            <div class="detail-block">
                <h4 class="section-label">MY TASK</h4>
                <p class="text-highlight">
-                   Led the end-to-end redesign of the Mobius Labs SDK web demo to align with industry-specific needs. Bridged Product and Sales by defining industry personas, creating a scalable design system, and delivering an interactive demo product that enabled the sales team to showcase the real-time capabilities of Mobius AI during client pitches.
+                   Conduct a fast UX audit of the current setup experience, identify the highest-friction points, and propose a practical redesign direction that could improve clarity and usability without requiring major backend changes.
                </p>
            </div>
 
            <div class="detail-block last-top">
                <h4 class="section-label">TASK TIMEFRAME</h4>
-               <p class="text-highlight">5 months</p>
+               <p class="text-highlight">4 hours</p>
            </div>
 
            
            <div style="margin-bottom: 40px;">
                <h4 class="section-label">KEY FOCUS AREAS</h4>
                <ul class="detail-list">
-                   <li>Internal UX auditing & "New Hire" usability testing</li>
-                   <li>Sales team interviews & Industry Persona definition</li>
-                   <li>Design System creation (MUI + Figma + Storybook)</li>
-                   <li>High-fidelity prototyping</li>
+                   <li>Internal UX audit through first-time user simulation</li>
+                   <li>Audience and persona framing for AI agent setup</li>
+                   <li>Prompt editor friction analysis</li>
+                   <li>Goal-driven UX restructuring</li>
+                   <li>Low-effort prototype for frontend-only improvements</li>
                </ul>
            </div>
            
            <h4 class="section-label">KEY RESULTS</h4>
            <div class="results-card">
                <ul class="numbered-list">
-                   <li>Increased demo usage in sales meetings by 95%</li>
-                   <li>Accelerated design production speed by implementing a unified MUI-based Design System</li>
-                   <li>Established a "new hire testing loop" agreement with HR to secure continuous, free user feedback</li>
+                   <li>Identified 3 core friction points in the current setup flow: cognitive overload, architecture-driven UX, and premature feature exposure.</li>
+                   <li>Designed a frontend-only restructuring concept focused on: clearer hierarchy, structured prompt editing, and better separation between core task and advanced configuration.</li>
+                   <li>Proposed a solution that keeps existing backend logic intact while making the setup flow easier to understand and faster to complete for less technical users.</li>
                </ul>
            </div>
            
 
        </div>
-
-       <div class="media-block">
-            <img src="/images/mobius-02.png" alt="Mobius Redesigned Interface">
-       </div>
        
        <h4 class="process-header">OVERVIEW OF MY DESIGN PROCESS</h4>
 
        <div class="process-step">
-           <h3>Step 1 - Internal UX review workshop:</h3>
-           <p>Conducted "labor illusion" experiments and usability tests with new employees during my first two weeks, identifying that users were overwhelmed by technical jargon and confusing onboarding.</p>
+           <h3>Step 1 — Framing the audience and business context</h3>
+           <p>Mapped the platform’s likely audience across four levels of technical familiarity: non-technical users, prompt designers, automation builders, and developers. Then narrowed the audit to a realistic business use case: real estate lead qualification, where an AI agent helps qualify inbound leads before a realtor follows up.</p>
            <div class="media-block">
-               <img src="/images/mobius-03.png" alt="UX Workshop and Analysis">
+               <img src="/images/synthflow-02.png" alt="Audience & Context Mapping">
            </div>
        </div>
 
        <div class="process-step">
-           <h3>Step 2 - Sales team interviews & deal analysis:</h3>
-           <p>Interviewed 4 experts most involved in sales process (sales specialists, CEO and tech lead) and analyzed 30+ HubSpot deals to understand the disconnect. Discovered that while the product demo sold "features," clients were buying "solutions" specific to their industry.</p>
+           <h3>Step 2 — Defining a realistic persona and goal</h3>
+           <p>Grounded the audit in a real-world persona based on previous interviews with U.S. realtors. I used “Jay,” a semi-technical realtor familiar with ChatGPT, Calendly, and basic automation, whose goal was simple: set up an AI agent to contact leads, ask qualification questions, collect property preferences, and identify which leads were worth his time.</p>
            <div class="media-block">
-               <img src="/images/mobius-04.png" alt="HubSpot Deal Analysis">
+               <img src="/images/synthflow-03.png" alt="Persona & Use Case Definition">
            </div>
        </div>
 
        <div class="process-step">
-           <h3>Step 3 - Defining industry personas:</h3>
-           <p>Synthesized research into 4 key industry personas (Content Licensing, Internet-to-Print, Broadcasting, Marketing) to ensure the new design spoke the language of the decision-makers, not just developers.</p>
+           <h3>Step 3 — Simulating the first-time user flow</h3>
+           <p>Explored the platform step by step as a new user:</p>
+           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
+               <li>created an agent using a template</li>
+               <li>edited the prompt</li>
+               <li>explored custom actions</li>
+               <li>tested the agent via chat</li>
+               <li>reviewed the conversation results</li>
+           </ul>
+           <p>This revealed where the product flow broke down for users trying to complete a simple task.</p>
            <div class="media-block">
-               <img src="/images/mobius-05.png" alt="Industry Personas">
+               <img src="/images/synthflow-04.png" alt="First-Time User Flow Audit">
            </div>
        </div>
 
        <div class="process-step">
-           <h3>Step 4 - Building the infrastructure:</h3>
-           <p>Created a comprehensive Design System (Figma library with MUI-based components linked to Storybook) to eliminate messy custom add-ons and inconsistent fonts, streamlining the implementation process.</p>
+           <h3>Step 4 — Identifying the 3 core UX problems</h3>
+           <p>The audit surfaced three systemic problems:</p>
+           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
+               <li><strong>1. Cognitive overload:</strong> The user had to understand multiple systems at once: prompt, settings, and actions.</li>
+               <li><strong>2. Architecture-driven UX:</strong> The interface reflected internal system structure instead of guiding users toward their goal.</li>
+               <li><strong>3. Premature feature exposure:</strong> The platform exposed advanced options before users understood their value.</li>
+           </ul>
            <div class="media-block">
-               <img src="/images/mobius-06.png" alt="Design System & Storybook">
+               <img src="/images/synthflow-05.png" alt="Problem Framing">
            </div>
        </div>
 
        <div class="process-step">
-           <h3>Step 5 - Strategic redesign & vertical prototyping:</h3>
-           <p>Executed the “industry-oriented” redesign with improved contrast and clear, step-by-step processes.</p>
+           <h3>Step 5 — Exploring broader redesign directions</h3>
+           <p>I briefly explored larger product opportunities, such as:</p>
+           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
+               <li>turning raw extractors into goal-based actions</li>
+               <li>restructuring setup into smaller guided steps</li>
+               <li>using more user-friendly naming for actions and variables</li>
+           </ul>
+           <p>But because the exercise was time-constrained, I deliberately narrowed the final solution to one practical change with minimal implementation cost.</p>
            <div class="media-block">
-               <img src="/images/mobius-07.png" alt="Redesign Prototypes">
+               <img src="/images/synthflow-06.png" alt="Exploration Concepts">
            </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 6 — Designing a focused frontend solution</h3>
+           <p>I redesigned the main setup screen around a clearer mental model:</p>
            
-           <div class="media-block video-embed">
-               <iframe
-                 src="https://www.youtube.com/embed/JjPqlSbk6qo"
-                 title="YouTube video player"
-                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                 allowfullscreen>
-               </iframe>
+           <p style="font-weight: 600; margin-bottom: 8px; margin-top: 24px; color: var(--text-color);">Agent Behavior on the left</p>
+           <ul class="detail-list">
+               <li>greeting message</li>
+               <li>background info</li>
+               <li>agent info</li>
+               <li>objection handling</li>
+               <li>call script instructions</li>
+           </ul>
+
+           <p style="font-weight: 600; margin-bottom: 8px; margin-top: 24px; color: var(--text-color);">Agent Configuration on the right</p>
+           <ul class="detail-list">
+               <li>actions</li>
+               <li>variables</li>
+               <li>version history</li>
+               <li>global settings</li>
+               <li>deployment</li>
+           </ul>
+
+           <p style="margin-top: 24px;">I replaced the intimidating prompt wall with a structured, form-like layout while still preserving access to raw prompt editing for more advanced users.</p>
+           <div class="media-block">
+               <img src="/images/synthflow-07.png" alt="Low-Effort Prototype">
            </div>
        </div>
 
        <h4 class="section-label">CORE RESULT</h4>
-       <div class="text-slide secondary" style="margin-top: 16px;">
-           The redesigned demo product drove a 95% increase in usage during sales meetings.
+       <div class="text-slide secondary" style="margin-top: 16px; margin-bottom: 40px; font-size: 28px;">
+           The final concept showed how Synthflow could move from a fragmented, system-oriented setup experience to a more guided and goal-driven flow without changing the backend logic.
        </div>
+       <p style="margin-bottom: 16px;">The main improvement was not a full redesign, but a better structure:</p>
+       <ul class="detail-list" style="margin-bottom: 60px;">
+           <li>less cognitive overload</li>
+           <li>clearer setup hierarchy</li>
+           <li>easier understanding for first-time users</li>
+           <li>preserved flexibility for technical users</li>
+       </ul>
+
+       <div class="detail-block last-top"></div>
+
+       <h4 class="section-label">NEXT STEPS</h4>
+       <p style="margin-bottom: 16px;">If expanded beyond the 4-hour audit, I would validate the concept through:</p>
+       <ul class="detail-list">
+           <li>time-to-first-successful-setup measurement</li>
+           <li>drop-off analysis during setup</li>
+           <li>number of test runs before successful publish</li>
+           <li>heatmap/session recordings</li>
+           <li>quick comprehension testing: Can a user clearly explain what their agent does after setup?</li>
+       </ul>
 
        <div class="footer-cta">
            <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
