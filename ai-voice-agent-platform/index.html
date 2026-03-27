@@ -115,6 +115,10 @@
     .detail-list { list-style: none; padding: 0; margin: 0; }
     .detail-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 18px; line-height: 1.6; }
     .detail-list li::before { content: "•"; position: absolute; left: 0; color: var(--secondary-text); font-weight: bold; }
+    .detail-list-dark li,
+.detail-list-dark li::before {
+  color: var(--text-color);
+}
     
     .numbered-list { list-style: none; padding: 0; margin: 0; counter-reset: result-counter; }
     .numbered-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 20px; line-height: 1.6; }
@@ -699,20 +703,20 @@
        </div>
 
        <div class="process-step">
-           <h3>Step 3 - Simulating the first-time user flow</h3>
-           <p>Explored the platform step by step as a new user:</p>
-           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
-               <li>created an agent using a template</li>
-               <li>edited the prompt</li>
-               <li>explored custom actions</li>
-               <li>tested the agent via chat</li>
-               <li>reviewed the conversation results</li>
-           </ul>
-           <p>This revealed where the product flow broke down for users trying to complete a simple task.</p>
-           <div class="media-block">
-               <img src="/images/synthflow-04-1.png" alt="First-Time User Flow Audit">
-           </div>
-       </div>
+    <h3>Step 3 - Simulating the first-time user flow</h3>
+    <p>Explored the platform step by step as a new user:</p>
+    <ul class="detail-list detail-list-dark" style="margin-top: 16px; margin-bottom: 24px;">
+        <li>created an agent using a template</li>
+        <li>edited the prompt</li>
+        <li>explored custom actions</li>
+        <li>tested the agent via chat</li>
+        <li>reviewed the conversation results</li>
+    </ul>
+    <p>This revealed where the product flow broke down for users trying to complete a simple task.</p>
+    <div class="media-block">
+        <img src="/images/synthflow-04-1.png" alt="First-Time User Flow Audit">
+    </div>
+</div>
 
        <div class="process-step">
            <h3>Step 4 - Identifying the 3 core UX problems</h3>
