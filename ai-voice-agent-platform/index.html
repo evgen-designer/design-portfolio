@@ -157,8 +157,273 @@
     .results-card li { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.5; padding-left: 32px; }
     .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
 
-    /* Sub-list utility for long badges */
     .hero-badge.long-text { max-width: 320px; text-align: right; border-radius: 16px; }
+
+    /* =========================================
+       SYNTHFLOW INTERACTIVE WIDGET STYLES
+       ========================================= */
+    .sf-widget-wrapper {
+        margin: 20px 0 60px 0;
+        width: 100%;
+        /* Enforce light colors internally to protect against night mode */
+        --sf-bg: #ffffff;
+        --sf-text: #111827;
+        --sf-text-muted: #6B7280;
+        --sf-border: #E5E7EB;
+        --sf-purple: #5B0DD5;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .sf-widget {
+        background-color: var(--sf-bg);
+        border-radius: 12px;
+        border: 1px solid var(--sf-border);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        display: flex;
+        flex-direction: column;
+        color: var(--sf-text);
+        overflow: hidden;
+    }
+
+    /* Top Tabs */
+    .sf-top-bar {
+        display: flex;
+        gap: 8px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--sf-border);
+        overflow-x: auto;
+        scrollbar-width: none;
+        background-color: var(--sf-bg);
+    }
+    .sf-top-bar::-webkit-scrollbar { display: none; }
+    
+    .sf-top-tab {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--sf-text-muted);
+        border-radius: 6px;
+        white-space: nowrap;
+    }
+    .sf-top-tab svg { width: 16px; height: 16px; stroke: currentColor; }
+    .sf-top-tab.active {
+        background-color: var(--sf-purple);
+        color: #ffffff;
+    }
+
+    /* Body Layout */
+    .sf-body {
+        display: flex;
+        flex-direction: column;
+        min-height: 500px;
+        background-color: var(--sf-bg);
+    }
+    @media (min-width: 768px) {
+        .sf-body { flex-direction: row; }
+    }
+
+    /* Sidebar */
+    .sf-sidebar {
+        padding: 24px;
+        border-right: 1px solid var(--sf-border);
+        width: 100%;
+        flex-shrink: 0;
+        background-color: var(--sf-bg);
+    }
+    @media (min-width: 768px) {
+        .sf-sidebar { width: 280px; border-bottom: none; }
+    }
+    @media (max-width: 767px) {
+        .sf-sidebar { border-bottom: 1px solid var(--sf-border); border-right: none; }
+    }
+
+    .sf-eyebrow {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--sf-text-muted);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .sf-sidebar h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        color: var(--sf-text);
+        line-height: 1.3;
+    }
+    .sf-sidebar p {
+        font-size: 13px;
+        color: var(--sf-text-muted);
+        line-height: 1.5;
+        margin: 0 0 24px 0;
+    }
+    .sf-divider {
+        height: 1px;
+        background-color: var(--sf-border);
+        margin: 24px 0;
+    }
+
+    /* Mode Buttons */
+    .sf-mode-btn {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        width: 100%;
+        text-align: left;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid var(--sf-border);
+        background-color: var(--sf-bg);
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-bottom: 12px;
+        outline: none;
+    }
+    .sf-mode-btn:hover { border-color: #ccc; }
+    .sf-mode-btn.active {
+        border-color: #A855F7;
+        box-shadow: 0 0 0 1px #A855F7;
+    }
+    .sf-mode-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    .sf-mode-icon.blue { background-color: #EEF2FF; color: #005EFF; }
+    .sf-mode-icon.green { background-color: #E6F9F5; color: #00C8A3; }
+    
+    .sf-mode-text strong {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--sf-text);
+        margin-bottom: 4px;
+    }
+    .sf-mode-text span {
+        display: block;
+        font-size: 12px;
+        color: var(--sf-text-muted);
+        line-height: 1.4;
+    }
+
+    /* Main Content Area */
+    .sf-content {
+        flex-grow: 1;
+        background-color: #FAFAFA;
+        background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+        background-size: 20px 20px;
+        padding: 40px 24px;
+        position: relative;
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .sf-view {
+        display: none;
+        width: 100%;
+        max-width: 460px;
+        animation: sfFadeIn 0.3s ease;
+    }
+    .sf-view.active { display: block; }
+    @keyframes sfFadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Flow View Nodes */
+    .sf-flow-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        position: relative;
+        align-items: center;
+    }
+    .sf-flow-line {
+        position: absolute;
+        left: 50%;
+        top: 20px;
+        bottom: 20px;
+        width: 2px;
+        background-color: var(--sf-border);
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+    .sf-node {
+        background-color: var(--sf-bg);
+        border: 1px solid var(--sf-border);
+        border-radius: 8px;
+        padding: 16px;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .sf-node-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+    .sf-node-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sf-node-icon.gray { background-color: #F3F5F7; border: 1px solid var(--sf-border); color: #666; }
+    .sf-node-icon.green-node { background-color: #EFFDF4; border: 1px solid #bbf7d0; color: #22c55e; }
+    .sf-node-icon.purple-node { background-color: #F4F3FE; border: 1px solid #ddd6fe; color: #a855f7; }
+    
+    .sf-node h4 { font-size: 14px; font-weight: 600; margin: 0; color: var(--sf-text); }
+    .sf-node hr { border: none; border-top: 1px solid var(--sf-border); margin: 0 -16px 12px -16px; }
+    .sf-node p { font-size: 12px; color: var(--sf-text-muted); margin: 0; line-height: 1.5; }
+
+    /* Prompt View */
+    .sf-prompt {
+        background-color: var(--sf-bg);
+        border: 1px solid var(--sf-border);
+        border-radius: 8px;
+        padding: 32px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .sf-tag {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--sf-purple);
+        background-color: #F4F3FE;
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        letter-spacing: 0.05em;
+    }
+    .sf-prompt-body {
+        font-size: 13px;
+        color: #333;
+        line-height: 1.6;
+    }
+    .sf-prompt-body h5 {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 24px 0 8px 0;
+        color: var(--sf-text);
+    }
+    .sf-prompt-body h5:first-child { margin-top: 0; }
+    .sf-prompt-body p { margin-bottom: 12px; }
 
     @media (max-width: 768px) {
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -205,6 +470,157 @@
                View case study deck <span>↗</span>
            </a>
        </div>
+
+       <!-- INTERACTIVE WIDGET INJECTION -->
+       <div class="sf-widget-wrapper">
+           <div class="sf-widget">
+               
+               <!-- Top Tab Bar -->
+               <div class="sf-top-bar">
+                   <div class="sf-top-tab">
+                       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"></path></svg>
+                       Use Case
+                   </div>
+                   <div class="sf-top-tab active">
+                       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg>
+                       Flow Designer
+                   </div>
+                   <div class="sf-top-tab">
+                       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+                       Knowledge Base
+                   </div>
+                   <div class="sf-top-tab">
+                       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
+                       Actions
+                   </div>
+                   <div class="sf-top-tab">
+                       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                       Test Calls
+                   </div>
+               </div>
+
+               <!-- Body Layout -->
+               <div class="sf-body">
+                   
+                   <!-- Sidebar -->
+                   <div class="sf-sidebar">
+                       <div class="sf-eyebrow">
+                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3"/><path d="M4 12h16"/></svg>
+                           Flow Preview
+                       </div>
+                       <h3 class="sf-title">Lead Qualification · Buyer</h3>
+                       <p class="sf-desc">This agent follows a predefined logic flow to simulate real conversations.</p>
+                       
+                       <div class="sf-divider"></div>
+                       
+                       <div class="sf-eyebrow">Select a mode</div>
+                       
+                       <!-- Toggles -->
+                       <button class="sf-mode-btn active" id="sf-btn-flow">
+                           <div class="sf-mode-icon blue">
+                               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+                           </div>
+                           <div class="sf-mode-text">
+                               <strong>Flow View</strong>
+                               <span>View the logic of this use case visually.</span>
+                           </div>
+                       </button>
+
+                       <button class="sf-mode-btn" id="sf-btn-prompt">
+                           <div class="sf-mode-icon green">
+                               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                           </div>
+                           <div class="sf-mode-text">
+                               <strong>Prompt View</strong>
+                               <span>View this use case's logic as a natural language prompt.</span>
+                           </div>
+                       </button>
+                   </div>
+
+                   <!-- Main Content Area -->
+                   <div class="sf-content">
+                       
+                       <!-- Flow View -->
+                       <div id="sf-view-flow" class="sf-view active">
+                           <div class="sf-flow-wrap">
+                               <div class="sf-flow-line"></div>
+                               
+                               <div class="sf-node">
+                                   <div class="sf-node-header">
+                                       <div class="sf-node-icon gray">
+                                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                       </div>
+                                       <h4>Global Settings</h4>
+                                   </div>
+                                   <hr>
+                                   <p>Who You Are You're Paul, the calm, helpful, and easygoing voice of a real estate team. Your go...</p>
+                               </div>
+
+                               <div class="sf-node">
+                                   <div class="sf-node-header">
+                                       <div class="sf-node-icon green-node">
+                                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                       </div>
+                                       <h4>Greeting Message</h4>
+                                   </div>
+                                   <hr>
+                                   <p>Hey there! This is Paul from [Real Estate Company]—how're you doing today?</p>
+                               </div>
+
+                               <div class="sf-node">
+                                   <div class="sf-node-header">
+                                       <div class="sf-node-icon purple-node">
+                                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+                                       </div>
+                                       <h4>Greeting and Disclaimer</h4>
+                                   </div>
+                                   <hr>
+                                   <p>After the custom greeting: [Hey there! This is Paul from [Real Estate Company]—how're you...]</p>
+                               </div>
+
+                               <div class="sf-node">
+                                   <div class="sf-node-header">
+                                       <div class="sf-node-icon purple-node">
+                                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+                                       </div>
+                                       <h4>Discovery Flow</h4>
+                                   </div>
+                                   <hr>
+                                   <p>Ask these questions conversationally—adapt to the caller's pace: 1. "What city or neighbourho...</p>
+                               </div>
+                           </div>
+                       </div>
+
+                       <!-- Prompt View -->
+                       <div id="sf-view-prompt" class="sf-view">
+                           <div class="sf-prompt">
+                               <div class="sf-tag">PROMPT</div>
+                               <div class="sf-prompt-body">
+                                   <h5># Who You Are</h5>
+                                   <p>You're Paul, a calm, helpful AI assistant working for a real estate team. Your job? Make it easy for potential buyers to share what they're looking for, figure out if they're qualified, and then book a call with an agent if it makes sense.</p>
+                                   <p>You're friendly and relaxed, like someone checking in to see how they can help—not pushy, not scripted. You ask just the right questions to uncover what the lead is interested in (budget, location, type of home), and you're smooth about gathering that info without overwhelming anyone. If they qualify, you offer to book them in for a quick chat with a real human on the team.</p>
+                                   <p>Keep it human, keep it casual, and always keep things moving forward.</p>
+                                   
+                                   <h5># Call Disclaimer & Intro Flow</h5>
+                                   <p>After the Custom Greeting:</p>
+                                   <p>[Hey there! This is Paul with [Real Estate Company]—how're you doing today?]<br>
+                                   [[acknowledge their response] You popped up in our system as someone looking to buy a home, so I wanted to learn a little more and see if we're a good fit to help you out.]<br>
+                                   (If the user interrupts or doesn't hear you clearly, repeat the greeting, wait for confirmation, and continue.)</p>
+
+                                   <h5># Initial Inquiry</h5>
+                                   <p>Start with something easy and natural:<br>
+                                   "So—what kind of home are you hoping to find?"</p>
+                                   <p>Let them talk. If they're vague or unsure, you can follow up with:<br>
+                                   "Totally fine if you're just browsing. What's the dream right now—condo, single-family, something with a yard?"</p>
+                               </div>
+                           </div>
+                       </div>
+                       
+                   </div>
+               </div>
+           </div>
+       </div>
+       <!-- END INTERACTIVE WIDGET -->
 
        <h4 class="section-label">CHALLENGE</h4>
        <div class="text-slide">
@@ -379,6 +795,7 @@
 </div>
 
 <script>
+  // Theme Toggle Script
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
@@ -392,6 +809,28 @@
           body.classList.remove('night'); body.classList.add('day'); localStorage.setItem('theme', 'day');
       }
   });
+
+  // Synthflow Widget Toggle Script
+  const btnFlow = document.getElementById('sf-btn-flow');
+  const btnPrompt = document.getElementById('sf-btn-prompt');
+  const viewFlow = document.getElementById('sf-view-flow');
+  const viewPrompt = document.getElementById('sf-view-prompt');
+
+  if (btnFlow && btnPrompt) {
+      btnFlow.addEventListener('click', () => {
+          btnFlow.classList.add('active');
+          btnPrompt.classList.remove('active');
+          viewFlow.classList.add('active');
+          viewPrompt.classList.remove('active');
+      });
+
+      btnPrompt.addEventListener('click', () => {
+          btnPrompt.classList.add('active');
+          btnFlow.classList.remove('active');
+          viewPrompt.classList.add('active');
+          viewFlow.classList.remove('active');
+      });
+  }
 </script>
 </body>
 </html>
