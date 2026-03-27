@@ -1,555 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synthflow AI - Case Study</title>
-    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your main portfolio CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>Synthflow AI Audit - Eugene Evgen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/icon-192.png" type="image/png">
+  
+  <style>
+    /* VARIABLES */
+    :root {
+      --bg-color: #F6F6F6; --text-color: #111; --secondary-text: #777; --link-color: #111; --divider-color: #e5e5e5;
+      --header-bg: rgba(255, 255, 255, 0.6); --header-border: rgba(0, 0, 0, 0.05);
+      --btn-bg: #111; --btn-text: #fff;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --container-width: 800px; --top-spacing: 40px; --bottom-spacing: 140px;
+      
+      --meta-label: #888;
+      --image-bg: #e0e0e0;
+      --code-bg: #fff;
+      --slide-bg: #111;
+      --slide-text: #fff;
+    }
+    body.night {
+      --bg-color: #1a1a1a; --text-color: #f0f0f0; --secondary-text: #a0a0a0; --link-color: #fff; --divider-color: #333;
+      --header-bg: rgba(40, 40, 40, 0.6); --header-border: rgba(255, 255, 255, 0.1); --btn-bg: #fff; --btn-text: #000;
+      
+      --meta-label: #666;
+      --image-bg: #2a2a2a;
+      --code-bg: #222;
+      --slide-bg: #fff;
+      --slide-text: #000;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
+
+    /* LAYOUT */
+    .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
     
-    <!-- Scoped CSS for the Interactive Flow Designer Widget -->
-    <style>
-        .interactive-demo-container {
-            margin: 40px auto 80px;
-            max-width: 1200px;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
-            color: #111827;
-            display: flex;
-            flex-direction: column;
-        }
+    /* Centered Content Layout */
+    .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .content-col { width: 100%; max-width: 680px; }
 
-        /* Top Fake Browser/App Bar */
-        .demo-top-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 16px 24px;
-            border-bottom: 1px solid #E5E7EB;
-            background: #ffffff;
-        }
-        
-        .demo-top-tab {
-            background: #5B0DD5;
-            color: white;
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    /* HEADER */
+    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 32px 10px 32px; margin-bottom: 60px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
+    
+    /* Back Button */
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; }
+    .btn-back:hover { opacity: 0.6; }
+    .btn-back svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-        .demo-body {
-            display: flex;
-            flex-direction: column;
-            min-height: 600px;
-        }
+    /* Theme Toggle */
+    .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
+    .theme-toggle:hover { opacity: 1; }
+    .theme-toggle svg { width: 20px; height: 20px; display: block; }
+    body.day .icon-moon { display: block !important; fill: #333; }
+    body.day .icon-sun { display: none !important; }
+    body.night .icon-moon { display: none !important; }
+    body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-        @media (min-width: 768px) {
-            .demo-body {
-                flex-direction: row;
-            }
-        }
+    .mobile-menu-btn { display: none; }
 
-        /* Left Sidebar Controls */
-        .demo-sidebar {
-            width: 100%;
-            border-right: 1px solid #E5E7EB;
-            padding: 32px 24px;
-            background: #ffffff;
-            flex-shrink: 0;
-        }
+    /* CASE STUDY STYLES */
+    .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
 
-        @media (min-width: 768px) {
-            .demo-sidebar {
-                width: 300px;
-            }
-        }
+    h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
+    
+    .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 12px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
+    .hero-image img { width: 100%; height: auto; display: block; }
 
-        .eyebrow {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #6B7280;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
+    .hero-image.inset-black {
+        background-color: #000; 
+        padding: 40px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .hero-image.inset-black img {
+        width: 100%; 
+        height: auto;
+        object-fit: contain; 
+        border-radius: 6px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
 
-        .demo-sidebar h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 0 0 8px 0;
-            color: #111827;
-        }
+    .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
+    body.night .hero-badge { background-color: #54D1FF; color: #000; }
+    
+    .project-links-row { display: flex; gap: 32px; margin-top: -12px; margin-bottom: 60px; flex-wrap: wrap; }
+    .project-link { 
+      color: var(--text-color); 
+      font-weight: 700; 
+      text-decoration: none; 
+      font-size: 16px; 
+      display: inline-flex; 
+      align-items: center; 
+      transition: opacity 0.2s ease; 
+    }
+    .project-link:hover { opacity: 0.6; }
+    .project-link span { margin-left: 6px; font-size: 18px; line-height: 1; font-weight: 400; }
 
-        .demo-sidebar p {
-            font-size: 14px;
-            color: #6B7280;
-            line-height: 1.5;
-            margin: 0 0 24px 0;
-        }
+    .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 12px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
+    .text-slide.secondary { font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px; }
 
-        .sidebar-divider {
-            height: 1px;
-            background: #E5E7EB;
-            margin: 24px 0;
-            border: none;
-        }
+    .project-details-wrapper { margin-bottom: 80px; }
+    .detail-block { margin-bottom: 40px; }
+    .detail-block.last-top { padding-bottom: 40px; border-bottom: 1px solid var(--divider-color); margin-bottom: 40px; }
 
-        /* Toggle Buttons */
-        .toggle-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
+    
+    .text-highlight { font-size: 20px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin: 0; max-width: 680px; }
 
-        .toggle-btn {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 16px;
-            border: 1px solid #E5E7EB;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background: #ffffff;
-            text-align: left;
-        }
+    .detail-list { list-style: none; padding: 0; margin: 0; }
+    .detail-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 18px; line-height: 1.6; }
+    .detail-list li::before { content: "•"; position: absolute; left: 0; color: var(--secondary-text); font-weight: bold; }
+    
+    .numbered-list { list-style: none; padding: 0; margin: 0; counter-reset: result-counter; }
+    .numbered-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 20px; line-height: 1.6; }
+    .numbered-list li::before { counter-increment: result-counter; content: counter(result-counter) "."; position: absolute; left: 0; color: var(--secondary-text); font-weight: 500; }
 
-        .toggle-btn:hover {
-            border-color: #D1D5DB;
-        }
+    .process-header { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px; }
+    
+    .process-step { margin-bottom: 60px; }
+    .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
 
-        .toggle-btn.active {
-            border-color: #B881FF;
-            box-shadow: 0 0 0 1px #B881FF;
-        }
+    .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
+    
+    .media-block img, 
+    .media-block video { width: 100%; height: auto; display: block; }
+    .media-block iframe { width: 100%; aspect-ratio: 16 / 9; display: block; border: 0; }
 
-        .toggle-icon {
-            flex-shrink: 0;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-        }
+    /* Responsive YouTube embed fallback (keeps everything else intact) */
+    .media-block.video-embed { padding: 0; }
+    @supports not (aspect-ratio: 16 / 9) {
+      .media-block.video-embed { position: relative; height: 0; padding-bottom: 56.25%; min-height: 0; }
+      .media-block.video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    }
+    
+    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
+    .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
-        .toggle-btn.active .toggle-text strong {
-            color: #111827;
-        }
+    .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
+    .footer-title { font-size: 32px; font-weight: 700; line-height: 1.2; color: var(--text-color); margin: 0 0 16px 0; }
+    .footer-subtitle { font-size: 16px; color: var(--secondary-text); max-width: 620px; margin: 0 auto 32px auto; line-height: 1.6; }
 
-        .toggle-text {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
+    .btn-contact { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 24px; background-color: var(--btn-bg); color: var(--btn-text); border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease; }
+    .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
 
-        .toggle-text strong {
-            font-size: 15px;
-            font-weight: 600;
-            color: #374151;
-        }
+    .animated { animation-duration: 0.8s; animation-fill-mode: both; }
+    .fadeIn { animation-name: fadeIn; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .toggle-text span {
-            font-size: 13px;
-            color: #6B7280;
-            line-height: 1.4;
-        }
+    /* TASK SPECIFIC STYLES */
+    .results-card { background-color: #6936CC; padding: 40px; border-radius: 12px; margin-top: 16px; margin-bottom: 40px; }
+    .results-card li { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.5; padding-left: 32px; }
+    .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
 
-        /* Right Content Area */
-        .demo-content {
-            flex: 1;
-            background-color: #FAFAFA;
-            background-image: radial-gradient(#D1D5DB 1px, transparent 1px);
-            background-size: 24px 24px;
-            position: relative;
-            padding: 40px 24px;
-            overflow-y: auto;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
+    /* Sub-list utility for long badges */
+    .hero-badge.long-text { max-width: 320px; text-align: right; border-radius: 16px; }
 
-        /* View States */
-        .view-state {
-            display: none;
-            width: 100%;
-            max-width: 600px;
-            animation: fadeIn 0.4s ease forwards;
-        }
-
-        .view-state.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Flow View Nodes */
-        .flow-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 32px;
-            position: relative;
-            padding: 20px 0;
-        }
-
-        /* Connecting vertical line */
-        .flow-container::before {
-            content: '';
-            position: absolute;
-            top: 40px;
-            bottom: 40px;
-            left: 50%;
-            width: 2px;
-            background: #E5E7EB;
-            transform: translateX(-50%);
-            z-index: 0;
-        }
-
-        .flow-node {
-            background: #ffffff;
-            border: 1px solid #E5E7EB;
-            border-radius: 12px;
-            padding: 20px;
-            width: 100%;
-            max-width: 380px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            position: relative;
-            z-index: 1;
-        }
-
-        .node-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .node-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .node-icon.gray { background: #F3F5F7; border: 1px solid #E5E7EB; }
-        .node-icon.green { background: #EFFDF4; border: 1px solid #bbf7d0; color: #22c55e; }
-        .node-icon.purple { background: #F4F3FE; border: 1px solid #ddd6fe; color: #a855f7; }
-
-        .node-header h4 {
-            margin: 0;
-            font-size: 15px;
-            font-weight: 600;
-            color: #111827;
-        }
-
-        .node-divider {
-            height: 1px;
-            background: #E5E7EB;
-            margin: 0 -20px 16px;
-        }
-
-        .node-content p {
-            margin: 0;
-            font-size: 13px;
-            color: #6B7280;
-            line-height: 1.5;
-        }
-
-        /* Prompt View Content */
-        .prompt-container {
-            background: #ffffff;
-            border: 1px solid #E5E7EB;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-
-        .prompt-tag {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 700;
-            color: #5B0DD5;
-            background: #F4F3FE;
-            padding: 4px 8px;
-            border-radius: 4px;
-            margin-bottom: 24px;
-            letter-spacing: 0.05em;
-        }
-
-        .prompt-content {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            line-height: 1.7;
-            color: #374151;
-        }
-
-        .prompt-content p {
-            margin-bottom: 20px;
-        }
-
-        .prompt-content h4 {
-            font-size: 15px;
-            color: #111827;
-            margin: 32px 0 12px 0;
-        }
-    </style>
+    @media (max-width: 768px) {
+      .split-grid { grid-template-columns: 1fr; gap: 40px; }
+      h1 { font-size: 28px; }
+      .footer-title { font-size: 28px; }
+      .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
+      .media-block { min-height: auto; }
+      .hero-image.inset-black { padding: 20px; }
+      .results-card li { font-size: 18px; padding-left: 28px; }
+      .hero-badge.long-text { max-width: 90%; text-align: center; border-radius: 100px; }
+    }
+  </style>
 </head>
-<body>
+<body class="day">
 
-    <!-- Main Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <a href="/" class="logo">Your Name.</a>
-            <div class="nav-links">
-                <a href="/#work">Work</a>
-                <a href="/about.html">About</a>
-                <a href="/contact.html">Contact</a>
-            </div>
-        </div>
-    </nav>
+<div class="container">
+  <header class="main-header">
+    <a href="/works/" class="btn-back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to works
+    </a>
+    
+    <div id="theme-btn" class="theme-toggle">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </div>
+  </header>
 
-    <!-- Case Study Content -->
-    <main class="case-study-page">
-        
-        <header class="cs-header">
-            <div class="cs-container">
-                <h1>Synthflow AI</h1>
-                <p class="subtitle">Designing the complete end-to-end Voice AI Operating System</p>
-                <div class="tags">
-                    <span class="tag">UX/UI Design</span>
-                    <span class="tag">Prototyping</span>
-                    <span class="tag">SaaS Platform</span>
-                </div>
-            </div>
-        </header>
+  <div class="content-grid animated fadeIn">
+    <div class="content-col">
 
-        <section class="cs-content cs-container">
-            
-            <!-- HERO IMAGE -->
-            <div class="hero-image inset-black">
-                <div class="hero-badge long-text">Uncovered dev-ready fixes via 4-hour audit</div>
-                <img src="/images/synthflow-01.png" alt="Synthflow AI Agent Setup Experience">
-            </div>
-            
-            <!-- LINKS -->
-            <div class="project-links-row">
-                <a href="https://www.figma.com/deck/LHnk2nDyvd4rvXiE0kqikN" target="_blank" class="project-link">
-                    View case study deck <span>↗</span>
-                </a>
-            </div>
+       <span class="case-tag">AI INTERACTION DESIGN</span>
+       <h1>Simplifying AI agent setup for an enterprise Voice AI platform through a focused UX audit</h1>
+       
+       <!-- HERO IMAGE -->
+       <div class="hero-image inset-black">
+           <div class="hero-badge long-text">Uncovered dev-ready fixes via 4-hour audit</div>
+           <img src="/images/synthflow-01.png" alt="Synthflow AI Agent Setup Experience">
+       </div>
+       
+       <!-- LINKS -->
+       <div class="project-links-row">
+           <a href="https://www.figma.com/deck/LHnk2nDyvd4rvXiE0kqikN" target="_blank" class="project-link">
+               View case study deck <span>↗</span>
+           </a>
+       </div>
 
-            <!-- INTERACTIVE WIDGET (NEW ADDITION) -->
-            <div class="interactive-demo-container">
-                
-                <!-- Fake Top Bar to simulate platform context -->
-                <div class="demo-top-bar">
-                    <div class="demo-top-tab">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg>
-                        Flow Designer
-                    </div>
-                </div>
+       <h4 class="section-label">CHALLENGE</h4>
+       <div class="text-slide">
+           Synthflow offers AI agent capabilities for voice-based workflows, but the setup experience exposed prompts, actions, variables, and settings all at once. For first-time users, this created cognitive overload and made the product feel architecture-driven rather than goal-driven.
+       </div>
 
-                <div class="demo-body">
-                    <!-- Left Sidebar Controls -->
-                    <div class="demo-sidebar">
-                        <div class="eyebrow">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"></path><path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3"></path><path d="M4 12h16"></path></svg>
-                            Flow Preview
-                        </div>
-                        <h3>Lead Qualification · Buyer</h3>
-                        <p>This agent follows a predefined logic flow to simulate real conversations.</p>
-                        
-                        <hr class="sidebar-divider">
+       <div class="project-details-wrapper">
+           
+           <div class="detail-block">
+               <h4 class="section-label">MY TASK</h4>
+               <p class="text-highlight">
+                   Conduct a fast UX audit of the current setup experience, identify the highest-friction points, and propose a practical redesign direction that could improve clarity and usability without requiring major logic and backend changes.
+               </p>
+           </div>
 
-                        <div class="eyebrow">Select a mode</div>
-                        
-                        <div class="toggle-group">
-                            <button class="toggle-btn active" id="btn-flow" aria-label="Select Flow View">
-                                <div class="toggle-icon">
-                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="40" height="40" rx="8" fill="#EEF2FF"/>
-                                        <path d="M13 18C13 15.2386 15.2386 13 18 13H26C28.7614 13 31 15.2386 31 18V26C31 28.7614 28.7614 31 26 31H18C15.2386 31 13 28.7614 13 26V18Z" fill="#005EFF"/>
-                                        <path d="M24.5 21H22.5C22.2239 21 22 21.2239 22 21.5V23.5C22 23.7761 22.2239 24 22.5 24H24.5C24.7761 24 25 23.7761 25 23.5V21.5C25 21.2239 24.7761 21 24.5 21Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M17.5 21H15.5C15.2239 21 15 21.2239 15 21.5V23.5C15 23.7761 15.2239 24 15.5 24H17.5C17.7761 24 18 23.7761 18 23.5V21.5C18 21.2239 17.7761 21 17.5 21Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M21 14H19C18.7239 14 18.5 14.2239 18.5 14.5V16.5C18.5 16.7761 18.7239 17 19 17H21C21.2761 17 21.5 16.7761 21.5 16.5V14.5C21.5 14.2239 21.2761 14 21 14Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M16 21V19.5C16 19.3674 16.0527 19.2402 16.1464 19.1464C16.2402 19.0527 16.3674 19 16.5 19H22.5C22.6326 19 22.7598 19.0527 22.8536 19.1464C22.9473 19.2402 23 19.3674 23 19.5V21" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M20 19V17" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <div class="toggle-text">
-                                    <strong>Flow View</strong>
-                                    <span>View the logic of this use case visually.</span>
-                                </div>
-                            </button>
-                            
-                            <button class="toggle-btn" id="btn-prompt" aria-label="Select Prompt View">
-                                <div class="toggle-icon">
-                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="40" height="40" rx="8" fill="#E6F9F5"/>
-                                        <rect x="10" y="10" width="20" height="20" rx="4" fill="#00C8A3"/>
-                                        <path d="M22.5 17H16.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M22.5 20.5H16.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M22.5 13.5H16.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M12.5 14.5L14.5 16.5L12.5 18.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <div class="toggle-text">
-                                    <strong>Prompt View</strong>
-                                    <span>View this use case's logic as a natural language prompt.</span>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
+           <div class="detail-block last-top">
+               <h4 class="section-label">TASK TIMEFRAME</h4>
+               <p class="text-highlight">4 hours</p>
+           </div>
 
-                    <!-- Right Area Contents -->
-                    <div class="demo-content">
-                        
-                        <!-- STATE 1: FLOW VIEW -->
-                        <div id="view-flow" class="view-state active">
-                            <div class="flow-container">
-                                
-                                <!-- Node 1 -->
-                                <div class="flow-node">
-                                    <div class="node-header">
-                                        <div class="node-icon gray">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                                        </div>
-                                        <h4>Global Settings</h4>
-                                    </div>
-                                    <div class="node-divider"></div>
-                                    <div class="node-content">
-                                        <p>Who You Are You're Paul, the calm, helpful, and easygoing voice of a real estate team. Your go...</p>
-                                    </div>
-                                </div>
+           
+           <div style="margin-bottom: 40px;">
+               <h4 class="section-label">KEY FOCUS AREAS</h4>
+               <ul class="detail-list">
+                   <li>Internal UX audit through first-time user simulation</li>
+                   <li>Audience and persona framing for AI agent setup</li>
+                   <li>Prompt editor friction analysis</li>
+                   <li>Goal-driven UX restructuring</li>
+                   <li>Low-effort prototype for frontend-only improvements</li>
+               </ul>
+           </div>
+           
+           <h4 class="section-label">KEY RESULTS</h4>
+           <div class="results-card">
+               <ul class="numbered-list">
+                   <li>Identified 3 core friction points in the current setup flow: cognitive overload, architecture-driven UX, and premature feature exposure.</li>
+                   <li>Designed a frontend-only restructuring concept focused on: clearer hierarchy, structured prompt editing, and better separation between core task and advanced configuration.</li>
+                   <li>Proposed a solution that keeps existing backend logic intact while making the setup flow easier to understand and faster to complete for less technical users.</li>
+               </ul>
+           </div>
+           
 
-                                <!-- Node 2 -->
-                                <div class="flow-node">
-                                    <div class="node-header">
-                                        <div class="node-icon green">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                                        </div>
-                                        <h4>Greeting Message</h4>
-                                    </div>
-                                    <div class="node-divider"></div>
-                                    <div class="node-content">
-                                        <p>Hey there! This is Paul from [Real Estate Company]—how're you doing today?</p>
-                                    </div>
-                                </div>
+       </div>
+       
+       <h4 class="process-header">OVERVIEW OF MY DESIGN PROCESS</h4>
 
-                                <!-- Node 3 -->
-                                <div class="flow-node">
-                                    <div class="node-header">
-                                        <div class="node-icon purple">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
-                                        </div>
-                                        <h4>Greeting and Disclaimer</h4>
-                                    </div>
-                                    <div class="node-divider"></div>
-                                    <div class="node-content">
-                                        <p>After the custom greeting: [Hey there! This is Paul from [Real Estate Company]—how're you...]</p>
-                                    </div>
-                                </div>
+       <div class="process-step">
+           <h3>Step 1 — Framing the audience and business context</h3>
+           <p>Mapped the platform’s likely audience across four levels of technical familiarity: non-technical users, prompt designers, automation builders, and developers. Then narrowed the audit to a realistic business use case: real estate lead qualification, where an AI agent helps qualify inbound leads before a realtor follows up.</p>
+           <div class="media-block">
+               <img src="/images/synthflow-02.png" alt="Audience & Context Mapping">
+           </div>
+       </div>
 
-                                <!-- Node 4 -->
-                                <div class="flow-node">
-                                    <div class="node-header">
-                                        <div class="node-icon purple">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
-                                        </div>
-                                        <h4>Discovery Flow</h4>
-                                    </div>
-                                    <div class="node-divider"></div>
-                                    <div class="node-content">
-                                        <p>Ask these questions conversationally—adapt to the caller's pace: 1. "What city or neighbourho...</p>
-                                    </div>
-                                </div>
+       <div class="process-step">
+           <h3>Step 2 — Defining a realistic persona and goal</h3>
+           <p>Grounded the audit in a real-world persona based on previous interviews with U.S. realtors. I used “Jay,” a semi-technical realtor familiar with ChatGPT, Calendly, and basic automation, whose goal was simple: set up an AI agent to contact leads, ask qualification questions, collect property preferences, and identify which leads were worth his time.</p>
+           <div class="media-block">
+               <img src="/images/synthflow-03.png" alt="Persona & Use Case Definition">
+           </div>
+       </div>
 
-                            </div>
-                        </div>
+       <div class="process-step">
+           <h3>Step 3 — Simulating the first-time user flow</h3>
+           <p>Explored the platform step by step as a new user:</p>
+           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
+               <li>created an agent using a template</li>
+               <li>edited the prompt</li>
+               <li>explored custom actions</li>
+               <li>tested the agent via chat</li>
+               <li>reviewed the conversation results</li>
+           </ul>
+           <p>This revealed where the product flow broke down for users trying to complete a simple task.</p>
+           <div class="media-block">
+               <img src="/images/synthflow-04.png" alt="First-Time User Flow Audit">
+           </div>
+       </div>
 
-                        <!-- STATE 2: PROMPT VIEW -->
-                        <div id="view-prompt" class="view-state">
-                            <div class="prompt-container">
-                                <span class="prompt-tag">PROMPT</span>
-                                <div class="prompt-content">
-                                    <h4># Who You Are</h4>
-                                    <p>You’re Paul, a calm, helpful AI assistant working for a real estate team. Your job? Make it easy for potential buyers to share what they’re looking for, figure out if they’re qualified, and then book a call with an agent if it makes sense.</p>
-                                    <p>You’re friendly and relaxed, like someone checking in to see how they can help—not pushy, not scripted. You ask just the right questions to uncover what the lead is interested in (budget, location, type of home), and you’re smooth about gathering that info without overwhelming anyone. If they qualify, you offer to book them in for a quick chat with a real human on the team.</p>
-                                    <p>Keep it human, keep it casual, and always keep things moving forward.</p>
-                                    
-                                    <h4># Call Disclaimer & Intro Flow</h4>
-                                    <p>After the Custom Greeting:</p>
-                                    <p>[Hey there! This is Paul with [Real Estate Company]—how're you doing today?]<br>
-                                    [[acknowledge their response] You popped up in our system as someone looking to buy a home, so I wanted to learn a little more and see if we’re a good fit to help you out.]<br>
-                                    (If the user interrupts or doesn’t hear you clearly, repeat the greeting, wait for confirmation, and continue.)</p>
+       <div class="process-step">
+           <h3>Step 4 — Identifying the 3 core UX problems</h3>
+           <p>The audit surfaced three systemic problems:</p>
+           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
+               <li><strong>1. Cognitive overload:</strong> The user had to understand multiple systems at once: prompt, settings, and actions.</li>
+               <li><strong>2. Architecture-driven UX:</strong> The interface reflected internal system structure instead of guiding users toward their goal.</li>
+               <li><strong>3. Premature feature exposure:</strong> The platform exposed advanced options before users understood their value.</li>
+           </ul>
+           <div class="media-block">
+               <img src="/images/synthflow-05.png" alt="Problem Framing">
+           </div>
+       </div>
 
-                                    <h4># Initial Inquiry</h4>
-                                    <p>Start with something easy and natural:<br>
-                                    “So—what kind of home are you hoping to find?”</p>
-                                </div>
-                            </div>
-                        </div>
+       <div class="process-step">
+           <h3>Step 5 — Exploring broader redesign directions</h3>
+           <p>I briefly explored larger product opportunities, such as:</p>
+           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
+               <li>turning raw extractors into goal-based actions</li>
+               <li>restructuring setup into smaller guided steps</li>
+               <li>using more user-friendly naming for actions and variables</li>
+           </ul>
+           <p>But because the exercise was time-constrained, I deliberately narrowed the final solution to one practical change with minimal implementation cost.</p>
+           <div class="media-block">
+               <img src="/images/synthflow-06.png" alt="Exploration Concepts">
+           </div>
+       </div>
 
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Next sections of your case study would continue here... -->
-            <div class="cs-overview">
-                <h2>Project Overview</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
-            </div>
+       <div class="process-step">
+           <h3>Step 6 — Designing a focused frontend solution</h3>
+           <p>I redesigned the main setup screen around a clearer mental model:</p>
+           
+           <p style="font-weight: 600; margin-bottom: 8px; margin-top: 24px; color: var(--text-color);">Agent Behavior on the left</p>
+           <ul class="detail-list">
+               <li>greeting message</li>
+               <li>background info</li>
+               <li>agent info</li>
+               <li>objection handling</li>
+               <li>call script instructions</li>
+           </ul>
 
-        </section>
-    </main>
+           <p style="font-weight: 600; margin-bottom: 8px; margin-top: 24px; color: var(--text-color);">Agent Configuration on the right</p>
+           <ul class="detail-list">
+               <li>actions</li>
+               <li>variables</li>
+               <li>version history</li>
+               <li>global settings</li>
+               <li>deployment</li>
+           </ul>
 
-    <!-- Standard Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2024 Your Name. All rights reserved.</p>
-        </div>
-    </footer>
+           <p style="margin-top: 24px;">I replaced the intimidating prompt wall with a structured, form-like layout while still preserving access to raw prompt editing for more advanced users.</p>
+           <div class="media-block">
+               <img src="/images/synthflow-07.png" alt="Low-Effort Prototype (Form tab)">
+           </div>
+         <div class="media-block">
+               <img src="/images/synthflow-08.png" alt="Low-Effort Prototype (Prompt tab)">
+           </div>
+         <div class="media-block">
+               <img src="/images/synthflow-09.png" alt="Low-Effort Prototype (Before and After)">
+           </div>
+       </div>
 
-    <!-- Logic for the Widget Toggle -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const btnFlow = document.getElementById('btn-flow');
-            const btnPrompt = document.getElementById('btn-prompt');
-            const viewFlow = document.getElementById('view-flow');
-            const viewPrompt = document.getElementById('view-prompt');
+       <h4 class="section-label">CORE RESULT</h4>
+       <div class="text-slide secondary" style="margin-top: 16px; margin-bottom: 40px; font-size: 28px;">
+           The final concept showed how Synthflow could move from a fragmented, system-oriented setup experience to a more guided and goal-driven flow without changing the backend logic.
+       </div>
+       <p style="margin-bottom: 16px;">The main improvement was not a full redesign, but a better structure:</p>
+       <ul class="detail-list" style="margin-bottom: 60px;">
+           <li>less cognitive overload</li>
+           <li>clearer setup hierarchy</li>
+           <li>easier understanding for first-time users</li>
+           <li>preserved flexibility for technical users</li>
+       </ul>
 
-            if (btnFlow && btnPrompt) {
-                btnFlow.addEventListener('click', () => {
-                    btnFlow.classList.add('active');
-                    btnPrompt.classList.remove('active');
-                    viewFlow.classList.add('active');
-                    viewPrompt.classList.remove('active');
-                });
+       <div class="detail-block last-top"></div>
 
-                btnPrompt.addEventListener('click', () => {
-                    btnPrompt.classList.add('active');
-                    btnFlow.classList.remove('active');
-                    viewPrompt.classList.add('active');
-                    viewFlow.classList.remove('active');
-                });
-            }
-        });
-    </script>
+       <h4 class="section-label">NEXT STEPS</h4>
+       <p style="margin-bottom: 16px;">If expanded beyond the 4-hour audit, I would validate the concept through:</p>
+       <ul class="detail-list">
+           <li>time-to-first-successful-setup measurement</li>
+           <li>drop-off analysis during setup</li>
+           <li>number of test runs before successful publish</li>
+           <li>heatmap/session recordings</li>
+           <li>quick comprehension testing: Can a user clearly explain what their agent does after setup?</li>
+       </ul>
+
+       <div class="footer-cta">
+           <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
+           <p class="footer-subtitle">I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery.<br>AI-powered workflows, fast iterations, real business impact.</p>
+           <a href="/contact/" class="btn-contact">Let’s design your product</a>
+       </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const themeBtn = document.getElementById('theme-btn');
+  const body = document.body;
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'night') { body.classList.remove('day'); body.classList.add('night'); } 
+  else { body.classList.add('day'); }
+
+  themeBtn.addEventListener('click', function() {
+      if (body.classList.contains('day')) {
+          body.classList.remove('day'); body.classList.add('night'); localStorage.setItem('theme', 'night');
+      } else {
+          body.classList.remove('night'); body.classList.add('day'); localStorage.setItem('theme', 'day');
+      }
+  });
+</script>
 </body>
 </html>
