@@ -1,8 +1,21 @@
+
+Model 9:12 PM
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Since that exact phrase wasn't in your original code, I have added it as a key finding under **Step 3 - Interviews** and created a custom `.highlight-purple` CSS class for it. 
+
+I gave it a nice purple text color (matching your results card) with a subtle purple background to make it truly look "highlighted." It also automatically adapts to a lighter, readable purple when toggled into dark mode.
+
+Here is the updated code:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Synthflow AI Audit - Eugene Evgen</title>
+  <title>AI UX Research - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/images/favicon.ico" sizes="any">
   <link rel="icon" href="/images/icon-192.png" type="image/png">
@@ -69,36 +82,9 @@
     .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 12px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
     .hero-image img { width: 100%; height: auto; display: block; }
 
-    .hero-image.inset-black {
-        background-color: #000; 
-        padding: 40px; 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .hero-image.inset-black img {
-        width: 100%; 
-        height: auto;
-        object-fit: contain; 
-        border-radius: 6px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
+    /* BADGE STYLE */
     .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
     body.night .hero-badge { background-color: #54D1FF; color: #000; }
-    
-    .project-links-row { display: flex; gap: 32px; margin-top: -12px; margin-bottom: 60px; flex-wrap: wrap; }
-    .project-link { 
-      color: var(--text-color); 
-      font-weight: 700; 
-      text-decoration: none; 
-      font-size: 16px; 
-      display: inline-flex; 
-      align-items: center; 
-      transition: opacity 0.2s ease; 
-    }
-    .project-link:hover { opacity: 0.6; }
-    .project-link span { margin-left: 6px; font-size: 18px; line-height: 1; font-weight: 400; }
 
     .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 12px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
     .text-slide.secondary { font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px; }
@@ -126,18 +112,36 @@
     .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
 
     .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
-    
-    .media-block img, 
-    .media-block video { width: 100%; height: auto; display: block; }
-    .media-block iframe { width: 100%; aspect-ratio: 16 / 9; display: block; border: 0; }
+    .media-block img { width: 100%; height: auto; display: block; }
 
-    /* Responsive YouTube embed fallback (keeps everything else intact) */
-    .media-block.video-embed { padding: 0; }
-    @supports not (aspect-ratio: 16 / 9) {
-      .media-block.video-embed { position: relative; height: 0; padding-bottom: 56.25%; min-height: 0; }
-      .media-block.video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    /* === MEDIA UTILITIES === */
+    .force-white-bg { background-color: #ffffff !important; }
+    .force-white-bg img { border: 1px solid rgba(0,0,0,0.05); }
+
+    .vertical-media {
+        flex-direction: column !important;
+        padding: 40px; 
+        gap: 20px;
+    }
+
+    .horizontal-media {
+        flex-direction: row !important;
+        gap: 20px;
+        padding: 40px;
+        align-items: center;
+    }
+    .horizontal-media img {
+        width: 50%;
+        height: auto;
     }
     
+    @media (max-width: 600px) {
+        .vertical-media { padding: 20px; }
+        .horizontal-media { flex-direction: column !important; padding: 20px; }
+        .horizontal-media img { width: 100%; }
+    }
+    /* === END MEDIA UTILITIES === */
+
     .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
     .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
@@ -148,303 +152,51 @@
     .btn-contact { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 24px; background-color: var(--btn-bg); color: var(--btn-text); border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease; }
     .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
 
+    /* STATS CARD STYLES */
+    .stats-card {
+        width: 100%;
+        background-color: #D6EE90;
+        border-radius: 8px;
+        padding: 60px 20px;
+        margin: 24px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        color: #000000;
+    }
+    .stat-row { display: flex; align-items: center; max-width: 500px; width: 100%; }
+    .stat-value { font-size: 32px; font-weight: 600; text-align: right; width: 40%; padding-right: 24px; border-right: 1px solid rgba(0,0,0,0.5); line-height: 1.2; flex-shrink: 0; }
+    .stat-label { font-size: 16px; font-weight: 400; padding-left: 24px; width: 60%; line-height: 1.4; }
+    
+    @media (max-width: 600px) {
+        .stat-value { font-size: 28px; width: 35%; padding-right: 16px; }
+        .stat-label { font-size: 15px; width: 65%; padding-left: 16px; }
+    }
+
     .animated { animation-duration: 0.8s; animation-fill-mode: both; }
     .fadeIn { animation-name: fadeIn; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     /* TASK SPECIFIC STYLES */
-    .results-card { background-color: #6936CC; padding: 40px; border-radius: 12px; margin-top: 16px; margin-bottom: 40px; }
-    .results-card li { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.5; padding-left: 32px; }
+    .results-card { background-color: #B0409E; padding: 40px; border-radius: 12px; margin-top: 16px; margin-bottom: 40px; }
+    .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
     .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
 
-    .hero-badge.long-text { max-width: 320px; text-align: right; border-radius: 16px; }
-
-    /* =========================================
-       SYNTHFLOW INTERACTIVE WIDGET STYLES
-       ========================================= */
-    .sf-widget-wrapper {
-        margin: 20px 0 60px 0;
-        width: 100%;
-        /* Enforce light colors internally to protect against night mode */
-        --sf-bg: #ffffff;
-        --sf-text: #111827;
-        --sf-text-muted: #6B7280;
-        --sf-border: #E5E7EB;
-        --sf-purple: #5B0DD5;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* PURPLE HIGHLIGHT ADDED HERE */
+    .highlight-purple {
+      background-color: rgba(176, 64, 158, 0.15);
+      color: #B0409E;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s;
     }
-
-    .sf-widget {
-        background-color: var(--sf-bg);
-        border-radius: 12px;
-        border: 1px solid var(--sf-border);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        display: flex;
-        flex-direction: column;
-        color: var(--sf-text);
-        overflow: hidden;
+    body.night .highlight-purple {
+      background-color: rgba(226, 120, 210, 0.2);
+      color: #e278d2;
     }
-
-    /* Top Header */
-    .sf-top-bar {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 16px;
-        padding: 20px 24px;
-        border-bottom: 1px solid var(--sf-border);
-        background-color: var(--sf-bg);
-    }
-    
-    .sf-top-avatar {
-        width: 48px;
-        height: 48px;
-        border-radius: 10px;
-        background-color: #F3F5F7;
-        border: 1px solid var(--sf-border);
-        overflow: hidden;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .sf-top-avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .sf-top-text {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-    
-    .sf-top-text h2 {
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--sf-text);
-        margin: 0;
-        line-height: 1.3;
-    }
-    
-    .sf-top-text p {
-        font-size: 13px;
-        color: var(--sf-text-muted);
-        margin: 0;
-    }
-
-    /* Body Layout */
-    .sf-body {
-        display: flex;
-        flex-direction: column;
-        min-height: 500px;
-        background-color: var(--sf-bg);
-    }
-    @media (min-width: 768px) {
-        .sf-body { flex-direction: row; }
-    }
-
-    /* Sidebar */
-    .sf-sidebar {
-        padding: 24px;
-        border-right: 1px solid var(--sf-border);
-        width: 100%;
-        flex-shrink: 0;
-        background-color: var(--sf-bg);
-    }
-    @media (min-width: 768px) {
-        .sf-sidebar { width: 280px; border-bottom: none; }
-    }
-    @media (max-width: 767px) {
-        .sf-sidebar { border-bottom: 1px solid var(--sf-border); border-right: none; }
-    }
-
-    .sf-eyebrow {
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--sf-text-muted);
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-    .sf-sidebar h3 {
-        font-size: 16px;
-        font-weight: 600;
-        margin: 0 0 8px 0;
-        color: var(--sf-text);
-        line-height: 1.3;
-    }
-    .sf-sidebar p {
-        font-size: 13px;
-        color: var(--sf-text-muted);
-        line-height: 1.5;
-        margin: 0 0 24px 0;
-    }
-    .sf-divider {
-        height: 1px;
-        background-color: var(--sf-border);
-        margin: 24px 0;
-    }
-
-    /* Mode Buttons */
-    .sf-mode-btn {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        width: 100%;
-        text-align: left;
-        padding: 12px;
-        border-radius: 8px;
-        border: 1px solid var(--sf-border);
-        background-color: var(--sf-bg);
-        cursor: pointer;
-        transition: all 0.2s;
-        margin-bottom: 12px;
-        outline: none;
-    }
-    .sf-mode-btn:hover { border-color: #ccc; }
-    .sf-mode-btn.active {
-        border-color: #A855F7;
-        box-shadow: 0 0 0 1px #A855F7;
-    }
-    .sf-mode-icon {
-        width: 32px;
-        height: 32px;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-    .sf-mode-icon.blue { background-color: #EEF2FF; color: #005EFF; }
-    .sf-mode-icon.green { background-color: #E6F9F5; color: #00C8A3; }
-    
-    .sf-mode-text strong {
-        display: block;
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--sf-text);
-        margin-bottom: 4px;
-    }
-    .sf-mode-text span {
-        display: block;
-        font-size: 12px;
-        color: var(--sf-text-muted);
-        line-height: 1.4;
-    }
-
-    /* Main Content Area */
-    .sf-content {
-        flex-grow: 1;
-        background-color: #FAFAFA;
-        background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-        background-size: 20px 20px;
-        padding: 40px 24px;
-        position: relative;
-        overflow-y: auto;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-    }
-    .sf-view {
-        display: none;
-        width: 100%;
-        max-width: 460px;
-        animation: sfFadeIn 0.3s ease;
-    }
-    .sf-view.active { display: block; }
-    @keyframes sfFadeIn {
-        from { opacity: 0; transform: translateY(5px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Flow View Nodes */
-    .sf-flow-wrap {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        position: relative;
-        align-items: center;
-    }
-    .sf-flow-line {
-        position: absolute;
-        left: 50%;
-        top: 20px;
-        bottom: 20px;
-        width: 2px;
-        background-color: var(--sf-border);
-        transform: translateX(-50%);
-        z-index: 1;
-    }
-    .sf-node {
-        background-color: var(--sf-bg);
-        border: 1px solid var(--sf-border);
-        border-radius: 8px;
-        padding: 16px;
-        width: 100%;
-        position: relative;
-        z-index: 2;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-    .sf-node-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 12px;
-    }
-    .sf-node-icon {
-        width: 32px;
-        height: 32px;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .sf-node-icon.gray { background-color: #F3F5F7; border: 1px solid var(--sf-border); color: #666; }
-    .sf-node-icon.green-node { background-color: #EFFDF4; border: 1px solid #bbf7d0; color: #22c55e; }
-    .sf-node-icon.purple-node { background-color: #F4F3FE; border: 1px solid #ddd6fe; color: #a855f7; }
-    
-    .sf-node h4 { font-size: 14px; font-weight: 600; margin: 0; color: var(--sf-text); }
-    .sf-node hr { border: none; border-top: 1px solid var(--sf-border); margin: 0 -16px 12px -16px; }
-    .sf-node p { font-size: 12px; color: var(--sf-text-muted); margin: 0; line-height: 1.5; }
-
-    /* Prompt View */
-    .sf-prompt {
-        background-color: var(--sf-bg);
-        border: 1px solid var(--sf-border);
-        border-radius: 8px;
-        padding: 32px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-    .sf-tag {
-        display: inline-block;
-        font-size: 10px;
-        font-weight: 700;
-        color: var(--sf-purple);
-        background-color: #F4F3FE;
-        padding: 4px 8px;
-        border-radius: 4px;
-        margin-bottom: 16px;
-        letter-spacing: 0.05em;
-    }
-    .sf-prompt-body {
-        font-size: 13px;
-        color: #333;
-        line-height: 1.6;
-    }
-    .sf-prompt-body h5 {
-        font-size: 14px;
-        font-weight: 600;
-        margin: 24px 0 8px 0;
-        color: var(--sf-text);
-    }
-    .sf-prompt-body h5:first-child { margin-top: 0; }
-    .sf-prompt-body p { margin-bottom: 12px; }
 
     @media (max-width: 768px) {
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -452,9 +204,7 @@
       .footer-title { font-size: 28px; }
       .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
       .media-block { min-height: auto; }
-      .hero-image.inset-black { padding: 20px; }
-      .results-card li { font-size: 18px; padding-left: 28px; }
-      .hero-badge.long-text { max-width: 90%; text-align: center; border-radius: 100px; }
+      .results-card li { font-size: 20px; padding-left: 28px; }
     }
   </style>
 </head>
@@ -476,25 +226,17 @@
   <div class="content-grid animated fadeIn">
     <div class="content-col">
 
-       <span class="case-tag">AI INTERACTION DESIGN</span>
-       <h1>Simplifying AI agent setup for an enterprise Voice AI platform through a focused UX audit</h1>
+       <span class="case-tag">AI UX RESEARCH / MARKET VALIDATION</span>
+       <h1>Validating U.S. real estate agent demand before committing to an AI MVP development</h1>
        
-       <!-- HERO IMAGE -->
-       <div class="hero-image inset-black">
-           <div class="hero-badge long-text">Uncovered dev-ready fixes via 4-hour audit</div>
-           <img src="/images/synthflow-00.png" alt="Synthflow AI Agent Setup Experience">
-       </div>
-       
-       <!-- LINKS -->
-       <div class="project-links-row">
-           <a href="https://www.figma.com/deck/LHnk2nDyvd4rvXiE0kqikN" target="_blank" class="project-link">
-               View case study deck <span>↗</span>
-           </a>
+       <div class="hero-image">
+           <div class="hero-badge">Prevented 3-month AI MVP build</div>
+           <img src="/images/polyagent-01.png" alt="Polyagent AI Research Overview">
        </div>
 
        <h4 class="section-label">CHALLENGE</h4>
        <div class="text-slide">
-           Synthflow offers AI agent capabilities for voice-based workflows, but the setup experience is too complex for non-tech users. Features like prompts, actions, variables, and settings are exposed all at once.
+           Polyagent AI risked investing in an AI MVP for real estate agents before validating whether automation solved a real and widespread problem.
        </div>
 
        <div class="project-details-wrapper">
@@ -502,306 +244,109 @@
            <div class="detail-block">
                <h4 class="section-label">MY TASK</h4>
                <p class="text-highlight">
-                   Conduct a fast UX audit of the current setup experience, identify the highest-friction points, and propose a practical redesign direction that could improve clarity and usability without requiring major logic and backend changes.
+                   Led market validation research by recruiting U.S. realtors, conducting interviews, and synthesizing insights to guide the founder’s MVP and investment decisions.
                </p>
            </div>
 
            <div class="detail-block last-top">
                <h4 class="section-label">TASK TIMEFRAME</h4>
-               <p class="text-highlight">4 hours</p>
+               <p class="text-highlight">6 weeks</p>
            </div>
 
            
            <div style="margin-bottom: 40px;">
                <h4 class="section-label">KEY FOCUS AREAS</h4>
                <ul class="detail-list">
-                   <li>Internal UX audit through first-time user simulation</li>
-                   <li>Audience and persona framing for AI agent setup</li>
-                   <li>Prompt editor friction analysis</li>
-                   <li>Goal-driven UX restructuring</li>
-                   <li>Low-effort prototype for frontend-only improvements</li>
+                   <li>User research & assumption testing</li>
+                   <li>Recruitment strategy & research ops</li>
+                   <li>Interview design & facilitation</li>
+                   <li>Affinity mapping & synthesis</li>
+                   <li>Founder decision support</li>
                </ul>
            </div>
            
            <h4 class="section-label">KEY RESULTS</h4>
            <div class="results-card">
                <ul class="numbered-list">
-                   <li>Identified 3 core friction points in the current setup flow: cognitive overload, architecture-driven UX, and premature feature exposure.</li>
-                   <li>Designed a frontend-only restructuring concept focused on: clearer hierarchy, structured prompt editing, and better separation between core task and advanced configuration.</li>
-                   <li>Proposed a solution that keeps existing backend logic intact while making the setup flow easier to understand and faster to complete for less technical users.</li>
+                   <li>Validated that only ~30% of interviewed realtors experienced sufficient pain to justify AI automation</li>
+                   <li>Identified that the core problem was situational and dependent on agent volume and business maturity</li>
+                   <li>Enabled the founder to pause a 3-month AI MVP development before committing engineering resources</li>
+                   <li>Prevented building an over-scoped product misaligned with the true addressable market</li>
                </ul>
            </div>
-
-         <div class="detail-block">
-               <h4 class="section-label">PRODUCT DEMO (CLICK TO TRY)</h4>
-               <p class="text-highlight">
-                   This is a simplified demo of Synthflow AI: creation of an AI agent with Workflow Designer or Direct Prompt, using a pre-configured template.
-               </p>
-           </div>
-       
-       <!-- INTERACTIVE WIDGET INJECTION -->
-       <div class="sf-widget-wrapper">
-           <div class="sf-widget">
-               
-               <!-- Top Header with Avatar -->
-               <div class="sf-top-bar">
-                   <div class="sf-top-avatar">
-                       <img src="/images/ai-avatar.png" alt="AI Agent"> <!-- Update path to your actual image -->
-                   </div>
-                   <div class="sf-top-text">
-                       <h2>Setup AI Voice Agent with Flow Designer or Direct Prompt</h2>
-                       <p>Click Flow View and Prompt View tabs to see the difference</p>
-                   </div>
-               </div>
-
-               <!-- Body Layout -->
-               <div class="sf-body">
-                   
-                   <!-- Sidebar -->
-                   <div class="sf-sidebar">
-                       <div class="sf-eyebrow">
-                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3"/><path d="M4 12h16"/></svg>
-                           Flow Preview
-                       </div>
-                       <h3 class="sf-title">Lead Qualification · Buyer</h3>
-                       <p class="sf-desc">This agent follows a predefined logic flow to simulate real conversations.</p>
-                       
-                       <div class="sf-divider"></div>
-                       
-                       <div class="sf-eyebrow">Select a mode</div>
-                       
-                       <!-- Toggles -->
-                       <button class="sf-mode-btn active" id="sf-btn-flow">
-                           <div class="sf-mode-icon blue">
-                               <!-- Updated Icon -->
-                               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg>
-                           </div>
-                           <div class="sf-mode-text">
-                               <strong>Flow View</strong>
-                               <span>View the logic of this use case visually.</span>
-                           </div>
-                       </button>
-
-                       <button class="sf-mode-btn" id="sf-btn-prompt">
-                           <div class="sf-mode-icon green">
-                               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                           </div>
-                           <div class="sf-mode-text">
-                               <strong>Prompt View</strong>
-                               <span>View this use case's logic as a natural language prompt.</span>
-                           </div>
-                       </button>
-                   </div>
-
-                   <!-- Main Content Area -->
-                   <div class="sf-content">
-                       
-                       <!-- Flow View -->
-                       <div id="sf-view-flow" class="sf-view active">
-                           <div class="sf-flow-wrap">
-                               <div class="sf-flow-line"></div>
-                               
-                               <div class="sf-node">
-                                   <div class="sf-node-header">
-                                       <div class="sf-node-icon gray">
-                                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                                       </div>
-                                       <h4>Global Settings</h4>
-                                   </div>
-                                   <hr>
-                                   <p>Who You Are You're Paul, the calm, helpful, and easygoing voice of a real estate team. Your go...</p>
-                               </div>
-
-                               <div class="sf-node">
-                                   <div class="sf-node-header">
-                                       <div class="sf-node-icon green-node">
-                                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                                       </div>
-                                       <h4>Greeting Message</h4>
-                                   </div>
-                                   <hr>
-                                   <p>Hey there! This is Paul from [Real Estate Company]—how're you doing today?</p>
-                               </div>
-
-                               <div class="sf-node">
-                                   <div class="sf-node-header">
-                                       <div class="sf-node-icon purple-node">
-                                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
-                                       </div>
-                                       <h4>Greeting and Disclaimer</h4>
-                                   </div>
-                                   <hr>
-                                   <p>After the custom greeting: [Hey there! This is Paul from [Real Estate Company]—how're you...]</p>
-                               </div>
-
-                               <div class="sf-node">
-                                   <div class="sf-node-header">
-                                       <div class="sf-node-icon purple-node">
-                                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
-                                       </div>
-                                       <h4>Discovery Flow</h4>
-                                   </div>
-                                   <hr>
-                                   <p>Ask these questions conversationally—adapt to the caller's pace: 1. "What city or neighbourho...</p>
-                               </div>
-                           </div>
-                       </div>
-
-                       <!-- Prompt View -->
-                       <div id="sf-view-prompt" class="sf-view">
-                           <div class="sf-prompt">
-                               <div class="sf-tag">PROMPT</div>
-                               <div class="sf-prompt-body">
-                                   <h5># Who You Are</h5>
-                                   <p>You're Paul, a calm, helpful AI assistant working for a real estate team. Your job? Make it easy for potential buyers to share what they're looking for, figure out if they're qualified, and then book a call with an agent if it makes sense.</p>
-                                   <p>You're friendly and relaxed, like someone checking in to see how they can help—not pushy, not scripted. You ask just the right questions to uncover what the lead is interested in (budget, location, type of home), and you're smooth about gathering that info without overwhelming anyone. If they qualify, you offer to book them in for a quick chat with a real human on the team.</p>
-                                   <p>Keep it human, keep it casual, and always keep things moving forward.</p>
-                                   
-                                   <h5># Call Disclaimer & Intro Flow</h5>
-                                   <p>After the Custom Greeting:</p>
-                                   <p>[Hey there! This is Paul with [Real Estate Company]—how're you doing today?]<br>
-                                   [[acknowledge their response] You popped up in our system as someone looking to buy a home, so I wanted to learn a little more and see if we're a good fit to help you out.]<br>
-                                   (If the user interrupts or doesn't hear you clearly, repeat the greeting, wait for confirmation, and continue.)</p>
-
-                                   <h5># Initial Inquiry</h5>
-                                   <p>Start with something easy and natural:<br>
-                                   "So—what kind of home are you hoping to find?"</p>
-                                   <p>Let them talk. If they're vague or unsure, you can follow up with:<br>
-                                   "Totally fine if you're just browsing. What's the dream right now—condo, single-family, something with a yard?"</p>
-                               </div>
-                           </div>
-                       </div>
-                       
-                   </div>
-               </div>
-           </div>
-       </div>
-       <!-- END INTERACTIVE WIDGET -->
-
-       </div>
-       
-       <h4 class="process-header">OVERVIEW OF MY DESIGN PROCESS</h4>
-
-       <div class="process-step">
-           <h3>Step 1 - Framing the audience and business context</h3>
-           <p>Mapped the platform’s likely audience across four levels of technical familiarity: non-technical users, prompt designers, automation builders, and developers. Then narrowed the audit to a realistic business use case: real estate lead qualification, where an AI agent helps qualify inbound leads before a realtor follows up.</p>
-           <div class="media-block">
-               <img src="/images/synthflow-02.png" alt="Audience & Context Mapping">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 2 - Defining a realistic persona and goal</h3>
-           <p>Grounded the audit in a real-world persona based on previous interviews with U.S. realtors. I used “Jay,” a semi-technical realtor familiar with ChatGPT, Calendly, and basic automation, whose goal was simple: set up an AI agent to contact leads, ask qualification questions, collect property preferences, and identify which leads were worth his time.</p>
-           <div class="media-block">
-               <img src="/images/synthflow-03.png" alt="Persona & Use Case Definition">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 3 - Simulating the first-time user flow</h3>
-           <p>Explored the platform step by step as a new user:</p>
-           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
-               <li>created an agent using a template</li>
-               <li>edited the prompt</li>
-               <li>explored custom actions</li>
-               <li>tested the agent via chat</li>
-               <li>reviewed the conversation results</li>
-           </ul>
-           <p>This revealed where the product flow broke down for users trying to complete a simple task.</p>
-           <div class="media-block">
-               <img src="/images/synthflow-04-1.png" alt="First-Time User Flow Audit">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 4 - Identifying the 3 core UX problems</h3>
-           <p>The audit surfaced three systemic problems:</p>
-           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
-               <li><strong>1. Cognitive overload:</strong> The user had to understand multiple systems at once: prompt, settings, and actions.</li>
-               <li><strong>2. Architecture-driven UX:</strong> The interface reflected internal system structure instead of guiding users toward their goal.</li>
-               <li><strong>3. Premature feature exposure:</strong> The platform exposed advanced options before users understood their value.</li>
-           </ul>
-           <div class="media-block">
-               <img src="/images/synthflow-05.png" alt="Problem Framing">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 5 - Exploring broader redesign directions</h3>
-           <p>I briefly explored larger product opportunities, such as:</p>
-           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
-               <li>turning raw extractors into goal-based actions</li>
-               <li>restructuring setup into smaller guided steps</li>
-               <li>using more user-friendly naming for actions and variables</li>
-           </ul>
-           <p>But because the exercise was time-constrained, I deliberately narrowed the final solution to one practical change with minimal implementation cost.</p>
-           <div class="media-block">
-               <img src="/images/synthflow-06.png" alt="Exploration Concepts">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 6 - Designing a focused frontend solution</h3>
-           <p>I redesigned the main setup screen around a clearer mental model:</p>
            
-           <p style="font-weight: 600; margin-bottom: 8px; margin-top: 24px; color: var(--text-color);">Agent Behavior on the left</p>
-           <ul class="detail-list">
-               <li>greeting message</li>
-               <li>background info</li>
-               <li>agent info</li>
-               <li>objection handling</li>
-               <li>call script instructions</li>
-           </ul>
 
-           <p style="font-weight: 600; margin-bottom: 8px; margin-top: 24px; color: var(--text-color);">Agent Configuration on the right</p>
-           <ul class="detail-list">
-               <li>actions</li>
-               <li>variables</li>
-               <li>version history</li>
-               <li>global settings</li>
-               <li>deployment</li>
-           </ul>
+       </div>
 
-           <p style="margin-top: 24px;">I replaced the intimidating prompt wall with a structured, form-like layout while still preserving access to raw prompt editing for more advanced users.</p>
-           <div class="media-block">
-               <img src="/images/synthflow-07.png" alt="Low-Effort Prototype (Form tab)">
+       <!-- STATS SLIDE -->
+       <div class="stats-card">
+           <div class="stat-row">
+               <div class="stat-value">98 hrs</div>
+               <div class="stat-label">My time spent for this research</div>
            </div>
-         <div class="media-block">
-               <img src="/images/synthflow-08.png" alt="Low-Effort Prototype (Prompt tab)">
+           <div class="stat-row">
+               <div class="stat-value">300$</div>
+               <div class="stat-label">Budget spent to pay realtors for interviews</div>
            </div>
-         <div class="media-block">
-               <img src="/images/synthflow-09.png" alt="Low-Effort Prototype (Before and After)">
+           <div class="stat-row">
+               <div class="stat-value">40%</div>
+               <div class="stat-label">Free interviews</div>
            </div>
+           <div class="stat-row">
+               <div class="stat-value">34</div>
+               <div class="stat-label">Total number of leads agreed for interviews</div>
+           </div>
+       </div>
 
-          <div class="hero-image inset-black">
-              <img src="/images/synthflow-01.png" alt="Presentation Call">
+       <div class="media-block force-white-bg">
+           <img src="/images/polyagent-02.png" alt="Founder and me">
+       </div>
+       
+       <h4 class="process-header">OVERVIEW OF MY RESEARCH PROCESS</h4>
+
+       <div class="process-step">
+           <h3>Step 1 - Research framing & assumptions:</h3>
+           <p>Defined 3 testable assumptions and translated them into a focused interview script centered on real agent workflows and decision triggers.</p>
+           <!-- STEP 1: FORCE WHITE BG -->
+           <div class="media-block force-white-bg">
+               <img src="/images/polyagent-03.png" alt="Research Framing">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 2 - Recruiting U.S. realtors:</h3>
+           <p>Built a multi-channel recruitment strategy that secured qualified real estate agents across 6 U.S. states within a limited research budget.</p>
+           <!-- STEP 2: VERTICAL STACK WITH PADDING -->
+           <div class="media-block vertical-media">
+               <img src="/images/polyagent-04-1.png" alt="Recruitment Strategy Part 1">
+               <img src="/images/polyagent-04-2.gif" alt="Recruitment Strategy Part 2">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 3 - Interviews:</h3>
+           <!-- ADDED THE TEXT AND HIGHLIGHT IN THIS PARAGRAPH -->
+           <p>Conducted 10 in-depth interviews with U.S. realtors to uncover lead-handling behaviors, automation pain points, and willingness to pay. A key finding was that the <span class="highlight-purple">setup experience is too complex for non-tech users</span>.</p>
+           <!-- STEP 3: HORIZONTAL STACK + FORCE WHITE BG -->
+           <div class="media-block horizontal-media force-white-bg">
+               <img src="/images/polyagent-05-1.gif" alt="Interview GIF">
+               <img src="/images/polyagent-05-2.png" alt="Interview Screen">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 4 - Data synthesis & analysis:</h3>
+           <p>Synthesized interview data through affinity mapping and customer profiling to clearly validate or invalidate each core assumption.</p>
+           <!-- STEP 4: FORCE WHITE BG -->
+           <div class="media-block force-white-bg">
+               <img src="/images/polyagent-06.gif" alt="Data Synthesis">
            </div>
        </div>
 
        <h4 class="section-label">CORE RESULT</h4>
-       <div class="text-slide secondary" style="margin-top: 16px; margin-bottom: 40px; font-size: 28px;">
-           The final concept showed how Synthflow could move from a fragmented, system-oriented setup experience to a more guided and goal-driven flow without changing the backend logic.
+       <div class="text-slide secondary" style="margin-top: 16px;">
+           Validated market fit early and avoided a 3-month AI MVP after discovering limited demand for automation among real estate agents.
        </div>
-       <p style="margin-bottom: 16px;">The main improvement was not a full redesign, but a better structure:</p>
-       <ul class="detail-list" style="margin-bottom: 60px;">
-           <li>less cognitive overload</li>
-           <li>clearer setup hierarchy</li>
-           <li>easier understanding for first-time users</li>
-           <li>preserved flexibility for technical users</li>
-       </ul>
-
-       <div class="detail-block last-top"></div>
-
-       <h4 class="section-label">NEXT STEPS</h4>
-       <p style="margin-bottom: 16px;">If expanded beyond the 4-hour audit, I would validate the concept through:</p>
-       <ul class="detail-list">
-           <li>time-to-first-successful-setup measurement</li>
-           <li>drop-off analysis during setup</li>
-           <li>number of test runs before successful publish</li>
-           <li>heatmap/session recordings</li>
-           <li>quick comprehension testing: Can a user clearly explain what their agent does after setup?</li>
-       </ul>
 
        <div class="footer-cta">
            <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
@@ -814,7 +359,6 @@
 </div>
 
 <script>
-  // Theme Toggle Script
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
@@ -828,28 +372,6 @@
           body.classList.remove('night'); body.classList.add('day'); localStorage.setItem('theme', 'day');
       }
   });
-
-  // Synthflow Widget Toggle Script
-  const btnFlow = document.getElementById('sf-btn-flow');
-  const btnPrompt = document.getElementById('sf-btn-prompt');
-  const viewFlow = document.getElementById('sf-view-flow');
-  const viewPrompt = document.getElementById('sf-view-prompt');
-
-  if (btnFlow && btnPrompt) {
-      btnFlow.addEventListener('click', () => {
-          btnFlow.classList.add('active');
-          btnPrompt.classList.remove('active');
-          viewFlow.classList.add('active');
-          viewPrompt.classList.remove('active');
-      });
-
-      btnPrompt.addEventListener('click', () => {
-          btnPrompt.classList.add('active');
-          btnFlow.classList.remove('active');
-          viewPrompt.classList.add('active');
-          viewFlow.classList.remove('active');
-      });
-  }
 </script>
 </body>
 </html>
