@@ -719,55 +719,20 @@
 </div>
 
        <div class="process-step">
-           <h3>Step 4 - Identifying the 3 core UX problems</h3>
-           <p>The audit surfaced three systemic problems:</p>
-           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
-               <li><strong>1. Cognitive overload:</strong> The user had to understand multiple systems at once: prompt, settings, and actions.</li>
-               <li><strong>2. Architecture-driven UX:</strong> The interface reflected internal system structure instead of guiding users toward their goal.</li>
-               <li><strong>3. Premature feature exposure:</strong> The platform exposed advanced options before users understood their value.</li>
-           </ul>
+           <h3>Solution</h3>
            <div class="media-block">
                <img src="/images/synthflow-05.png" alt="Problem Framing">
            </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 5 - Exploring broader redesign directions</h3>
-           <p>I briefly explored larger product opportunities, such as:</p>
-           <ul class="detail-list" style="margin-top: 16px; margin-bottom: 24px;">
-               <li>turning raw extractors into goal-based actions</li>
-               <li>restructuring setup into smaller guided steps</li>
-               <li>using more user-friendly naming for actions and variables</li>
-           </ul>
-           <p>But because the exercise was time-constrained, I deliberately narrowed the final solution to one practical change with minimal implementation cost.</p>
+         
            <div class="media-block">
-               <img src="/images/synthflow-06.png" alt="Exploration Concepts">
+               <img src="/images/synthflow-10.png" alt="Problem Framing">
            </div>
-       </div>
+         
+           <div class="media-block">
+               <img src="/images/synthflow-06-1.png" alt="Exploration Concepts">
+           </div>
 
-       <div class="process-step">
-           <h3>Step 6 - Designing a focused frontend solution</h3>
-           <p>I redesigned the main setup screen around a clearer mental model:</p>
-           
-           <p style="font-weight: 600; margin-bottom: 8px; margin-top: 24px; color: var(--text-color);">Agent Behavior on the left</p>
-           <ul class="detail-list">
-               <li>greeting message</li>
-               <li>background info</li>
-               <li>agent info</li>
-               <li>objection handling</li>
-               <li>call script instructions</li>
-           </ul>
-
-           <p style="font-weight: 600; margin-bottom: 8px; margin-top: 24px; color: var(--text-color);">Agent Configuration on the right</p>
-           <ul class="detail-list">
-               <li>actions</li>
-               <li>variables</li>
-               <li>version history</li>
-               <li>global settings</li>
-               <li>deployment</li>
-           </ul>
-
-           <p style="margin-top: 24px;">I replaced the intimidating prompt wall with a structured, form-like layout while still preserving access to raw prompt editing for more advanced users.</p>
+         <p style="margin-top: 24px;">I replaced the intimidating prompt wall with a structured, form-like layout while still preserving access to raw prompt editing for more advanced users.</p>
            <div class="media-block">
                <img src="/images/synthflow-07.png" alt="Low-Effort Prototype (Form tab)">
            </div>
@@ -777,8 +742,13 @@
          <div class="media-block">
                <img src="/images/synthflow-09.png" alt="Low-Effort Prototype (Before and After)">
            </div>
+         
+       </div>
 
-          <div class="hero-image inset-black">
+       <div class="process-step">
+           <h3>Presentation call</h3>
+           <p>I presented the audit findings with a solution to the team, where we discussed the next steps.</p>
+           <div class="hero-image inset-black">
               <img src="/images/synthflow-01.png" alt="Presentation Call">
            </div>
        </div>
@@ -786,31 +756,6 @@
        <h4 class="section-label">CORE RESULT</h4>
        <div class="text-slide secondary" style="margin-top: 16px; margin-bottom: 40px; font-size: 28px;">
            The final concept showed how Synthflow could move from a fragmented, system-oriented setup experience to a more guided and goal-driven flow without changing the backend logic.
-       </div>
-       <p style="margin-bottom: 16px;">The main improvement was not a full redesign, but a better structure:</p>
-       <ul class="detail-list" style="margin-bottom: 60px;">
-           <li>less cognitive overload</li>
-           <li>clearer setup hierarchy</li>
-           <li>easier understanding for first-time users</li>
-           <li>preserved flexibility for technical users</li>
-       </ul>
-
-       <div class="detail-block last-top"></div>
-
-       <h4 class="section-label">NEXT STEPS</h4>
-       <p style="margin-bottom: 16px;">If expanded beyond the 4-hour audit, I would validate the concept through:</p>
-       <ul class="detail-list">
-           <li>time-to-first-successful-setup measurement</li>
-           <li>drop-off analysis during setup</li>
-           <li>number of test runs before successful publish</li>
-           <li>heatmap/session recordings</li>
-           <li>quick comprehension testing: Can a user clearly explain what their agent does after setup?</li>
-       </ul>
-
-       <div class="footer-cta">
-           <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
-           <p class="footer-subtitle">I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery.<br>AI-powered workflows, fast iterations, real business impact.</p>
-           <a href="/contact/" class="btn-contact">Let’s design your product</a>
        </div>
 
     </div>
