@@ -132,16 +132,16 @@
         font-weight: 600; font-size: 14px; text-decoration: none; border: none; 
     }
 
-    /* HERO BANNER */
+    /* HERO BANNER (Split into 2 cards) */
     .hero-banner {
-        background-color: var(--hero-bg);
-        border-radius: 24px;
         display: flex;
-        overflow: hidden;
+        gap: 24px;
         margin-bottom: 40px;
         align-items: stretch;
     }
     .hero-content {
+        background-color: var(--hero-bg);
+        border-radius: 24px;
         padding: 60px 48px;
         flex: 1;
         display: flex;
@@ -165,7 +165,9 @@
         max-width: 440px;
     }
     .hero-image-wrapper {
-        width: 38%;
+        width: 35%;
+        border-radius: 24px;
+        overflow: hidden;
         position: relative;
         display: flex;
     }
@@ -274,10 +276,7 @@
         object-fit: cover;
     }
 
-    /* Change 2 & 3: Utility class for left-aligned images */
-    .img-left {
-        object-position: left center !important;
-    }
+    .img-left { object-position: left center !important; }
 
     /* TESTIMONIALS */
     .testimonials-grid {
@@ -350,10 +349,10 @@
         flex-shrink: 0;
     }
     
-    /* Change 1: Updated border-radius to 24px */
+    /* Updated border-radius to 22px */
     .about-photo img {
         width: 100%;
-        border-radius: 24px;
+        border-radius: 22px;
         border: 1px solid var(--card-border);
         box-shadow: 0 12px 32px rgba(0,0,0,0.05);
     }
@@ -371,7 +370,7 @@
 
     .job-list { position: relative; display: flex; flex-direction: column; }
     
-    /* Change 6: Tooltip styling updated for Right Side */
+    /* Tooltip positioned on the right inner bound */
     .hover-tooltip { 
         position: absolute; 
         width: 220px; 
@@ -389,7 +388,7 @@
         box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
     }
     
-    /* Change 6: Tooltip Arrow flipped to point Left */
+    /* Arrow points Left */
     .hover-tooltip::after { 
         content: ""; 
         position: absolute; 
@@ -457,7 +456,8 @@
       
       .main-header { height: 60px; padding: 0 24px; }
       
-      .hero-banner { flex-direction: column; }
+      /* Mobile Hero adjustment */
+      .hero-banner { flex-direction: column; gap: 16px; }
       .hero-content { padding: 40px 32px; }
       .hero-content h1 { font-size: 48px; }
       .hero-image-wrapper { width: 100%; height: 320px; }
@@ -546,7 +546,6 @@
       <a href="/ai-voice-agent-platform/" class="btn-outline">View project</a>
     </div>
     <div class="fc-visual">
-      <!-- Change 2: Added class="img-left" -->
       <img src="/images/synthflow-00-3.png" alt="Synthflow AI" class="img-left">
     </div>
   </div>
@@ -559,7 +558,6 @@
       <a href="/ai-investment-platform/" class="btn-outline">View project</a>
     </div>
     <div class="fc-visual">
-      <!-- Change 3: Added class="img-left" -->
       <img src="/images/gocanopy-01-1.png" alt="GoCanopy" class="img-left">
     </div>
   </div>
@@ -633,7 +631,6 @@
         
         <p>I’ve been designing at <a href="https://www.gocanopy.tech/" target="_blank">GoCanopy</a> for the last <span id="counter">...</span>.</p>
         
-        <!-- Change 4: Restored Link to "Fortune 500 clients" -->
         <p>My research-driven prototypes helped us win multiple <a href="https://evgendesigner.com/ai-investment-platform/" target="_blank">Fortune 500 clients</a>. I shaped the analytical, forecasting, agentic, generative, and conversational capabilities of our AI operating system for institutional real estate, supporting a €2.1M seed round and reducing manual data aggregation by 42%.</p>
         
         <p>I live in Porto, Portugal. You can keep up with me on <a href="https://www.threads.com/@bucklajean" target="_blank">Threads</a> or <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank">LinkedIn</a>.</p>
@@ -727,7 +724,6 @@
       <div style="max-width: 800px;">
           <p style="color: var(--secondary-text);">
               Outside of work, you’ll usually find me building my personal small apps in the App Store and talking about the journey on 
-              <!-- Change 5: Added font-weight: 600 directly to the Threads link -->
               <a href="https://www.threads.com/@bucklajean" target="_blank" style="color: var(--text-color); font-weight: 600;">Threads</a>.
               I also try to maintain a healthy relationship with the ocean - walking, running, surfing, or swimming, depending on the courage levels.
           </p>
@@ -808,8 +804,9 @@
       tooltip.innerText = element.getAttribute('data-tooltip');
       const centerLine = element.offsetTop + (element.offsetHeight / 2);
       
-      // Change 6: JS logic updated to position tooltip to the right side
-      tooltip.style.left = "calc(100% + 32px)"; 
+      // Positioned to the right edge of the text list container so it stays fully inside the screen
+      tooltip.style.left = "auto"; 
+      tooltip.style.right = "0px"; 
       tooltip.style.top = centerLine + "px"; 
       tooltip.style.opacity = "1";
   }
