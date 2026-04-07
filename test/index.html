@@ -59,8 +59,6 @@
       --font-body: 'Instrument Sans', sans-serif;
       
       --container-width: 1040px; 
-      
-      /* Change 1: Unified Layout Spacing set to 24px */
       --spacing-main: 24px; 
     }
 
@@ -166,9 +164,9 @@
         color: #333;
         max-width: 440px;
     }
-    /* Change 2: Resized hero image card */
+    /* Change: Hero image card widened */
     .hero-image-wrapper {
-        width: 23%;
+        width: 32%;
         border-radius: 24px;
         overflow: hidden;
         position: relative;
@@ -774,20 +772,47 @@
       }
   });
 
-  // 3. Tab Switching Logic
+  // 3. Tab Switching Logic (with auto-rotation)
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabPanes = document.querySelectorAll('.tab-content');
-  
-  tabBtns.forEach(btn => {
+  let currentTabIndex = 0;
+  let tabInterval;
+
+  function switchToTab(index) {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanes.forEach(p => p.classList.remove('active'));
+      const newActiveBtn = tabBtns[index];
+      if (newActiveBtn) {
+          newActiveBtn.classList.add('active');
+          const targetId = newActiveBtn.getAttribute('data-target');
+          const newActivePane = document.getElementById(targetId);
+          if (newActivePane) {
+              newActivePane.classList.add('active');
+          }
+      }
+  }
+
+  function startTabRotation() {
+      // Clear any existing interval to prevent duplicates
+      clearInterval(tabInterval);
+      tabInterval = setInterval(() => {
+          currentTabIndex = (currentTabIndex + 1) % tabBtns.length;
+          switchToTab(currentTabIndex);
+      }, 4000); // Switch every 4 seconds
+  }
+
+  // Add click event listeners for manual override
+  tabBtns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
-          tabBtns.forEach(b => b.classList.remove('active'));
-          tabPanes.forEach(p => p.classList.remove('active'));
-          
-          btn.classList.add('active');
-          const targetId = btn.getAttribute('data-target');
-          document.getElementById(targetId).classList.add('active');
+          clearInterval(tabInterval); // Stop auto-rotation on user interaction
+          currentTabIndex = index;
+          switchToTab(index);
       });
   });
+
+  // Start the rotation when the page is loaded
+  startTabRotation();
+
 
   // 4. Counter
   var startDate = new Date("Sep 4, 2024 09:00:00").getTime();
