@@ -81,7 +81,8 @@
     /* HEADER */
     .main-header { 
         display: flex; justify-content: space-between; align-items: center; 
-        padding: 10px 12px 10px 32px; 
+        /* Change: Restored symmetrical padding */
+        padding: 10px 32px 10px 32px; 
         margin-bottom: var(--spacing-main); 
         background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
         border-radius: 100px; border: 1px solid var(--header-border); 
@@ -172,24 +173,25 @@
 
     .hero-badge.long-text { max-width: 320px; text-align: right; border-radius: 16px; }
 
-    /* SYNTHFLOW WIDGET STYLES (now uses --font-body) */
+    /* SYNTHFLOW WIDGET STYLES */
     .sf-widget-wrapper {
         margin: 20px 0 60px 0;
         width: 100%;
         --sf-bg: #ffffff; --sf-text: #111827; --sf-text-muted: #6B7280; --sf-border: #E5E7EB; --sf-purple: #5B0DD5;
-        font-family: var(--font-body);
+        /* Change: Reverted font stack for this widget only */
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
     .sf-widget { background-color: var(--sf-bg); border-radius: 12px; border: 1px solid var(--sf-border); box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: flex; flex-direction: column; color: var(--sf-text); overflow: hidden; }
     .sf-top-bar { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--sf-border); }
     .sf-top-avatar { width: 48px; height: 48px; border-radius: 10px; background-color: #F3F5F7; border: 1px solid var(--sf-border); overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
     .sf-top-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .sf-top-text { display: flex; flex-direction: column; gap: 4px; }
-    .sf-top-text h2 { font-size: 16px; font-weight: 600; margin: 0; line-height: 1.3; }
+    .sf-top-text h2 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; margin: 0; line-height: 1.3; }
     .sf-top-text p { font-size: 13px; color: var(--sf-text-muted); margin: 0; }
     .sf-body { display: flex; flex-direction: column; min-height: 500px; }
     .sf-sidebar { padding: 24px; border-right: 1px solid var(--sf-border); width: 100%; flex-shrink: 0; }
     .sf-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--sf-text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
-    .sf-sidebar h3 { font-size: 16px; font-weight: 600; margin: 0 0 8px 0; line-height: 1.3; }
+    .sf-sidebar h3 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; margin: 0 0 8px 0; line-height: 1.3; }
     .sf-sidebar p { font-size: 13px; color: var(--sf-text-muted); line-height: 1.5; margin: 0 0 24px 0; }
     .sf-divider { height: 1px; background-color: var(--sf-border); margin: 24px 0; }
     .sf-mode-btn { display: flex; align-items: flex-start; gap: 12px; width: 100%; text-align: left; padding: 12px; border-radius: 8px; border: 1px solid var(--sf-border); background-color: var(--sf-bg); cursor: pointer; transition: all 0.2s; margin-bottom: 12px; outline: none; }
@@ -212,13 +214,13 @@
     .sf-node-icon.gray { background-color: #F3F5F7; border: 1px solid var(--sf-border); color: #666; }
     .sf-node-icon.green-node { background-color: #EFFDF4; border: 1px solid #bbf7d0; color: #22c55e; }
     .sf-node-icon.purple-node { background-color: #F4F3FE; border: 1px solid #ddd6fe; color: #a855f7; }
-    .sf-node h4 { font-size: 14px; font-weight: 600; margin: 0; color: var(--sf-text); }
+    .sf-node h4 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 600; margin: 0; color: var(--sf-text); }
     .sf-node hr { border: none; border-top: 1px solid var(--sf-border); margin: 0 -16px 12px -16px; }
     .sf-node p { font-size: 12px; color: var(--sf-text-muted); margin: 0; line-height: 1.5; }
     .sf-prompt { background-color: var(--sf-bg); border: 1px solid var(--sf-border); border-radius: 8px; padding: 32px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .sf-tag { display: inline-block; font-size: 10px; font-weight: 700; color: var(--sf-purple); background-color: #F4F3FE; padding: 4px 8px; border-radius: 4px; margin-bottom: 16px; letter-spacing: 0.05em; }
     .sf-prompt-body { font-size: 13px; color: #333; line-height: 1.6; }
-    .sf-prompt-body h5 { font-size: 14px; font-weight: 600; margin: 24px 0 8px 0; color: var(--sf-text); }
+    .sf-prompt-body h5 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 600; margin: 24px 0 8px 0; color: var(--sf-text); }
     .sf-prompt-body h5:first-child { margin-top: 0; }
     .sf-prompt-body p { margin-bottom: 12px; }
 
