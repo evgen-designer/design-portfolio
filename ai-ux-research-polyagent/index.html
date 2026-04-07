@@ -4,46 +4,91 @@
   <meta charset="utf-8">
   <title>AI UX Research - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
   <link rel="icon" href="/images/favicon.ico" sizes="any">
   <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
     /* VARIABLES */
     :root {
-      --bg-color: #F6F6F6; --text-color: #111; --secondary-text: #777; --link-color: #111; --divider-color: #e5e5e5;
-      --header-bg: rgba(255, 255, 255, 0.6); --header-border: rgba(0, 0, 0, 0.05);
-      --btn-bg: #111; --btn-text: #fff;
-      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --container-width: 800px; --top-spacing: 40px; --bottom-spacing: 140px;
+      --bg-color: #F6F6F6; 
+      --text-color: #111; 
+      --secondary-text: #666; 
+      --link-color: #111; 
+      --divider-color: #e5e5e5;
+      --header-bg: rgba(255, 255, 255, 0.6); 
+      --header-border: rgba(0, 0, 0, 0.05);
+      --btn-bg: #111; 
+      --btn-text: #fff;
       
       --meta-label: #888;
       --image-bg: #e0e0e0;
-      --code-bg: #fff;
       --slide-bg: #111;
       --slide-text: #fff;
+      
+      --font-heading: 'Bricolage Grotesque', sans-serif;
+      --font-body: 'Instrument Sans', sans-serif;
+      
+      --container-width: 1040px; 
+      --spacing-main: 24px; 
     }
     body.night {
-      --bg-color: #1a1a1a; --text-color: #f0f0f0; --secondary-text: #a0a0a0; --link-color: #fff; --divider-color: #333;
-      --header-bg: rgba(40, 40, 40, 0.6); --header-border: rgba(255, 255, 255, 0.1); --btn-bg: #fff; --btn-text: #000;
+      --bg-color: #121212; 
+      --text-color: #f0f0f0; 
+      --secondary-text: #999; 
+      --link-color: #fff; 
+      --divider-color: #333;
+      --header-bg: rgba(30, 30, 30, 0.6); 
+      --header-border: rgba(255, 255, 255, 0.1); 
+      --btn-bg: #fff; 
+      --btn-text: #000;
       
       --meta-label: #666;
       --image-bg: #2a2a2a;
-      --code-bg: #222;
       --slide-bg: #fff;
       --slide-text: #000;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
+    body { 
+        margin: 0; padding: 0; 
+        background-color: var(--bg-color); 
+        color: var(--text-color); 
+        font-family: var(--font-body); 
+        font-size: 16px; line-height: 1.6; 
+        transition: background-color 0.3s ease, color 0.3s ease; 
+    }
+    
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
+    p { margin-top: 0; margin-bottom: 16px; }
+    a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.7; }
 
     /* LAYOUT */
-    .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
+    .container { 
+        max-width: var(--container-width); width: 100%; margin: 0 auto; 
+        padding: var(--spacing-main) 20px;
+        display: flex; flex-direction: column; 
+    }
     
     /* Centered Content Layout */
     .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
     .content-col { width: 100%; max-width: 680px; }
 
     /* HEADER */
-    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 32px 10px 32px; margin-bottom: 60px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
+    .main-header { 
+        display: flex; justify-content: space-between; align-items: center; 
+        padding: 10px 32px 10px 32px; 
+        margin-bottom: var(--spacing-main); 
+        background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
+        border-radius: 100px; border: 1px solid var(--header-border); 
+        width: 100%; position: relative; z-index: 1001; 
+    }
+
+    .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
     
     /* Back Button */
     .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; }
@@ -66,14 +111,14 @@
 
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
     
-    .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 12px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
+    .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 24px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
     .hero-image img { width: 100%; height: auto; display: block; }
 
     /* BADGE STYLE */
     .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
     body.night .hero-badge { background-color: #54D1FF; color: #000; }
 
-    .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 12px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
+    .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 24px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
     .text-slide.secondary { font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px; }
 
     .project-details-wrapper { margin-bottom: 80px; }
@@ -101,36 +146,20 @@
     .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
     .media-block img { width: 100%; height: auto; display: block; }
 
-    /* === MEDIA UTILITIES === */
+    /* MEDIA UTILITIES */
     .force-white-bg { background-color: #ffffff !important; }
     .force-white-bg img { border: 1px solid rgba(0,0,0,0.05); }
 
-    .vertical-media {
-        flex-direction: column !important;
-        padding: 40px; 
-        gap: 20px;
-    }
+    .vertical-media { flex-direction: column !important; padding: 40px; gap: 20px; }
 
-    .horizontal-media {
-        flex-direction: row !important;
-        gap: 20px;
-        padding: 40px;
-        align-items: center;
-    }
-    .horizontal-media img {
-        width: 50%;
-        height: auto;
-    }
+    .horizontal-media { flex-direction: row !important; gap: 20px; padding: 40px; align-items: center; }
+    .horizontal-media img { width: 50%; height: auto; }
     
     @media (max-width: 600px) {
         .vertical-media { padding: 20px; }
         .horizontal-media { flex-direction: column !important; padding: 20px; }
         .horizontal-media img { width: 100%; }
     }
-    /* === END MEDIA UTILITIES === */
-
-    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
-    .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
     .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
     .footer-title { font-size: 32px; font-weight: 700; line-height: 1.2; color: var(--text-color); margin: 0 0 16px 0; }
@@ -143,7 +172,7 @@
     .stats-card {
         width: 100%;
         background-color: #D6EE90;
-        border-radius: 8px;
+        border-radius: 24px;
         padding: 60px 20px;
         margin: 24px 0;
         display: flex;
@@ -154,7 +183,7 @@
         color: #000000;
     }
     .stat-row { display: flex; align-items: center; max-width: 500px; width: 100%; }
-    .stat-value { font-size: 32px; font-weight: 600; text-align: right; width: 40%; padding-right: 24px; border-right: 1px solid rgba(0,0,0,0.5); line-height: 1.2; flex-shrink: 0; }
+    .stat-value { font-family: var(--font-heading); font-size: 32px; font-weight: 600; text-align: right; width: 40%; padding-right: 24px; border-right: 1px solid rgba(0,0,0,0.5); line-height: 1.2; flex-shrink: 0; }
     .stat-label { font-size: 16px; font-weight: 400; padding-left: 24px; width: 60%; line-height: 1.4; }
     
     @media (max-width: 600px) {
@@ -167,7 +196,7 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     /* TASK SPECIFIC STYLES */
-    .results-card { background-color: #B0409E; padding: 40px; border-radius: 12px; margin-top: 16px; margin-bottom: 40px; }
+    .results-card { background-color: #B0409E; padding: 40px; border-radius: 24px; margin-top: 16px; margin-bottom: 40px; }
     .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
     .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
 
@@ -185,14 +214,17 @@
 
 <div class="container">
   <header class="main-header">
-    <a href="/works/" class="btn-back">
-        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back to works
-    </a>
-    
-    <div id="theme-btn" class="theme-toggle">
-        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    <div class="header-left">
+      <a href="/works/" class="btn-back">
+          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to works
+      </a>
+    </div>
+    <div class="header-right">
+      <div id="theme-btn" class="theme-toggle">
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      </div>
     </div>
   </header>
 
@@ -280,7 +312,6 @@
        <div class="process-step">
            <h3>Step 1 - Research framing & assumptions:</h3>
            <p>Defined 3 testable assumptions and translated them into a focused interview script centered on real agent workflows and decision triggers.</p>
-           <!-- STEP 1: FORCE WHITE BG -->
            <div class="media-block force-white-bg">
                <img src="/images/polyagent-03.png" alt="Research Framing">
            </div>
@@ -289,7 +320,6 @@
        <div class="process-step">
            <h3>Step 2 - Recruiting U.S. realtors:</h3>
            <p>Built a multi-channel recruitment strategy that secured qualified real estate agents across 6 U.S. states within a limited research budget.</p>
-           <!-- STEP 2: VERTICAL STACK WITH PADDING -->
            <div class="media-block vertical-media">
                <img src="/images/polyagent-04-1.png" alt="Recruitment Strategy Part 1">
                <img src="/images/polyagent-04-2.gif" alt="Recruitment Strategy Part 2">
@@ -299,7 +329,6 @@
        <div class="process-step">
            <h3>Step 3 - Interviews:</h3>
            <p>Conducted 10 in-depth interviews with U.S. realtors to uncover lead-handling behaviors, automation pain points, and willingness to pay.</p>
-           <!-- STEP 3: HORIZONTAL STACK + FORCE WHITE BG -->
            <div class="media-block horizontal-media force-white-bg">
                <img src="/images/polyagent-05-1.gif" alt="Interview GIF">
                <img src="/images/polyagent-05-2.png" alt="Interview Screen">
@@ -309,7 +338,6 @@
        <div class="process-step">
            <h3>Step 4 - Data synthesis & analysis:</h3>
            <p>Synthesized interview data through affinity mapping and customer profiling to clearly validate or invalidate each core assumption.</p>
-           <!-- STEP 4: FORCE WHITE BG -->
            <div class="media-block force-white-bg">
                <img src="/images/polyagent-06.gif" alt="Data Synthesis">
            </div>
