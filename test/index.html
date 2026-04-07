@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Eugene Evgen - AI & B2B SaaS Product Designer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="preconnect" href="https://www.google-analytics.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.clarity.ms">
+
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+  <meta name="description" content="Portfolio of Eugene Evgen, an AI & B2B SaaS Product Designer.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://evgendesigner.com/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Eugene Evgen - AI & B2B SaaS Product Designer">
+  <meta property="og:description" content="Design for AI, forecasting, and multimodal interfaces.">
+  <meta property="og:image" content="https://evgendesigner.com/images/social-preview.png">
+  <meta property="og:url" content="https://evgendesigner.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Eugene Evgen - AI & B2B SaaS Product Designer">
+  <meta name="twitter:image" content="https://evgendesigner.com/images/social-preview.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Eugene Evgen",
+    "url": "https://evgendesigner.com/",
+    "image": "https://evgendesigner.com/images/profile-avatar.png",
+    "jobTitle": "Product Designer",
+    "sameAs": [
+      "https://www.linkedin.com/in/evgen-designer/",
+      "https://www.threads.com/@bucklajean"
+    ]
+  }
+  </script>
+  
+  <style>
+    /* VARIABLES */
+    :root {
+      --bg-color: #F6F6F6; --text-color: #111; --secondary-text: #777; --link-color: #111; --divider-color: #e5e5e5;
+      --header-bg: rgba(255, 255, 255, 0.6); --header-border: rgba(0, 0, 0, 0.05);
+      --btn-bg: #111; --btn-text: #fff;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --container-width: 800px; --top-spacing: 40px; --bottom-spacing: 140px;
+      --tooltip-bg: #050505; --tooltip-text: #fff;
+      
+      /* Card Variables for Home */
+      --card-bg: #ffffff; --card-border: rgba(0,0,0,0.08);
+      --pattern-dot: #e5e5e5;
+      --ui-elem-bg: #ffffff; --ui-elem-border: #f0f0f0; 
+      
+      /* Badge Colors */
+      --badge-bg: #FFD500; 
+    }
+    body.night {
+      --bg-color: #1a1a1a; --text-color: #f0f0f0; --secondary-text: #a0a0a0; --link-color: #fff; --divider-color: #333;
+      --header-bg: rgba(40, 40, 40, 0.6); --header-border: rgba(255, 255, 255, 0.1); --btn-bg: #fff; --btn-text: #000;
+      --tooltip-bg: #ffffff; --tooltip-text: #000000;
+      
+      --card-bg: #222222; --card-border: rgba(255,255,255,0.08);
+      --pattern-dot: #333;
+      --ui-elem-bg: #2a2a2a; --ui-elem-border: #383838;
+      
+      --badge-bg: #54D1FF; 
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
+
+    /* LAYOUT */
+    .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
+    
+    /* Centered Content Layout */
+    .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .content-col { width: 100%; max-width: 640px; }
+
+    /* HEADER */
+    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px 10px 32px; margin-bottom: 40px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
+    
+    /* Left Side: Navigation */
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a.text-link { text-decoration: none; color: var(--text-color); font-weight: 500; font-size: 15px; border-bottom: none; transition: opacity 0.2s; }
+    .nav-links a.text-link:hover { opacity: 0.6; }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    /* Right Side: Actions */
+    .header-right { display: flex; align-items: center; gap: 16px; }
+
+    /* Theme Toggle */
+    .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
+    .theme-toggle:hover { opacity: 1; }
+    .theme-toggle svg { width: 20px; height: 20px; display: block; }
+    body.day .icon-moon { display: block !important; fill: #333; }
+    body.day .icon-sun { display: none !important; }
+    body.night .icon-moon { display: none !important; }
+    body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
+
+    /* CV Button */
+    .btn-cv { background-color: var(--btn-bg); color: var(--btn-text) !important; padding: 10px 20px; border-radius: 100px; font-weight: 600; font-size: 14px; text-decoration: none; border: none; transition: transform 0.2s ease, opacity 0.2s ease; }
+    .btn-cv:hover { transform: translateY(-1px); opacity: 0.9; }
+
+    /* MOBILE MENU */
+    .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; color: var(--text-color); margin-left: 8px; padding-right: 8px; }
+    .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
+    .mobile-overlay.active { opacity: 1; pointer-events: all; }
+    .mobile-link { font-size: 24px; font-weight: 600; text-decoration: none; color: var(--text-color); }
+    .mobile-btn-cv { font-size: 18px; padding: 14px 28px; }
+
+    /* MAIN BANNER */
+    .main-banner {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin-bottom: 60px;
+        display: block;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        border: 1px solid var(--card-border);
+    }
+
+    h1 { font-size: 20px; font-weight: 700; margin-bottom: 24px; margin-top: 0; line-height: 1.3; }
+
+    /* --- SUBTITLE STYLE --- */
+    p.intro-subtitle {
+      font-family: var(--font-family); 
+      font-size: 16px; 
+      color: var(--secondary-text);
+      font-weight: 400; 
+      margin-top: -16px; 
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    /* BADGES (Skills) */
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .badge { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; border: 1px solid var(--divider-color); color: var(--secondary-text); background: transparent; white-space: nowrap; }
+
+    p { margin-bottom: 24px; }
+    a { color: var(--link-color); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    a:hover { border-bottom: 1px solid var(--link-color); }
+    .spacer48 { height: 16px; }
+    h4.label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 400; margin-top: 24px; margin-bottom: 24px; }
+    h4.label.mt-large { margin-top: 60px; }
+    .footer-text { font-size: 14px; color: var(--secondary-text); margin-top: 60px; }
+
+    /* --- FULL WIDTH MINI CARDS --- */
+    .recent-work-grid { 
+        display: grid; 
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 12px; 
+        width: 100%; 
+        margin-top: 60px;
+        margin-bottom: 60px;
+    }
+    
+    /* CARD CONTAINER */
+    .mini-card {
+        display: block;
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        overflow: hidden;
+        text-decoration: none;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+        position: relative;
+        aspect-ratio: 4 / 3; 
+    }
+    .mini-card:hover { transform: translateY(-2px); border-color: rgba(120, 120, 120, 0.3); }
+
+    /* VISUAL AREA (Fills the card completely) */
+    .mini-visual {
+        width: 100%;
+        height: 100%; 
+        background-color: var(--bg-color);
+        background-image: radial-gradient(var(--pattern-dot) 1.5px, transparent 1.5px);
+        background-size: 20px 20px;
+        position: relative;
+        overflow: hidden;
+        display: flex; align-items: center; justify-content: center;
+        border-bottom: 1px solid var(--card-border);
+    }
+    
+    /* IMAGE & HOVER EFFECTS */
+    .mini-img { 
+        width: 100%; height: 100%; object-fit: cover; 
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .mini-img-left {
+    object-position: left center;
+    }
+    
+    .mini-card:hover .mini-img {
+        filter: blur(2px);
+        transform: scale(1.05);
+    }
+
+    /* --- HOVER BADGE FOR MINI CARDS --- */
+    .mini-badge {
+      position: absolute;
+      top: 50%; 
+      left: 50%;
+      transform: translate(-50%, -40%); 
+      background-color: var(--badge-bg); 
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 8px; 
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.3;
+      opacity: 0; 
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 10;
+      pointer-events: none; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: max-content;
+      max-width: 90%;
+    }
+
+    .mini-card:hover .mini-badge {
+      opacity: 1;
+      transform: translate(-50%, -50%); 
+    }
+
+    .more-card { 
+        display: flex; align-items: center; justify-content: center; 
+        background-color: var(--card-bg); color: var(--text-color); 
+        font-size: 14px; font-weight: 600; text-align: center; 
+        border: 1px solid var(--card-border); border-radius: 12px; gap: 6px; 
+        transition: background-color 0.2s;
+        aspect-ratio: 4 / 3; 
+        height: auto; 
+    }
+    .more-card:hover { background-color: var(--bg-color); border-bottom: 1px solid var(--card-border); } 
+
+    /* JOB LIST & TOOLTIP */
+    .job-list { position: relative; display: flex; flex-direction: column; }
+    .hover-tooltip { position: absolute; left: -240px; width: 200px; background-color: var(--tooltip-bg); color: var(--tooltip-text); padding: 12px 16px; border-radius: 6px; font-size: 13px; line-height: 1.4; z-index: 10; opacity: 0; pointer-events: none; transform: translateY(-50%); transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .hover-tooltip::after { content: ""; position: absolute; top: 50%; right: -6px; margin-top: -6px; border-width: 6px; border-style: solid; border-color: transparent transparent transparent var(--tooltip-bg); }
+    .hover-tooltip a { color: inherit; text-decoration: underline; font-weight: 600; cursor: pointer; }
+    .hover-tooltip a:hover { opacity: 0.8; }
+
+    .job-row { position: relative; display: grid; grid-template-columns: 1fr 1fr; column-gap: 80px; padding: 24px 0; cursor: default; }
+    .job-company h2 { font-size: 16px; font-weight: 700; margin: 0; line-height: 1.4; }
+    .job-details h3 { font-size: 16px; font-weight: 400; margin: 0; }
+    /* Updated selector to include .job-company h4 for company types */
+    .job-details h4, .job-company h4 { font-size: 14px; color: var(--secondary-text); font-weight: 400; margin: 4px 0 0 0; }
+    .text-content-padding { padding-top: 6px; }
+
+    .job-description-mobile { display: none; }
+
+    /* New Yellow Badge Style */
+    .badge-yellow {
+      background-color: #FFD500; 
+      color: #000;
+      font-size: 10px; 
+      font-weight: 700; 
+      padding: 3px 8px; 
+      border-radius: 100px; 
+      white-space: nowrap; 
+      border: none;
+      display: inline-block;
+      transform: translateY(-2px); /* Visual alignment with text */
+    }
+
+    /* Dark Mode color for the yellow badge */
+    body.night .badge-yellow { 
+      background-color: #54D1FF; 
+      color: #000; 
+    }
+
+    /* ANIMATIONS */
+    .animated { animation-duration: 1s; animation-fill-mode: both; }
+    .fadeIn { animation-name: fadeIn; }
+    .two { animation-delay: 0.5s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* MOBILE BREAKPOINT */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .btn-cv { display: none; } /* Hide in header on mobile */
+      .hover-tooltip { display: none !important; }
+      
+      .main-header {
+        height: 60px;
+        min-height: 60px;
+        padding: 0 32px;
+        padding-top: 0;
+        padding-bottom: 0;
+        align-items: center;
+      }
+
+      .header-left,
+      .header-right {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .mobile-menu-btn {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        line-height: 1;
+      }
+
+      .theme-toggle {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+      
+      .recent-work-grid { 
+          grid-template-columns: 1fr 1fr; 
+          gap: 12px;
+          margin-top: 40px; 
+          margin-bottom: 40px; 
+      }
+      .mini-card, .more-card { 
+          aspect-ratio: 1 / 1; 
+      }
+      
+      .job-row { column-gap: 20px; margin-bottom: 0; padding-bottom: 24px; }
+      .job-row::after {
+        content: attr(data-tooltip);
+        grid-column: 1 / -1;
+        display: block;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--divider-color);
+        font-size: 14px;
+        color: var(--secondary-text);
+        line-height: 1.5;
+      }
+
+      .job-description-mobile {
+        display: block;
+        grid-column: 1 / -1;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--divider-color);
+        font-size: 14px;
+        color: var(--secondary-text);
+        line-height: 1.5;
+      }
+
+      .job-row.no-tooltip::after {
+        content: none;     /* removes the empty tooltip block */
+        display: none;     /* ensures no leftover spacing */
+        border-top: none;  /* safety */
+        margin-top: 0;
+        padding-top: 0;
+      }
+
+      .text-content-padding { padding-top: 0; }
+      p.intro-subtitle { font-size: 15px; margin-top: -12px; }
+    }
+  </style>
+</head>
+
+<body class="day">
+
+<!-- MOBILE OVERLAY -->
+<div class="mobile-overlay">
+    <a href="/" class="mobile-link" style="opacity: 0.5; pointer-events: none;">Experience</a>
+    <a href="/works/" class="mobile-link">Works</a>
+    <a href="/contact/" class="mobile-link">Contact</a>
+    <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank">Download CV</a>
+</div>
+
+<div class="container">
+  
+  <header class="main-header">
+  <!-- LEFT -->
+  <div class="header-left">
+    <nav class="nav-links">
+      <a href="/" class="text-link" style="opacity: 0.5; cursor: default;">Experience</a>
+      <a href="/works/" class="text-link">Works</a>
+      <a href="/contact/" class="text-link">Contact</a>
+    </nav>
+
+    <!-- Mobile only -->
+    <div class="mobile-menu-btn">Menu</div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="header-right">
+    <div id="theme-btn" class="theme-toggle">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </div>
+
+    <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
+  </div>
+</header>
+
+  <!-- MAIN BANNER (New) -->
+  <img src="/images/hero-banner.png" alt="Main Banner" class="main-banner animated fadeIn">
+
+  <!-- BLOCK 1: INTRO -->
+  <div class="content-grid animated fadeIn two">
+    <div class="content-col">
+      <!-- 1. HEADER (Updated Name) -->
+      <h1>Hi, I'm Eugene Evgen — Lead Product Designer with 10+ years designing complex B2B & enterprise SaaS across AI, fintech, and logistics domains.</h1>
+
+      <!-- 3. TEXT PARAGRAPHS -->
+      <div>
+        <p>
+          I’ve been designing at 
+          <a href="https://www.gocanopy.tech/" target="_blank">GoCanopy</a> for the last 
+          <span id="counter">...</span>.
+        </p>
+        
+        <p>
+          My research-driven prototypes helped us win multiple 
+          <b><a href="https://evgendesigner.com/ai-investment-platform/">Fortune 500 clients</a></b>.
+          I shaped the analytical, forecasting, agentic, generative, and conversational capabilities of our AI operating system for institutional real estate, supporting a €2.1M seed round and reducing manual data aggregation by 42%.
+        </p>
+
+        <p>
+          I live in Porto, Portugal. You can keep up with me on 
+          <a href="https://www.threads.com/@bucklajean" target="_blank">Threads</a> or 
+          <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank">LinkedIn</a>.
+        </p>
+      </div>
+      
+    </div>
+  </div> 
+
+  <!-- BLOCK 2: FULL WIDTH CARDS (UPDATED WITH BADGES) -->
+  <div class="recent-work-grid animated fadeIn two">
+
+<!-- 1. AI Voice Agent Platform Audit -->
+<a href="/ai-voice-agent-platform/" class="mini-card" title="AI Voice Agent Platform Audit - Synthflow AI">
+    <div class="mini-visual">
+        <div class="mini-badge">Uncovered dev-ready fixes via 4-hour audit</div>
+        <img src="/images/synthflow-00-3.png" alt="AI Voice Agent Platform Audit - Synthflow AI" class="mini-img mini-img-left">
+    </div>
+</a>  
+
+<!-- 2. Investment Platform Design -->
+<a href="/ai-investment-platform/" class="mini-card" title="AI Investment Platform Design - GoCanopy">
+    <div class="mini-visual">
+        <div class="mini-badge">Drove multiple Fortune 500 deals</div>
+        <img src="/images/gocanopy-01-1.png" alt="AI Investment Platform Design - GoCanopy" class="mini-img mini-img-left">
+    </div>
+</a>
+
+      <!-- 3. AI SDK Demo Redesign -->
+      <a href="/ai-sdk-mobius/" class="mini-card" title="AI SDK Demo Redesign - Mobius Labs">
+          <div class="mini-visual">
+              <div class="mini-badge">Increased demo usage in sales by 95%</div>
+              <img src="/images/mobius-07.png" alt="AI SDK Demo Redesign - Mobius Labs" class="mini-img">
+          </div>
+      </a>
+
+      <!-- 4. More Works Button -->
+      <a href="/works/" class="more-card">
+          More works →
+      </a>
+  </div>
+
+  <!-- BLOCK 3: RESUME/FOOTER -->
+  <div class="content-grid animated fadeIn two">
+    <div class="content-col">
+      <h4 class="label">PREVIOUSLY</h4> 
+
+      <div class="job-list">
+          <div class="hover-tooltip" id="hover-tooltip">Loading tooltip...</div>
+
+          <!-- Monocle -->
+          <div class="job-row" data-tooltip="Reduced onboarding drop-off by 40% for an AI forecasting tool.">
+            <div class="job-company">
+                <h2><a href="https://www.monocleapp.co/" target="_blank">Monocle</a></h2>
+                <h4>AI E-commerce Inventory Platform</h4>
+            </div>  
+            <div class="job-details"><h3>Senior Product Designer</h3><h4>2024</h4></div>
+          </div>  
+
+          <!-- Metapraxis -->
+          <div class="job-row" data-tooltip="Achieved a 50% early-adopter conversion rate with a prototype of a new financial platform.">
+            <div class="job-company">
+                <h2><a href="https://www.metapraxis.com/" target="_blank">Metapraxis</a></h2>
+                <h4>AI Financial Platform</h4>
+            </div>  
+            <div class="job-details"><h3>Senior Product Designer</h3><h4>2023</h4></div>
+          </div>
+
+          <!-- Mobius Labs (Badge Added) -->
+<div class="job-row" data-tooltip="Increased AI SDK web demo usage during sales by 95%.">
+  <div class="job-company">
+      <h2 style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <a href="https://dropbox.tech/machine-learning/mobius-labs-aana-dropbox-multimodal-understanding" target="_blank">Mobius Labs</a>
+          <a href="https://dropbox.tech/machine-learning/mobius-labs-aana-dropbox-multimodal-understanding" class="badge-yellow" target="_blank" style="border: none">Acquired by Dropbox</a>
+      </h2>
+      <h4>Enterprise AI SDK</h4>
+  </div>  
+  <div class="job-details"><h3>Senior Product Designer</h3><h4>2022</h4></div>
+</div>
+
+          <!-- BladeInsight -->
+          <div class="job-row" data-tooltip="Improved operator task efficiency by up to 34% for autonomous drone inspection software.">
+            <div class="job-company">
+                <h2 style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <a href="https://bladeinsight.com/" target="_blank">BladeInsight</a>
+                    <a href="https://splash247.com/swire-energy-services-buys-into-portuguese-wind-om-tech-start-up/" class="badge-yellow" target="_blank" style="border: none">Acquired by SES Energy</a>
+                </h2>
+                <h4>Industrial AI Software</h4>
+            </div>  
+            <div class="job-details"><h3>Senior Product Designer</h3><h4>2021-2022</h4></div>
+          </div>
+
+          <!-- Schmitz Cargobull -->
+          <div class="job-row" data-tooltip="Drove 1,828 downloads and 5-star ratings on both the App Store and Google Play within the first 8 months for a fleet management app.">
+            <div class="job-company">
+                <h2><a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a></h2>
+                <h4>Fleet Management Software</h4>
+            </div>
+            <div class="job-details"><h3>Senior UX/UI Designer</h3><h4>2019-2020</h4></div>
+          </div>
+
+          <!-- Xebia -->
+          <div class="job-row no-tooltip">
+            <div class="job-company">
+                <h2><a href="https://xebia.com/" target="_blank">Xebia</a></h2>
+                <h4>Enterprise Software Consulting</h4>
+            </div>  
+            <div class="job-details">
+                <h3>Senior UI Designer</h3>
+                <h4>2017-2021</h4>
+            </div>
+            <div class="job-description-mobile">
+                Designed B2B & enterprise apps for <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>, and others.
+            </div>
+          </div> 
+      </div>
+
+      <h4 class="label mt-large">OTHER THAN DESIGN</h4>
+
+      <div class="text-content-padding">
+          <p>
+              Outside of work, you’ll usually find me building my personal small apps in the App Store and talking about the journey on 
+              <a href="https://www.threads.com/@bucklajean" target="_blank">Threads</a>.
+              I also try to maintain a healthy relationship with the ocean - walking, running, surfing, or swimming, depending on the courage levels.
+          </p>
+      </div>
+
+      <div class="footer-text">
+          <p>This website is vibe-coded with Gemini 3 Pro. © 2026 All rights reserved.</p>
+      </div>
+    </div> 
+  </div> 
+
+</div>
+
+<script>
+  // 1. Theme Logic
+  const themeBtn = document.getElementById('theme-btn');
+  const body = document.body;
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'night') { body.classList.remove('day'); body.classList.add('night'); } 
+  else { body.classList.add('day'); }
+
+  themeBtn.addEventListener('click', function() {
+      if (body.classList.contains('day')) {
+          body.classList.remove('day'); body.classList.add('night'); localStorage.setItem('theme', 'night');
+      } else {
+          body.classList.remove('night'); body.classList.add('day'); localStorage.setItem('theme', 'day');
+      }
+  });
+
+  // 2. Mobile Menu Logic
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const overlay = document.querySelector('.mobile-overlay');
+  let isMenuOpen = false;
+
+  menuBtn.addEventListener('click', () => {
+      isMenuOpen = !isMenuOpen;
+      if(isMenuOpen) {
+          overlay.classList.add('active');
+          menuBtn.innerText = "Close";
+          document.body.style.overflow = 'hidden';
+      } else {
+          overlay.classList.remove('active');
+          menuBtn.innerText = "Menu";
+          document.body.style.overflow = '';
+      }
+  });
+
+  // 3. Counter
+  var startDate = new Date("Sep 4, 2024 09:00:00").getTime();
+  setInterval(function() {
+      var now = new Date().getTime();
+      var distance = now - startDate;
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      document.getElementById("counter").innerHTML = days + " days";
+  }, 1000);
+
+  // 4. Tooltip & Links Injection (Desktop Only)
+  const jobRows = document.querySelectorAll('.job-row');
+  const tooltip = document.getElementById('hover-tooltip');
+  
+  const xebiaLinks = `Designed B2B & enterprise apps for <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>, and others.`;
+
+  function updateTooltip(element) {
+      const isXebia = element.querySelector('h2 a').href.includes('xebia');
+      if (isXebia) {
+          tooltip.innerHTML = xebiaLinks; 
+          tooltip.style.pointerEvents = "auto";
+      } else {
+          tooltip.innerText = element.getAttribute('data-tooltip');
+          tooltip.style.pointerEvents = "none";
+      }
+      const centerLine = element.offsetTop + (element.offsetHeight / 2);
+      tooltip.style.left = "-220px";
+      tooltip.style.top = centerLine + "px"; tooltip.style.opacity = "1";
+  }
+
+  if (window.innerWidth > 768 && jobRows.length > 0) { setTimeout(() => { updateTooltip(jobRows[0]); }, 100); }
+  jobRows.forEach(row => { 
+      row.addEventListener('mouseenter', function() { if (window.innerWidth > 768) { updateTooltip(this); } }); 
+  });
+
+  const gaScript = document.createElement('script'); gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CP2M6FKBXK'; gaScript.async = true; document.head.appendChild(gaScript);
+  window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-CP2M6FKBXK');
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "ujw6gp5k0v");
+</script>
+</body>
+</html>
