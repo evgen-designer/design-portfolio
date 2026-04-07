@@ -59,8 +59,9 @@
       --font-body: 'Instrument Sans', sans-serif;
       
       --container-width: 1040px; 
-      --top-spacing: 40px; 
-      --bottom-spacing: 140px;
+      
+      /* Change 1 & 3: Unified Layout Spacing */
+      --spacing-main: 40px; 
     }
 
     body.night {
@@ -97,17 +98,18 @@
     a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.7; }
 
-    /* LAYOUT */
+    /* LAYOUT - Using Unified Spacing */
     .container { 
         max-width: var(--container-width); width: 100%; margin: 0 auto; 
-        padding: var(--top-spacing) 20px var(--bottom-spacing) 20px; 
+        padding: var(--spacing-main) 20px; /* Applies equal top and bottom padding */
         display: flex; flex-direction: column; 
     }
 
     /* HEADER */
     .main-header { 
         display: flex; justify-content: space-between; align-items: center; 
-        padding: 10px 12px 10px 32px; margin-bottom: 40px; 
+        padding: 10px 12px 10px 32px; 
+        margin-bottom: var(--spacing-main); /* Unified gap */
         background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
         border-radius: 100px; border: 1px solid var(--header-border); 
         width: 100%; position: relative; z-index: 1001; 
@@ -132,11 +134,11 @@
         font-weight: 600; font-size: 14px; text-decoration: none; border: none; 
     }
 
-    /* HERO BANNER (Split into 2 cards) */
+    /* HERO BANNER */
     .hero-banner {
         display: flex;
         gap: 24px;
-        margin-bottom: 40px;
+        margin-bottom: var(--spacing-main); /* Unified gap */
         align-items: stretch;
     }
     .hero-content {
@@ -181,7 +183,7 @@
     /* TABS NAV */
     .tabs-container {
         border-bottom: 1px solid var(--divider-color);
-        margin-bottom: 40px;
+        margin-bottom: var(--spacing-main); /* Unified gap */
     }
     .tabs-scroll {
         display: flex;
@@ -224,7 +226,7 @@
         background: var(--card-bg);
         border: 1px solid var(--card-border);
         border-radius: 24px;
-        margin-bottom: 40px;
+        margin-bottom: var(--spacing-main); /* Unified gap */
         overflow: hidden;
         width: 100%;
         min-height: 320px;
@@ -283,7 +285,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 24px;
-        margin-bottom: 60px;
+        margin-bottom: var(--spacing-main); /* Unified gap */
     }
     .t-card {
         background: var(--card-bg);
@@ -312,7 +314,7 @@
         border: 1px solid var(--card-border);
         border-radius: 24px;
         padding: 80px;
-        margin-bottom: 60px;
+        margin-bottom: 0; /* Bottom spacing handled by .container padding */
     }
 
     /* ABOUT SECTION */
@@ -349,7 +351,6 @@
         flex-shrink: 0;
     }
     
-    /* Updated border-radius to 22px */
     .about-photo img {
         width: 100%;
         border-radius: 22px;
@@ -370,7 +371,6 @@
 
     .job-list { position: relative; display: flex; flex-direction: column; }
     
-    /* Tooltip positioned on the right inner bound */
     .hover-tooltip { 
         position: absolute; 
         width: 220px; 
@@ -388,7 +388,6 @@
         box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
     }
     
-    /* Arrow points Left */
     .hover-tooltip::after { 
         content: ""; 
         position: absolute; 
@@ -400,11 +399,12 @@
         border-color: transparent var(--tooltip-bg) transparent transparent; 
     }
 
+    /* Change 2: 3-Column Grid leaves an empty space on the far right specifically for the tooltip */
     .job-row { 
         position: relative; 
         display: grid; 
-        grid-template-columns: 1fr 1fr; 
-        column-gap: 80px; 
+        grid-template-columns: 1.2fr 1fr 220px; 
+        column-gap: 32px; 
         padding: 24px 0; 
         cursor: default; 
         border-bottom: 1px solid transparent; 
@@ -444,9 +444,10 @@
     .three { animation-delay: 0.4s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* MOBILE BREAKPOINT */
+    /* MOBILE BREAKPOINTS */
     @media (max-width: 900px) {
       .testimonials-grid { grid-template-columns: 1fr; gap: 16px; }
+      .job-row { grid-template-columns: 1fr 1fr 150px; }
     }
     
     @media (max-width: 768px) {
@@ -456,11 +457,13 @@
       
       .main-header { height: 60px; padding: 0 24px; }
       
-      /* Mobile Hero adjustment */
       .hero-banner { flex-direction: column; gap: 16px; }
       .hero-content { padding: 40px 32px; }
       .hero-content h1 { font-size: 48px; }
       .hero-image-wrapper { width: 100%; height: 320px; }
+      
+      /* Change 4: Mobile hero image top center alignment */
+      .hero-img { object-position: top center !important; }
       
       .featured-card { flex-direction: column; }
       .fc-visual { width: 100%; height: 240px; border-left: none; border-top: 1px solid var(--card-border); order: -1; }
@@ -470,6 +473,7 @@
       .about-section { flex-direction: column; gap: 40px; padding-bottom: 40px; margin-bottom: 40px; text-align: left; align-items: flex-start; }
       .about-photo { width: 100%; max-width: 320px; }
       
+      /* Mobile reset for Job Rows */
       .job-row { grid-template-columns: 1fr; gap: 8px; padding: 20px 0; }
       .job-details { margin-top: 4px; }
       .job-row::after {
@@ -804,7 +808,7 @@
       tooltip.innerText = element.getAttribute('data-tooltip');
       const centerLine = element.offsetTop + (element.offsetHeight / 2);
       
-      // Positioned to the right edge of the text list container so it stays fully inside the screen
+      // Placed inside the dedicated empty column on the far right
       tooltip.style.left = "auto"; 
       tooltip.style.right = "0px"; 
       tooltip.style.top = centerLine + "px"; 
