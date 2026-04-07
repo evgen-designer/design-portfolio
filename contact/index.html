@@ -4,17 +4,26 @@
   <meta charset="utf-8">
   <title>Contact - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  
   <link rel="icon" href="/images/favicon.ico" sizes="any">
   <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
     /* VARIABLES */
     :root {
-      --bg-color: #F6F6F6; --text-color: #111; --secondary-text: #777; --link-color: #111;
-      --header-bg: rgba(255, 255, 255, 0.6); --header-border: rgba(0, 0, 0, 0.05);
-      --btn-bg: #111; --btn-text: #fff;
-      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --container-width: 800px; --top-spacing: 40px; --bottom-spacing: 140px;
+      --bg-color: #F6F6F6; 
+      --text-color: #111; 
+      --secondary-text: #666; 
+      --link-color: #111; 
+      --divider-color: #e5e5e5;
+      --header-bg: rgba(255, 255, 255, 0.6); 
+      --header-border: rgba(0, 0, 0, 0.05);
+      --btn-bg: #111; 
+      --btn-text: #fff;
       
       --input-bg: #ffffff;
       --input-border: #e5e5e5;
@@ -22,46 +31,87 @@
       --input-focus: #111;
       --submit-btn-bg: #222;
       --submit-btn-text: #fff;
+      
+      --font-heading: 'Bricolage Grotesque', sans-serif;
+      --font-body: 'Instrument Sans', sans-serif;
+      
+      --container-width: 1040px; 
+      --spacing-main: 24px; 
     }
     body.night {
-      --bg-color: #1a1a1a; --text-color: #f0f0f0; --secondary-text: #a0a0a0; --link-color: #fff;
-      --header-bg: rgba(40, 40, 40, 0.6); --header-border: rgba(255, 255, 255, 0.1); --btn-bg: #fff; --btn-text: #000;
+      --bg-color: #121212; 
+      --text-color: #f0f0f0; 
+      --secondary-text: #999; 
+      --link-color: #fff; 
+      --divider-color: #333;
+      --header-bg: rgba(30, 30, 30, 0.6); 
+      --header-border: rgba(255, 255, 255, 0.1); 
+      --btn-bg: #fff; 
+      --btn-text: #000;
       
       --input-bg: #262626;
       --input-border: #333333;
       --input-placeholder: #666;
       --input-focus: #fff;
-      --submit-btn-bg: #333;
-      --submit-btn-text: #fff;
+      --submit-btn-bg: #f0f0f0;
+      --submit-btn-text: #111;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
+    body { 
+        margin: 0; padding: 0; 
+        background-color: var(--bg-color); 
+        color: var(--text-color); 
+        font-family: var(--font-body); 
+        font-size: 16px; line-height: 1.6; 
+        transition: background-color 0.3s ease, color 0.3s ease; 
+    }
+    
+    h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
+    p { margin-top: 0; margin-bottom: 16px; }
+    a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.7; }
 
     /* LAYOUT */
-    .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
+    .container { 
+        max-width: var(--container-width); width: 100%; margin: 0 auto; 
+        padding: var(--spacing-main) 20px;
+        display: flex; flex-direction: column; 
+    }
     
     /* Centered Content Layout */
     .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
     .content-col { width: 100%; max-width: 640px; }
 
     /* HEADER */
-    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px 10px 32px; margin-bottom: 60px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
-    
-    /* Left Side: Navigation */
-    .nav-links { display: flex; align-items: center; gap: 24px; }
-    .nav-links a.text-link { text-decoration: none; color: var(--text-color); font-weight: 500; font-size: 15px; border-bottom: none; transition: opacity 0.2s; }
-    .nav-links a.text-link:hover { opacity: 0.6; }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 24px;
+    .main-header { 
+        display: flex; justify-content: space-between; align-items: center; 
+        padding: 10px 12px 10px 32px; 
+        margin-bottom: var(--spacing-main); 
+        background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
+        border-radius: 100px; border: 1px solid var(--header-border); 
+        width: 100%; position: relative; z-index: 1001; 
     }
-
-    /* Right Side: Actions */
-    .header-right { display: flex; align-items: center; gap: 16px; }
-
-    /* Theme Toggle */
+    
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    
+    .nav-links a.text-link {
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 15px;
+        opacity: 0.6;
+        transition: opacity 0.2s;
+    }
+    .nav-links a.text-link.nav-active {
+        opacity: 1;
+        font-weight: 600;
+        cursor: default;
+    }
+    .nav-links a.text-link:not(.nav-active):hover {
+        opacity: 1;
+    }
+    
+    .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
+    
     .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
     .theme-toggle:hover { opacity: 1; }
     .theme-toggle svg { width: 20px; height: 20px; display: block; }
@@ -70,23 +120,42 @@
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-    /* CV Button */
-    .btn-cv { background-color: var(--btn-bg); color: var(--btn-text) !important; padding: 10px 20px; border-radius: 100px; font-weight: 600; font-size: 14px; text-decoration: none; border: none; transition: transform 0.2s ease, opacity 0.2s ease; }
-    .btn-cv:hover { transform: translateY(-1px); opacity: 0.9; }
+    .btn-cv { 
+        background-color: var(--btn-bg); color: var(--btn-text) !important; 
+        padding: 10px 20px; border-radius: 100px; 
+        font-family: var(--font-body); font-weight: 600; 
+        font-size: 14px; text-decoration: none; border: none; 
+    }
 
     /* MOBILE MENU */
-    .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; color: var(--text-color); margin-left: 8px; padding-right: 8px; }
+    .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; margin-left: 8px; }
     .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
     .mobile-overlay.active { opacity: 1; pointer-events: all; }
-    .mobile-link { font-size: 24px; font-weight: 600; text-decoration: none; color: var(--text-color); }
-    .mobile-btn-cv { background-color: var(--btn-bg); color: var(--btn-text); font-size: 18px; padding: 14px 28px; border-radius: 100px; text-decoration: none; font-weight: 600; }
+    
+    .mobile-link {
+        font-size: 24px; font-weight: 600; 
+        text-decoration: none; color: var(--text-color); 
+        opacity: 0.6; transition: opacity 0.2s;
+    }
+    .mobile-link.nav-active {
+        opacity: 1; pointer-events: none;
+    }
+    .mobile-btn-cv { font-size: 18px; padding: 14px 28px; }
 
     /* CONTACT FORM STYLES */
-    h1 { font-size: 20px; font-weight: 700; margin-bottom: 32px; margin-top: 0; line-height: 1.3; }
+    h1 {
+        font-family: var(--font-body);
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.3;
+        margin-bottom: 32px;
+        margin-top: 0;
+        text-align: center;
+    }
 
     form { display: flex; flex-direction: column; gap: 16px; max-width: 100%; }
 
-    input, select, textarea { width: 100%; background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-color); padding: 12px 14px; border-radius: 10px; font-family: var(--font-family); font-size: 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; }
+    input, select, textarea { width: 100%; background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-color); padding: 12px 14px; border-radius: 10px; font-family: var(--font-body); font-size: 15px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; }
     input::placeholder, textarea::placeholder { color: var(--input-placeholder); }
     input:focus, select:focus, textarea:focus { border-color: var(--input-focus); box-shadow: 0 0 0 1px var(--input-focus); }
     textarea { min-height: 120px; resize: vertical; }
@@ -97,43 +166,21 @@
     select:invalid { color: var(--input-placeholder); }
     option { color: #111; }
 
-    button[type="submit"] { background-color: var(--submit-btn-bg); color: var(--submit-btn-text); font-weight: 600; font-size: 14px; padding: 12px; border-radius: 100px; border: 1px solid transparent; cursor: pointer; margin-top: 8px; transition: opacity 0.2s, transform 0.1s; }
+    button[type="submit"] { background-color: var(--submit-btn-bg); color: var(--submit-btn-text); font-weight: 600; font-size: 15px; padding: 12px; border-radius: 100px; border: 1px solid transparent; cursor: pointer; margin-top: 8px; transition: opacity 0.2s, transform 0.1s; }
     button[type="submit"]:hover { opacity: 0.9; transform: translateY(-1px); }
     button[type="submit"]:active { transform: translateY(0); }
 
-    .form-note { font-size: 13px; color: var(--secondary-text); text-align: center; margin: 0; margin-top: 4px; }
+    .form-note { font-size: 14px; color: var(--secondary-text); text-align: center; margin: 0; margin-top: 4px; }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
-      .btn-cv { display: none; } /* Hide in header on mobile */
+      .btn-cv { display: none; }
 
       .main-header {
         height: 60px;
         min-height: 60px;
-        padding: 0 32px;
-        padding-top: 0;
-        padding-bottom: 0;
-        align-items: center;
-      }
-
-      .header-left,
-      .header-right {
-        height: 100%;
-        display: flex;
-        align-items: center;
-      }
-
-      .mobile-menu-btn {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        line-height: 1;
-      }
-
-      .theme-toggle {
-        height: 100%;
-        display: flex;
+        padding: 0 24px;
         align-items: center;
       }
     }
@@ -144,8 +191,8 @@
 <div class="mobile-overlay">
     <a href="/" class="mobile-link">Experience</a>
     <a href="/works/" class="mobile-link">Works</a>
-    <a href="/contact/" class="mobile-link" style="opacity: 0.5; pointer-events: none;">Contact</a>
-    <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank">Download CV</a>
+    <a href="/contact/" class="mobile-link nav-active">Contact</a>
+    <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank" style="display:block; margin-top:16px;">Download CV</a>
 </div>
 
 <div class="container">
@@ -154,7 +201,7 @@
         <nav class="nav-links">
           <a href="/" class="text-link">Experience</a>
           <a href="/works/" class="text-link">Works</a>
-          <a href="/contact/" class="text-link" style="opacity: 0.5; cursor: default;">Contact</a>
+          <a href="/contact/" class="text-link nav-active">Contact</a>
         </nav>
         <div class="mobile-menu-btn">Menu</div>
     </div>
@@ -231,10 +278,6 @@
           document.body.style.overflow = '';
       }
   });
-
-  const gaScript = document.createElement('script'); gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CP2M6FKBXK'; gaScript.async = true; document.head.appendChild(gaScript);
-  window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-CP2M6FKBXK');
-  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "ujw6gp5k0v");
 </script>
 </body>
 </html>
