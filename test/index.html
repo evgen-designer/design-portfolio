@@ -38,7 +38,6 @@
   <style>
     /* VARIABLES */
     :root {
-      /* Colors */
       --bg-color: #F6F6F6; 
       --text-color: #111; 
       --secondary-text: #666; 
@@ -51,16 +50,14 @@
       --tooltip-bg: #050505; 
       --tooltip-text: #fff;
       
-      --hero-bg: #C6CBE4; /* Soft purple/blue from mockup */
+      --hero-bg: #C6CBE4; 
       --card-bg: #ffffff; 
       --card-border: rgba(0,0,0,0.08);
       --badge-yellow: #FFD500;
       
-      /* Typography */
       --font-heading: 'Bricolage Grotesque', sans-serif;
       --font-body: 'Instrument Sans', sans-serif;
       
-      /* Layout */
       --container-width: 1040px; 
       --top-spacing: 40px; 
       --bottom-spacing: 140px;
@@ -156,7 +153,7 @@
         line-height: 0.95;
         letter-spacing: -0.02em;
         margin-bottom: 24px;
-        color: #111; /* Kept dark even in night mode for the purple card contrast */
+        color: #111; 
     }
     body.night .hero-content h1, body.night .hero-content p { color: #fff; }
     
@@ -239,7 +236,7 @@
         align-items: flex-start;
     }
     .fc-content h2 {
-        font-family: var(--font-body); /* Body font per mockup for this card title */
+        font-family: var(--font-body); 
         font-size: 24px;
         font-weight: 500;
         line-height: 1.3;
@@ -275,6 +272,11 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    /* Change 2 & 3: Utility class for left-aligned images */
+    .img-left {
+        object-position: left center !important;
     }
 
     /* TESTIMONIALS */
@@ -347,9 +349,11 @@
         width: 280px;
         flex-shrink: 0;
     }
+    
+    /* Change 1: Updated border-radius to 24px */
     .about-photo img {
         width: 100%;
-        border-radius: 16px;
+        border-radius: 24px;
         border: 1px solid var(--card-border);
         box-shadow: 0 12px 32px rgba(0,0,0,0.05);
     }
@@ -367,9 +371,9 @@
 
     .job-list { position: relative; display: flex; flex-direction: column; }
     
+    /* Change 6: Tooltip styling updated for Right Side */
     .hover-tooltip { 
         position: absolute; 
-        left: -260px; 
         width: 220px; 
         background-color: var(--tooltip-bg); 
         color: var(--tooltip-text); 
@@ -384,12 +388,17 @@
         transition: all 0.3s ease; 
         box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
     }
+    
+    /* Change 6: Tooltip Arrow flipped to point Left */
     .hover-tooltip::after { 
         content: ""; 
         position: absolute; 
-        top: 50%; right: -6px; margin-top: -6px; 
-        border-width: 6px; border-style: solid; 
-        border-color: transparent transparent transparent var(--tooltip-bg); 
+        top: 50%; 
+        left: -6px; 
+        margin-top: -6px; 
+        border-width: 6px 6px 6px 0; 
+        border-style: solid; 
+        border-color: transparent var(--tooltip-bg) transparent transparent; 
     }
 
     .job-row { 
@@ -399,7 +408,7 @@
         column-gap: 80px; 
         padding: 24px 0; 
         cursor: default; 
-        border-bottom: 1px solid transparent; /* Keeps spacing consistent */
+        border-bottom: 1px solid transparent; 
     }
     
     .job-company h3 { font-family: var(--font-body); font-size: 18px; font-weight: 600; margin: 0 0 4px 0; color: var(--text-color); }
@@ -513,7 +522,7 @@
       <p>Simplifying data-heavy workflows into decision-ready experiences</p>
     </div>
     <div class="hero-image-wrapper">
-      <img src="/images/hero-portrait.png" alt="Eugene Evgen" class="hero-img"> <!-- Update path if needed -->
+      <img src="/images/hero-portrait.png" alt="Eugene Evgen" class="hero-img"> 
     </div>
   </div>
 
@@ -537,7 +546,8 @@
       <a href="/ai-voice-agent-platform/" class="btn-outline">View project</a>
     </div>
     <div class="fc-visual">
-      <img src="/images/synthflow-00-3.png" alt="Synthflow AI">
+      <!-- Change 2: Added class="img-left" -->
+      <img src="/images/synthflow-00-3.png" alt="Synthflow AI" class="img-left">
     </div>
   </div>
 
@@ -549,7 +559,8 @@
       <a href="/ai-investment-platform/" class="btn-outline">View project</a>
     </div>
     <div class="fc-visual">
-      <img src="/images/gocanopy-01-1.png" alt="GoCanopy">
+      <!-- Change 3: Added class="img-left" -->
+      <img src="/images/gocanopy-01-1.png" alt="GoCanopy" class="img-left">
     </div>
   </div>
 
@@ -621,7 +632,10 @@
         <p class="subtitle">with 10+ years designing complex B2B & enterprise SaaS across automation, data, fintech, and AI.</p>
         
         <p>I’ve been designing at <a href="https://www.gocanopy.tech/" target="_blank">GoCanopy</a> for the last <span id="counter">...</span>.</p>
-        <p>My research-driven prototypes helped us win multiple <span style="color:var(--text-color);font-weight:600;">Fortune 500 clients</span>. I shaped the analytical, forecasting, agentic, generative, and conversational capabilities of our AI operating system for institutional real estate, supporting a €2.1M seed round and reducing manual data aggregation by 42%.</p>
+        
+        <!-- Change 4: Restored Link to "Fortune 500 clients" -->
+        <p>My research-driven prototypes helped us win multiple <a href="https://evgendesigner.com/ai-investment-platform/" target="_blank">Fortune 500 clients</a>. I shaped the analytical, forecasting, agentic, generative, and conversational capabilities of our AI operating system for institutional real estate, supporting a €2.1M seed round and reducing manual data aggregation by 42%.</p>
+        
         <p>I live in Porto, Portugal. You can keep up with me on <a href="https://www.threads.com/@bucklajean" target="_blank">Threads</a> or <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank">LinkedIn</a>.</p>
       </div>
       <div class="about-photo">
@@ -713,7 +727,8 @@
       <div style="max-width: 800px;">
           <p style="color: var(--secondary-text);">
               Outside of work, you’ll usually find me building my personal small apps in the App Store and talking about the journey on 
-              <a href="https://www.threads.com/@bucklajean" target="_blank" style="color: var(--text-color);">Threads</a>.
+              <!-- Change 5: Added font-weight: 600 directly to the Threads link -->
+              <a href="https://www.threads.com/@bucklajean" target="_blank" style="color: var(--text-color); font-weight: 600;">Threads</a>.
               I also try to maintain a healthy relationship with the ocean - walking, running, surfing, or swimming, depending on the courage levels.
           </p>
       </div>
@@ -792,7 +807,9 @@
   function updateTooltip(element) {
       tooltip.innerText = element.getAttribute('data-tooltip');
       const centerLine = element.offsetTop + (element.offsetHeight / 2);
-      tooltip.style.left = "-260px";
+      
+      // Change 6: JS logic updated to position tooltip to the right side
+      tooltip.style.left = "calc(100% + 32px)"; 
       tooltip.style.top = centerLine + "px"; 
       tooltip.style.opacity = "1";
   }
@@ -805,9 +822,6 @@
       row.addEventListener('mouseenter', function() { 
           if (window.innerWidth > 768) { updateTooltip(this); } 
       }); 
-      row.addEventListener('mouseleave', function() {
-          // Optional: clear tooltip on leave, or keep pointing at the last hovered element like the original
-      });
   });
 </script>
 </body>
