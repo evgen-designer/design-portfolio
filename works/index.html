@@ -72,12 +72,11 @@
         display: flex; flex-direction: column; 
     }
     
-    /* Centered Content Layout */
     .content-grid { 
         width: 100%; display: flex; 
         flex-direction: column; align-items: center; 
     }
-    .content-col { width: 100%; max-width: 800px; } /* Widened for this page */
+    .content-col { width: 100%; max-width: 800px; }
 
     /* HEADER */
     .main-header { 
@@ -183,6 +182,11 @@
         display: flex;
         align-items: center;
       }
+
+      /* Fix: Align specific project images to the left on mobile */
+      .img-left-mobile {
+          object-position: left center !important;
+      }
     }
   </style>
 </head>
@@ -223,7 +227,8 @@
            <a href="/ai-voice-agent-platform/" class="work-card">
                <div class="card-visual">
                    <div class="card-badge">Uncovered dev-ready fixes via 4-hour audit</div>
-                   <img src="/images/synthflow-00-3.png" alt="AI Voice Agent Platform Audit — Synthflow AI ($20M funding)" class="card-img">
+                   <!-- Added class img-left-mobile -->
+                   <img src="/images/synthflow-00-3.png" alt="AI Voice Agent Platform Audit — Synthflow AI ($20M funding)" class="card-img img-left-mobile">
                </div>
                <div class="card-content">
                    <div class="card-meta">
@@ -237,7 +242,8 @@
            <a href="/ai-investment-platform/" class="work-card">
                <div class="card-visual">
                    <div class="card-badge">Drove multiple Fortune 500 deals</div>
-                   <img src="/images/gocanopy-01-1.png" alt="AI Investment Platform Design — GoCanopy.tech (€2.1M funding)" class="card-img">
+                   <!-- Added class img-left-mobile -->
+                   <img src="/images/gocanopy-01-1.png" alt="AI Investment Platform Design — GoCanopy.tech (€2.1M funding)" class="card-img img-left-mobile">
                </div>
                <div class="card-content">
                    <div class="card-meta">
