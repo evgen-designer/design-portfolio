@@ -78,7 +78,8 @@
       --hero-bg: #272A3B; 
       --card-bg: #1A1A1A; 
       --card-border: rgba(255,255,255,0.1);
-      --badge-yellow: #FFD500;
+      /* Fix: Changed variable to blue for dark mode */
+      --badge-yellow: #54D1FF; 
     }
 
     * { box-sizing: border-box; }
@@ -115,21 +116,20 @@
     
     .nav-links { display: flex; align-items: center; gap: 24px; }
     
-    /* Change 2: Header Link Styles Reversed */
     .nav-links a.text-link {
         font-family: var(--font-body);
         font-weight: 500;
         font-size: 15px;
-        opacity: 0.6; /* Inactive links are dim */
+        opacity: 0.6;
         transition: opacity 0.2s;
     }
     .nav-links a.text-link.nav-active {
-        opacity: 1; /* Active link is full opacity */
+        opacity: 1;
         font-weight: 600;
         cursor: default;
     }
     .nav-links a.text-link:not(.nav-active):hover {
-        opacity: 1; /* Hover effect only for inactive links */
+        opacity: 1;
     }
 
     .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
@@ -294,7 +294,6 @@
 
     .img-left { object-position: left center !important; }
 
-    /* Change 1: Title for Testimonials */
     .section-title {
         font-family: var(--font-body); 
         font-size: 24px;
@@ -463,11 +462,11 @@
         font-weight: 600;
         text-decoration: none;
         color: var(--text-color);
-        opacity: 0.6; /* Inactive links are dim */
+        opacity: 0.6;
         transition: opacity 0.2s;
     }
     .mobile-link.nav-active {
-        opacity: 1; /* Active is full opacity */
+        opacity: 1;
         pointer-events: none;
     }
 
