@@ -78,6 +78,7 @@
       --hero-bg: #272A3B; 
       --card-bg: #1A1A1A; 
       --card-border: rgba(255,255,255,0.1);
+      /* Fix: Changed variable to blue for dark mode */
       --badge-yellow: #54D1FF; 
     }
 
@@ -154,9 +155,8 @@
         margin-bottom: var(--spacing-main);
         align-items: stretch;
     }
-    
     .hero-content {
-        background-color: var(--hero-bg); 
+        background-color: var(--hero-bg);
         border-radius: 24px;
         padding: 60px 48px;
         flex: 1;
@@ -164,7 +164,6 @@
         flex-direction: column;
         justify-content: center;
     }
-    
     .hero-content h1 {
         font-size: 72px;
         line-height: 0.95;
@@ -181,7 +180,6 @@
         color: #333;
         max-width: 440px;
     }
-
     .hero-image-wrapper {
         width: 32%;
         border-radius: 24px;
@@ -495,7 +493,6 @@
       .hero-banner { flex-direction: column; gap: 16px; }
       .hero-content { padding: 40px 32px; }
       .hero-content h1 { font-size: 48px; }
-      
       .hero-image-wrapper { width: 100%; height: 320px; }
       
       .hero-img { object-position: top center !important; }
