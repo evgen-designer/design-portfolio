@@ -50,8 +50,7 @@
       --tooltip-bg: #050505; 
       --tooltip-text: #fff;
       
-      /* Updated to the requested linear gradient */
-      --hero-bg: linear-gradient(to bottom left, #6C84C4, #D0D6FD, #A2A4D2); 
+      --hero-bg: #C6CBE4; 
       --card-bg: #ffffff; 
       --card-border: rgba(0,0,0,0.08);
       --badge-yellow: #FFD500;
@@ -157,34 +156,15 @@
     }
     
     .hero-content {
-        background: var(--hero-bg); /* Changed from background-color to background to support gradients */
+        background-color: var(--hero-bg); 
         border-radius: 24px;
         padding: 60px 48px;
         flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        position: relative;
-        overflow: hidden; /* Added to clip the noise pseudo-element perfectly to the rounded corners */
-        z-index: 1; /* Creates stacking context for the noise pseudo-element */
     }
     
-    /* Noise texture overlay */
-    .hero-content::before {
-        content: "";
-        position: absolute;
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%;
-        /* Multi-color SVG fractal noise data URI */
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        opacity: 0.5; /* Opacity requested */
-        mix-blend-mode: overlay; /* Softly blends the multi-color noise into the gradient */
-        z-index: -1; /* Keeps it behind the text and spinning badge */
-        pointer-events: none;
-    }
-
     .hero-content h1 {
         font-size: 72px;
         line-height: 0.95;
@@ -200,35 +180,6 @@
         font-weight: 400;
         color: #333;
         max-width: 440px;
-    }
-
-    /* Spinning Circular Text Badge */
-    .spinning-badge {
-        position: absolute;
-        bottom: 32px;
-        right: 32px;
-        width: 130px;
-        height: 130px;
-        animation: spinText 15s linear infinite;
-        pointer-events: none;
-    }
-    .spinning-badge svg {
-        width: 100%;
-        height: 100%;
-    }
-    .spinning-badge text {
-        font-family: var(--font-body);
-        font-size: 13.5px;
-        font-weight: 600;
-        fill: #111;
-        transition: fill 0.3s ease;
-    }
-    body.night .spinning-badge text {
-        fill: #fff;
-    }
-    @keyframes spinText {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
     }
 
     .hero-image-wrapper {
@@ -545,13 +496,6 @@
       .hero-content { padding: 40px 32px; }
       .hero-content h1 { font-size: 48px; }
       
-      .spinning-badge {
-          width: 90px;
-          height: 90px;
-          bottom: 20px;
-          right: 20px;
-      }
-      
       .hero-image-wrapper { width: 100%; height: 320px; }
       
       .hero-img { object-position: top center !important; }
@@ -614,17 +558,6 @@
     <div class="hero-content">
       <h1>AI & Complex<br>SaaS Product<br>Designer</h1>
       <p>Simplifying data-heavy workflows into decision-ready experiences</p>
-      
-      <!-- Spinning Text Badge -->
-      <div class="spinning-badge">
-        <svg viewBox="0 0 150 150">
-          <path id="circlePath" d="M 75, 25 a 50,50 0 1,1 0,100 a 50,50 0 1,1 0,-100" fill="none" />
-          <text>
-            <textPath href="#circlePath" startOffset="0" textLength="314" lengthAdjust="spacing">AUTOMATION &#160;&#160;•&#160;&#160; DATA &#160;&#160;•&#160;&#160; FINTECH &#160;&#160;•&#160;&#160; ENTERPRISE &#160;&#160;•&#160;&#160; </textPath>
-          </text>
-        </svg>
-      </div>
-
     </div>
     <div class="hero-image-wrapper">
       <img src="/images/hero-portrait.png" alt="Eugene Evgen" class="hero-img"> 
