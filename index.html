@@ -163,6 +163,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        position: relative; /* Added for absolute positioning of spinning text */
     }
     .hero-content h1 {
         font-size: 72px;
@@ -180,6 +181,32 @@
         color: #333;
         max-width: 440px;
     }
+
+    /* Spinning Circular Text Badge */
+    .spinning-badge {
+        position: absolute;
+        bottom: 32px;
+        right: 32px;
+        width: 130px;
+        height: 130px;
+        animation: spinText 15s linear infinite;
+        pointer-events: none;
+    }
+    .spinning-badge svg {
+        width: 100%;
+        height: 100%;
+    }
+    .spinning-badge text {
+        font-family: var(--font-body);
+        font-size: 13.5px;
+        font-weight: 600;
+        fill: #000;
+    }
+    @keyframes spinText {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
     .hero-image-wrapper {
         width: 32%;
         border-radius: 24px;
@@ -493,6 +520,14 @@
       .hero-banner { flex-direction: column; gap: 16px; }
       .hero-content { padding: 40px 32px; }
       .hero-content h1 { font-size: 48px; }
+      
+      .spinning-badge {
+          width: 90px;
+          height: 90px;
+          bottom: 20px;
+          right: 20px;
+      }
+      
       .hero-image-wrapper { width: 100%; height: 320px; }
       
       .hero-img { object-position: top center !important; }
@@ -555,6 +590,17 @@
     <div class="hero-content">
       <h1>AI & Complex<br>SaaS Product<br>Designer</h1>
       <p>Simplifying data-heavy workflows into decision-ready experiences</p>
+      
+      <!-- Spinning Text Badge -->
+      <div class="spinning-badge">
+        <svg viewBox="0 0 150 150">
+          <path id="circlePath" d="M 75, 25 a 50,50 0 1,1 0,100 a 50,50 0 1,1 0,-100" fill="none" />
+          <text>
+            <textPath href="#circlePath" startOffset="0" textLength="314" lengthAdjust="spacing">AUTOMATION • DATA • FINTECH • ENTERPRISE SAAS • </textPath>
+          </text>
+        </svg>
+      </div>
+
     </div>
     <div class="hero-image-wrapper">
       <img src="/images/hero-portrait.png" alt="Eugene Evgen" class="hero-img"> 
