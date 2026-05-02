@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Works - Eugene Evgen</title>
+  <title>AI Investment Platform - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -24,9 +24,11 @@
       --header-border: rgba(0, 0, 0, 0.05);
       --btn-bg: #111; 
       --btn-text: #fff;
-      --card-bg: #ffffff; 
-      --card-border: rgba(0,0,0,0.08);
-      --pattern-dot: #e5e5e5;
+      
+      --meta-label: #888;
+      --image-bg: #e0e0e0;
+      --slide-bg: #111;
+      --slide-text: #fff;
       
       --font-heading: 'Bricolage Grotesque', sans-serif;
       --font-body: 'Instrument Sans', sans-serif;
@@ -34,7 +36,6 @@
       --container-width: 1040px; 
       --spacing-main: 24px; 
     }
-
     body.night {
       --bg-color: #121212; 
       --text-color: #f0f0f0; 
@@ -45,11 +46,12 @@
       --header-border: rgba(255, 255, 255, 0.1); 
       --btn-bg: #fff; 
       --btn-text: #000;
-      --card-bg: #1A1A1A; 
-      --card-border: rgba(255,255,255,0.1);
-      --pattern-dot: #333;
+      
+      --meta-label: #666;
+      --image-bg: #2a2a2a;
+      --slide-bg: #fff;
+      --slide-text: #000;
     }
-
     * { box-sizing: border-box; }
     body { 
         margin: 0; padding: 0; 
@@ -60,7 +62,7 @@
         transition: background-color 0.3s ease, color 0.3s ease; 
     }
     
-    h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
     p { margin-top: 0; margin-bottom: 16px; }
     a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.7; }
@@ -72,42 +74,62 @@
         display: flex; flex-direction: column; 
     }
     
-    .content-grid { 
-        width: 100%; display: flex; 
-        flex-direction: column; align-items: center; 
+    /* Centered Content Layout */
+    .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .content-col { width: 100%; max-width: 680px; }
+
+    /* HEADER WRAPPER (STICKY FULL WIDTH) */
+    .header-wrapper {
+        position: sticky;
+        top: 0;
+        z-index: 1001;
+        width: 100%;
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
+        transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
     }
-    .content-col { width: 100%; max-width: 800px; }
+    .header-wrapper.scrolled {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--header-border);
+    }
+    .header-container {
+        max-width: var(--container-width);
+        width: 100%;
+        margin: 0 auto;
+        padding: var(--spacing-main) 20px 0 20px;
+        transition: padding 0.3s ease;
+    }
+    .header-wrapper.scrolled .header-container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 
     /* HEADER */
     .main-header { 
         display: flex; justify-content: space-between; align-items: center; 
-        padding: 10px 12px 10px 32px; 
-        margin-bottom: var(--spacing-main); 
+        padding: 10px 32px; 
         background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
         border-radius: 100px; border: 1px solid var(--header-border); 
-        width: 100%; position: relative; z-index: 1001; 
+        width: 100%; position: relative; z-index: 1001;
+        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
     }
-    
-    .nav-links { display: flex; align-items: center; gap: 24px; }
-    
-    .nav-links a.text-link {
-        font-family: var(--font-body);
-        font-weight: 500;
-        font-size: 15px;
-        opacity: 0.6;
-        transition: opacity 0.2s;
-    }
-    .nav-links a.text-link.nav-active {
-        opacity: 1;
-        font-weight: 600;
-        cursor: default;
-    }
-    .nav-links a.text-link:not(.nav-active):hover {
-        opacity: 1;
+    .header-wrapper.scrolled .main-header {
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-color: transparent;
     }
     
     .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
     
+    /* Back Button */
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; cursor: pointer; border: none; font-family: var(--font-body); }
+    .btn-back:hover { opacity: 0.6; }
+    .btn-back svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Theme Toggle */
     .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
     .theme-toggle:hover { opacity: 1; }
     .theme-toggle svg { width: 20px; height: 20px; display: block; }
@@ -116,194 +138,292 @@
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-    .btn-cv { 
-        background-color: var(--btn-bg); color: var(--btn-text) !important; 
-        padding: 10px 20px; border-radius: 100px; 
-        font-family: var(--font-body); 
-        font-weight: 600; font-size: 14px; 
-        text-decoration: none; border: none; 
-    }
+    .mobile-menu-btn { display: none; }
 
-    /* MOBILE MENU */
-    .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; margin-left: 8px; }
-    .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
-    .mobile-overlay.active { opacity: 1; pointer-events: all; }
+    /* CASE STUDY STYLES */
+    .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
+
+    h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
     
-    .mobile-link {
-        font-size: 24px; font-weight: 600; 
-        text-decoration: none; color: var(--text-color); 
-        opacity: 0.6; transition: opacity 0.2s;
-    }
-    .mobile-link.nav-active {
-        opacity: 1; pointer-events: none;
-    }
-    .mobile-btn-cv { font-size: 18px; padding: 14px 28px; }
+    .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 24px; margin-bottom: var(--spacing-main); border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
+    .hero-image img { width: 100%; height: auto; display: block; }
+    .hero-image.inset-black { background-color: #000; padding: 40px; display: flex; align-items: center; justify-content: center; }
+    .hero-image.inset-black img { width: 100%; height: auto; object-fit: contain; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-    /* --- WORK CARD STYLES --- */
-    .cards-container { display: flex; flex-direction: column; gap: var(--spacing-main); width: 100%; }
-    .work-card { display: block; background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; text-decoration: none; color: var(--text-color); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; position: relative; width: 100%; }
-    .work-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); border-color: rgba(120, 120, 120, 0.3); }
+    .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
+    body.night .hero-badge { background-color: #54D1FF; color: #000; }
 
-    .card-visual { height: 320px; width: 100%; position: relative; background-color: var(--bg-color); background-image: radial-gradient(var(--pattern-dot) 1.5px, transparent 1.5px); background-size: 24px 24px; overflow: hidden; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--card-border); }
-    .card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-    .work-card:hover .card-img { transform: scale(1.03); }
+    .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 24px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
+    .text-slide.secondary { font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px; }
 
-    .card-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; font-family: var(--font-body); }
-    body.night .card-badge { background-color: #54D1FF; color: #000; }
+    .project-details-wrapper { margin-bottom: 80px; }
+    .detail-block { margin-bottom: 40px; }
+    .detail-block.last-top { padding-bottom: 40px; border-bottom: 1px solid var(--divider-color); margin-bottom: 40px; }
 
-    .card-content { padding: 32px; }
-    .card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .card-tag { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--secondary-text); }
-    .card-content h2 { font-size: 20px; font-weight: 600; margin: 4px 0 8px 0; color: var(--text-color); }
-    .card-content p { font-size: 16px; color: var(--secondary-text); margin: 0; line-height: 1.5; max-width: 100%; }
+    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
+    
+    .text-highlight { font-size: 20px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin: 0; max-width: 680px; }
 
-    .animated { animation-duration: 1s; animation-fill-mode: both; }
+    .detail-list { list-style: none; padding: 0; margin: 0; }
+    .detail-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 18px; line-height: 1.6; }
+    .detail-list li::before { content: "•"; position: absolute; left: 0; color: var(--secondary-text); font-weight: bold; }
+    
+    .numbered-list { list-style: none; padding: 0; margin: 0; counter-reset: result-counter; }
+    .numbered-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 20px; line-height: 1.6; }
+    .numbered-list li::before { counter-increment: result-counter; content: counter(result-counter) "."; position: absolute; left: 0; color: var(--secondary-text); font-weight: 500; }
+
+    .process-header { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px; }
+    
+    .process-step { margin-bottom: 60px; }
+    .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
+
+    .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
+    .media-block img { width: 100%; height: auto; display: block; }
+    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
+    
+    .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
+
+    .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
+    .footer-title { font-size: 32px; font-weight: 700; line-height: 1.2; color: var(--text-color); margin: 0 0 16px 0; }
+    .footer-subtitle { font-size: 16px; color: var(--secondary-text); max-width: 620px; margin: 0 auto 32px auto; line-height: 1.6; }
+
+    .btn-contact { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 24px; background-color: var(--btn-bg); color: var(--btn-text); border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease; }
+    .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    .animated { animation-duration: 0.8s; animation-fill-mode: both; }
     .fadeIn { animation-name: fadeIn; }
-    .two { animation-delay: 0.5s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .mobile-menu-btn { display: block; }
-      .btn-cv { display: none; }
-      .card-visual { height: 200px; }
-      .card-content h2, .card-content p { word-wrap: break-word; }
+    /* TASK SPECIFIC STYLES */
+    .results-card { background-color: #339989; padding: 40px; border-radius: 24px; margin-top: 16px; margin-bottom: 40px; }
+    .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
+    .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
 
-      .main-header {
-        height: 60px;
-        min-height: 60px;
-        padding: 0 24px;
-        align-items: center;
-      }
-
-      .header-left,
-      .header-right {
-        height: 100%;
+    /* FLOATING ACTION BUTTON */
+    .fab-up {
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
         display: flex;
         align-items: center;
-      }
+        justify-content: center;
+        cursor: pointer;
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .fab-up.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    .fab-up:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    }
+    .fab-up svg {
+        width: 24px;
+        height: 24px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    body.night .fab-up {
+        box-shadow: 0 8px 24px rgba(255,255,255,0.05);
+    }
 
-      /* Fix: Align specific project images to the left on mobile */
-      .img-left-mobile {
-          object-position: left center !important;
-      }
+    @media (max-width: 768px) {
+      .split-grid { grid-template-columns: 1fr; gap: 40px; }
+      h1 { font-size: 28px; }
+      .footer-title { font-size: 28px; }
+      .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
+      .media-block { min-height: auto; }
+      .results-card li { font-size: 20px; padding-left: 28px; }
+      .fab-up { bottom: 24px; right: 24px; width: 40px; height: 40px; }
+      .fab-up svg { width: 20px; height: 20px; }
     }
   </style>
 </head>
 <body class="day">
 
-<div class="mobile-overlay">
-    <a href="/" class="mobile-link">Experience</a>
-    <a href="/works/" class="mobile-link nav-active">Works</a>
-    <a href="/contact/" class="mobile-link">Contact</a>
-    <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank" style="display:block; margin-top:16px;">Download CV</a>
-</div>
-
-<div class="container">
-  <header class="main-header">
-    <div class="header-left">
-        <nav class="nav-links">
-          <a href="/" class="text-link">Experience</a>
-          <a href="/works/" class="text-link nav-active">Works</a>
-          <a href="/contact/" class="text-link">Contact</a>
-        </nav>
-        <div class="mobile-menu-btn">Menu</div>
-    </div>
-    
-    <div class="header-right">
+<!-- STICKY HEADER WRAPPER -->
+<div class="header-wrapper" id="header-wrapper">
+  <div class="header-container">
+    <header class="main-header">
+      <div class="header-left">
+        <button class="btn-back" onclick="history.back()">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+        </button>
+      </div>
+      <div class="header-right">
         <div id="theme-btn" class="theme-toggle">
             <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
         </div>
-        <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
-    </div>
-  </header>
+      </div>
+    </header>
+  </div>
+</div>
 
-  <div class="content-grid animated fadeIn two">
+<div class="container">
+
+  <div class="content-grid animated fadeIn">
     <div class="content-col">
-       
-       <div class="cards-container">
+
+       <span class="case-tag">AI INTERACTION DESIGN</span>
+       <h1>Empowering enterprise investment teams to scale portfolio decisions with AI (Secured €2.1M in seed funding)</h1>
+
+       <div class="hero-image inset-black">
+           <div class="hero-badge">Drove multiple Fortune 500 deals</div>
+           <img src="/images/gocanopy-09.gif" alt="GoCanopy Investment Platform Interface">
+       </div>
+
+       <div class="hero-image inset-black">
+          <img src="/images/gocanopy-10.png" alt="Seed Funding News">
+       </div>
+      
+       <h4 class="section-label">CHALLENGE</h4>
+       <div class="text-slide">
+           Real estate investment teams lose time and decision quality due to highly fragmented, inconsistent data scattered across drives, inboxes, PDFs, spreadsheets, and manual processes.
+       </div>
+
+       <div class="project-details-wrapper">
+           
+           <div class="detail-block">
+               <h4 class="section-label">MY TASK</h4>
+               <p class="text-highlight">
+                   Led the design of the MVP Asset Management experience for an enterprise client presentation, unifying fragmented real estate data into a single, decision-ready workflow and integrating it into the existing investment platform.
+               </p>
+           </div>
+
+           <div class="detail-block last-top">
+               <h4 class="section-label">TASK TIMEFRAME</h4>
+               <p class="text-highlight">2 months</p>
+           </div>
+
+           <div style="margin-bottom: 40px;">
+               <h4 class="section-label">KEY FOCUS AREAS</h4>
+               <ul class="detail-list">
+                   <li>User research, workflow analysis, and problem framing</li>
+                   <li>End-to-end UX & UI design (clickable Figma prototype)</li>
+                   <li>AI-assisted insight design & data visualization</li>
+                   <li>Stakeholder presentations & alignment</li>
+               </ul>
+           </div>
+           
+           <h4 class="section-label">KEY RESULTS</h4>
+           <div class="results-card">
+               <ul class="numbered-list">
+                   <li>Helped secure multiple Fortune 500 enterprise client partnerships</li>
+                   <li>Reduced manual data aggregation by 42% by centralizing portfolio data into a single workflow</li>
+                   <li>Improved decision turnaround time by 2-3x with real-time portfolio visibility</li>
+               </ul>
+           </div>
+           
+
+       </div>
+
+       <div class="media-block">
+            <img src="/images/gocanopy-02.png" alt="Prototype Screen">
+       </div>
+       <p class="nda-note">NDA-protected project - business-sensitive details omitted. Full story with deeper insights available upon request.</p>
+
+       <h4 class="process-header">OVERVIEW OF MY DESIGN PROCESS</h4>
+
+       <div class="process-step">
+           <h3>Step 1 - Countless collaborative sessions with the CEO and CTO:</h3>
+           <div class="media-block">
+               <img src="/images/gocanopy-03.png" alt="Collaboration Session">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 2 - Analysis of meeting transcripts and research data using Google AI Studio:</h3>
+           <div class="media-block">
+               <img src="/images/gocanopy-04.png" alt="AI Research Analysis">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 3 - Capturing early insights and requirements in FigJam:</h3>
+           <div class="media-block">
+               <img src="/images/gocanopy-05.png" alt="FigJam Insights">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 4 - Early idea explorations for implementation approaches, using V0.dev and Claude:</h3>
+           <div class="media-block">
+               <img src="/images/gocanopy-06.png" alt="AI Prototyping Explorations">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 5 - Figma design stages overview (excluding the design system library and clickable prototypes):</h3>
+           <div class="media-block">
+               <img src="/images/gocanopy-07.png" alt="Figma Design Overview">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 6 - Implementation support, user feedback, and refinement:</h3>
+           <div class="media-block">
+               <img src="/images/gocanopy-11.png" alt="Implementation Support">
+           </div>
          
-           <a href="/ai-investment-platform/" class="work-card">
-               <div class="card-visual">
-                   <div class="card-badge">Drove multiple Fortune 500 deals</div>
-                   <!-- Added class img-left-mobile -->
-                   <img src="/images/gocanopy-01-1.png" alt="AI Investment Platform Design — GoCanopy.tech (€2.1M funding)" class="card-img img-left-mobile">
-               </div>
-               <div class="card-content">
-                   <div class="card-meta">
-                       <span class="card-tag">AI Interaction Design</span>
-                   </div>
-                   <h2>AI Investment Platform Design — GoCanopy.tech (€2.1M funding)</h2>
-                   <p>Empowering enterprise investment teams to scale portfolio decisions with AI</p>
-               </div>
-           </a>
-
-           <a href="/ai-sdk-mobius/" class="work-card">
-               <div class="card-visual">
-                   <div class="card-badge">Increased demo usage in sales by 95%</div>
-                   <img src="/images/mobius-07.png" alt="AI SDK Demo Redesign — Mobius Labs (Acquired by Dropbox)" class="card-img">
-               </div>
-               <div class="card-content">
-                   <div class="card-meta">
-                       <span class="card-tag">AI Interaction Design</span>
-                   </div>
-                   <h2>AI SDK Demo Redesign — Mobius Labs (Acquired by Dropbox)</h2>
-                   <p>Transforming a neglected AI SKD web demo into a vital sales tool for a Computer Vision startup</p>
-               </div>
-           </a>
+           <div class="media-block">
+               <img src="/images/gocanopy-12.png" alt="Implementation Support">
+           </div>
          
-           <a href="/ai-voice-agent-platform/" class="work-card">
-               <div class="card-visual">
-                   <div class="card-badge">Uncovered dev-ready fixes via 4-hour audit</div>
-                   <!-- Added class img-left-mobile -->
-                   <img src="/images/synthflow-00-3.png" alt="AI Voice Agent Platform Audit — Synthflow AI ($20M funding)" class="card-img img-left-mobile">
-               </div>
-               <div class="card-content">
-                   <div class="card-meta">
-                       <span class="card-tag">AI INTERACTION DESIGN</span>
-                   </div>
-                   <h2>AI Voice Agent Platform Audit — Synthflow AI ($20M funding)</h2>
-                   <p>Simplifying AI agent setup for an enterprise Voice AI platform through a focused UX audit</p>
-               </div>
-           </a>
+           <div class="media-block">
+               <img src="/images/gocanopy-13.png" alt="Implementation Support">
+           </div>
+         
+           <div class="media-block">
+               <img src="/images/gocanopy-14.png" alt="Implementation Support">
+           </div>
+         
+           <div class="media-block">
+               <img src="/images/gocanopy-01.png" alt="Implementation Support">
+           </div>
+       </div>
 
-           <a href="/drone-inspection-software/" class="work-card">
-               <div class="card-visual">
-                   <div class="card-badge">Improved operator task efficiency by 34%</div>
-                   <img src="/images/bi-02-1.png" alt="Drone Inspection Software Design — BladeInsight (Acquired by SES Energy)" class="card-img">
-               </div>
-               <div class="card-content">
-                   <div class="card-meta">
-                       <span class="card-tag">AUTONOMOUS SYSTEMS UX</span>
-                   </div>
-                   <h2>Drone Inspection Software Design — BladeInsight (Acquired by SES Energy)</h2>
-                   <p>Reinventing wind turbine inspections for field operators with autonomous drone workflows</p>
-               </div>
-           </a>
+       <h4 class="section-label">CORE RESULT</h4>
+       <div class="text-slide secondary" style="margin-top: 16px;">
+           My Figma prototype helped win multiple Fortune 500 enterprise client deals
+       </div>
 
-           <a href="/ai-ux-research-polyagent/" class="work-card">
-                <div class="card-visual">
-                    <div class="card-badge">Prevented 3-month AI MVP build</div>
-                    <img src="/images/polyagent-01.png" alt="AI Assistant Platform Research — Polyagent" class="card-img">
-                </div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span class="card-tag">AI UX RESEARCH</span>
-                    </div>
-                    <h2>AI Assistant Platform Research — Polyagent AI</h2>
-                    <p>Validating U.S. real estate agent demand before committing to an AI SaaS MVP development</p>
-                </div>
-            </a>         
-
+       <div class="footer-cta">
+           <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
+           <p class="footer-subtitle">I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery.<br>AI-powered workflows, fast iterations, real business impact.</p>
+           <a href="/contact/" class="btn-contact">Let's design your product</a>
        </div>
 
     </div>
   </div>
 </div>
 
+<!-- FLOATING ACTION BUTTON -->
+<div id="fab-up" class="fab-up">
+    <svg viewBox="0 0 24 24">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+</div>
+
 <script>
-  // Theme Logic
+  // 1. Theme Logic
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
@@ -318,24 +438,27 @@
       }
   });
 
-  // Mobile Menu Logic
-  const menuBtn = document.querySelector('.mobile-menu-btn');
-  const overlay = document.querySelector('.mobile-overlay');
-  let isMenuOpen = false;
+  // 2. Sticky Header & FAB Logic
+  const headerWrapper = document.getElementById('header-wrapper');
+  const fabUp = document.getElementById('fab-up');
 
-  menuBtn.addEventListener('click', () => {
-      isMenuOpen = !isMenuOpen;
-      if(isMenuOpen) {
-          overlay.classList.add('active');
-          menuBtn.innerText = "Close";
-          document.body.style.overflow = 'hidden';
+  window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+          headerWrapper.classList.add('scrolled');
       } else {
-          overlay.classList.remove('active');
-          menuBtn.innerText = "Menu";
-          document.body.style.overflow = '';
+          headerWrapper.classList.remove('scrolled');
+      }
+
+      if (window.scrollY > 400) {
+          fabUp.classList.add('visible');
+      } else {
+          fabUp.classList.remove('visible');
       }
   });
 
+  fabUp.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 </body>
 </html>
