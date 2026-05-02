@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Works - Eugene Evgen</title>
+  <title>Projects - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,16 +78,51 @@
     }
     .content-col { width: 100%; max-width: 800px; }
 
+    /* HEADER WRAPPER (STICKY FULL WIDTH) */
+    .header-wrapper {
+        position: sticky;
+        top: 0;
+        z-index: 1001;
+        width: 100%;
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
+        transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .header-wrapper.scrolled {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--header-border);
+    }
+    .header-container {
+        max-width: var(--container-width);
+        width: 100%;
+        margin: 0 auto;
+        padding: var(--spacing-main) 20px 0 20px;
+        transition: padding 0.3s ease;
+    }
+    .header-wrapper.scrolled .header-container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
     /* HEADER */
     .main-header { 
         display: flex; justify-content: space-between; align-items: center; 
         padding: 10px 12px 10px 32px; 
-        margin-bottom: var(--spacing-main); 
         background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
         border-radius: 100px; border: 1px solid var(--header-border); 
-        width: 100%; position: relative; z-index: 1001; 
+        width: 100%; 
+        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, border-radius 0.3s ease;
     }
     
+    .header-wrapper.scrolled .main-header {
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-color: transparent;
+    }
+
     .nav-links { display: flex; align-items: center; gap: 24px; }
     
     .nav-links a.text-link {
@@ -162,6 +197,49 @@
     .two { animation-delay: 0.5s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* FLOATING ACTION BUTTON */
+    .fab-up {
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .fab-up.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    .fab-up:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    }
+    .fab-up svg {
+        width: 24px;
+        height: 24px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    body.night .fab-up {
+        box-shadow: 0 8px 24px rgba(255,255,255,0.05);
+    }
+
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
@@ -169,7 +247,11 @@
       .card-visual { height: 200px; }
       .card-content h2, .card-content p { word-wrap: break-word; }
 
-      .main-header {
+      .header-container { padding-top: 16px; }
+      .header-wrapper.scrolled .header-container { padding-top: 8px; padding-bottom: 8px; }
+
+      .main-header,
+      .header-wrapper.scrolled .main-header {
         height: 60px;
         min-height: 60px;
         padding: 0 24px;
@@ -182,10 +264,20 @@
         display: flex;
         align-items: center;
       }
-
-      /* Fix: Align specific project images to the left on mobile */
+      
       .img-left-mobile {
           object-position: left center !important;
+      }
+
+      .fab-up {
+          bottom: 24px;
+          right: 24px;
+          width: 40px;
+          height: 40px;
+      }
+      .fab-up svg {
+          width: 20px;
+          height: 20px;
       }
     }
   </style>
@@ -194,31 +286,35 @@
 
 <div class="mobile-overlay">
     <a href="/" class="mobile-link">Experience</a>
-    <a href="/works/" class="mobile-link nav-active">Works</a>
+    <a href="/projects/" class="mobile-link nav-active">Projects</a>
     <a href="/contact/" class="mobile-link">Contact</a>
     <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank" style="display:block; margin-top:16px;">Download CV</a>
 </div>
 
-<div class="container">
-  <header class="main-header">
-    <div class="header-left">
-        <nav class="nav-links">
-          <a href="/" class="text-link">Experience</a>
-          <a href="/works/" class="text-link nav-active">Works</a>
-          <a href="/contact/" class="text-link">Contact</a>
-        </nav>
-        <div class="mobile-menu-btn">Menu</div>
+<div class="header-wrapper" id="header-wrapper">
+    <div class="header-container">
+        <header class="main-header">
+            <div class="header-left">
+                <nav class="nav-links">
+                <a href="/" class="text-link">Experience</a>
+                <a href="/projects/" class="text-link nav-active">Projects</a>
+                <a href="/contact/" class="text-link">Contact</a>
+                </nav>
+                <div class="mobile-menu-btn">Menu</div>
+            </div>
+            
+            <div class="header-right">
+                <div id="theme-btn" class="theme-toggle">
+                    <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </div>
+                <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
+            </div>
+        </header>
     </div>
-    
-    <div class="header-right">
-        <div id="theme-btn" class="theme-toggle">
-            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </div>
-        <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
-    </div>
-  </header>
+</div>
 
+<div class="container">
   <div class="content-grid animated fadeIn two">
     <div class="content-col">
        
@@ -227,7 +323,6 @@
            <a href="/ai-investment-platform/" class="work-card">
                <div class="card-visual">
                    <div class="card-badge">Drove multiple Fortune 500 deals</div>
-                   <!-- Added class img-left-mobile -->
                    <img src="/images/gocanopy-01-1.png" alt="AI Investment Platform Design — GoCanopy.tech (€2.1M funding)" class="card-img img-left-mobile">
                </div>
                <div class="card-content">
@@ -256,7 +351,6 @@
            <a href="/ai-voice-agent-platform/" class="work-card">
                <div class="card-visual">
                    <div class="card-badge">Uncovered dev-ready fixes via 4-hour audit</div>
-                   <!-- Added class img-left-mobile -->
                    <img src="/images/synthflow-00-3.png" alt="AI Voice Agent Platform Audit — Synthflow AI ($20M funding)" class="card-img img-left-mobile">
                </div>
                <div class="card-content">
@@ -302,6 +396,12 @@
   </div>
 </div>
 
+<div id="fab-up" class="fab-up">
+    <svg viewBox="0 0 24 24">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+</div>
+
 <script>
   // Theme Logic
   const themeBtn = document.getElementById('theme-btn');
@@ -336,6 +436,27 @@
       }
   });
 
+  // Sticky Header & FAB Logic
+  const headerWrapper = document.getElementById('header-wrapper');
+  const fabUp = document.getElementById('fab-up');
+
+  window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+          headerWrapper.classList.add('scrolled');
+      } else {
+          headerWrapper.classList.remove('scrolled');
+      }
+
+      if (window.scrollY > 400) {
+          fabUp.classList.add('visible');
+      } else {
+          fabUp.classList.remove('visible');
+      }
+  });
+
+  fabUp.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 </body>
 </html>
