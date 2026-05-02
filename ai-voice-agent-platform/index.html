@@ -78,21 +78,54 @@
     .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
     .content-col { width: 100%; max-width: 680px; }
 
+    /* HEADER WRAPPER (STICKY FULL WIDTH) */
+    .header-wrapper {
+        position: sticky;
+        top: 0;
+        z-index: 1001;
+        width: 100%;
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
+        transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .header-wrapper.scrolled {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--header-border);
+    }
+    .header-container {
+        max-width: var(--container-width);
+        width: 100%;
+        margin: 0 auto;
+        padding: var(--spacing-main) 20px 0 20px;
+        transition: padding 0.3s ease;
+    }
+    .header-wrapper.scrolled .header-container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
     /* HEADER */
     .main-header { 
         display: flex; justify-content: space-between; align-items: center; 
-        /* Change: Restored symmetrical padding */
-        padding: 10px 32px 10px 32px; 
-        margin-bottom: var(--spacing-main); 
+        padding: 10px 32px; 
         background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
         border-radius: 100px; border: 1px solid var(--header-border); 
-        width: 100%; position: relative; z-index: 1001; 
+        width: 100%; position: relative; z-index: 1001;
+        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .header-wrapper.scrolled .main-header {
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-color: transparent;
     }
 
     .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
     
     /* Back Button */
-    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; }
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; cursor: pointer; border: none; font-family: var(--font-body); }
     .btn-back:hover { opacity: 0.6; }
     .btn-back svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -178,7 +211,6 @@
         margin: 20px 0 60px 0;
         width: 100%;
         --sf-bg: #ffffff; --sf-text: #111827; --sf-text-muted: #6B7280; --sf-border: #E5E7EB; --sf-purple: #5B0DD5;
-        /* Change: Reverted font stack for this widget only */
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
     .sf-widget { background-color: var(--sf-bg); border-radius: 12px; border: 1px solid var(--sf-border); box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: flex; flex-direction: column; color: var(--sf-text); overflow: hidden; }
@@ -197,7 +229,7 @@
     .sf-mode-btn { display: flex; align-items: flex-start; gap: 12px; width: 100%; text-align: left; padding: 12px; border-radius: 8px; border: 1px solid var(--sf-border); background-color: var(--sf-bg); cursor: pointer; transition: all 0.2s; margin-bottom: 12px; outline: none; }
     .sf-mode-btn:hover { border-color: #ccc; }
     .sf-mode-btn.active { border-color: #A855F7; box-shadow: 0 0 0 1px #A855F7; }
-    .sf-mode-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .sf-mode-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
     .sf-mode-icon.blue { background-color: #EEF2FF; color: #005EFF; }
     .sf-mode-icon.green { background-color: #E6F9F5; color: #00C8A3; }
     .sf-mode-text strong { display: block; font-size: 14px; font-weight: 600; color: var(--sf-text); margin-bottom: 4px; }
@@ -224,6 +256,49 @@
     .sf-prompt-body h5:first-child { margin-top: 0; }
     .sf-prompt-body p { margin-bottom: 12px; }
 
+    /* FLOATING ACTION BUTTON */
+    .fab-up {
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .fab-up.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    .fab-up:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    }
+    .fab-up svg {
+        width: 24px;
+        height: 24px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    body.night .fab-up {
+        box-shadow: 0 8px 24px rgba(255,255,255,0.05);
+    }
+
     /* MEDIA QUERIES */
     @media (min-width: 768px) {
         .sf-body { flex-direction: row; }
@@ -239,40 +314,45 @@
         .hero-image.inset-black { padding: 20px; }
         .results-card li { font-size: 18px; padding-left: 28px; }
         .hero-badge.long-text { max-width: 90%; text-align: center; border-radius: 100px; }
+        .fab-up { bottom: 24px; right: 24px; width: 40px; height: 40px; }
+        .fab-up svg { width: 20px; height: 20px; }
     }
   </style>
 </head>
 <body class="day">
 
-<div class="container">
-  <header class="main-header">
-    <div class="header-left">
-      <a href="/works/" class="btn-back">
-          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          Back to works
-      </a>
-    </div>
-    <div class="header-right">
-      <div id="theme-btn" class="theme-toggle">
-          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+<!-- STICKY HEADER WRAPPER -->
+<div class="header-wrapper" id="header-wrapper">
+  <div class="header-container">
+    <header class="main-header">
+      <div class="header-left">
+        <button class="btn-back" onclick="history.back()">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+        </button>
       </div>
-    </div>
-  </header>
+      <div class="header-right">
+        <div id="theme-btn" class="theme-toggle">
+            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
 
+<div class="container">
   <div class="content-grid animated fadeIn">
     <div class="content-col">
 
        <span class="case-tag">AI INTERACTION DESIGN</span>
        <h1>Simplifying AI agent setup for an enterprise Voice AI platform through a focused UX audit</h1>
        
-       <!-- HERO IMAGE -->
        <div class="hero-image inset-black">
            <div class="hero-badge long-text">Uncovered dev-ready fixes via 4-hour audit</div>
            <img src="/images/synthflow-00.png" alt="Synthflow AI Agent Setup Experience">
        </div>
        
-       <!-- LINKS -->
        <div class="project-links-row">
            <a href="https://www.figma.com/deck/LHnk2nDyvd4rvXiE0kqikN" target="_blank" class="project-link">
                View case study deck <span>↗</span>
@@ -298,7 +378,6 @@
                <p class="text-highlight">4 hours</p>
            </div>
 
-           
            <div style="margin-bottom: 40px;">
                <h4 class="section-label">KEY FOCUS AREAS</h4>
                <ul class="detail-list">
@@ -319,18 +398,17 @@
                </ul>
            </div>
 
-         <div class="detail-block">
+          <div class="detail-block">
                <h4 class="section-label">PRODUCT DEMO (CLICK TO TRY)</h4>
                <p class="text-highlight">
                    This is a <span style="color: #A855F7;">simplified demo</span> of Synthflow AI: creation of an AI agent with Workflow Designer or Direct Prompt, using a pre-configured template.
                </p>
            </div>
        
-       <!-- INTERACTIVE WIDGET INJECTION -->
+       <!-- INTERACTIVE WIDGET -->
        <div class="sf-widget-wrapper">
            <div class="sf-widget">
                
-               <!-- Top Header with Avatar -->
                <div class="sf-top-bar">
                    <div class="sf-top-avatar">
                        <img src="/images/ai-avatar.png" alt="AI Agent">
@@ -341,10 +419,8 @@
                    </div>
                </div>
 
-               <!-- Body Layout -->
                <div class="sf-body">
                    
-                   <!-- Sidebar -->
                    <div class="sf-sidebar">
                        <div class="sf-eyebrow">
                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3"/><path d="M4 12h16"/></svg>
@@ -357,7 +433,6 @@
                        
                        <div class="sf-eyebrow">Select a mode</div>
                        
-                       <!-- Toggles -->
                        <button class="sf-mode-btn active" id="sf-btn-flow">
                            <div class="sf-mode-icon blue">
                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg>
@@ -379,10 +454,8 @@
                        </button>
                    </div>
 
-                   <!-- Main Content Area -->
                    <div class="sf-content">
                        
-                       <!-- Flow View -->
                        <div id="sf-view-flow" class="sf-view active">
                            <div class="sf-flow-wrap">
                                <div class="sf-flow-line"></div>
@@ -433,7 +506,6 @@
                            </div>
                        </div>
 
-                       <!-- Prompt View -->
                        <div id="sf-view-prompt" class="sf-view">
                            <div class="sf-prompt">
                                <div class="sf-tag">PROMPT</div>
@@ -485,55 +557,54 @@
        </div>
 
        <div class="process-step">
-    <h3>Step 3 - Simulating the first-time user flow</h3>
-    <p>Explored the platform step by step as a new user:</p>
-    <ul class="detail-list detail-list-dark" style="margin-top: 16px; margin-bottom: 24px;">
-        <li>created an agent using a template</li>
-        <li>edited the prompt</li>
-        <li>explored custom actions</li>
-        <li>tested the agent via chat</li>
-        <li>reviewed the conversation results</li>
-    </ul>
-    <p>This revealed where the product flow broke down for users trying to complete a simple task.</p>
-    <div class="media-block">
-        <img src="/images/synthflow-04-1.png" alt="First-Time User Flow Audit">
-    </div>
-</div>
+           <h3>Step 3 - Simulating the first-time user flow</h3>
+           <p>Explored the platform step by step as a new user:</p>
+           <ul class="detail-list detail-list-dark" style="margin-top: 16px; margin-bottom: 24px;">
+               <li>created an agent using a template</li>
+               <li>edited the prompt</li>
+               <li>explored custom actions</li>
+               <li>tested the agent via chat</li>
+               <li>reviewed the conversation results</li>
+           </ul>
+           <p>This revealed where the product flow broke down for users trying to complete a simple task.</p>
+           <div class="media-block">
+               <img src="/images/synthflow-04-1.png" alt="First-Time User Flow Audit">
+           </div>
+       </div>
 
        <div class="process-step">
            <h3>PROBLEM: Based on the test, I identified 3 core UX problems</h3>
            <p style="margin-top: 24px;">The whole user journey - from login to agent setup - had 3 core problems: cognitive overload, architecture-driven UX, and premature feature exposure. I took the key screen and split it into system areas like prompt space, actions, and settings.</p>
           
-         <div class="media-block">
+           <div class="media-block">
                <img src="/images/synthflow-10-1.png" alt="Problem Framing">
            </div>
          
-         <div class="media-block">
+           <div class="media-block">
                <img src="/images/synthflow-05.png" alt="Problem Showing">
            </div>
-         </div>
+       </div>
 
-      <div class="process-step">
-         <h3>SOLUTION: Redesign strategy + Key improvement</h3>
+       <div class="process-step">
+           <h3>SOLUTION: Redesign strategy + Key improvement</h3>
            <p style="margin-top: 24px;">The solution was to restructure the setup into smaller guided steps, focusing on goal-based actions and using more user-friendly naming.</p>
          
            <div class="media-block">
                <img src="/images/synthflow-06-1.png" alt="Exploration Concepts">
            </div>
 
-         <p style="margin-top: 24px;">I narrowed the final solution to one practical change with minimal implementation cost.</p>
-         <p style="margin-top: 24px;">The redesign of the main setup screen is a clear two-part layout: left Agent Behavior and right Agent Configuration. The prompt wall was replaced with a structured form while preserving raw prompt access for advanced users.</p>
+           <p style="margin-top: 24px;">I narrowed the final solution to one practical change with minimal implementation cost.</p>
+           <p style="margin-top: 24px;">The redesign of the main setup screen is a clear two-part layout: left Agent Behavior and right Agent Configuration. The prompt wall was replaced with a structured form while preserving raw prompt access for advanced users.</p>
         
            <div class="media-block">
                <img src="/images/synthflow-07.png" alt="Low-Effort Prototype (Form tab)">
            </div>
-         <div class="media-block">
+           <div class="media-block">
                <img src="/images/synthflow-08.png" alt="Low-Effort Prototype (Prompt tab)">
            </div>
-         <div class="media-block">
+           <div class="media-block">
                <img src="/images/synthflow-09.png" alt="Low-Effort Prototype (Before and After)">
            </div>
-         
        </div>
 
        <div class="process-step">
@@ -549,17 +620,25 @@
            The proposed solution showed how Synthflow could move from a fragmented, system-oriented setup experience to a more guided and goal-driven flow without changing the backend logic.
        </div>
 
-      <div class="footer-cta">
+       <div class="footer-cta">
            <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
            <p class="footer-subtitle">I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery.<br>AI-powered workflows, fast iterations, real business impact.</p>
-           <a href="/contact/" class="btn-contact">Let’s design your product</a>
+           <a href="/contact/" class="btn-contact">Let's design your product</a>
        </div>
+
     </div>
   </div>
 </div>
 
+<!-- FLOATING ACTION BUTTON -->
+<div id="fab-up" class="fab-up">
+    <svg viewBox="0 0 24 24">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+</div>
+
 <script>
-  // Theme Toggle Script
+  // 1. Theme Toggle
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
@@ -574,7 +653,29 @@
       }
   });
 
-  // Synthflow Widget Toggle Script
+  // 2. Sticky Header & FAB Logic
+  const headerWrapper = document.getElementById('header-wrapper');
+  const fabUp = document.getElementById('fab-up');
+
+  window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+          headerWrapper.classList.add('scrolled');
+      } else {
+          headerWrapper.classList.remove('scrolled');
+      }
+
+      if (window.scrollY > 400) {
+          fabUp.classList.add('visible');
+      } else {
+          fabUp.classList.remove('visible');
+      }
+  });
+
+  fabUp.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // 3. Synthflow Widget Toggle
   const btnFlow = document.getElementById('sf-btn-flow');
   const btnPrompt = document.getElementById('sf-btn-prompt');
   const viewFlow = document.getElementById('sf-view-flow');
