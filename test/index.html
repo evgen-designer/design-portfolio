@@ -13,123 +13,101 @@
   <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
-    /* VARIABLES */
     :root {
-      --bg-color: #F6F6F6; 
-      --text-color: #111; 
-      --secondary-text: #666; 
-      --link-color: #111; 
+      --bg-color: #F6F6F6;
+      --text-color: #111;
+      --secondary-text: #666;
+      --link-color: #111;
       --divider-color: #e5e5e5;
-      --header-bg: rgba(255, 255, 255, 0.6); 
+      --header-bg: rgba(255, 255, 255, 0.6);
       --header-border: rgba(0, 0, 0, 0.05);
-      --btn-bg: #111; 
+      --btn-bg: #111;
       --btn-text: #fff;
-      
+      --card-bg: #ffffff;
+      --card-border: rgba(0,0,0,0.08);
+      --inner-bg: #F8F7F4;
       --meta-label: #888;
       --image-bg: #e0e0e0;
       --slide-bg: #111;
       --slide-text: #fff;
-      
       --font-heading: 'Bricolage Grotesque', sans-serif;
       --font-body: 'Instrument Sans', sans-serif;
-      
-      --container-width: 1040px; 
-      --spacing-main: 24px; 
+      --container-width: 1040px;
+      --spacing-main: 24px;
     }
     body.night {
-      --bg-color: #121212; 
-      --text-color: #f0f0f0; 
-      --secondary-text: #999; 
-      --link-color: #fff; 
+      --bg-color: #121212;
+      --text-color: #f0f0f0;
+      --secondary-text: #999;
+      --link-color: #fff;
       --divider-color: #333;
-      --header-bg: rgba(30, 30, 30, 0.6); 
-      --header-border: rgba(255, 255, 255, 0.1); 
-      --btn-bg: #fff; 
+      --header-bg: rgba(30, 30, 30, 0.6);
+      --header-border: rgba(255, 255, 255, 0.1);
+      --btn-bg: #fff;
       --btn-text: #000;
-      
+      --card-bg: #1A1A1A;
+      --card-border: rgba(255,255,255,0.1);
+      --inner-bg: #242424;
       --meta-label: #666;
       --image-bg: #2a2a2a;
       --slide-bg: #fff;
       --slide-text: #000;
     }
     * { box-sizing: border-box; }
-    body { 
-        margin: 0; padding: 0; 
-        background-color: var(--bg-color); 
-        color: var(--text-color); 
-        font-family: var(--font-body); 
-        font-size: 16px; line-height: 1.6; 
-        transition: background-color 0.3s ease, color 0.3s ease; 
+    body {
+      margin: 0; padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      font-size: 16px; line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
-    
     h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
     p { margin-top: 0; margin-bottom: 16px; }
     a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.7; }
 
     /* LAYOUT */
-    .container { 
-        max-width: var(--container-width); width: 100%; margin: 0 auto; 
-        padding: var(--spacing-main) 20px;
-        display: flex; flex-direction: column; 
+    .container {
+      max-width: var(--container-width); width: 100%; margin: 0 auto;
+      padding: var(--spacing-main) 20px;
+      display: flex; flex-direction: column;
     }
-    
-    /* Centered Content Layout */
     .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
-    .content-col { width: 100%; max-width: 680px; }
+    .content-col { width: 100%; max-width: 720px; }
 
-    /* HEADER WRAPPER (STICKY FULL WIDTH) */
+    /* STICKY HEADER */
     .header-wrapper {
-        position: sticky;
-        top: 0;
-        z-index: 1001;
-        width: 100%;
-        background-color: transparent;
-        border-bottom: 1px solid transparent;
-        transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
+      position: sticky; top: 0; z-index: 1001; width: 100%;
+      background-color: transparent; border-bottom: 1px solid transparent;
+      transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
     }
     .header-wrapper.scrolled {
-        background-color: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--header-border);
+      background-color: var(--header-bg);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--header-border);
     }
     .header-container {
-        max-width: var(--container-width);
-        width: 100%;
-        margin: 0 auto;
-        padding: var(--spacing-main) 20px 0 20px;
-        transition: padding 0.3s ease;
+      max-width: var(--container-width); width: 100%; margin: 0 auto;
+      padding: var(--spacing-main) 20px 0 20px;
+      transition: padding 0.3s ease;
     }
-    .header-wrapper.scrolled .header-container {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-    /* HEADER */
-    .main-header { 
-        display: flex; justify-content: space-between; align-items: center; 
-        padding: 10px 32px; 
-        background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
-        border-radius: 100px; border: 1px solid var(--header-border); 
-        width: 100%; position: relative; z-index: 1001;
-        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+    .header-wrapper.scrolled .header-container { padding-top: 10px; padding-bottom: 10px; }
+    .main-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 32px;
+      background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-radius: 100px; border: 1px solid var(--header-border);
+      width: 100%; position: relative; z-index: 1001;
+      transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
     }
     .header-wrapper.scrolled .main-header {
-        background-color: transparent;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        border-color: transparent;
+      background-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-color: transparent;
     }
-    
     .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
-    
-    /* Back Button */
     .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; cursor: pointer; border: none; font-family: var(--font-body); }
     .btn-back:hover { opacity: 0.6; }
     .btn-back svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-    /* Theme Toggle */
     .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
     .theme-toggle:hover { opacity: 1; }
     .theme-toggle svg { width: 20px; height: 20px; display: block; }
@@ -138,327 +116,631 @@
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-    .mobile-menu-btn { display: none; }
+    /* HERO */
+    .case-hero {
+      background-color: #0A0A0A;
+      border-radius: 24px;
+      padding: 56px 48px;
+      margin-bottom: var(--spacing-main);
+      position: relative;
+      overflow: hidden;
+    }
+    .case-hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(51,153,137,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .case-tag {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      font-weight: 700; color: #339989; margin-bottom: 20px; display: block;
+    }
+    .case-hero h1 {
+      font-size: 40px; line-height: 1.1; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 32px; max-width: 580px;
+    }
+    .hero-meta-row {
+      display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .hero-meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); font-weight: 600; }
+    .hero-meta-value { font-size: 15px; color: rgba(255,255,255,0.85); font-weight: 500; }
 
-    /* CASE STUDY STYLES */
-    .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
+    .badge-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background-color: #339989; color: #fff;
+      font-size: 13px; font-weight: 600;
+      padding: 8px 16px; border-radius: 100px;
+    }
+    .badge svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-    h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
-    
-    .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 24px; margin-bottom: var(--spacing-main); border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
-    .hero-image img { width: 100%; height: auto; display: block; }
-    .hero-image.inset-black { background-color: #000; padding: 40px; display: flex; align-items: center; justify-content: center; }
-    .hero-image.inset-black img { width: 100%; height: auto; object-fit: contain; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    /* SNAPSHOT CARD */
+    .snapshot-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--spacing-main);
+      margin-bottom: var(--spacing-main);
+    }
+    .snapshot-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px 28px;
+    }
+    .snapshot-card .snap-num {
+      font-family: var(--font-heading);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--secondary-text);
+      margin-bottom: 12px; display: block;
+    }
+    .snapshot-card h3 {
+      font-family: var(--font-body);
+      font-size: 15px; font-weight: 600;
+      margin-bottom: 12px; color: var(--text-color);
+    }
+    .snapshot-card p { font-size: 14px; color: var(--secondary-text); margin: 0; line-height: 1.6; }
 
-    .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
-    body.night .hero-badge { background-color: #54D1FF; color: #000; }
+    /* STATS ROW */
+    .stats-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-main);
+      margin-bottom: var(--spacing-main);
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .stat-card .stat-value {
+      font-family: var(--font-heading);
+      font-size: 48px; font-weight: 700; line-height: 1;
+      color: #339989;
+    }
+    .stat-card .stat-label { font-size: 15px; color: var(--secondary-text); }
 
-    .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 24px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
-    .text-slide.secondary { font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px; }
+    /* SECTION STRUCTURE */
+    .section-block {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 48px 40px;
+      margin-bottom: var(--spacing-main);
+    }
+    .section-eyebrow {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--secondary-text); font-weight: 700;
+      margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-eyebrow::after {
+      content: ''; flex: 1; height: 1px; background: var(--divider-color);
+    }
+    .section-block h2 {
+      font-size: 24px; font-weight: 700; line-height: 1.3;
+      margin-bottom: 20px; letter-spacing: -0.01em;
+    }
+    .section-block p { color: var(--secondary-text); font-size: 16px; line-height: 1.7; }
+    .section-block p strong { color: var(--text-color); }
 
-    .project-details-wrapper { margin-bottom: 80px; }
-    .detail-block { margin-bottom: 40px; }
-    .detail-block.last-top { padding-bottom: 40px; border-bottom: 1px solid var(--divider-color); margin-bottom: 40px; }
+    /* CONTEXT GRID */
+    .context-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; margin-top: 24px;
+    }
+    .context-item {
+      background: var(--inner-bg);
+      border-radius: 12px; padding: 20px 24px;
+      border: 1px solid var(--card-border);
+    }
+    .context-item .ci-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--secondary-text); font-weight: 700; margin-bottom: 6px;
+    }
+    .context-item .ci-value { font-size: 15px; font-weight: 500; color: var(--text-color); }
 
-    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
-    
-    .text-highlight { font-size: 20px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin: 0; max-width: 680px; }
+    /* PROBLEM CARDS */
+    .problem-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-top: 24px;
+    }
+    .problem-card {
+      background: var(--inner-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 24px;
+    }
+    .problem-card .p-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: #339989; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .problem-card .p-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; }
+    .problem-card h4 { font-family: var(--font-body); font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .problem-card p { font-size: 14px; color: var(--secondary-text); margin: 0; line-height: 1.6; }
 
-    .detail-list { list-style: none; padding: 0; margin: 0; }
-    .detail-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 18px; line-height: 1.6; }
-    .detail-list li::before { content: "•"; position: absolute; left: 0; color: var(--secondary-text); font-weight: bold; }
-    
-    .numbered-list { list-style: none; padding: 0; margin: 0; counter-reset: result-counter; }
-    .numbered-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 20px; line-height: 1.6; }
-    .numbered-list li::before { counter-increment: result-counter; content: counter(result-counter) "."; position: absolute; left: 0; color: var(--secondary-text); font-weight: 500; }
+    /* STRATEGY - TENSION BLOCK */
+    .tension-block {
+      background: var(--inner-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 28px;
+      margin: 20px 0;
+    }
+    .tension-block h4 { font-family: var(--font-body); font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--text-color); }
+    .tension-block p { font-size: 14px; color: var(--secondary-text); margin: 0; line-height: 1.7; }
 
-    .process-header { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px; }
-    
-    .process-step { margin-bottom: 60px; }
-    .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
+    /* QUOTE CALLOUT */
+    .callout {
+      border-left: 3px solid #339989;
+      padding: 20px 24px;
+      background: var(--inner-bg);
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+      font-size: 16px; font-weight: 500;
+      color: var(--text-color); line-height: 1.6;
+    }
 
-    .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
+    /* STEPS */
+    .steps-list { display: flex; flex-direction: column; gap: 0; margin-top: 24px; }
+    .step-item {
+      display: flex; gap: 20px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--divider-color);
+    }
+    .step-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--inner-bg); border: 1px solid var(--card-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: var(--secondary-text);
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step-body { flex: 1; }
+    .step-body h4 { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text-color); }
+    .step-body p { font-size: 14px; color: var(--secondary-text); margin: 0; line-height: 1.7; }
+
+    /* IMPACT CARDS */
+    .impact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-top: 24px;
+    }
+    .impact-card {
+      background: var(--inner-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 24px;
+    }
+    .impact-card h4 { font-family: var(--font-body); font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--text-color); }
+    .impact-card p { font-size: 14px; color: var(--secondary-text); margin: 0; line-height: 1.6; }
+    .impact-card.full { grid-column: 1 / -1; }
+
+    /* LEARNINGS */
+    .learnings-list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+    .learning-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: var(--inner-bg); border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 24px;
+    }
+    .learning-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: #111; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    body.night .learning-icon { background: #fff; }
+    .learning-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; }
+    body.night .learning-icon svg { stroke: #000; }
+    .learning-body h4 { font-family: var(--font-body); font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text-color); }
+    .learning-body p { font-size: 14px; color: var(--secondary-text); margin: 0; line-height: 1.6; }
+
+    /* MEDIA */
+    .media-block {
+      width: 100%; background-color: var(--image-bg);
+      border-radius: 12px; overflow: hidden;
+      margin: 20px 0; border: 1px solid var(--divider-color);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 200px;
+    }
     .media-block img { width: 100%; height: auto; display: block; }
-    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
-    
-    .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
+    .media-block.inset-black { background: #000; padding: 32px; }
+    .media-block.inset-black img { border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-    .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
-    .footer-title { font-size: 32px; font-weight: 700; line-height: 1.2; color: var(--text-color); margin: 0 0 16px 0; }
-    .footer-subtitle { font-size: 16px; color: var(--secondary-text); max-width: 620px; margin: 0 auto 32px auto; line-height: 1.6; }
+    .nda-note {
+      font-size: 13px; color: var(--secondary-text); font-style: italic;
+      border-left: 2px solid var(--divider-color); padding-left: 14px;
+      margin: 12px 0 24px;
+    }
 
-    .btn-contact { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 24px; background-color: var(--btn-bg); color: var(--btn-text); border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease; }
+    /* FOOTER CTA */
+    .footer-cta {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 24px; padding: 60px 40px;
+      text-align: center; margin-bottom: var(--spacing-main);
+    }
+    .footer-cta h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+    .footer-cta p { font-size: 16px; color: var(--secondary-text); max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
+    .btn-contact {
+      display: inline-flex; align-items: center; justify-content: center;
+      height: 44px; padding: 0 28px;
+      background-color: var(--btn-bg); color: var(--btn-text);
+      border-radius: 100px; font-weight: 600; font-size: 15px;
+      text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease;
+    }
     .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    /* FAB */
+    .fab-up {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 48px; height: 48px; border-radius: 50%;
+      background-color: var(--btn-bg); color: var(--btn-text);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 999;
+      opacity: 0; pointer-events: none; transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .fab-up.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .fab-up:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+    .fab-up svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
     .animated { animation-duration: 0.8s; animation-fill-mode: both; }
     .fadeIn { animation-name: fadeIn; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* TASK SPECIFIC STYLES */
-    .results-card { background-color: #339989; padding: 40px; border-radius: 24px; margin-top: 16px; margin-bottom: 40px; }
-    .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
-    .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
-
-    /* FLOATING ACTION BUTTON */
-    .fab-up {
-        position: fixed;
-        bottom: 32px;
-        right: 32px;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background-color: var(--btn-bg);
-        color: var(--btn-text);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(20px);
-        transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    }
-    .fab-up.visible {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-    }
-    .fab-up:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-    }
-    .fab-up svg {
-        width: 24px;
-        height: 24px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-    body.night .fab-up {
-        box-shadow: 0 8px 24px rgba(255,255,255,0.05);
-    }
-
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .split-grid { grid-template-columns: 1fr; gap: 40px; }
-      h1 { font-size: 28px; }
-      .footer-title { font-size: 28px; }
-      .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
-      .media-block { min-height: auto; }
-      .results-card li { font-size: 20px; padding-left: 28px; }
+      .case-hero { padding: 40px 28px; }
+      .case-hero h1 { font-size: 28px; }
+      .snapshot-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .context-grid { grid-template-columns: 1fr; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .impact-card.full { grid-column: auto; }
+      .section-block { padding: 32px 24px; }
+      .footer-cta { padding: 40px 24px; }
+      .footer-cta h2 { font-size: 26px; }
       .fab-up { bottom: 24px; right: 24px; width: 40px; height: 40px; }
       .fab-up svg { width: 20px; height: 20px; }
+    }
+    @media (max-width: 480px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .hero-meta-row { gap: 20px; }
     }
   </style>
 </head>
 <body class="day">
 
-<!-- STICKY HEADER WRAPPER -->
+<!-- STICKY HEADER -->
 <div class="header-wrapper" id="header-wrapper">
   <div class="header-container">
     <header class="main-header">
       <div class="header-left">
         <button class="btn-back" onclick="history.back()">
-            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Back
+          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back
         </button>
       </div>
       <div class="header-right">
         <div id="theme-btn" class="theme-toggle">
-            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
         </div>
       </div>
     </header>
   </div>
 </div>
 
-<div class="container">
+<div class="container animated fadeIn">
 
-  <div class="content-grid animated fadeIn">
-    <div class="content-col">
-
-       <span class="case-tag">AI INTERACTION DESIGN</span>
-       <h1>Empowering enterprise investment teams to scale portfolio decisions with AI (Secured €2.1M in seed funding)</h1>
-
-       <div class="hero-image inset-black">
-           <div class="hero-badge">Drove multiple Fortune 500 deals</div>
-           <img src="/images/gocanopy-09.gif" alt="GoCanopy Investment Platform Interface">
-       </div>
-
-       <div class="hero-image inset-black">
-          <img src="/images/gocanopy-10.png" alt="Seed Funding News">
-       </div>
-      
-       <h4 class="section-label">CHALLENGE</h4>
-       <div class="text-slide">
-           Real estate investment teams lose time and decision quality due to highly fragmented, inconsistent data scattered across drives, inboxes, PDFs, spreadsheets, and manual processes.
-       </div>
-
-       <div class="project-details-wrapper">
-           
-           <div class="detail-block">
-               <h4 class="section-label">MY TASK</h4>
-               <p class="text-highlight">
-                   Led the design of the MVP Asset Management experience for an enterprise client presentation, unifying fragmented real estate data into a single, decision-ready workflow and integrating it into the existing investment platform.
-               </p>
-           </div>
-
-           <div class="detail-block last-top">
-               <h4 class="section-label">TASK TIMEFRAME</h4>
-               <p class="text-highlight">2 months</p>
-           </div>
-
-           <div style="margin-bottom: 40px;">
-               <h4 class="section-label">KEY FOCUS AREAS</h4>
-               <ul class="detail-list">
-                   <li>User research, workflow analysis, and problem framing</li>
-                   <li>End-to-end UX & UI design (clickable Figma prototype)</li>
-                   <li>AI-assisted insight design & data visualization</li>
-                   <li>Stakeholder presentations & alignment</li>
-               </ul>
-           </div>
-           
-           <h4 class="section-label">KEY RESULTS</h4>
-           <div class="results-card">
-               <ul class="numbered-list">
-                   <li>Helped secure multiple Fortune 500 enterprise client partnerships</li>
-                   <li>Reduced manual data aggregation by 42% by centralizing portfolio data into a single workflow</li>
-                   <li>Improved decision turnaround time by 2-3x with real-time portfolio visibility</li>
-               </ul>
-           </div>
-           
-
-       </div>
-
-       <div class="media-block">
-            <img src="/images/gocanopy-02.png" alt="Prototype Screen">
-       </div>
-       <p class="nda-note">NDA-protected project - business-sensitive details omitted. Full story with deeper insights available upon request.</p>
-
-       <h4 class="process-header">OVERVIEW OF MY DESIGN PROCESS</h4>
-
-       <div class="process-step">
-           <h3>Step 1 - Countless collaborative sessions with the CEO and CTO:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-03.png" alt="Collaboration Session">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 2 - Analysis of meeting transcripts and research data using Google AI Studio:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-04.png" alt="AI Research Analysis">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 3 - Capturing early insights and requirements in FigJam:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-05.png" alt="FigJam Insights">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 4 - Early idea explorations for implementation approaches, using V0.dev and Claude:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-06.png" alt="AI Prototyping Explorations">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 5 - Figma design stages overview (excluding the design system library and clickable prototypes):</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-07.png" alt="Figma Design Overview">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 6 - Implementation support, user feedback, and refinement:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-11.png" alt="Implementation Support">
-           </div>
-         
-           <div class="media-block">
-               <img src="/images/gocanopy-12.png" alt="Implementation Support">
-           </div>
-         
-           <div class="media-block">
-               <img src="/images/gocanopy-13.png" alt="Implementation Support">
-           </div>
-         
-           <div class="media-block">
-               <img src="/images/gocanopy-14.png" alt="Implementation Support">
-           </div>
-         
-           <div class="media-block">
-               <img src="/images/gocanopy-01.png" alt="Implementation Support">
-           </div>
-       </div>
-
-       <h4 class="section-label">CORE RESULT</h4>
-       <div class="text-slide secondary" style="margin-top: 16px;">
-           My Figma prototype helped win multiple Fortune 500 enterprise client deals
-       </div>
-
-       <div class="footer-cta">
-           <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
-           <p class="footer-subtitle">I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery.<br>AI-powered workflows, fast iterations, real business impact.</p>
-           <a href="/contact/" class="btn-contact">Let's design your product</a>
-       </div>
-
+  <!-- HERO -->
+  <div class="case-hero">
+    <span class="case-tag">AI Interaction Design · 10 min read</span>
+    <h1>Empowering enterprise investment teams to scale decisions with AI</h1>
+    <div class="hero-meta-row">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Company</span>
+        <span class="hero-meta-value">GoCanopy</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Role</span>
+        <span class="hero-meta-value">Lead UX/UI Designer</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Timeline</span>
+        <span class="hero-meta-value">2 months</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Outcome</span>
+        <span class="hero-meta-value">€2.1M seed funding secured</span>
+      </div>
+    </div>
+    <div class="badge-row">
+      <div class="badge">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Drove Fortune 500 deals with Figma prototype
+      </div>
     </div>
   </div>
+
+  <!-- HERO IMAGE -->
+  <div class="media-block inset-black" style="margin-bottom: var(--spacing-main); min-height: 300px;">
+    <img src="/images/gocanopy-09.gif" alt="GoCanopy Investment Platform Interface">
+  </div>
+
+  <!-- SNAPSHOT -->
+  <div class="snapshot-grid">
+    <div class="snapshot-card">
+      <span class="snap-num">1. Problem</span>
+      <h3>Scattered data killing deal velocity</h3>
+      <p>84% of deal intelligence was buried in PDFs. Teams manually extracted and compared it in Excel, losing critical context along the way.</p>
+    </div>
+    <div class="snapshot-card">
+      <span class="snap-num">2. Action</span>
+      <h3>MVP design in 2 months</h3>
+      <p>Led UX/UI design of GoCanopy's Asset Management MVP — automated document ingestion, multi-agent underwriting, and AI insights.</p>
+    </div>
+    <div class="snapshot-card">
+      <span class="snap-num">3. Impact</span>
+      <h3>Enterprise deals + €2.1M raised</h3>
+      <p>Drove pitches with Brookfield and Apollo. Prototype directly contributed to the seed round and 10,000+ documents processed.</p>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value">42%</div>
+      <div class="stat-label">Reduction in manual data aggregation</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">2–3×</div>
+      <div class="stat-label">Improved decision turnaround time</div>
+    </div>
+  </div>
+
+  <!-- 1. PROJECT CONTEXT -->
+  <div class="section-block">
+    <div class="section-eyebrow">1. Project context</div>
+    <h2>Setting the stage</h2>
+    <p>GoCanopy is an enterprise real estate investment platform. Under a strict 2-month deadline to support Fortune 500 pitches, I led research, strategy, and end-to-end design of the Asset Management MVP.</p>
+    <div class="context-grid">
+      <div class="context-item">
+        <div class="ci-label">Product</div>
+        <div class="ci-value">GoCanopy — Enterprise real estate investment platform</div>
+      </div>
+      <div class="context-item">
+        <div class="ci-label">My role</div>
+        <div class="ci-value">Lead UX/UI Designer — Research, strategy, prototyping</div>
+      </div>
+      <div class="context-item">
+        <div class="ci-label">Timeline</div>
+        <div class="ci-value">2 months to arm CEO & CTO for Fortune 500 pitches</div>
+      </div>
+      <div class="context-item">
+        <div class="ci-label">Core constraint</div>
+        <div class="ci-value">Introduce AI automation without making analysts feel they've lost control over financial data</div>
+      </div>
+    </div>
+    <div class="media-block inset-black" style="margin-top: 24px;">
+      <img src="/images/gocanopy-10.png" alt="Meeting with Fortune 500 client">
+    </div>
+    <p class="nda-note">NDA-protected project — specific user data generalised to comply with NDAs. Full story available upon request.</p>
+  </div>
+
+  <!-- 2. PROBLEM FRAMING -->
+  <div class="section-block">
+    <div class="section-eyebrow">2. Problem framing</div>
+    <h2>Two compounding challenges</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="p-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h4>Scattered data in legacy workflows</h4>
+        <p>Critical deal intelligence lived across PDFs, Excel models, and disconnected BI tools. Extracting and comparing data was heavy manual work. Historical context was regularly lost — too hard to structure over time.</p>
+      </div>
+      <div class="problem-card">
+        <div class="p-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h4>AI hallucination risk in finance</h4>
+        <p>Even one incorrectly generated rent number would destroy platform credibility. Users needed a transparent way to verify and correct AI outputs without breaking their existing workflow.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. STRATEGY & TRADE-OFFS -->
+  <div class="section-block">
+    <div class="section-eyebrow">3. Strategy & trade-offs</div>
+    <h2>From static data repository to automated workflows</h2>
+    <p>When I joined in 2024, GoCanopy was a simple data repository with basic AI chat on top, targeting investors only. As the product expanded, I helped reframe the direction toward automating complex workflows — like generating underwriting reports and actionable insights.</p>
+
+    <div class="tension-block">
+      <h4>The core tension: automation vs. control</h4>
+      <p>One early hypothesis was full agent automation — trigger underwriting, and background agents independently generate a final report. But interviews with existing clients revealed a hard truth: analysts were deeply wary of AI in finance. One hallucinated number could ruin a deal. This was already visible in the existing platform through source-linking components designed to help users verify data.</p>
+    </div>
+
+    <div class="callout">
+      UX pivot: from fully autonomous agents → co-creation model
+    </div>
+
+    <p>Through alignment with engineering, I advocated that a pure "black box" workflow was too fragile for enterprise finance. I designed the <strong>co-creator approach</strong>: instead of generating a full document in one step, AI produces smaller modular outputs — tables, assumptions, insights — that users can edit, regenerate, trace to source data, and compose themselves.</p>
+
+    <p>I also designed <strong>inline editing</strong>: if AI generated an incorrect cap rate, users could edit it directly, and the system automatically recalculated the rest of the model.</p>
+
+    <p>For AI deal extraction, I designed a clear <strong>validation flow</strong>: newly extracted data was marked "Under review" with subtle visual cues, and only transitioned to "Verified" after user confirmation or correction.</p>
+
+    <div class="media-block" style="margin-top: 24px;">
+      <img src="/images/gocanopy-03.png" alt="Collaborative sessions with CEO and CTO">
+    </div>
+  </div>
+
+  <!-- 4. DESIGN EXECUTION -->
+  <div class="section-block">
+    <div class="section-eyebrow">4. Design execution</div>
+    <h2>Five steps from concept to prototype</h2>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Research & new asset management logic</h4>
+          <p>Mapped core underwriting workflows to define how AI document extraction, human review loops, and artifact generation would interact. Defining this system logic upfront was essential to handle complex data hierarchies (Deals → Assets → Leases) without dead ends or broken mental models.</p>
+          <div class="media-block" style="margin-top: 16px;">
+            <img src="/images/gocanopy-05.png" alt="FigJam insights and requirements">
+          </div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Vibe-coding early concepts</h4>
+          <p>To hit the 2-month deadline, I rapidly validated code-based layouts with the CTO using Generative UI tools like V0.dev and Claude Code, then moved to Figma to refine the interactions that would make or break user adoption.</p>
+          <div class="media-block" style="margin-top: 16px;">
+            <img src="/images/gocanopy-06.png" alt="AI prototyping explorations">
+          </div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>From wireframing to high-fidelity prototype</h4>
+          <p>Started with core data requirements in early wireframes, adjusting layouts as we received actual BI dashboard examples from clients. Experimented with conversational UIs and embedded AI insights. After testing with engineering, shifted to the co-creator workspace model using step-controlled agents. Then applied the design system to build the final high-fidelity prototype.</p>
+          <div class="media-block" style="margin-top: 16px;">
+            <img src="/images/gocanopy-07.png" alt="Figma design stages overview">
+          </div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Design system foundation</h4>
+          <p>The platform already had baseline styling. I audited and structured existing styles into a formal design system, then optimised components for enterprise workflows: high-density typography, strict table behaviours, and clear color semantics (specific colors reserved exclusively for AI-generated vs. human-verified data).</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Three high-risk workflows for the enterprise pitch</h4>
+          <p><strong>Automated document ingestion:</strong> Replaced passive upload with a drag-and-drop zone that instantly generates deal cards and shows extraction progress — giving users immediate visibility into AI status.</p>
+          <p><strong>Verifiable source linking:</strong> To counter AI hallucination risk, the UI connects extracted metrics to their origin. Clicking a data point splits the screen and highlights the exact paragraph in the source PDF, enabling instant auditability.</p>
+          <p><strong>Proactive insights & alerts:</strong> Instead of forcing users to search for risks in tables, the system automatically flags upcoming lease breaks and visualises rent positioning against market comps directly on the deal overview.</p>
+          <div class="media-block inset-black" style="margin-top: 16px;">
+            <img src="/images/gocanopy-11.png" alt="Implementation support">
+          </div>
+          <div class="media-block inset-black" style="margin-top: 16px;">
+            <img src="/images/gocanopy-12.png" alt="Implementation support">
+          </div>
+          <div class="media-block inset-black" style="margin-top: 16px;">
+            <img src="/images/gocanopy-13.png" alt="Implementation support">
+          </div>
+          <div class="media-block inset-black" style="margin-top: 16px;">
+            <img src="/images/gocanopy-14.png" alt="Implementation support">
+          </div>
+          <div class="media-block inset-black" style="margin-top: 16px;">
+            <img src="/images/gocanopy-01.png" alt="Implementation support">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. IMPACT -->
+  <div class="section-block">
+    <div class="section-eyebrow">5. Project impact</div>
+    <h2>Human-in-the-loop proved its worth</h2>
+    <p>The co-creator architecture proved we could automate institutional data without triggering anti-AI reflexes. Prioritising transparency bridged the gap between LLMs and rigid finance demands.</p>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <h4>Secured enterprise adoption</h4>
+        <p>The prototype drove successful pitches, securing rollouts with industry giants like Brookfield and Apollo.</p>
+      </div>
+      <div class="impact-card">
+        <h4>Raised €2.1M seed</h4>
+        <p>The pivot from a static repository to an actionable AI workspace formed the core narrative that closed funding.</p>
+      </div>
+      <div class="impact-card">
+        <h4>Accelerated core workflows</h4>
+        <p>Automating manual PDF extraction reduced data aggregation by 42%, leading to a 2–3× improvement in decision turnaround for underwriting new deals.</p>
+      </div>
+      <div class="impact-card">
+        <h4>Demonstrated platform ROI</h4>
+        <p>The system scaled to process 10,000+ documents. By connecting previously siloed data, the platform helped a client secure a €3M/year lease.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. LEARNINGS -->
+  <div class="section-block">
+    <div class="section-eyebrow">6. Learnings</div>
+    <h2>What I'd take to the next project</h2>
+    <div class="learnings-list">
+      <div class="learning-item">
+        <div class="learning-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="learning-body">
+          <h4>Friction builds trust</h4>
+          <p>UX usually preaches frictionless flows. But in high-stakes finance, seamless AI feels suspicious. Forcing users to verify source links and manually approve "Under review" data added the exact friction needed to win Investment Committee trust.</p>
+        </div>
+      </div>
+      <div class="learning-item">
+        <div class="learning-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="learning-body">
+          <h4>Match UI to technical reality</h4>
+          <p>My initial design was sequential: upload a deal, click to trigger AI analysis. After reviewing with the CTO, we realised some agents could run automatically in the background right after extraction. Redesigning to show proactive insights upfront was a much better experience — anticipating what users needed and delivering it instantly.</p>
+        </div>
+      </div>
+      <div class="learning-item">
+        <div class="learning-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="learning-body">
+          <h4>The cost of pitch-speed design</h4>
+          <p>Moving fast meant shortcuts. I didn't create a consistent system for data charts upfront. When we needed to add new chart types for different assets, it required messy rework. Next time: define the rules for all charts in week one, even if we don't build them all immediately.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER CTA -->
+  <div class="footer-cta">
+    <h2>Want to turn complex ideas into products people love?</h2>
+    <p>I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery. AI-powered workflows, fast iterations, real business impact.</p>
+    <a href="/contact/" class="btn-contact">Let's design your product</a>
+  </div>
+
 </div>
 
-<!-- FLOATING ACTION BUTTON -->
+<!-- FAB -->
 <div id="fab-up" class="fab-up">
-    <svg viewBox="0 0 24 24">
-        <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
 <script>
-  // 1. Theme Logic
+  // Theme
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'night') { body.classList.remove('day'); body.classList.add('night'); } 
+  if (savedTheme === 'night') { body.classList.remove('day'); body.classList.add('night'); }
   else { body.classList.add('day'); }
-
   themeBtn.addEventListener('click', function() {
-      if (body.classList.contains('day')) {
-          body.classList.remove('day'); body.classList.add('night'); localStorage.setItem('theme', 'night');
-      } else {
-          body.classList.remove('night'); body.classList.add('day'); localStorage.setItem('theme', 'day');
-      }
+    if (body.classList.contains('day')) {
+      body.classList.remove('day'); body.classList.add('night'); localStorage.setItem('theme', 'night');
+    } else {
+      body.classList.remove('night'); body.classList.add('day'); localStorage.setItem('theme', 'day');
+    }
   });
 
-  // 2. Sticky Header & FAB Logic
+  // Sticky header & FAB
   const headerWrapper = document.getElementById('header-wrapper');
   const fabUp = document.getElementById('fab-up');
-
   window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-          headerWrapper.classList.add('scrolled');
-      } else {
-          headerWrapper.classList.remove('scrolled');
-      }
-
-      if (window.scrollY > 400) {
-          fabUp.classList.add('visible');
-      } else {
-          fabUp.classList.remove('visible');
-      }
+    headerWrapper.classList.toggle('scrolled', window.scrollY > 20);
+    fabUp.classList.toggle('visible', window.scrollY > 400);
   });
-
-  fabUp.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  fabUp.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
 </body>
 </html>
