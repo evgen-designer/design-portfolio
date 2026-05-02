@@ -53,6 +53,7 @@
       --hero-bg: #C6CBE4; 
       --card-bg: #ffffff; 
       --card-border: rgba(0,0,0,0.08);
+      --inner-bg: #F8F7F4;
       --badge-yellow: #FFD500;
       
       --font-heading: 'Bricolage Grotesque', sans-serif;
@@ -78,6 +79,7 @@
       --hero-bg: #272A3B; 
       --card-bg: #1A1A1A; 
       --card-border: rgba(255,255,255,0.1);
+      --inner-bg: #242424;
       --badge-yellow: #54D1FF; 
     }
 
@@ -210,7 +212,7 @@
         font-size: 20px;
         font-weight: 500;
         color: var(--text-color);
-        margin-bottom: 40px;
+        margin-bottom: 20px; /* Reduced by half */
         text-align: center;
     }
     .trust-logos {
@@ -233,10 +235,20 @@
         opacity: 1;
     }
 
+    /* PORTFOLIO SECTION (TABS + CONTENT) */
+    .portfolio-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        padding: 40px;
+        margin-bottom: var(--spacing-main);
+        width: 100%;
+    }
+
     /* TABS NAV */
     .tabs-container {
         border-bottom: 1px solid var(--divider-color);
-        margin-bottom: var(--spacing-main);
+        margin-bottom: 32px;
     }
     .tabs-scroll {
         display: flex;
@@ -267,45 +279,54 @@
         bottom: -1px;
         left: 0;
         width: 100%;
-        height: 2px;
+        height: 3px;
         background: var(--text-color);
+        border-radius: 3px 3px 0 0;
     }
 
-    /* TAB CONTENT (FEATURED CARD) */
-    .tab-content { display: none; }
-    .tab-content.active { display: flex; }
-    
-    .featured-card {
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 24px;
-        margin-bottom: var(--spacing-main);
-        overflow: hidden;
-        width: 100%;
-        min-height: 320px;
+    /* TAB CONTENT */
+    .tab-content { 
+        display: none; 
+        gap: 24px; 
     }
-    .fc-content {
+    
+    @keyframes tabFade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .tab-content.active { 
+        display: flex; 
+        animation: tabFade 0.4s ease forwards;
+    }
+    
+    .tc-text-card {
         flex: 1;
-        padding: 48px;
+        background-color: var(--inner-bg);
+        border-radius: 16px;
+        padding: 48px 40px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
+        border: 1px solid var(--card-border);
     }
-    .fc-content h2 {
+    .tc-text-card h2 {
         font-family: var(--font-body); 
-        font-size: 24px;
+        font-size: 26px;
         font-weight: 500;
         line-height: 1.3;
-        margin-bottom: 12px;
+        margin-bottom: 16px;
     }
-    .fc-content p {
+    .tc-text-card p {
         font-size: 16px;
-        color: var(--secondary-text);
+        color: var(--text-color);
+        opacity: 0.85;
         margin-bottom: 32px;
     }
+    
     .btn-outline {
-        padding: 10px 24px;
+        padding: 12px 24px;
         border: 1px solid var(--divider-color);
         border-radius: 100px;
         color: var(--text-color);
@@ -315,17 +336,20 @@
         transition: border-color 0.2s;
     }
     .btn-outline:hover { border-color: var(--text-color); }
+    body.day .btn-outline { border-color: rgba(0,0,0,0.15); }
+    body.night .btn-outline { border-color: rgba(255,255,255,0.2); }
     
-    .fc-visual {
-        width: 45%;
-        background-color: var(--bg-color);
+    .tc-image-card {
+        flex: 1;
+        background-color: var(--inner-bg);
+        border-radius: 16px;
+        border: 1px solid var(--card-border);
         display: flex;
         align-items: center;
         justify-content: center;
-        border-left: 1px solid var(--card-border);
-        position: relative;
+        overflow: hidden;
     }
-    .fc-visual img {
+    .tc-image-card img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -537,13 +561,14 @@
       .hero-img { object-position: top center !important; }
 
       .trust-section { padding: 32px 24px; }
-      .trust-title { font-size: 18px; margin-bottom: 24px; }
+      .trust-title { font-size: 18px; margin-bottom: 16px; }
       .trust-logos { gap: 24px; }
       .trust-logos img { height: 28px; }
       
-      .featured-card { flex-direction: column; }
-      .fc-visual { width: 100%; height: 240px; border-left: none; border-top: 1px solid var(--card-border); order: -1; }
-      .fc-content { padding: 32px; }
+      .portfolio-card { padding: 32px 24px; }
+      .tab-content { flex-direction: column; gap: 16px; }
+      .tc-text-card { padding: 32px 24px; }
+      .tc-image-card { height: 240px; }
       
       .main-content-card { padding: 40px 24px; }
       .about-section { flex-direction: column; gap: 40px; padding-bottom: 40px; margin-bottom: 40px; text-align: left; align-items: flex-start; }
@@ -617,76 +642,81 @@
     </div>
   </div>
 
-  <!-- TABS NAV -->
-  <div class="tabs-container animated fadeIn two">
-    <div class="tabs-scroll">
-      <button class="tab-btn active" data-target="tab-synthflow">Synthflow AI</button>
-      <button class="tab-btn" data-target="tab-gocanopy">GoCanopy</button>
-      <button class="tab-btn" data-target="tab-mobius">Mobius Labs</button>
-      <button class="tab-btn" data-target="tab-polyagent">Polyagent AI</button>
-      <button class="tab-btn" data-target="tab-bladeinsight">BladeInsight</button>
+  <!-- PORTFOLIO SECTION -->
+  <div class="portfolio-card animated fadeIn two">
+    
+    <!-- TABS NAV -->
+    <div class="tabs-container">
+      <div class="tabs-scroll">
+        <button class="tab-btn active" data-target="tab-synthflow">Synthflow AI</button>
+        <button class="tab-btn" data-target="tab-gocanopy">GoCanopy</button>
+        <button class="tab-btn" data-target="tab-mobius">Mobius Labs/Dropbox</button>
+        <button class="tab-btn" data-target="tab-polyagent">Polyagent AI</button>
+        <button class="tab-btn" data-target="tab-bladeinsight">BladeInsight</button>
+      </div>
     </div>
-  </div>
 
-  <!-- TABS CONTENT -->
-  <!-- 1. Synthflow AI -->
-  <div id="tab-synthflow" class="tab-content featured-card active animated fadeIn two">
-    <div class="fc-content">
-      <h2>AI Automation Platform Audit —<br>Synthflow AI ($20M funding)</h2>
-      <p>Simplified agent setup flow, improving completion speed</p>
-      <a href="/ai-voice-agent-platform/" class="btn-outline">View project</a>
+    <!-- TABS CONTENT -->
+    <!-- 1. Synthflow AI -->
+    <div id="tab-synthflow" class="tab-content active">
+      <div class="tc-text-card">
+        <h2>AI Automation Platform Audit —<br>Synthflow AI ($20M funding)</h2>
+        <p>Simplified agent setup flow, improving completion speed</p>
+        <a href="/ai-voice-agent-platform/" class="btn-outline">View project</a>
+      </div>
+      <div class="tc-image-card">
+        <img src="/images/synthflow-00-3.png" alt="Synthflow AI" class="img-left">
+      </div>
     </div>
-    <div class="fc-visual">
-      <img src="/images/synthflow-00-3.png" alt="Synthflow AI" class="img-left">
-    </div>
-  </div>
 
-  <!-- 2. GoCanopy -->
-  <div id="tab-gocanopy" class="tab-content featured-card animated fadeIn two">
-    <div class="fc-content">
-      <h2>AI Investment Platform Design —<br>GoCanopy (€2.1M funding)</h2>
-      <p>Empowering enterprise investment teams to scale portfolio decisions with AI</p>
-      <a href="/ai-investment-platform/" class="btn-outline">View project</a>
+    <!-- 2. GoCanopy -->
+    <div id="tab-gocanopy" class="tab-content">
+      <div class="tc-text-card">
+        <h2>AI Investment Platform Design —<br>GoCanopy (€2.1M funding)</h2>
+        <p>Empowering enterprise investment teams to scale portfolio decisions with AI</p>
+        <a href="/ai-investment-platform/" class="btn-outline">View project</a>
+      </div>
+      <div class="tc-image-card">
+        <img src="/images/gocanopy-01-1.png" alt="GoCanopy" class="img-left">
+      </div>
     </div>
-    <div class="fc-visual">
-      <img src="/images/gocanopy-01-1.png" alt="GoCanopy" class="img-left">
-    </div>
-  </div>
 
-  <!-- 3. Mobius Labs -->
-  <div id="tab-mobius" class="tab-content featured-card animated fadeIn two">
-    <div class="fc-content">
-      <h2>AI SDK Demo Redesign —<br>Mobius Labs (Acquired by Dropbox)</h2>
-      <p>Transforming a neglected AI SDK web demo into a vital sales tool</p>
-      <a href="/ai-sdk-mobius/" class="btn-outline">View project</a>
+    <!-- 3. Mobius Labs -->
+    <div id="tab-mobius" class="tab-content">
+      <div class="tc-text-card">
+        <h2>AI SDK Demo Redesign —<br>Mobius Labs (Acquired by Dropbox)</h2>
+        <p>Transforming a neglected AI SDK web demo into a vital sales tool</p>
+        <a href="/ai-sdk-mobius/" class="btn-outline">View project</a>
+      </div>
+      <div class="tc-image-card">
+        <img src="/images/mobius-07.png" alt="Mobius Labs">
+      </div>
     </div>
-    <div class="fc-visual">
-      <img src="/images/mobius-07.png" alt="Mobius Labs">
-    </div>
-  </div>
 
-  <!-- 4. Polyagent AI -->
-  <div id="tab-polyagent" class="tab-content featured-card animated fadeIn two">
-    <div class="fc-content">
-      <h2>AI Assistant Platform Research —<br>Polyagent AI</h2>
-      <p>Validating U.S. real estate agent demand before committing to an AI SaaS MVP</p>
-      <a href="/ai-ux-research-polyagent/" class="btn-outline">View project</a>
+    <!-- 4. Polyagent AI -->
+    <div id="tab-polyagent" class="tab-content">
+      <div class="tc-text-card">
+        <h2>AI Assistant Platform Research —<br>Polyagent AI</h2>
+        <p>Validating U.S. real estate agent demand before committing to an AI SaaS MVP</p>
+        <a href="/ai-ux-research-polyagent/" class="btn-outline">View project</a>
+      </div>
+      <div class="tc-image-card">
+        <img src="/images/polyagent-01.png" alt="Polyagent AI">
+      </div>
     </div>
-    <div class="fc-visual">
-      <img src="/images/polyagent-01.png" alt="Polyagent AI">
-    </div>
-  </div>
 
-  <!-- 5. BladeInsight -->
-  <div id="tab-bladeinsight" class="tab-content featured-card animated fadeIn two">
-    <div class="fc-content">
-      <h2>Drone Inspection Software Design —<br>BladeInsight (Acquired by SES Energy)</h2>
-      <p>Reinventing wind turbine inspections for field operators with autonomous drone workflows</p>
-      <a href="/drone-inspection-software/" class="btn-outline">View project</a>
+    <!-- 5. BladeInsight -->
+    <div id="tab-bladeinsight" class="tab-content">
+      <div class="tc-text-card">
+        <h2>Drone Inspection Software Design —<br>BladeInsight (Acquired by SES Energy)</h2>
+        <p>Reinventing wind turbine inspections for field operators with autonomous drone workflows</p>
+        <a href="/drone-inspection-software/" class="btn-outline">View project</a>
+      </div>
+      <div class="tc-image-card">
+        <img src="/images/bi-02-1.png" alt="BladeInsight">
+      </div>
     </div>
-    <div class="fc-visual">
-      <img src="/images/bi-02-1.png" alt="BladeInsight">
-    </div>
+    
   </div>
 
   <h2 class="section-title animated fadeIn three">What founders say about my expertise</h2>
