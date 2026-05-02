@@ -212,7 +212,7 @@
         font-size: 20px;
         font-weight: 500;
         color: var(--text-color);
-        margin-bottom: 20px; /* Reduced by half */
+        margin-bottom: 20px; 
         text-align: center;
     }
     .trust-logos {
@@ -255,6 +255,7 @@
         gap: 32px;
         overflow-x: auto;
         scrollbar-width: none;
+        position: relative;
     }
     .tabs-scroll::-webkit-scrollbar { display: none; }
     
@@ -362,6 +363,7 @@
         font-size: 24px;
         font-weight: 500;
         line-height: 1.3;
+        margin-top: 96px; /* 4x spacing here */
         margin-bottom: var(--spacing-main);
     }
 
@@ -660,7 +662,7 @@
     <!-- 1. Synthflow AI -->
     <div id="tab-synthflow" class="tab-content active">
       <div class="tc-text-card">
-        <h2>AI Automation Platform Audit —<br>Synthflow AI ($20M funding)</h2>
+        <h2>AI Automation Platform Audit — Synthflow AI ($20M funding)</h2>
         <p>Simplified agent setup flow, improving completion speed</p>
         <a href="/ai-voice-agent-platform/" class="btn-outline">View project</a>
       </div>
@@ -672,7 +674,7 @@
     <!-- 2. GoCanopy -->
     <div id="tab-gocanopy" class="tab-content">
       <div class="tc-text-card">
-        <h2>AI Investment Platform Design —<br>GoCanopy (€2.1M funding)</h2>
+        <h2>AI Investment Platform Design — GoCanopy (€2.1M funding)</h2>
         <p>Empowering enterprise investment teams to scale portfolio decisions with AI</p>
         <a href="/ai-investment-platform/" class="btn-outline">View project</a>
       </div>
@@ -684,7 +686,7 @@
     <!-- 3. Mobius Labs -->
     <div id="tab-mobius" class="tab-content">
       <div class="tc-text-card">
-        <h2>AI SDK Demo Redesign —<br>Mobius Labs (Acquired by Dropbox)</h2>
+        <h2>AI SDK Demo Redesign — Mobius Labs (Acquired by Dropbox)</h2>
         <p>Transforming a neglected AI SDK web demo into a vital sales tool</p>
         <a href="/ai-sdk-mobius/" class="btn-outline">View project</a>
       </div>
@@ -696,7 +698,7 @@
     <!-- 4. Polyagent AI -->
     <div id="tab-polyagent" class="tab-content">
       <div class="tc-text-card">
-        <h2>AI Assistant Platform Research —<br>Polyagent AI</h2>
+        <h2>AI Assistant Platform Research — Polyagent AI</h2>
         <p>Validating U.S. real estate agent demand before committing to an AI SaaS MVP</p>
         <a href="/ai-ux-research-polyagent/" class="btn-outline">View project</a>
       </div>
@@ -708,7 +710,7 @@
     <!-- 5. BladeInsight -->
     <div id="tab-bladeinsight" class="tab-content">
       <div class="tc-text-card">
-        <h2>Drone Inspection Software Design —<br>BladeInsight (Acquired by SES Energy)</h2>
+        <h2>Drone Inspection Software Design — BladeInsight (Acquired by SES Energy)</h2>
         <p>Reinventing wind turbine inspections for field operators with autonomous drone workflows</p>
         <a href="/drone-inspection-software/" class="btn-outline">View project</a>
       </div>
@@ -895,15 +897,17 @@
       }
   });
 
-  // 3. Tab Switching Logic (with auto-rotation)
+  // 3. Tab Switching Logic (with auto-rotation and mobile horizontal scrolling)
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabPanes = document.querySelectorAll('.tab-content');
+  const tabsScrollContainer = document.querySelector('.tabs-scroll');
   let currentTabIndex = 0;
   let tabInterval;
 
   function switchToTab(index) {
       tabBtns.forEach(b => b.classList.remove('active'));
       tabPanes.forEach(p => p.classList.remove('active'));
+      
       const newActiveBtn = tabBtns[index];
       if (newActiveBtn) {
           newActiveBtn.classList.add('active');
@@ -911,6 +915,15 @@
           const newActivePane = document.getElementById(targetId);
           if (newActivePane) {
               newActivePane.classList.add('active');
+          }
+          
+          // Scroll active tab into view horizontally in the scroll container
+          if (tabsScrollContainer) {
+              const scrollLeftPos = newActiveBtn.offsetLeft - (tabsScrollContainer.offsetWidth / 2) + (newActiveBtn.offsetWidth / 2);
+              tabsScrollContainer.scrollTo({
+                  left: scrollLeftPos,
+                  behavior: 'smooth'
+              });
           }
       }
   }
