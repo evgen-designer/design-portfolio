@@ -147,6 +147,7 @@
         background-color: var(--btn-bg); color: var(--btn-text) !important; 
         padding: 10px 20px; border-radius: 100px; font-family: var(--font-body); 
         font-weight: 600; font-size: 14px; text-decoration: none; border: none; 
+        display: inline-block;
     }
 
     /* HERO BANNER */
@@ -327,7 +328,7 @@
     }
     
     .btn-outline {
-        padding: 12px 24px;
+        padding: 9px 24px; /* Reduced top/bottom padding slightly to account for the 1px border */
         border: 1px solid var(--divider-color);
         border-radius: 100px;
         color: var(--text-color);
@@ -335,6 +336,7 @@
         font-size: 14px;
         background: transparent;
         transition: border-color 0.2s;
+        display: inline-block;
     }
     .btn-outline:hover { border-color: var(--text-color); }
     body.day .btn-outline { border-color: rgba(0,0,0,0.15); }
@@ -363,7 +365,7 @@
         font-size: 24px;
         font-weight: 500;
         line-height: 1.3;
-        margin-top: 96px; /* 4x spacing here */
+        margin-top: 72px; /* Set spacing above testimonials */
         margin-bottom: var(--spacing-main);
     }
 
@@ -652,7 +654,7 @@
       <div class="tabs-scroll">
         <button class="tab-btn active" data-target="tab-synthflow">Synthflow AI</button>
         <button class="tab-btn" data-target="tab-gocanopy">GoCanopy</button>
-        <button class="tab-btn" data-target="tab-mobius">Mobius Labs/Dropbox</button>
+        <button class="tab-btn" data-target="tab-mobius">MobiusLabs/Dropbox</button>
         <button class="tab-btn" data-target="tab-polyagent">Polyagent AI</button>
         <button class="tab-btn" data-target="tab-bladeinsight">BladeInsight</button>
       </div>
@@ -683,15 +685,15 @@
       </div>
     </div>
 
-    <!-- 3. Mobius Labs -->
+    <!-- 3. MobiusLabs -->
     <div id="tab-mobius" class="tab-content">
       <div class="tc-text-card">
-        <h2>AI SDK Demo Redesign — Mobius Labs (Acquired by Dropbox)</h2>
+        <h2>AI SDK Demo Redesign — MobiusLabs (Acquired by Dropbox)</h2>
         <p>Transforming a neglected AI SDK web demo into a vital sales tool</p>
         <a href="/ai-sdk-mobius/" class="btn-outline">View project</a>
       </div>
       <div class="tc-image-card">
-        <img src="/images/mobius-07.png" alt="Mobius Labs">
+        <img src="/images/mobius-07.png" alt="MobiusLabs">
       </div>
     </div>
 
@@ -740,7 +742,7 @@
     <div class="t-card">
       <img src="/images/appu.png" alt="Appu Shaji" class="t-avatar" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2QxZDVkYiIvPjwvc3ZnPg=='">
       <h4>Appu Shaji</h4>
-      <span>CEO, Mobius Labs</span>
+      <span>CEO, MobiusLabs</span>
       <p>I worked with Eugene across various stages of the design process, from ideation and prototyping to production. I was impressed by his work on rapid prototypes showing how our technical SDK could serve business users in the new market we were targeting.</p>
     </div>
   </div>
@@ -797,7 +799,7 @@
           <div class="job-row" data-tooltip="Increased AI SDK web demo usage during sales by 95%.">
             <div class="job-company">
                 <h3 style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                    Mobius Labs
+                    MobiusLabs
                     <span class="badge-yellow">Acquired by Dropbox</span>
                 </h3>
                 <p>Enterprise AI SDK</p>
