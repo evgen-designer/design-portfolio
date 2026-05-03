@@ -13,7 +13,6 @@
   <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
-    /* VARIABLES */
     :root {
       --bg-color: #F6F6F6; 
       --text-color: #111; 
@@ -24,16 +23,13 @@
       --header-border: rgba(0, 0, 0, 0.05);
       --btn-bg: #111; 
       --btn-text: #fff;
-      
       --meta-label: #888;
       --image-bg: #e0e0e0;
       --code-bg: #fff;
       --slide-bg: #111;
       --slide-text: #fff;
-      
       --font-heading: 'Bricolage Grotesque', sans-serif;
       --font-body: 'Instrument Sans', sans-serif;
-      
       --container-width: 1040px; 
       --spacing-main: 24px; 
     }
@@ -47,7 +43,6 @@
       --header-border: rgba(255, 255, 255, 0.1); 
       --btn-bg: #fff; 
       --btn-text: #000;
-      
       --meta-label: #666;
       --image-bg: #2a2a2a;
       --code-bg: #222;
@@ -63,24 +58,20 @@
         font-size: 16px; line-height: 1.6; 
         transition: background-color 0.3s ease, color 0.3s ease; 
     }
-
     h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
     p { margin-top: 0; margin-bottom: 16px; }
     a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.7; }
 
-    /* LAYOUT */
     .container { 
         max-width: var(--container-width); width: 100%; margin: 0 auto; 
         padding: var(--spacing-main) 20px; 
         display: flex; flex-direction: column; 
     }
-    
-    /* Centered Content Layout */
     .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
     .content-col { width: 100%; max-width: 680px; }
 
-    /* HEADER WRAPPER (STICKY FULL WIDTH) */
+    /* HEADER WRAPPER */
     .header-wrapper {
         position: sticky;
         top: 0;
@@ -91,10 +82,8 @@
         transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
     }
     .header-wrapper.scrolled {
-        background-color: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--header-border);
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
     }
     .header-container {
         max-width: var(--container-width);
@@ -104,34 +93,56 @@
         transition: padding 0.3s ease;
     }
     .header-wrapper.scrolled .header-container {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
     }
 
-    /* HEADER */
+    /* HEADER — default (top of page) */
     .main-header { 
         display: flex; justify-content: space-between; align-items: center; 
         padding: 10px 32px; 
         background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
         border-radius: 100px; border: 1px solid var(--header-border); 
         width: 100%; position: relative; z-index: 1001;
-        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+        transition: background-color 0.3s ease, border-color 0.3s ease, width 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
     }
+
+    /* HEADER — scrolled: shrink to just the back button capsule */
     .header-wrapper.scrolled .main-header {
         background-color: transparent;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
         border-color: transparent;
+        padding: 0;
+        width: auto;
+        box-shadow: none;
     }
-    
+    .header-wrapper.scrolled .header-right {
+        display: none;
+    }
+    .header-wrapper.scrolled .btn-back {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--header-border);
+        border-radius: 100px;
+        padding: 8px 18px 8px 14px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .header-wrapper.scrolled .btn-back:hover {
+        opacity: 0.85;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    body.night .header-wrapper.scrolled .btn-back {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
     .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
 
-    /* Back Button */
-    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; cursor: pointer; border: none; font-family: var(--font-body); }
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease, background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease; cursor: pointer; border: none; font-family: var(--font-body); }
     .btn-back:hover { opacity: 0.6; }
     .btn-back svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    /* Theme Toggle */
     .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
     .theme-toggle:hover { opacity: 1; }
     .theme-toggle svg { width: 20px; height: 20px; display: block; }
@@ -142,42 +153,19 @@
 
     .mobile-menu-btn { display: none; }
 
-    /* CASE STUDY STYLES */
     .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
-
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
     
     .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 24px; margin-bottom: var(--spacing-main); border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
     .hero-image img { width: 100%; height: auto; display: block; }
-
-    .hero-image.inset-black {
-        background-color: #000; 
-        padding: 40px; 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .hero-image.inset-black img {
-        width: 100%; 
-        height: auto;
-        object-fit: contain; 
-        border-radius: 6px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
+    .hero-image.inset-black { background-color: #000; padding: 40px; display: flex; align-items: center; justify-content: center; }
+    .hero-image.inset-black img { width: 100%; height: auto; object-fit: contain; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
     .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
     body.night .hero-badge { background-color: #54D1FF; color: #000; }
     
     .project-links-row { display: flex; gap: 32px; margin-top: -12px; margin-bottom: 60px; flex-wrap: wrap; }
-    .project-link { 
-      color: var(--text-color); 
-      font-weight: 700; 
-      text-decoration: none; 
-      font-size: 16px; 
-      display: inline-flex; 
-      align-items: center; 
-      transition: opacity 0.2s ease; 
-    }
+    .project-link { color: var(--text-color); font-weight: 700; text-decoration: none; font-size: 16px; display: inline-flex; align-items: center; transition: opacity 0.2s ease; }
     .project-link:hover { opacity: 0.6; }
     .project-link span { margin-left: 6px; font-size: 18px; line-height: 1; font-weight: 400; }
 
@@ -190,7 +178,6 @@
 
     .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
     .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
-    
     .text-highlight { font-size: 20px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin: 0; max-width: 680px; }
 
     .detail-list { list-style: none; padding: 0; margin: 0; }
@@ -202,16 +189,12 @@
     .numbered-list li::before { counter-increment: result-counter; content: counter(result-counter) "."; position: absolute; left: 0; color: var(--secondary-text); font-weight: 500; }
 
     .process-header { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px; }
-    
     .process-step { margin-bottom: 60px; }
     .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
 
     .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
-    
-    .media-block img, 
-    .media-block video { width: 100%; height: auto; display: block; }
+    .media-block img, .media-block video { width: 100%; height: auto; display: block; }
     .media-block iframe { width: 100%; aspect-ratio: 16 / 9; display: block; border: 0; }
-
     .media-block.video-embed { padding: 0; }
     @supports not (aspect-ratio: 16 / 9) {
       .media-block.video-embed { position: relative; height: 0; padding-bottom: 56.25%; min-height: 0; }
@@ -232,53 +215,23 @@
     .fadeIn { animation-name: fadeIn; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* TASK SPECIFIC STYLES */
     .results-card { background-color: #6936CC; padding: 40px; border-radius: 24px; margin-top: 16px; margin-bottom: 40px; }
     .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
     .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
 
-    /* FLOATING ACTION BUTTON */
     .fab-up {
-        position: fixed;
-        bottom: 32px;
-        right: 32px;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background-color: var(--btn-bg);
-        color: var(--btn-text);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
+        position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
+        border-radius: 50%; background-color: var(--btn-bg); color: var(--btn-text);
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; z-index: 999; opacity: 0; pointer-events: none;
         transform: translateY(20px);
         transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
-    .fab-up.visible {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-    }
-    .fab-up:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-    }
-    .fab-up svg {
-        width: 24px;
-        height: 24px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-    body.night .fab-up {
-        box-shadow: 0 8px 24px rgba(255,255,255,0.05);
-    }
+    .fab-up.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .fab-up:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+    .fab-up svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    body.night .fab-up { box-shadow: 0 8px 24px rgba(255,255,255,0.05); }
 
     @media (max-width: 768px) {
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -295,7 +248,6 @@
 </head>
 <body class="day">
 
-<!-- STICKY HEADER WRAPPER -->
 <div class="header-wrapper" id="header-wrapper">
   <div class="header-container">
     <header class="main-header">
@@ -342,7 +294,6 @@
        </div>
 
        <div class="project-details-wrapper">
-           
            <div class="detail-block">
                <h4 class="section-label">MY TASK</h4>
                <p class="text-highlight">
@@ -373,7 +324,6 @@
                    <li>Established a "new hire testing loop" agreement with HR to secure continuous, free user feedback</li>
                </ul>
            </div>
-
        </div>
 
        <div class="media-block">
@@ -385,42 +335,31 @@
        <div class="process-step">
            <h3>Step 1 - Internal UX review workshop:</h3>
            <p>Conducted "labor illusion" experiments and usability tests with new employees during my first two weeks, identifying that users were overwhelmed by technical jargon and confusing onboarding.</p>
-           <div class="media-block">
-               <img src="/images/mobius-03.png" alt="UX Workshop and Analysis">
-           </div>
+           <div class="media-block"><img src="/images/mobius-03.png" alt="UX Workshop and Analysis"></div>
        </div>
 
        <div class="process-step">
            <h3>Step 2 - Sales team interviews & deal analysis:</h3>
            <p>Interviewed 4 experts most involved in sales process (sales specialists, CEO and tech lead) and analyzed 30+ HubSpot deals to understand the disconnect. Discovered that while the product demo sold "features," clients were buying "solutions" specific to their industry.</p>
-           <div class="media-block">
-               <img src="/images/mobius-04.png" alt="HubSpot Deal Analysis">
-           </div>
+           <div class="media-block"><img src="/images/mobius-04.png" alt="HubSpot Deal Analysis"></div>
        </div>
 
        <div class="process-step">
            <h3>Step 3 - Defining industry personas:</h3>
            <p>Synthesized research into 4 key industry personas (Content Licensing, Internet-to-Print, Broadcasting, Marketing) to ensure the new design spoke the language of the decision-makers, not just developers.</p>
-           <div class="media-block">
-               <img src="/images/mobius-05.png" alt="Industry Personas">
-           </div>
+           <div class="media-block"><img src="/images/mobius-05.png" alt="Industry Personas"></div>
        </div>
 
        <div class="process-step">
            <h3>Step 4 - Building the infrastructure:</h3>
            <p>Created a comprehensive Design System (Figma library with MUI-based components linked to Storybook) to eliminate messy custom add-ons and inconsistent fonts, streamlining the implementation process.</p>
-           <div class="media-block">
-               <img src="/images/mobius-06.png" alt="Design System & Storybook">
-           </div>
+           <div class="media-block"><img src="/images/mobius-06.png" alt="Design System & Storybook"></div>
        </div>
 
        <div class="process-step">
            <h3>Step 5 - Strategic redesign & vertical prototyping:</h3>
            <p>Executed the "industry-oriented" redesign with improved contrast and clear, step-by-step processes.</p>
-           <div class="media-block">
-               <img src="/images/mobius-07.png" alt="Redesign Prototypes">
-           </div>
-           
+           <div class="media-block"><img src="/images/mobius-07.png" alt="Redesign Prototypes"></div>
            <div class="media-block video-embed">
                <iframe
                  src="https://www.youtube.com/embed/JjPqlSbk6qo"
@@ -446,15 +385,11 @@
   </div>
 </div>
 
-<!-- FLOATING ACTION BUTTON -->
 <div id="fab-up" class="fab-up">
-    <svg viewBox="0 0 24 24">
-        <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
 <script>
-  // 1. Theme Logic
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
@@ -469,7 +404,6 @@
       }
   });
 
-  // 2. Sticky Header & FAB Logic
   const headerWrapper = document.getElementById('header-wrapper');
   const fabUp = document.getElementById('fab-up');
 
@@ -479,7 +413,6 @@
       } else {
           headerWrapper.classList.remove('scrolled');
       }
-
       if (window.scrollY > 400) {
           fabUp.classList.add('visible');
       } else {
