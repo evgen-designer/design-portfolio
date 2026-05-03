@@ -13,7 +13,6 @@
   <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
-    /* VARIABLES */
     :root {
       --bg-color: #F6F6F6; 
       --text-color: #111; 
@@ -24,15 +23,12 @@
       --header-border: rgba(0, 0, 0, 0.05);
       --btn-bg: #111; 
       --btn-text: #fff;
-      
       --meta-label: #888;
       --image-bg: #e0e0e0;
       --slide-bg: #111;
       --slide-text: #fff;
-      
       --font-heading: 'Bricolage Grotesque', sans-serif;
       --font-body: 'Instrument Sans', sans-serif;
-      
       --container-width: 1040px; 
       --spacing-main: 24px; 
     }
@@ -46,7 +42,6 @@
       --header-border: rgba(255, 255, 255, 0.1); 
       --btn-bg: #fff; 
       --btn-text: #000;
-      
       --meta-label: #666;
       --image-bg: #2a2a2a;
       --slide-bg: #fff;
@@ -61,24 +56,20 @@
         font-size: 16px; line-height: 1.6; 
         transition: background-color 0.3s ease, color 0.3s ease; 
     }
-    
     h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
     p { margin-top: 0; margin-bottom: 16px; }
     a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.7; }
 
-    /* LAYOUT */
     .container { 
         max-width: var(--container-width); width: 100%; margin: 0 auto; 
         padding: var(--spacing-main) 20px;
         display: flex; flex-direction: column; 
     }
-    
-    /* Centered Content Layout */
     .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
     .content-col { width: 100%; max-width: 680px; }
 
-    /* HEADER WRAPPER (STICKY FULL WIDTH) */
+    /* HEADER WRAPPER */
     .header-wrapper {
         position: sticky;
         top: 0;
@@ -89,10 +80,8 @@
         transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
     }
     .header-wrapper.scrolled {
-        background-color: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--header-border);
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
     }
     .header-container {
         max-width: var(--container-width);
@@ -102,34 +91,56 @@
         transition: padding 0.3s ease;
     }
     .header-wrapper.scrolled .header-container {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
     }
 
-    /* HEADER */
+    /* HEADER — default (top of page) */
     .main-header { 
         display: flex; justify-content: space-between; align-items: center; 
         padding: 10px 32px; 
         background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
         border-radius: 100px; border: 1px solid var(--header-border); 
         width: 100%; position: relative; z-index: 1001;
-        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+        transition: background-color 0.3s ease, border-color 0.3s ease, width 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
     }
+
+    /* HEADER — scrolled: shrink to just the back button capsule */
     .header-wrapper.scrolled .main-header {
         background-color: transparent;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
         border-color: transparent;
+        padding: 0;
+        width: auto;
+        box-shadow: none;
+    }
+    .header-wrapper.scrolled .header-right {
+        display: none;
+    }
+    .header-wrapper.scrolled .btn-back {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--header-border);
+        border-radius: 100px;
+        padding: 8px 18px 8px 14px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .header-wrapper.scrolled .btn-back:hover {
+        opacity: 0.85;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    body.night .header-wrapper.scrolled .btn-back {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     }
 
     .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
-    
-    /* Back Button */
-    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; cursor: pointer; border: none; font-family: var(--font-body); }
+
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease, background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease; cursor: pointer; border: none; font-family: var(--font-body); }
     .btn-back:hover { opacity: 0.6; }
     .btn-back svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    /* Theme Toggle */
     .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
     .theme-toggle:hover { opacity: 1; }
     .theme-toggle svg { width: 20px; height: 20px; display: block; }
@@ -140,14 +151,11 @@
 
     .mobile-menu-btn { display: none; }
 
-    /* CASE STUDY STYLES */
     .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
-
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
     
     .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 24px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
     .hero-image img { width: 100%; height: auto; display: block; }
-
     .hero-image.inset-black { background-color: #000; padding: 40px; display: flex; align-items: center; justify-content: center; }
     .hero-image.inset-black img { width: 100%; height: auto; object-fit: contain; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
@@ -168,7 +176,6 @@
 
     .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
     .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
-    
     .text-highlight { font-size: 20px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin: 0; max-width: 680px; }
 
     .detail-list { list-style: none; padding: 0; margin: 0; }
@@ -181,7 +188,6 @@
     .numbered-list li::before { counter-increment: result-counter; content: counter(result-counter) "."; position: absolute; left: 0; color: var(--secondary-text); font-weight: 500; }
 
     .process-header { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px; }
-    
     .process-step { margin-bottom: 60px; }
     .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
 
@@ -199,7 +205,6 @@
     .fadeIn { animation-name: fadeIn; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* TASK SPECIFIC STYLES */
     .results-card { background-color: #6936CC; padding: 40px; border-radius: 24px; margin-top: 16px; margin-bottom: 40px; }
     .results-card li { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.5; padding-left: 32px; }
     .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
@@ -256,50 +261,20 @@
     .sf-prompt-body h5:first-child { margin-top: 0; }
     .sf-prompt-body p { margin-bottom: 12px; }
 
-    /* FLOATING ACTION BUTTON */
     .fab-up {
-        position: fixed;
-        bottom: 32px;
-        right: 32px;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background-color: var(--btn-bg);
-        color: var(--btn-text);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
+        position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
+        border-radius: 50%; background-color: var(--btn-bg); color: var(--btn-text);
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; z-index: 999; opacity: 0; pointer-events: none;
         transform: translateY(20px);
         transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
-    .fab-up.visible {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-    }
-    .fab-up:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-    }
-    .fab-up svg {
-        width: 24px;
-        height: 24px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-    body.night .fab-up {
-        box-shadow: 0 8px 24px rgba(255,255,255,0.05);
-    }
+    .fab-up.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .fab-up:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+    .fab-up svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    body.night .fab-up { box-shadow: 0 8px 24px rgba(255,255,255,0.05); }
 
-    /* MEDIA QUERIES */
     @media (min-width: 768px) {
         .sf-body { flex-direction: row; }
         .sf-sidebar { width: 280px; border-bottom: none; }
@@ -321,7 +296,6 @@
 </head>
 <body class="day">
 
-<!-- STICKY HEADER WRAPPER -->
 <div class="header-wrapper" id="header-wrapper">
   <div class="header-container">
     <header class="main-header">
@@ -365,7 +339,6 @@
        </div>
 
        <div class="project-details-wrapper">
-           
            <div class="detail-block">
                <h4 class="section-label">MY TASK</h4>
                <p class="text-highlight">
@@ -408,7 +381,6 @@
        <!-- INTERACTIVE WIDGET -->
        <div class="sf-widget-wrapper">
            <div class="sf-widget">
-               
                <div class="sf-top-bar">
                    <div class="sf-top-avatar">
                        <img src="/images/ai-avatar.png" alt="AI Agent">
@@ -420,7 +392,6 @@
                </div>
 
                <div class="sf-body">
-                   
                    <div class="sf-sidebar">
                        <div class="sf-eyebrow">
                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3"/><path d="M4 12h16"/></svg>
@@ -428,11 +399,8 @@
                        </div>
                        <h3 class="sf-title">Lead Qualification · Buyer</h3>
                        <p class="sf-desc">This agent follows a predefined logic flow to simulate real conversations.</p>
-                       
                        <div class="sf-divider"></div>
-                       
                        <div class="sf-eyebrow">Select a mode</div>
-                       
                        <button class="sf-mode-btn active" id="sf-btn-flow">
                            <div class="sf-mode-icon blue">
                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg>
@@ -442,7 +410,6 @@
                                <span>View the logic of this use case visually.</span>
                            </div>
                        </button>
-
                        <button class="sf-mode-btn" id="sf-btn-prompt">
                            <div class="sf-mode-icon green">
                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
@@ -455,11 +422,9 @@
                    </div>
 
                    <div class="sf-content">
-                       
                        <div id="sf-view-flow" class="sf-view active">
                            <div class="sf-flow-wrap">
                                <div class="sf-flow-line"></div>
-                               
                                <div class="sf-node">
                                    <div class="sf-node-header">
                                        <div class="sf-node-icon gray">
@@ -470,7 +435,6 @@
                                    <hr>
                                    <p>Who You Are You're Paul, the calm, helpful, and easygoing voice of a real estate team. Your go...</p>
                                </div>
-
                                <div class="sf-node">
                                    <div class="sf-node-header">
                                        <div class="sf-node-icon green-node">
@@ -481,7 +445,6 @@
                                    <hr>
                                    <p>Hey there! This is Paul from [Real Estate Company]—how're you doing today?</p>
                                </div>
-
                                <div class="sf-node">
                                    <div class="sf-node-header">
                                        <div class="sf-node-icon purple-node">
@@ -492,7 +455,6 @@
                                    <hr>
                                    <p>After the custom greeting: [Hey there! This is Paul from [Real Estate Company]—how're you...]</p>
                                </div>
-
                                <div class="sf-node">
                                    <div class="sf-node-header">
                                        <div class="sf-node-icon purple-node">
@@ -514,13 +476,11 @@
                                    <p>You're Paul, a calm, helpful AI assistant working for a real estate team. Your job? Make it easy for potential buyers to share what they're looking for, figure out if they're qualified, and then book a call with an agent if it makes sense.</p>
                                    <p>You're friendly and relaxed, like someone checking in to see how they can help—not pushy, not scripted. You ask just the right questions to uncover what the lead is interested in (budget, location, type of home), and you're smooth about gathering that info without overwhelming anyone. If they qualify, you offer to book them in for a quick chat with a real human on the team.</p>
                                    <p>Keep it human, keep it casual, and always keep things moving forward.</p>
-                                   
                                    <h5># Call Disclaimer & Intro Flow</h5>
                                    <p>After the Custom Greeting:</p>
                                    <p>[Hey there! This is Paul with [Real Estate Company]—how're you doing today?]<br>
                                    [[acknowledge their response] You popped up in our system as someone looking to buy a home, so I wanted to learn a little more and see if we're a good fit to help you out.]<br>
                                    (If the user interrupts or doesn't hear you clearly, repeat the greeting, wait for confirmation, and continue.)</p>
-
                                    <h5># Initial Inquiry</h5>
                                    <p>Start with something easy and natural:<br>
                                    "So—what kind of home are you hoping to find?"</p>
@@ -529,7 +489,6 @@
                                </div>
                            </div>
                        </div>
-                       
                    </div>
                </div>
            </div>
@@ -543,17 +502,13 @@
        <div class="process-step">
            <h3>Step 1 - Framing the audience and business context</h3>
            <p>Mapped the platform's likely audience across four levels of technical familiarity: non-technical users, prompt designers, automation builders, and developers. Then narrowed the audit to a realistic business use case: real estate lead qualification, where an AI agent helps qualify inbound leads before a realtor follows up.</p>
-           <div class="media-block">
-               <img src="/images/synthflow-02.png" alt="Audience & Context Mapping">
-           </div>
+           <div class="media-block"><img src="/images/synthflow-02.png" alt="Audience & Context Mapping"></div>
        </div>
 
        <div class="process-step">
            <h3>Step 2 - Defining a realistic persona and goal</h3>
            <p>Grounded the audit in a real-world persona based on previous interviews with U.S. realtors. I used "Jay", a semi-technical realtor familiar with ChatGPT, Calendly, and basic automation, whose goal was simple: set up an AI agent to contact leads, ask qualification questions, collect property preferences, and identify which leads were worth his time.</p>
-           <div class="media-block">
-               <img src="/images/synthflow-03.png" alt="Persona & Use Case Definition">
-           </div>
+           <div class="media-block"><img src="/images/synthflow-03.png" alt="Persona & Use Case Definition"></div>
        </div>
 
        <div class="process-step">
@@ -567,44 +522,25 @@
                <li>reviewed the conversation results</li>
            </ul>
            <p>This revealed where the product flow broke down for users trying to complete a simple task.</p>
-           <div class="media-block">
-               <img src="/images/synthflow-04-1.png" alt="First-Time User Flow Audit">
-           </div>
+           <div class="media-block"><img src="/images/synthflow-04-1.png" alt="First-Time User Flow Audit"></div>
        </div>
 
        <div class="process-step">
            <h3>PROBLEM: Based on the test, I identified 3 core UX problems</h3>
            <p style="margin-top: 24px;">The whole user journey - from login to agent setup - had 3 core problems: cognitive overload, architecture-driven UX, and premature feature exposure. I took the key screen and split it into system areas like prompt space, actions, and settings.</p>
-          
-           <div class="media-block">
-               <img src="/images/synthflow-10-1.png" alt="Problem Framing">
-           </div>
-         
-           <div class="media-block">
-               <img src="/images/synthflow-05.png" alt="Problem Showing">
-           </div>
+           <div class="media-block"><img src="/images/synthflow-10-1.png" alt="Problem Framing"></div>
+           <div class="media-block"><img src="/images/synthflow-05.png" alt="Problem Showing"></div>
        </div>
 
        <div class="process-step">
            <h3>SOLUTION: Redesign strategy + Key improvement</h3>
            <p style="margin-top: 24px;">The solution was to restructure the setup into smaller guided steps, focusing on goal-based actions and using more user-friendly naming.</p>
-         
-           <div class="media-block">
-               <img src="/images/synthflow-06-1.png" alt="Exploration Concepts">
-           </div>
-
+           <div class="media-block"><img src="/images/synthflow-06-1.png" alt="Exploration Concepts"></div>
            <p style="margin-top: 24px;">I narrowed the final solution to one practical change with minimal implementation cost.</p>
            <p style="margin-top: 24px;">The redesign of the main setup screen is a clear two-part layout: left Agent Behavior and right Agent Configuration. The prompt wall was replaced with a structured form while preserving raw prompt access for advanced users.</p>
-        
-           <div class="media-block">
-               <img src="/images/synthflow-07.png" alt="Low-Effort Prototype (Form tab)">
-           </div>
-           <div class="media-block">
-               <img src="/images/synthflow-08.png" alt="Low-Effort Prototype (Prompt tab)">
-           </div>
-           <div class="media-block">
-               <img src="/images/synthflow-09.png" alt="Low-Effort Prototype (Before and After)">
-           </div>
+           <div class="media-block"><img src="/images/synthflow-07.png" alt="Low-Effort Prototype (Form tab)"></div>
+           <div class="media-block"><img src="/images/synthflow-08.png" alt="Low-Effort Prototype (Prompt tab)"></div>
+           <div class="media-block"><img src="/images/synthflow-09.png" alt="Low-Effort Prototype (Before and After)"></div>
        </div>
 
        <div class="process-step">
@@ -630,15 +566,11 @@
   </div>
 </div>
 
-<!-- FLOATING ACTION BUTTON -->
 <div id="fab-up" class="fab-up">
-    <svg viewBox="0 0 24 24">
-        <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
 <script>
-  // 1. Theme Toggle
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
@@ -653,7 +585,6 @@
       }
   });
 
-  // 2. Sticky Header & FAB Logic
   const headerWrapper = document.getElementById('header-wrapper');
   const fabUp = document.getElementById('fab-up');
 
@@ -663,7 +594,6 @@
       } else {
           headerWrapper.classList.remove('scrolled');
       }
-
       if (window.scrollY > 400) {
           fabUp.classList.add('visible');
       } else {
@@ -675,7 +605,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // 3. Synthflow Widget Toggle
   const btnFlow = document.getElementById('sf-btn-flow');
   const btnPrompt = document.getElementById('sf-btn-prompt');
   const viewFlow = document.getElementById('sf-view-flow');
@@ -688,7 +617,6 @@
           viewFlow.classList.add('active');
           viewPrompt.classList.remove('active');
       });
-
       btnPrompt.addEventListener('click', () => {
           btnPrompt.classList.add('active');
           btnFlow.classList.remove('active');
