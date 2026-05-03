@@ -13,7 +13,6 @@
   <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
-    /* VARIABLES */
     :root {
       --bg-color: #F6F6F6; 
       --text-color: #111; 
@@ -24,15 +23,12 @@
       --header-border: rgba(0, 0, 0, 0.05);
       --btn-bg: #111; 
       --btn-text: #fff;
-      
       --meta-label: #888;
       --image-bg: #e0e0e0;
       --slide-bg: #111;
       --slide-text: #fff;
-      
       --font-heading: 'Bricolage Grotesque', sans-serif;
       --font-body: 'Instrument Sans', sans-serif;
-      
       --container-width: 1040px; 
       --spacing-main: 24px; 
     }
@@ -46,7 +42,6 @@
       --header-border: rgba(255, 255, 255, 0.1); 
       --btn-bg: #fff; 
       --btn-text: #000;
-      
       --meta-label: #666;
       --image-bg: #2a2a2a;
       --slide-bg: #fff;
@@ -61,24 +56,20 @@
         font-size: 16px; line-height: 1.6; 
         transition: background-color 0.3s ease, color 0.3s ease; 
     }
-    
     h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
     p { margin-top: 0; margin-bottom: 16px; }
     a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.7; }
 
-    /* LAYOUT */
     .container { 
         max-width: var(--container-width); width: 100%; margin: 0 auto; 
         padding: var(--spacing-main) 20px;
         display: flex; flex-direction: column; 
     }
-    
-    /* Centered Content Layout */
     .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
     .content-col { width: 100%; max-width: 680px; }
 
-    /* HEADER WRAPPER (STICKY FULL WIDTH) */
+    /* HEADER WRAPPER */
     .header-wrapper {
         position: sticky;
         top: 0;
@@ -89,10 +80,8 @@
         transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
     }
     .header-wrapper.scrolled {
-        background-color: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--header-border);
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
     }
     .header-container {
         max-width: var(--container-width);
@@ -102,34 +91,56 @@
         transition: padding 0.3s ease;
     }
     .header-wrapper.scrolled .header-container {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
     }
 
-    /* HEADER */
+    /* HEADER — default (top of page) */
     .main-header { 
         display: flex; justify-content: space-between; align-items: center; 
         padding: 10px 32px; 
         background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
         border-radius: 100px; border: 1px solid var(--header-border); 
         width: 100%; position: relative; z-index: 1001;
-        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+        transition: background-color 0.3s ease, border-color 0.3s ease, width 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
     }
+
+    /* HEADER — scrolled: shrink to just the back button capsule */
     .header-wrapper.scrolled .main-header {
         background-color: transparent;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
         border-color: transparent;
+        padding: 0;
+        width: auto;
+        box-shadow: none;
     }
-    
+    .header-wrapper.scrolled .header-right {
+        display: none;
+    }
+    .header-wrapper.scrolled .btn-back {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--header-border);
+        border-radius: 100px;
+        padding: 8px 18px 8px 14px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .header-wrapper.scrolled .btn-back:hover {
+        opacity: 0.85;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    body.night .header-wrapper.scrolled .btn-back {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
     .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
     
-    /* Back Button */
-    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; cursor: pointer; border: none; font-family: var(--font-body); }
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease, background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease; cursor: pointer; border: none; font-family: var(--font-body); }
     .btn-back:hover { opacity: 0.6; }
     .btn-back svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    /* Theme Toggle */
     .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
     .theme-toggle:hover { opacity: 1; }
     .theme-toggle svg { width: 20px; height: 20px; display: block; }
@@ -140,9 +151,7 @@
 
     .mobile-menu-btn { display: none; }
 
-    /* CASE STUDY STYLES */
     .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
-
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
     
     .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 24px; margin-bottom: var(--spacing-main); border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
@@ -162,7 +171,6 @@
 
     .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
     .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
-    
     .text-highlight { font-size: 20px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin: 0; max-width: 680px; }
 
     .detail-list { list-style: none; padding: 0; margin: 0; }
@@ -174,14 +182,12 @@
     .numbered-list li::before { counter-increment: result-counter; content: counter(result-counter) "."; position: absolute; left: 0; color: var(--secondary-text); font-weight: 500; }
 
     .process-header { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px; }
-    
     .process-step { margin-bottom: 60px; }
     .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
 
     .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
     .media-block img { width: 100%; height: auto; display: block; }
     .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
-    
     .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
     .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
@@ -195,53 +201,23 @@
     .fadeIn { animation-name: fadeIn; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* TASK SPECIFIC STYLES */
     .results-card { background-color: #339989; padding: 40px; border-radius: 24px; margin-top: 16px; margin-bottom: 40px; }
     .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
     .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
 
-    /* FLOATING ACTION BUTTON */
     .fab-up {
-        position: fixed;
-        bottom: 32px;
-        right: 32px;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background-color: var(--btn-bg);
-        color: var(--btn-text);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
+        position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
+        border-radius: 50%; background-color: var(--btn-bg); color: var(--btn-text);
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; z-index: 999; opacity: 0; pointer-events: none;
         transform: translateY(20px);
         transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
-    .fab-up.visible {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-    }
-    .fab-up:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-    }
-    .fab-up svg {
-        width: 24px;
-        height: 24px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-    body.night .fab-up {
-        box-shadow: 0 8px 24px rgba(255,255,255,0.05);
-    }
+    .fab-up.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .fab-up:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+    .fab-up svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    body.night .fab-up { box-shadow: 0 8px 24px rgba(255,255,255,0.05); }
 
     @media (max-width: 768px) {
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -257,7 +233,6 @@
 </head>
 <body class="day">
 
-<!-- STICKY HEADER WRAPPER -->
 <div class="header-wrapper" id="header-wrapper">
   <div class="header-container">
     <header class="main-header">
@@ -278,7 +253,6 @@
 </div>
 
 <div class="container">
-
   <div class="content-grid animated fadeIn">
     <div class="content-col">
 
@@ -300,7 +274,6 @@
        </div>
 
        <div class="project-details-wrapper">
-           
            <div class="detail-block">
                <h4 class="section-label">MY TASK</h4>
                <p class="text-highlight">
@@ -331,8 +304,6 @@
                    <li>Improved decision turnaround time by 2-3x with real-time portfolio visibility</li>
                </ul>
            </div>
-           
-
        </div>
 
        <div class="media-block">
@@ -344,60 +315,36 @@
 
        <div class="process-step">
            <h3>Step 1 - Countless collaborative sessions with the CEO and CTO:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-03.png" alt="Collaboration Session">
-           </div>
+           <div class="media-block"><img src="/images/gocanopy-03.png" alt="Collaboration Session"></div>
        </div>
 
        <div class="process-step">
            <h3>Step 2 - Analysis of meeting transcripts and research data using Google AI Studio:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-04.png" alt="AI Research Analysis">
-           </div>
+           <div class="media-block"><img src="/images/gocanopy-04.png" alt="AI Research Analysis"></div>
        </div>
 
        <div class="process-step">
            <h3>Step 3 - Capturing early insights and requirements in FigJam:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-05.png" alt="FigJam Insights">
-           </div>
+           <div class="media-block"><img src="/images/gocanopy-05.png" alt="FigJam Insights"></div>
        </div>
 
        <div class="process-step">
            <h3>Step 4 - Early idea explorations for implementation approaches, using V0.dev and Claude:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-06.png" alt="AI Prototyping Explorations">
-           </div>
+           <div class="media-block"><img src="/images/gocanopy-06.png" alt="AI Prototyping Explorations"></div>
        </div>
 
        <div class="process-step">
            <h3>Step 5 - Figma design stages overview (excluding the design system library and clickable prototypes):</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-07.png" alt="Figma Design Overview">
-           </div>
+           <div class="media-block"><img src="/images/gocanopy-07.png" alt="Figma Design Overview"></div>
        </div>
 
        <div class="process-step">
            <h3>Step 6 - Implementation support, user feedback, and refinement:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-11.png" alt="Implementation Support">
-           </div>
-         
-           <div class="media-block">
-               <img src="/images/gocanopy-12.png" alt="Implementation Support">
-           </div>
-         
-           <div class="media-block">
-               <img src="/images/gocanopy-13.png" alt="Implementation Support">
-           </div>
-         
-           <div class="media-block">
-               <img src="/images/gocanopy-14.png" alt="Implementation Support">
-           </div>
-         
-           <div class="media-block">
-               <img src="/images/gocanopy-01.png" alt="Implementation Support">
-           </div>
+           <div class="media-block"><img src="/images/gocanopy-11.png" alt="Implementation Support"></div>
+           <div class="media-block"><img src="/images/gocanopy-12.png" alt="Implementation Support"></div>
+           <div class="media-block"><img src="/images/gocanopy-13.png" alt="Implementation Support"></div>
+           <div class="media-block"><img src="/images/gocanopy-14.png" alt="Implementation Support"></div>
+           <div class="media-block"><img src="/images/gocanopy-01.png" alt="Implementation Support"></div>
        </div>
 
        <h4 class="section-label">CORE RESULT</h4>
@@ -415,15 +362,11 @@
   </div>
 </div>
 
-<!-- FLOATING ACTION BUTTON -->
 <div id="fab-up" class="fab-up">
-    <svg viewBox="0 0 24 24">
-        <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
 <script>
-  // 1. Theme Logic
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
@@ -438,7 +381,6 @@
       }
   });
 
-  // 2. Sticky Header & FAB Logic
   const headerWrapper = document.getElementById('header-wrapper');
   const fabUp = document.getElementById('fab-up');
 
@@ -448,7 +390,6 @@
       } else {
           headerWrapper.classList.remove('scrolled');
       }
-
       if (window.scrollY > 400) {
           fabUp.classList.add('visible');
       } else {
