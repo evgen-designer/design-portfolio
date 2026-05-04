@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Projects - Eugene Evgen</title>
+  <title>Works - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,6 @@
   <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
-    /* VARIABLES */
     :root {
       --bg-color: #F6F6F6; 
       --text-color: #111; 
@@ -27,10 +26,8 @@
       --card-bg: #ffffff; 
       --card-border: rgba(0,0,0,0.08);
       --pattern-dot: #e5e5e5;
-      
       --font-heading: 'Bricolage Grotesque', sans-serif;
       --font-body: 'Instrument Sans', sans-serif;
-      
       --container-width: 1040px; 
       --spacing-main: 24px; 
     }
@@ -65,7 +62,6 @@
     a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.7; }
 
-    /* LAYOUT */
     .container { 
         max-width: var(--container-width); width: 100%; margin: 0 auto; 
         padding: var(--spacing-main) 20px;
@@ -78,21 +74,12 @@
     }
     .content-col { width: 100%; max-width: 800px; }
 
-    /* HEADER WRAPPER (STICKY FULL WIDTH) */
+    /* HEADER WRAPPER */
     .header-wrapper {
         position: sticky;
         top: 0;
         z-index: 1001;
         width: 100%;
-        background-color: transparent;
-        border-bottom: 1px solid transparent;
-        transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
-    }
-    .header-wrapper.scrolled {
-        background-color: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--header-border);
     }
     .header-container {
         max-width: var(--container-width);
@@ -102,8 +89,8 @@
         transition: padding 0.3s ease;
     }
     .header-wrapper.scrolled .header-container {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
     }
 
     /* HEADER */
@@ -112,19 +99,41 @@
         padding: 10px 12px 10px 32px; 
         background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
         border-radius: 100px; border: 1px solid var(--header-border); 
-        width: 100%; 
-        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, border-radius 0.3s ease;
+        width: 100%;
+        transition: background-color 0.3s ease, border-color 0.3s ease, width 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
     }
-    
     .header-wrapper.scrolled .main-header {
         background-color: transparent;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
         border-color: transparent;
+        padding: 0;
+        width: auto;
+        box-shadow: none;
+        justify-content: flex-start;
+    }
+    .header-wrapper.scrolled .header-right {
+        display: none;
     }
 
-    .nav-links { display: flex; align-items: center; gap: 24px; }
-    
+    .nav-links { 
+        display: flex; align-items: center; gap: 24px;
+        transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+    }
+    .header-wrapper.scrolled .nav-links {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--header-border);
+        border-radius: 100px;
+        padding: 8px 20px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        gap: 20px;
+    }
+    body.night .header-wrapper.scrolled .nav-links {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
     .nav-links a.text-link {
         font-family: var(--font-body);
         font-weight: 500;
@@ -137,9 +146,7 @@
         font-weight: 600;
         cursor: default;
     }
-    .nav-links a.text-link:not(.nav-active):hover {
-        opacity: 1;
-    }
+    .nav-links a.text-link:not(.nav-active):hover { opacity: 1; }
     
     .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
     
@@ -163,18 +170,11 @@
     .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; margin-left: 8px; }
     .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
     .mobile-overlay.active { opacity: 1; pointer-events: all; }
-    
-    .mobile-link {
-        font-size: 24px; font-weight: 600; 
-        text-decoration: none; color: var(--text-color); 
-        opacity: 0.6; transition: opacity 0.2s;
-    }
-    .mobile-link.nav-active {
-        opacity: 1; pointer-events: none;
-    }
+    .mobile-link { font-size: 24px; font-weight: 600; text-decoration: none; color: var(--text-color); opacity: 0.6; transition: opacity 0.2s; }
+    .mobile-link.nav-active { opacity: 1; pointer-events: none; }
     .mobile-btn-cv { font-size: 18px; padding: 14px 28px; }
 
-    /* --- WORK CARD STYLES --- */
+    /* WORK CARDS */
     .cards-container { display: flex; flex-direction: column; gap: var(--spacing-main); width: 100%; }
     .work-card { display: block; background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; text-decoration: none; color: var(--text-color); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; position: relative; width: 100%; }
     .work-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); border-color: rgba(120, 120, 120, 0.3); }
@@ -197,112 +197,55 @@
     .two { animation-delay: 0.5s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* FLOATING ACTION BUTTON */
-    .fab-up {
-        position: fixed;
-        bottom: 32px;
-        right: 32px;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background-color: var(--btn-bg);
-        color: var(--btn-text);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(20px);
-        transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    }
-    .fab-up.visible {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-    }
-    .fab-up:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-    }
-    .fab-up svg {
-        width: 24px;
-        height: 24px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-    body.night .fab-up {
-        box-shadow: 0 8px 24px rgba(255,255,255,0.05);
-    }
-
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .btn-cv { display: none; }
       .card-visual { height: 200px; }
       .card-content h2, .card-content p { word-wrap: break-word; }
-
       .header-container { padding-top: 16px; }
       .header-wrapper.scrolled .header-container { padding-top: 8px; padding-bottom: 8px; }
-
       .main-header,
       .header-wrapper.scrolled .main-header {
         height: 60px;
         min-height: 60px;
         padding: 0 24px;
         align-items: center;
+        width: 100%;
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-color: var(--header-border);
+        justify-content: space-between;
       }
-
-      .header-left,
-      .header-right {
-        height: 100%;
-        display: flex;
-        align-items: center;
-      }
-      
-      .img-left-mobile {
-          object-position: left center !important;
-      }
-
-      .fab-up {
-          bottom: 24px;
-          right: 24px;
-          width: 40px;
-          height: 40px;
-      }
-      .fab-up svg {
-          width: 20px;
-          height: 20px;
-      }
+      .header-wrapper.scrolled .header-right { display: flex; }
+      .header-left, .header-right { height: 100%; display: flex; align-items: center; }
+      .img-left-mobile { object-position: left center !important; }
     }
   </style>
 </head>
 <body class="day">
 
+<!-- MOBILE OVERLAY -->
 <div class="mobile-overlay">
     <a href="/" class="mobile-link">Experience</a>
-    <a href="/projects/" class="mobile-link nav-active">Projects</a>
+    <a href="/works/" class="mobile-link nav-active">Works</a>
     <a href="/contact/" class="mobile-link">Contact</a>
     <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank" style="display:block; margin-top:16px;">Download CV</a>
 </div>
 
+<!-- STICKY HEADER WRAPPER -->
 <div class="header-wrapper" id="header-wrapper">
     <div class="header-container">
         <header class="main-header">
             <div class="header-left">
                 <nav class="nav-links">
-                <a href="/" class="text-link">Experience</a>
-                <a href="/projects/" class="text-link nav-active">Projects</a>
-                <a href="/contact/" class="text-link">Contact</a>
+                    <a href="/" class="text-link">Experience</a>
+                    <a href="/works/" class="text-link nav-active">Works</a>
+                    <a href="/contact/" class="text-link">Contact</a>
                 </nav>
                 <div class="mobile-menu-btn">Menu</div>
             </div>
-            
             <div class="header-right">
                 <div id="theme-btn" class="theme-toggle">
                     <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -317,7 +260,6 @@
 <div class="container">
   <div class="content-grid animated fadeIn two">
     <div class="content-col">
-       
        <div class="cards-container">
          
            <a href="/ai-investment-platform/" class="work-card">
@@ -391,25 +333,17 @@
             </a>         
 
        </div>
-
     </div>
   </div>
 </div>
 
-<div id="fab-up" class="fab-up">
-    <svg viewBox="0 0 24 24">
-        <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
-</div>
-
 <script>
-  // Theme Logic
+  // Theme
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'night') { body.classList.remove('day'); body.classList.add('night'); } 
   else { body.classList.add('day'); }
-
   themeBtn.addEventListener('click', function() {
       if (body.classList.contains('day')) {
           body.classList.remove('day'); body.classList.add('night'); localStorage.setItem('theme', 'night');
@@ -418,14 +352,13 @@
       }
   });
 
-  // Mobile Menu Logic
+  // Mobile Menu
   const menuBtn = document.querySelector('.mobile-menu-btn');
   const overlay = document.querySelector('.mobile-overlay');
   let isMenuOpen = false;
-
   menuBtn.addEventListener('click', () => {
       isMenuOpen = !isMenuOpen;
-      if(isMenuOpen) {
+      if (isMenuOpen) {
           overlay.classList.add('active');
           menuBtn.innerText = "Close";
           document.body.style.overflow = 'hidden';
@@ -436,26 +369,14 @@
       }
   });
 
-  // Sticky Header & FAB Logic
+  // Sticky Header
   const headerWrapper = document.getElementById('header-wrapper');
-  const fabUp = document.getElementById('fab-up');
-
   window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
           headerWrapper.classList.add('scrolled');
       } else {
           headerWrapper.classList.remove('scrolled');
       }
-
-      if (window.scrollY > 400) {
-          fabUp.classList.add('visible');
-      } else {
-          fabUp.classList.remove('visible');
-      }
-  });
-
-  fabUp.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
 </body>
