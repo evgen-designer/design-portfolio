@@ -36,7 +36,6 @@
   </script>
   
   <style>
-    /* VARIABLES */
     :root {
       --bg-color: #F6F6F6; 
       --text-color: #111; 
@@ -49,20 +48,16 @@
       --btn-text: #fff;
       --tooltip-bg: #050505; 
       --tooltip-text: #fff;
-      
       --hero-bg: #C6CBE4; 
       --card-bg: #ffffff; 
       --card-border: rgba(0,0,0,0.08);
       --inner-bg: #F8F7F4;
       --badge-yellow: #FFD500;
-      
       --font-heading: 'Bricolage Grotesque', sans-serif;
       --font-body: 'Instrument Sans', sans-serif;
-      
       --container-width: 1040px; 
       --spacing-main: 24px; 
     }
-
     body.night {
       --bg-color: #121212; 
       --text-color: #f0f0f0; 
@@ -75,14 +70,12 @@
       --btn-text: #000;
       --tooltip-bg: #ffffff; 
       --tooltip-text: #000000;
-      
       --hero-bg: #272A3B; 
       --card-bg: #1A1A1A; 
       --card-border: rgba(255,255,255,0.1);
       --inner-bg: #242424;
       --badge-yellow: #54D1FF; 
     }
-
     * { box-sizing: border-box; }
     body { 
         margin: 0; padding: 0; 
@@ -92,20 +85,18 @@
         font-size: 16px; line-height: 1.6; 
         transition: background-color 0.3s ease, color 0.3s ease; 
     }
-    
     h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
     p { margin-top: 0; margin-bottom: 16px; }
     a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.7; }
 
-    /* LAYOUT */
     .container { 
         max-width: var(--container-width); width: 100%; margin: 0 auto; 
         padding: var(--spacing-main) 20px;
         display: flex; flex-direction: column; 
     }
 
-    /* HEADER WRAPPER (STICKY FULL WIDTH) */
+    /* HEADER WRAPPER */
     .header-wrapper {
         position: sticky;
         top: 0;
@@ -116,10 +107,8 @@
         transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
     }
     .header-wrapper.scrolled {
-        background-color: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--header-border);
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
     }
     .header-container {
         max-width: var(--container-width);
@@ -129,29 +118,59 @@
         transition: padding 0.3s ease;
     }
     .header-wrapper.scrolled .header-container {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
     }
 
-    /* HEADER */
+    /* HEADER — default (top of page): full pill */
     .main-header { 
         display: flex; justify-content: space-between; align-items: center; 
         padding: 10px 12px 10px 32px; 
         background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
         border-radius: 100px; border: 1px solid var(--header-border); 
         width: 100%; 
-        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, border-radius 0.3s ease;
+        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, width 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
     }
 
+    /* HEADER — scrolled: only the nav links capsule, left-aligned */
     .header-wrapper.scrolled .main-header {
         background-color: transparent;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
         border-color: transparent;
+        padding: 0;
+        width: auto;
+        box-shadow: none;
+        justify-content: flex-start;
     }
-    
-    .nav-links { display: flex; align-items: center; gap: 24px; }
-    
+
+    /* Hide the right side (theme toggle + CV button) when scrolled */
+    .header-wrapper.scrolled .header-right {
+        display: none;
+    }
+
+    /* Nav links become their own floating capsule when scrolled */
+    .header-wrapper.scrolled .nav-links {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--header-border);
+        border-radius: 100px;
+        padding: 8px 20px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        gap: 20px;
+    }
+    body.night .header-wrapper.scrolled .nav-links {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .header-wrapper.scrolled .nav-links:hover {
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .nav-links { 
+        display: flex; align-items: center; gap: 24px;
+        transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+    }
     .nav-links a.text-link {
         font-family: var(--font-body);
         font-weight: 500;
@@ -164,9 +183,7 @@
         font-weight: 600;
         cursor: default;
     }
-    .nav-links a.text-link:not(.nav-active):hover {
-        opacity: 1;
-    }
+    .nav-links a.text-link:not(.nav-active):hover { opacity: 1; }
 
     .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
     
@@ -186,391 +203,88 @@
     }
 
     /* HERO BANNER */
-    .hero-banner {
-        display: flex;
-        gap: var(--spacing-main);
-        margin-bottom: var(--spacing-main);
-        align-items: stretch;
-    }
-    .hero-content {
-        background-color: var(--hero-bg);
-        border-radius: 24px;
-        padding: 60px 48px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .hero-content h1 {
-        font-size: 72px;
-        line-height: 0.95;
-        letter-spacing: -0.02em;
-        margin-bottom: 24px;
-        color: #111; 
-    }
+    .hero-banner { display: flex; gap: var(--spacing-main); margin-bottom: var(--spacing-main); align-items: stretch; }
+    .hero-content { background-color: var(--hero-bg); border-radius: 24px; padding: 60px 48px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .hero-content h1 { font-size: 72px; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 24px; color: #111; }
     body.night .hero-content h1, body.night .hero-content p { color: #fff; }
-    
-    .hero-content p {
-        font-size: 22px;
-        line-height: 1.3;
-        font-weight: 400;
-        color: #333;
-        max-width: 440px;
-    }
-    .hero-image-wrapper {
-        width: 32%;
-        border-radius: 24px;
-        overflow: hidden;
-        position: relative;
-        display: flex;
-    }
-    .hero-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
+    .hero-content p { font-size: 22px; line-height: 1.3; font-weight: 400; color: #333; max-width: 440px; }
+    .hero-image-wrapper { width: 32%; border-radius: 24px; overflow: hidden; position: relative; display: flex; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
     /* TRUST SECTION */
-    .trust-section {
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 24px;
-        padding: 48px 32px;
-        margin-bottom: var(--spacing-main);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    .trust-title {
-        font-family: var(--font-body);
-        font-size: 16px;
-        font-weight: 300;
-        color: var(--text-color);
-        margin-bottom: 20px; 
-        text-align: center;
-    }
-    .trust-logos {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 56px;
-        flex-wrap: wrap;
-        width: 100%;
-    }
-    .trust-logos img {
-        height: 36px;
-        width: auto;
-        object-fit: contain;
-        opacity: 0.9;
-    }
-    /* Invert black logos for dark mode */
-    body.night .trust-logos img {
-        filter: invert(1) brightness(2);
-        opacity: 1;
-    }
+    .trust-section { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 48px 32px; margin-bottom: var(--spacing-main); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .trust-title { font-family: var(--font-body); font-size: 16px; font-weight: 300; color: var(--text-color); margin-bottom: 20px; text-align: center; }
+    .trust-logos { display: flex; align-items: center; justify-content: center; gap: 56px; flex-wrap: wrap; width: 100%; }
+    .trust-logos img { height: 36px; width: auto; object-fit: contain; opacity: 0.9; }
+    body.night .trust-logos img { filter: invert(1) brightness(2); opacity: 1; }
 
-    /* PORTFOLIO SECTION (TABS + CONTENT) */
-    .portfolio-card {
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 24px;
-        padding: 40px;
-        margin-bottom: var(--spacing-main);
-        width: 100%;
-    }
-
-    /* TABS NAV */
-    .tabs-container {
-        border-bottom: 1px solid var(--divider-color);
-        margin-bottom: 32px;
-    }
-    .tabs-scroll {
-        display: flex;
-        gap: 32px;
-        overflow-x: auto;
-        scrollbar-width: none;
-        position: relative;
-    }
+    /* PORTFOLIO SECTION */
+    .portfolio-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 40px; margin-bottom: var(--spacing-main); width: 100%; }
+    .tabs-container { border-bottom: 1px solid var(--divider-color); margin-bottom: 32px; }
+    .tabs-scroll { display: flex; gap: 32px; overflow-x: auto; scrollbar-width: none; position: relative; }
     .tabs-scroll::-webkit-scrollbar { display: none; }
-    
-    .tab-btn {
-        background: none;
-        border: none;
-        padding: 0 0 16px 0;
-        font-family: var(--font-body);
-        font-size: 16px;
-        color: var(--secondary-text);
-        cursor: pointer;
-        font-weight: 500;
-        position: relative;
-        white-space: nowrap;
-        transition: color 0.2s;
-    }
+    .tab-btn { background: none; border: none; padding: 0 0 16px 0; font-family: var(--font-body); font-size: 16px; color: var(--secondary-text); cursor: pointer; font-weight: 500; position: relative; white-space: nowrap; transition: color 0.2s; }
     .tab-btn:hover { color: var(--text-color); }
     .tab-btn.active { color: var(--text-color); font-weight: 600; }
-    .tab-btn.active::after {
-        content: '';
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: var(--text-color);
-        border-radius: 3px 3px 0 0;
-    }
-
-    /* TAB CONTENT */
-    .tab-content { 
-        display: none; 
-        gap: 24px; 
-    }
-    
-    @keyframes tabFade {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .tab-content.active { 
-        display: flex; 
-        animation: tabFade 0.4s ease forwards;
-    }
-    
-    .tc-text-card {
-        flex: 1;
-        background-color: var(--inner-bg);
-        border-radius: 16px;
-        padding: 48px 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        border: 1px solid var(--card-border);
-    }
-    .tc-text-card h2 {
-        font-family: var(--font-body); 
-        font-size: 26px;
-        font-weight: 500;
-        line-height: 1.3;
-        margin-bottom: 16px;
-    }
-    .tc-text-card p {
-        font-size: 16px;
-        color: var(--text-color);
-        opacity: 0.85;
-        margin-bottom: 32px;
-    }
-    
-    .btn-outline {
-        padding: 9px 24px; 
-        border: 1px solid var(--divider-color);
-        border-radius: 100px;
-        color: var(--text-color);
-        font-weight: 600;
-        font-size: 14px;
-        background: transparent;
-        transition: border-color 0.2s;
-        display: inline-block;
-    }
+    .tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 3px; background: var(--text-color); border-radius: 3px 3px 0 0; }
+    .tab-content { display: none; gap: 24px; }
+    @keyframes tabFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .tab-content.active { display: flex; animation: tabFade 0.4s ease forwards; }
+    .tc-text-card { flex: 1; background-color: var(--inner-bg); border-radius: 16px; padding: 48px 40px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; border: 1px solid var(--card-border); }
+    .tc-text-card h2 { font-family: var(--font-body); font-size: 26px; font-weight: 500; line-height: 1.3; margin-bottom: 16px; }
+    .tc-text-card p { font-size: 16px; color: var(--text-color); opacity: 0.85; margin-bottom: 32px; }
+    .btn-outline { padding: 9px 24px; border: 1px solid var(--divider-color); border-radius: 100px; color: var(--text-color); font-weight: 600; font-size: 14px; background: transparent; transition: border-color 0.2s; display: inline-block; }
     .btn-outline:hover { border-color: var(--text-color); }
     body.day .btn-outline { border-color: rgba(0,0,0,0.15); }
     body.night .btn-outline { border-color: rgba(255,255,255,0.2); }
-    
-    .tc-image-card {
-        flex: 1;
-        background-color: var(--inner-bg);
-        border-radius: 16px;
-        border: 1px solid var(--card-border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    .tc-image-card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
+    .tc-image-card { flex: 1; background-color: var(--inner-bg); border-radius: 16px; border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .tc-image-card img { width: 100%; height: 100%; object-fit: cover; }
     .img-left { object-position: left center !important; }
 
-    .section-title {
-        font-family: var(--font-body); 
-        font-size: 24px;
-        font-weight: 500;
-        line-height: 1.3;
-        margin-top: 72px; 
-        margin-bottom: var(--spacing-main);
-    }
+    .section-title { font-family: var(--font-body); font-size: 24px; font-weight: 500; line-height: 1.3; margin-top: 72px; margin-bottom: var(--spacing-main); }
 
     /* TESTIMONIALS */
-    .testimonials-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--spacing-main);
-        margin-bottom: var(--spacing-main);
-    }
-    .t-card {
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 20px;
-        padding: 40px 32px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .t-avatar {
-        width: 64px; height: 64px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 16px;
-        background: var(--bg-color);
-    }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-main); margin-bottom: var(--spacing-main); }
+    .t-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 40px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .t-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background: var(--bg-color); }
     .t-card h4 { font-family: var(--font-body); font-size: 18px; font-weight: 600; margin: 0 0 4px 0; }
     .t-card span { font-size: 13px; color: var(--secondary-text); margin-bottom: 24px; display: block; }
     .t-card p { font-size: 15px; line-height: 1.6; margin: 0; color: var(--text-color); }
 
-    /* MAIN WHITE CONTAINER */
-    .main-content-card {
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 24px;
-        padding: 80px;
-        margin-bottom: 0;
-    }
+    /* MAIN CONTENT CARD */
+    .main-content-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 80px; margin-bottom: 0; }
 
-    /* ABOUT SECTION */
-    .about-section {
-        display: flex;
-        gap: 60px;
-        margin-bottom: 80px;
-        padding-bottom: 80px;
-        border-bottom: 1px solid var(--divider-color);
-        align-items: center;
-    }
+    /* ABOUT */
+    .about-section { display: flex; gap: 60px; margin-bottom: 80px; padding-bottom: 80px; border-bottom: 1px solid var(--divider-color); align-items: center; }
     .about-text { flex: 1; }
-    .about-text h2 {
-        font-size: 36px;
-        letter-spacing: -0.02em;
-        margin-bottom: 16px;
-        line-height: 1.2;
-    }
-    .about-text .subtitle {
-        font-size: 20px;
-        line-height: 1.5;
-        margin-bottom: 32px;
-        color: var(--text-color);
-    }
-    .about-text p {
-        color: var(--secondary-text);
-        margin-bottom: 20px;
-    }
+    .about-text h2 { font-size: 36px; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.2; }
+    .about-text .subtitle { font-size: 20px; line-height: 1.5; margin-bottom: 32px; color: var(--text-color); }
+    .about-text p { color: var(--secondary-text); margin-bottom: 20px; }
     .about-text a { font-weight: 600; border-bottom: 1px solid transparent; }
     .about-text a:hover { border-bottom: 1px solid var(--link-color); }
-    
-    .about-photo {
-        width: 280px;
-        flex-shrink: 0;
-    }
-    
-    .about-photo img {
-        width: 100%;
-        border-radius: 22px;
-        border: 1px solid var(--card-border);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.05);
-    }
+    .about-photo { width: 280px; flex-shrink: 0; }
+    .about-photo img { width: 100%; border-radius: 22px; border: 1px solid var(--card-border); box-shadow: 0 12px 32px rgba(0,0,0,0.05); }
 
-    /* PREVIOUS EXPERIENCE */
-    .section-label { 
-        font-family: var(--font-body);
-        font-size: 12px; 
-        letter-spacing: 1.5px; 
-        text-transform: uppercase; 
-        color: var(--secondary-text); 
-        font-weight: 600; 
-        margin-bottom: 32px; 
-    }
-
+    /* EXPERIENCE */
+    .section-label { font-family: var(--font-body); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-bottom: 32px; }
     .job-list { position: relative; display: flex; flex-direction: column; }
-    
-    .hover-tooltip { 
-        position: absolute; 
-        width: 220px; 
-        background-color: var(--tooltip-bg); 
-        color: var(--tooltip-text); 
-        padding: 16px; 
-        border-radius: 8px; 
-        font-size: 13px; 
-        line-height: 1.5; 
-        z-index: 10; 
-        opacity: 0; 
-        pointer-events: none; 
-        transform: translateY(-50%); 
-        transition: all 0.3s ease; 
-        box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
-    }
-    
-    .hover-tooltip::after { 
-        content: ""; 
-        position: absolute; 
-        top: 50%; 
-        left: -6px; 
-        margin-top: -6px; 
-        border-width: 6px 6px 6px 0; 
-        border-style: solid; 
-        border-color: transparent var(--tooltip-bg) transparent transparent; 
-    }
-
-    .job-row { 
-        position: relative; 
-        display: grid; 
-        grid-template-columns: 1.2fr 1fr 220px; 
-        column-gap: 32px; 
-        padding: 24px 0; 
-        cursor: default; 
-        border-bottom: 1px solid transparent; 
-    }
-    
+    .hover-tooltip { position: absolute; width: 220px; background-color: var(--tooltip-bg); color: var(--tooltip-text); padding: 16px; border-radius: 8px; font-size: 13px; line-height: 1.5; z-index: 10; opacity: 0; pointer-events: none; transform: translateY(-50%); transition: all 0.3s ease; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .hover-tooltip::after { content: ""; position: absolute; top: 50%; left: -6px; margin-top: -6px; border-width: 6px 6px 6px 0; border-style: solid; border-color: transparent var(--tooltip-bg) transparent transparent; }
+    .job-row { position: relative; display: grid; grid-template-columns: 1.2fr 1fr 220px; column-gap: 32px; padding: 24px 0; cursor: default; border-bottom: 1px solid transparent; }
     .job-company h3 { font-family: var(--font-body); font-size: 18px; font-weight: 600; margin: 0 0 4px 0; color: var(--text-color); }
     .job-company p { font-size: 14px; color: var(--secondary-text); margin: 0; }
-    
     .job-details h4 { font-family: var(--font-body); font-size: 16px; font-weight: 500; margin: 0 0 4px 0; color: var(--text-color); }
     .job-details p { font-size: 14px; color: var(--secondary-text); margin: 0; }
-    
-    .badge-yellow {
-        background-color: var(--badge-yellow); 
-        color: #000;
-        font-size: 10px; 
-        font-weight: 700; 
-        padding: 3px 8px; 
-        border-radius: 100px; 
-        white-space: nowrap; 
-        display: inline-block;
-        transform: translateY(-2px);
-    }
+    .badge-yellow { background-color: var(--badge-yellow); color: #000; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 100px; white-space: nowrap; display: inline-block; transform: translateY(-2px); }
 
-    /* FOOTER TEXT */
     .footer-text { font-size: 14px; color: var(--secondary-text); margin-top: 80px; }
 
     /* MOBILE OVERLAY */
     .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; margin-left: 8px; }
     .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
     .mobile-overlay.active { opacity: 1; pointer-events: all; }
-    
-    .mobile-link {
-        font-size: 24px;
-        font-weight: 600;
-        text-decoration: none;
-        color: var(--text-color);
-        opacity: 0.6;
-        transition: opacity 0.2s;
-    }
-    .mobile-link.nav-active {
-        opacity: 1;
-        pointer-events: none;
-    }
+    .mobile-link { font-size: 24px; font-weight: 600; text-decoration: none; color: var(--text-color); opacity: 0.6; transition: opacity 0.2s; }
+    .mobile-link.nav-active { opacity: 1; pointer-events: none; }
 
     /* ANIMATIONS */
     .animated { animation-duration: 0.8s; animation-fill-mode: both; }
@@ -579,114 +293,47 @@
     .three { animation-delay: 0.4s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* FLOATING ACTION BUTTON */
-    .fab-up {
-        position: fixed;
-        bottom: 32px;
-        right: 32px;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background-color: var(--btn-bg);
-        color: var(--btn-text);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(20px);
-        transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    }
-    .fab-up.visible {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-    }
-    .fab-up:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-    }
-    .fab-up svg {
-        width: 24px;
-        height: 24px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-    body.night .fab-up {
-        box-shadow: 0 8px 24px rgba(255,255,255,0.05);
-    }
+    /* FAB */
+    .fab-up { position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px; border-radius: 50%; background-color: var(--btn-bg); color: var(--btn-text); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; opacity: 0; pointer-events: none; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .fab-up.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .fab-up:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+    .fab-up svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    body.night .fab-up { box-shadow: 0 8px 24px rgba(255,255,255,0.05); }
 
-    /* MOBILE BREAKPOINTS */
+    /* MOBILE */
     @media (max-width: 900px) {
       .testimonials-grid { grid-template-columns: 1fr; gap: 16px; }
       .job-row { grid-template-columns: 1fr 1fr 150px; }
     }
-    
     @media (max-width: 768px) {
       .nav-links, .btn-cv { display: none; }
       .mobile-menu-btn { display: block; }
       .hover-tooltip { display: none !important; }
-      
       .header-container { padding-top: 16px; }
       .header-wrapper.scrolled .header-container { padding-top: 8px; padding-bottom: 8px; }
-
       .main-header,
-      .header-wrapper.scrolled .main-header {
-        height: 60px;
-        min-height: 60px;
-        padding: 0 24px;
-        align-items: center;
-      }
-      
+      .header-wrapper.scrolled .main-header { height: 60px; min-height: 60px; padding: 0 24px; align-items: center; }
       .hero-banner { flex-direction: column; gap: 16px; }
       .hero-content { padding: 40px 32px; }
       .hero-content h1 { font-size: 48px; }
       .hero-image-wrapper { width: 100%; height: 320px; }
-      
       .hero-img { object-position: top center !important; }
-
       .trust-section { padding: 32px 24px; }
       .trust-title { font-size: 18px; margin-bottom: 16px; }
       .trust-logos { gap: 24px; }
       .trust-logos img { height: 28px; }
-      
       .portfolio-card { padding: 32px 24px; }
       .tab-content { flex-direction: column-reverse; gap: 16px; }
       .tc-text-card { padding: 32px 24px; }
       .tc-image-card { height: 240px; }
-      
       .main-content-card { padding: 40px 24px; }
       .about-section { flex-direction: column; gap: 40px; padding-bottom: 40px; margin-bottom: 40px; text-align: left; align-items: flex-start; }
       .about-photo { width: 100%; max-width: 320px; }
-      
       .job-row { grid-template-columns: 1fr; gap: 8px; padding: 20px 0; }
       .job-details { margin-top: 4px; }
-      .job-row::after {
-          content: attr(data-tooltip);
-          display: block;
-          margin-top: 16px;
-          padding-top: 16px;
-          border-top: 1px solid var(--divider-color);
-          font-size: 14px;
-          color: var(--secondary-text);
-      }
-
-      .fab-up {
-          bottom: 24px;
-          right: 24px;
-          width: 40px;
-          height: 40px;
-      }
-      .fab-up svg {
-          width: 20px;
-          height: 20px;
-      }
+      .job-row::after { content: attr(data-tooltip); display: block; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); }
+      .fab-up { bottom: 24px; right: 24px; width: 40px; height: 40px; }
+      .fab-up svg { width: 20px; height: 20px; }
     }
   </style>
 </head>
@@ -706,19 +353,19 @@
     <div class="header-container">
         <header class="main-header">
             <div class="header-left">
-            <nav class="nav-links">
-                <a href="/" class="text-link nav-active">Experience</a>
-                <a href="/projects/" class="text-link">Projects</a>
-                <a href="/contact/" class="text-link">Contact</a>
-            </nav>
-            <div class="mobile-menu-btn">Menu</div>
+                <nav class="nav-links">
+                    <a href="/" class="text-link nav-active">Experience</a>
+                    <a href="/projects/" class="text-link">Projects</a>
+                    <a href="/contact/" class="text-link">Contact</a>
+                </nav>
+                <div class="mobile-menu-btn">Menu</div>
             </div>
             <div class="header-right">
-            <div id="theme-btn" class="theme-toggle">
-                <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            </div>
-            <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
+                <div id="theme-btn" class="theme-toggle">
+                    <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </div>
+                <a href="/Eugene Evgen CV - Lead Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
             </div>
         </header>
     </div>
@@ -726,7 +373,7 @@
 
 <div class="container">
 
-  <!-- HERO SECTION -->
+  <!-- HERO -->
   <div class="hero-banner animated fadeIn">
     <div class="hero-content">
       <h1>AI & Complex<br>SaaS Product<br>Designer</h1>
@@ -737,7 +384,7 @@
     </div>
   </div>
 
-  <!-- TRUST SECTION -->
+  <!-- TRUST -->
   <div class="trust-section animated fadeIn two">
     <h3 class="trust-title">Trusted by teams at leading organizations</h3>
     <div class="trust-logos">
@@ -749,10 +396,8 @@
     </div>
   </div>
 
-  <!-- PORTFOLIO SECTION -->
+  <!-- PORTFOLIO -->
   <div class="portfolio-card animated fadeIn two">
-    
-    <!-- TABS NAV -->
     <div class="tabs-container">
       <div class="tabs-scroll">
         <button class="tab-btn" data-target="tab-gocanopy">GoCanopy</button>
@@ -763,8 +408,6 @@
       </div>
     </div>
 
-    <!-- TABS CONTENT -->
-    <!-- 1. GoCanopy -->
     <div id="tab-gocanopy" class="tab-content">
       <div class="tc-text-card">
         <h2>AI Investment Platform Design — GoCanopy (€2.1M funding)</h2>
@@ -776,7 +419,6 @@
       </div>
     </div>
 
-    <!-- 2. MobiusLabs -->
     <div id="tab-mobius" class="tab-content">
       <div class="tc-text-card">
         <h2>AI SDK Demo Redesign — MobiusLabs (Acquired by Dropbox)</h2>
@@ -788,7 +430,6 @@
       </div>
     </div>
     
-    <!-- 3. Synthflow AI -->
     <div id="tab-synthflow" class="tab-content active">
       <div class="tc-text-card">
         <h2>AI Automation Platform Audit — Synthflow AI ($20M funding)</h2>
@@ -800,7 +441,6 @@
       </div>
     </div>
 
-    <!-- 4. BladeInsight -->
     <div id="tab-bladeinsight" class="tab-content">
       <div class="tc-text-card">
         <h2>Drone Inspection Software Design — BladeInsight (Acquired by SES Energy)</h2>
@@ -812,7 +452,6 @@
       </div>
     </div>    
 
-    <!-- 5. Polyagent AI -->
     <div id="tab-polyagent" class="tab-content">
       <div class="tc-text-card">
         <h2>AI Assistant Platform Research — Polyagent AI</h2>
@@ -823,7 +462,6 @@
         <img src="/images/polyagent-01.png" alt="Polyagent AI">
       </div>
     </div>
-    
   </div>
 
   <h2 class="section-title animated fadeIn three">What founders say about my impact</h2>
@@ -840,7 +478,7 @@
       <img src="/images/tom.png" alt="Tom Godfrey" class="t-avatar" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2QxZDVkYiIvPjwvc3ZnPg=='">
       <h4>Tom Godfrey</h4>
       <span>Head of Product, Metapraxis</span>
-      <p>Eugene is great at communicating where improvements are required in the overall design and the system. The interface designs he pulled together were the best I’ve seen, getting us 90% of the way there.</p>
+      <p>Eugene is great at communicating where improvements are required in the overall design and the system. The interface designs he pulled together were the best I've seen, getting us 90% of the way there.</p>
     </div>
     <div class="t-card">
       <img src="/images/appu.png" alt="Appu Shaji" class="t-avatar" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2QxZDVkYiIvPjwvc3ZnPg=='">
@@ -850,19 +488,14 @@
     </div>
   </div>
 
-  <!-- MAIN WHITE CONTENT BLOCK -->
+  <!-- MAIN CONTENT -->
   <div class="main-content-card animated fadeIn three">
-    
-    <!-- ABOUT -->
     <div class="about-section">
       <div class="about-text">
         <h2>Hi, I'm Eugene — Lead Product Designer</h2>
         <p class="subtitle">with 10+ years designing complex B2B & enterprise SaaS across automation, data, fintech, and AI.</p>
-        
-        <p>I’ve been designing at <a href="https://www.gocanopy.tech/" target="_blank">GoCanopy</a> for the last <span id="counter">...</span>.</p>
-        
+        <p>I've been designing at <a href="https://www.gocanopy.tech/" target="_blank">GoCanopy</a> for the last <span id="counter">...</span>.</p>
         <p>My research-driven prototypes helped us win multiple <a href="https://evgendesigner.com/ai-investment-platform/" target="_blank">Fortune 500 clients</a>. I shaped the analytical, forecasting, agentic, generative, and conversational capabilities of our AI operating system for institutional real estate, supporting a €2.1M seed round and reducing manual data aggregation by 42%.</p>
-        
         <p>I live in Porto, Portugal. You can keep up with me on <a href="https://www.threads.com/@bucklajean" target="_blank">Threads</a> or <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank">LinkedIn</a>.</p>
       </div>
       <div class="about-photo">
@@ -870,33 +503,19 @@
       </div>
     </div>
 
-    <!-- EXPERIENCE -->
     <div class="experience-section">
       <h4 class="section-label">PREVIOUS EXPERIENCE</h4> 
-
       <div class="job-list">
           <div class="hover-tooltip" id="hover-tooltip">Loading tooltip...</div>
 
           <div class="job-row" data-tooltip="Reduced onboarding drop-off by 40% for an AI forecasting tool.">
-            <div class="job-company">
-                <h3>Monocle</h3>
-                <p>AI E-commerce Inventory Platform</p>
-            </div>  
-            <div class="job-details">
-                <h4>Senior Product Designer</h4>
-                <p>2024</p>
-            </div>
+            <div class="job-company"><h3>Monocle</h3><p>AI E-commerce Inventory Platform</p></div>  
+            <div class="job-details"><h4>Senior Product Designer</h4><p>2024</p></div>
           </div>  
 
           <div class="job-row" data-tooltip="Achieved a 50% early-adopter conversion rate with a prototype of a new financial platform.">
-            <div class="job-company">
-                <h3>Metapraxis</h3>
-                <p>AI Financial Platform</p>
-            </div>  
-            <div class="job-details">
-                <h4>Senior Product Designer</h4>
-                <p>2023</p>
-            </div>
+            <div class="job-company"><h3>Metapraxis</h3><p>AI Financial Platform</p></div>  
+            <div class="job-details"><h4>Senior Product Designer</h4><p>2023</p></div>
           </div>
 
           <div class="job-row" data-tooltip="Increased AI SDK web demo usage during sales by 95%.">
@@ -907,10 +526,7 @@
                 </h3>
                 <p>Enterprise AI SDK</p>
             </div>  
-            <div class="job-details">
-                <h4>Senior Product Designer</h4>
-                <p>2022</p>
-            </div>
+            <div class="job-details"><h4>Senior Product Designer</h4><p>2022</p></div>
           </div>
 
           <div class="job-row" data-tooltip="Improved operator task efficiency by up to 34% for autonomous drone inspection software.">
@@ -921,39 +537,24 @@
                 </h3>
                 <p>Industrial AI Software</p>
             </div>  
-            <div class="job-details">
-                <h4>Senior Product Designer</h4>
-                <p>2021-2022</p>
-            </div>
+            <div class="job-details"><h4>Senior Product Designer</h4><p>2021-2022</p></div>
           </div>
 
           <div class="job-row" data-tooltip="Drove 1,828 downloads and 5-star ratings on both the App Store and Google Play within the first 8 months for a fleet management app.">
-            <div class="job-company">
-                <h3>Schmitz Cargobull</h3>
-                <p>Fleet Management Software</p>
-            </div>
-            <div class="job-details">
-                <h4>Senior UX/UI Designer</h4>
-                <p>2019-2020</p>
-            </div>
+            <div class="job-company"><h3>Schmitz Cargobull</h3><p>Fleet Management Software</p></div>
+            <div class="job-details"><h4>Senior UX/UI Designer</h4><p>2019-2020</p></div>
           </div>
 
           <div class="job-row" data-tooltip="Designed B2B & enterprise apps for Knight Frank, Volotea, ADNOC, BCG, and others.">
-            <div class="job-company">
-                <h3>Xebia</h3>
-                <p>Enterprise Software Consulting</p>
-            </div>  
-            <div class="job-details">
-                <h4>Senior UI Designer</h4>
-                <p>2017-2021</p>
-            </div>
+            <div class="job-company"><h3>Xebia</h3><p>Enterprise Software Consulting</p></div>  
+            <div class="job-details"><h4>Senior UI Designer</h4><p>2017-2021</p></div>
           </div> 
       </div>
 
       <h4 class="section-label" style="margin-top: 80px;">OTHER THAN DESIGN</h4>
       <div style="max-width: 800px;">
           <p style="color: var(--secondary-text);">
-              Outside of work, you’ll usually find me building my personal small apps in the App Store and talking about the journey on 
+              Outside of work, you'll usually find me building my personal small apps in the App Store and talking about the journey on 
               <a href="https://www.threads.com/@bucklajean" target="_blank" style="color: var(--text-color); font-weight: 600;">Threads</a>.
               I also try to maintain a healthy relationship with the ocean - walking, running, surfing, or swimming, depending on the courage levels :)
           </p>
@@ -962,26 +563,22 @@
       <div class="footer-text">
           <p>This website is vibe-coded with Gemini 3 Pro. © 2026 All rights reserved.</p>
       </div>
-      
     </div>
   </div> 
 
 </div>
 
 <div id="fab-up" class="fab-up">
-    <svg viewBox="0 0 24 24">
-        <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
 <script>
-  // 1. Theme Logic
+  // 1. Theme
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'night') { body.classList.remove('day'); body.classList.add('night'); } 
   else { body.classList.add('day'); }
-
   themeBtn.addEventListener('click', function() {
       if (body.classList.contains('day')) {
           body.classList.remove('day'); body.classList.add('night'); localStorage.setItem('theme', 'night');
@@ -990,14 +587,13 @@
       }
   });
 
-  // 2. Mobile Menu Logic
+  // 2. Mobile Menu
   const menuBtn = document.querySelector('.mobile-menu-btn');
   const overlay = document.querySelector('.mobile-overlay');
   let isMenuOpen = false;
-
   menuBtn.addEventListener('click', () => {
       isMenuOpen = !isMenuOpen;
-      if(isMenuOpen) {
+      if (isMenuOpen) {
           overlay.classList.add('active');
           menuBtn.innerText = "Close";
           document.body.style.overflow = 'hidden';
@@ -1008,7 +604,7 @@
       }
   });
 
-  // 3. Tab Switching Logic (with auto-rotation and mobile horizontal scrolling)
+  // 3. Tabs
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabPanes = document.querySelectorAll('.tab-content');
   const tabsScrollContainer = document.querySelector('.tabs-scroll');
@@ -1018,48 +614,36 @@
   function switchToTab(index) {
       tabBtns.forEach(b => b.classList.remove('active'));
       tabPanes.forEach(p => p.classList.remove('active'));
-      
       const newActiveBtn = tabBtns[index];
       if (newActiveBtn) {
           newActiveBtn.classList.add('active');
           const targetId = newActiveBtn.getAttribute('data-target');
           const newActivePane = document.getElementById(targetId);
-          if (newActivePane) {
-              newActivePane.classList.add('active');
-          }
-          
-          // Scroll active tab into view horizontally in the scroll container
+          if (newActivePane) newActivePane.classList.add('active');
           if (tabsScrollContainer) {
               const scrollLeftPos = newActiveBtn.offsetLeft - (tabsScrollContainer.offsetWidth / 2) + (newActiveBtn.offsetWidth / 2);
-              tabsScrollContainer.scrollTo({
-                  left: scrollLeftPos,
-                  behavior: 'smooth'
-              });
+              tabsScrollContainer.scrollTo({ left: scrollLeftPos, behavior: 'smooth' });
           }
       }
   }
 
   function startTabRotation() {
-      // Clear any existing interval to prevent duplicates
       clearInterval(tabInterval);
       tabInterval = setInterval(() => {
           currentTabIndex = (currentTabIndex + 1) % tabBtns.length;
           switchToTab(currentTabIndex);
-      }, 4000); // Switch every 4 seconds
+      }, 4000);
   }
 
-  // Add click event listeners for manual override
   tabBtns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
-          clearInterval(tabInterval); // Stop auto-rotation on user interaction
+          clearInterval(tabInterval);
           currentTabIndex = index;
           switchToTab(index);
       });
   });
 
-  // Start the rotation when the page is loaded
   startTabRotation();
-
 
   // 4. Counter
   var startDate = new Date("Sep 4, 2024 09:00:00").getTime();
@@ -1070,31 +654,29 @@
       document.getElementById("counter").innerHTML = days + " days";
   }, 1000);
 
-  // 5. Tooltip Logic (Desktop Only)
+  // 5. Tooltip
   const jobRows = document.querySelectorAll('.job-row');
   const tooltip = document.getElementById('hover-tooltip');
 
   function updateTooltip(element) {
       tooltip.innerText = element.getAttribute('data-tooltip');
       const centerLine = element.offsetTop + (element.offsetHeight / 2);
-      
-      tooltip.style.left = "auto"; 
-      tooltip.style.right = "0px"; 
-      tooltip.style.top = centerLine + "px"; 
+      tooltip.style.left = "auto";
+      tooltip.style.right = "0px";
+      tooltip.style.top = centerLine + "px";
       tooltip.style.opacity = "1";
   }
 
-  if (window.innerWidth > 768 && jobRows.length > 0) { 
-      setTimeout(() => { updateTooltip(jobRows[0]); }, 100); 
+  if (window.innerWidth > 768 && jobRows.length > 0) {
+      setTimeout(() => { updateTooltip(jobRows[0]); }, 100);
   }
-  
-  jobRows.forEach(row => { 
-      row.addEventListener('mouseenter', function() { 
-          if (window.innerWidth > 768) { updateTooltip(this); } 
-      }); 
+  jobRows.forEach(row => {
+      row.addEventListener('mouseenter', function() {
+          if (window.innerWidth > 768) { updateTooltip(this); }
+      });
   });
 
-  // 6. Sticky Header & FAB Logic
+  // 6. Sticky Header & FAB
   const headerWrapper = document.getElementById('header-wrapper');
   const fabUp = document.getElementById('fab-up');
 
@@ -1104,7 +686,6 @@
       } else {
           headerWrapper.classList.remove('scrolled');
       }
-
       if (window.scrollY > 400) {
           fabUp.classList.add('visible');
       } else {
