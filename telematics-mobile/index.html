@@ -2,55 +2,145 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>AI Investment Platform - Eugene Evgen</title>
+  <title>Schmitz Cargobull Telematics Platform - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
   <link rel="icon" href="/images/favicon.ico" sizes="any">
   <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
-    /* VARIABLES */
     :root {
-      --bg-color: #F6F6F6; --text-color: #111; --secondary-text: #777; --link-color: #111; --divider-color: #e5e5e5;
-      --header-bg: rgba(255, 255, 255, 0.6); --header-border: rgba(0, 0, 0, 0.05);
-      --btn-bg: #111; --btn-text: #fff;
-      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --container-width: 800px; --top-spacing: 40px; --bottom-spacing: 140px;
-      
+      --bg-color: #F6F6F6; 
+      --text-color: #111; 
+      --secondary-text: #666; 
+      --link-color: #111; 
+      --divider-color: #e5e5e5;
+      --header-bg: rgba(255, 255, 255, 0.6); 
+      --header-border: rgba(0, 0, 0, 0.05);
+      --btn-bg: #111; 
+      --btn-text: #fff;
       --meta-label: #888;
       --image-bg: #e0e0e0;
-      --code-bg: #fff;
       --slide-bg: #111;
       --slide-text: #fff;
+      --font-heading: 'Bricolage Grotesque', sans-serif;
+      --font-body: 'Instrument Sans', sans-serif;
+      --container-width: 1040px; 
+      --spacing-main: 24px; 
     }
     body.night {
-      --bg-color: #1a1a1a; --text-color: #f0f0f0; --secondary-text: #a0a0a0; --link-color: #fff; --divider-color: #333;
-      --header-bg: rgba(40, 40, 40, 0.6); --header-border: rgba(255, 255, 255, 0.1); --btn-bg: #fff; --btn-text: #000;
-      
+      --bg-color: #121212; 
+      --text-color: #f0f0f0; 
+      --secondary-text: #999; 
+      --link-color: #fff; 
+      --divider-color: #333;
+      --header-bg: rgba(30, 30, 30, 0.6); 
+      --header-border: rgba(255, 255, 255, 0.1); 
+      --btn-bg: #fff; 
+      --btn-text: #000;
       --meta-label: #666;
       --image-bg: #2a2a2a;
-      --code-bg: #222;
       --slide-bg: #fff;
       --slide-text: #000;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
+    body { 
+        margin: 0; padding: 0; 
+        background-color: var(--bg-color); 
+        color: var(--text-color); 
+        font-family: var(--font-body); 
+        font-size: 16px; line-height: 1.6; 
+        transition: background-color 0.3s ease, color 0.3s ease; 
+    }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
+    p { margin-top: 0; margin-bottom: 16px; }
+    a { color: var(--link-color); text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.7; }
 
-    /* LAYOUT */
-    .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
-    
-    /* Centered Content Layout */
+    .container { 
+        max-width: var(--container-width); width: 100%; margin: 0 auto; 
+        padding: var(--spacing-main) 20px;
+        display: flex; flex-direction: column; 
+    }
     .content-grid { width: 100%; display: flex; flex-direction: column; align-items: center; }
     .content-col { width: 100%; max-width: 680px; }
 
-    /* HEADER */
-    .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 32px 10px 32px; margin-bottom: 60px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
+    /* HEADER WRAPPER */
+    .header-wrapper {
+        position: sticky;
+        top: 0;
+        z-index: 1001;
+        width: 100%;
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
+        transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .header-wrapper.scrolled {
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
+    }
+    .header-container {
+        max-width: var(--container-width);
+        width: 100%;
+        margin: 0 auto;
+        padding: var(--spacing-main) 20px 0 20px;
+        transition: padding 0.3s ease;
+    }
+    .header-wrapper.scrolled .header-container {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    /* HEADER — default (top of page) */
+    .main-header { 
+        display: flex; justify-content: space-between; align-items: center; 
+        padding: 10px 32px; 
+        background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
+        border-radius: 100px; border: 1px solid var(--header-border); 
+        width: 100%; position: relative; z-index: 1001;
+        transition: background-color 0.3s ease, border-color 0.3s ease, width 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* HEADER — scrolled: shrink to just the back button capsule */
+    .header-wrapper.scrolled .main-header {
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-color: transparent;
+        padding: 0;
+        width: auto;
+        box-shadow: none;
+    }
+    .header-wrapper.scrolled .header-right {
+        display: none;
+    }
+    .header-wrapper.scrolled .btn-back {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--header-border);
+        border-radius: 100px;
+        padding: 8px 18px 8px 14px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .header-wrapper.scrolled .btn-back:hover {
+        opacity: 0.85;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    body.night .header-wrapper.scrolled .btn-back {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .header-left, .header-right { display: flex; align-items: center; gap: 24px; }
     
-    /* Back Button */
-    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease; }
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 0; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: opacity 0.2s ease, background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease; cursor: pointer; border: none; font-family: var(--font-body); }
     .btn-back:hover { opacity: 0.6; }
     .btn-back svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    /* Theme Toggle */
     .theme-toggle { width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s; }
     .theme-toggle:hover { opacity: 1; }
     .theme-toggle svg { width: 20px; height: 20px; display: block; }
@@ -61,18 +151,18 @@
 
     .mobile-menu-btn { display: none; }
 
-    /* CASE STUDY STYLES */
     .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
-
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
     
-    .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 12px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
+    .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 24px; margin-bottom: var(--spacing-main); border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
     .hero-image img { width: 100%; height: auto; display: block; }
+    .hero-image.inset-black { background-color: #000; padding: 40px; display: flex; align-items: center; justify-content: center; }
+    .hero-image.inset-black img { width: 100%; height: auto; object-fit: contain; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
     .hero-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
     body.night .hero-badge { background-color: #54D1FF; color: #000; }
 
-    .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 12px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
+    .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 24px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
     .text-slide.secondary { font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px; }
 
     .project-details-wrapper { margin-bottom: 80px; }
@@ -81,7 +171,6 @@
 
     .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
     .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
-    
     .text-highlight { font-size: 20px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin: 0; max-width: 680px; }
 
     .detail-list { list-style: none; padding: 0; margin: 0; }
@@ -93,15 +182,11 @@
     .numbered-list li::before { counter-increment: result-counter; content: counter(result-counter) "."; position: absolute; left: 0; color: var(--secondary-text); font-weight: 500; }
 
     .process-header { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px; }
-    
     .process-step { margin-bottom: 60px; }
     .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
 
     .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
     .media-block img { width: 100%; height: auto; display: block; }
-    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
-    
-    .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
     .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
     .footer-title { font-size: 32px; font-weight: 700; line-height: 1.2; color: var(--text-color); margin: 0 0 16px 0; }
@@ -114,10 +199,23 @@
     .fadeIn { animation-name: fadeIn; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* TASK SPECIFIC STYLES */
-    .results-card { background-color: #339989; padding: 40px; border-radius: 12px; margin-top: 16px; margin-bottom: 40px; }
+    .results-card { background-color: #339989; padding: 40px; border-radius: 24px; margin-top: 16px; margin-bottom: 40px; }
     .results-card li { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 20px; line-height: 1.4; padding-left: 32px; }
     .results-card li::before { color: rgba(255,255,255,0.6); font-weight: 600; }
+
+    .fab-up {
+        position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
+        border-radius: 50%; background-color: var(--btn-bg); color: var(--btn-text);
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; z-index: 999; opacity: 0; pointer-events: none;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .fab-up.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .fab-up:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+    .fab-up svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    body.night .fab-up { box-shadow: 0 8px 24px rgba(255,255,255,0.05); }
 
     @media (max-width: 768px) {
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -126,138 +224,137 @@
       .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
       .media-block { min-height: auto; }
       .results-card li { font-size: 20px; padding-left: 28px; }
+      .fab-up { bottom: 24px; right: 24px; width: 40px; height: 40px; }
+      .fab-up svg { width: 20px; height: 20px; }
     }
   </style>
 </head>
 <body class="day">
 
-<div class="container">
-  <header class="main-header">
-    <a href="/works/" class="btn-back">
-        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back to works
-    </a>
-    
-    <div id="theme-btn" class="theme-toggle">
-        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-    </div>
-  </header>
+<div class="header-wrapper" id="header-wrapper">
+  <div class="header-container">
+    <header class="main-header">
+      <div class="header-left">
+        <button class="btn-back" onclick="history.back()">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+        </button>
+      </div>
+      <div class="header-right">
+        <div id="theme-btn" class="theme-toggle">
+            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
 
+<div class="container">
   <div class="content-grid animated fadeIn">
     <div class="content-col">
 
-       <span class="case-tag">AI INTERACTION DESIGN</span>
-       <h1>Empowering enterprise investment teams to scale portfolio decisions with AI (Won €2.1M Seed Funding)</h1>
-       
-       <div class="hero-image">
-           <div class="hero-badge">Drove multiple Fortune 500 deals</div>
-           <img src="/images/gocanopy-01.png" alt="GoCanopy Investment Platform Interface">
-       </div>
+       <span class="case-tag">NATIVE MOBILE & TELEMATICS DESIGN</span>
+       <h1>Translating complex vehicle telematics into an intuitive mobile platform for Europe's leading trailer manufacturer</h1>
 
+       <div class="hero-image inset-black">
+           <div class="hero-badge">Reduced fleet downtime by up to 30%</div>
+           <img src="/images/slide-45.png" alt="High-fidelity prototype showcase of the beUpToDate app screens">
+       </div>
+      
        <h4 class="section-label">CHALLENGE</h4>
        <div class="text-slide">
-           Real estate investment teams lose time and decision quality due to highly fragmented, inconsistent data scattered across drives, inboxes, PDFs, spreadsheets, and manual processes.
+           Schmitz Cargobull’s legacy desktop fleet management system was clumsy, overwhelming, and inaccessible on the go. Fleet managers and drivers were missing critical, real-time vehicle data (like sudden temperature drops in refrigerated trailers or tire pressure issues), leading to delayed decisions, safety risks, and operational inefficiencies.
        </div>
 
        <div class="project-details-wrapper">
-           
            <div class="detail-block">
                <h4 class="section-label">MY TASK</h4>
                <p class="text-highlight">
-                   Led the design of the MVP Asset Management experience for an enterprise client presentation, unifying fragmented real estate data into a single, decision-ready workflow and integrating it into the existing investment platform.
+                   Lead the end-to-end product design (iOS & Android) for a new mobile telematics assistant. My goal was to partner with Product and Engineering to translate massive amounts of live vehicle data into a simplified, task-critical mobile workflow that drivers and operators could rely on in fast-paced, field environments.
                </p>
            </div>
 
            <div class="detail-block last-top">
                <h4 class="section-label">TASK TIMEFRAME</h4>
-               <p class="text-highlight">2 months</p>
+               <p class="text-highlight">10-week MVP delivery (followed by 15 months of continuous feature scaling & dev support)</p>
            </div>
 
            <div style="margin-bottom: 40px;">
                <h4 class="section-label">KEY FOCUS AREAS</h4>
                <ul class="detail-list">
-                   <li>User research, workflow analysis, and problem framing</li>
-                   <li>End-to-end UX & UI design (clickable Figma prototype)</li>
-                   <li>AI-assisted insight design & data visualization</li>
-                   <li>Stakeholder presentations & alignment</li>
+                   <li>Native mobile UX/UI design (iOS HIG & Android Material)</li>
+                   <li>Translating massive telematics datasets into intuitive, low-cognitive-load interfaces</li>
+                   <li>Cross-functional collaboration (PMs, BAs, and Swift/Kotlin developers)</li>
+                   <li>Resourceful usability testing and friction analysis</li>
+                   <li>Design system utilization and scalable engineering handoff</li>
                </ul>
            </div>
            
            <h4 class="section-label">KEY RESULTS</h4>
            <div class="results-card">
                <ul class="numbered-list">
-                   <li>Helped secure multiple Fortune 500 enterprise client partnerships</li>
-                   <li>Reduced manual data aggregation by 42% by centralizing portfolio data into a single workflow</li>
-                   <li>Improved decision turnaround time by 2-3x with real-time portfolio visibility</li>
+                   <li>Achieved a 5-star rating on both App Store & Google Play (1,828 downloads in first 8 months, now 10K+)</li>
+                   <li>Improved incident response efficiency by ~50% through real-time mobile notifications</li>
+                   <li>Reduced trailer downtime by 15-30% and fuel consumption by 3-10%</li>
+                   <li>Successfully adopted across 100,000+ telematics units processing live vehicle data</li>
                </ul>
            </div>
-           
-
        </div>
 
        <div class="media-block">
-            <img src="/images/gocanopy-02.png" alt="Prototype Screen">
+            <img src="/images/slide-53.png" alt="Real-world user alongside business achievements">
        </div>
-       <p class="nda-note">NDA-protected project - business-sensitive details omitted. Full story with deeper insights available upon request.</p>
 
        <h4 class="process-header">OVERVIEW OF MY DESIGN PROCESS</h4>
 
        <div class="process-step">
-           <h3>Step 1 - Countless collaborative sessions with the CEO and CTO:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-03.png" alt="Collaboration Session">
-           </div>
+           <h3>Step 1 - Empathizing with drivers and fleet operators:</h3>
+           <p>I analyzed the current desktop platform and interviewed the client's fleet coordinators. We uncovered three core insights: the existing data was too slow to access, operators lacked out-of-office visibility, and drivers needed vital safety/status notifications without excessive interruption while on the road.</p>
+           <div class="media-block"><img src="/images/slide-38.png" alt="3 main interview insights sticky notes"></div>
        </div>
 
        <div class="process-step">
-           <h3>Step 2 - Analysis of meeting transcripts and research data using Google AI Studio:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-04.png" alt="AI Research Analysis">
-           </div>
+           <h3>Step 2 - Information architecture & rapid ideation:</h3>
+           <p>I facilitated the transition from a complex, data-heavy desktop view to a focused mobile architecture. I created low-fidelity wireframes mapped to specific user goals: real-time trailer status, on-the-go control actions, and vital safety alerts.</p>
+           <div class="media-block"><img src="/images/slide-40.png" alt="Low-fidelity sketches and architecture mapping"></div>
        </div>
 
        <div class="process-step">
-           <h3>Step 3 - Capturing early insights and requirements in FigJam:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-05.png" alt="FigJam Insights">
-           </div>
+           <h3>Step 3 - High-fidelity prototyping for native platforms:</h3>
+           <p>I designed parallel experiences for native iOS and Android. A core focus was simplifying the cognitive load—ensuring that complex telematics (like multi-zone temperature monitoring and engine diagnostics) were scannable at a glance. I built interactive prototypes to align C-suite stakeholders and the product team.</p>
+           <div class="media-block"><img src="/images/slide-42.png" alt="Progression from wireframes to advanced UI screens"></div>
        </div>
 
        <div class="process-step">
-           <h3>Step 4 - Early idea explorations for implementation approaches, using V0.dev and Claude:</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-06.png" alt="AI Prototyping Explorations">
-           </div>
+           <h3>Step 4 - Resourceful "corridor" usability testing:</h3>
+           <p>Operating without a dedicated budget for external user testing, I embraced a "deliver with urgency" mindset. I conducted guerilla corridor tests with internal employees unfamiliar with the project. This friction analysis revealed a critical flaw: vital temperature data was hidden behind clicks. I immediately redesigned the list view to surface this telematics data upfront, vastly improving scannability.</p>
+           <div class="media-block"><img src="/images/slide-49.png" alt="Before & After UI comparison showing the exposed temperature data"></div>
        </div>
 
        <div class="process-step">
-           <h3>Step 5 - Figma design stages overview (excluding the design system library and clickable prototype):</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-07.png" alt="Figma Design Overview">
-           </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 6 - User feedback, refinement, and implementation support (preview of design snippets).</h3>
-           <div class="media-block">
-               <img src="/images/gocanopy-08.png" alt="Implementation Support">
-           </div>
+           <h3>Step 5 - Deep engineering collaboration & agile handoff:</h3>
+           <p>To ensure we hit our aggressive 10-week MVP launch, I worked in tight daily syncs with the iOS and Android developers. I utilized a scalable design system and Zeplin for seamless handoff, ensuring components aligned with native Swift and Kotlin capabilities without compromising the user experience.</p>
+           <div class="media-block"><img src="/images/slide-50.png" alt="Developer workspace showing Zeplin handoff and SwiftUI code"></div>
        </div>
 
        <h4 class="section-label">CORE RESULT</h4>
        <div class="text-slide secondary" style="margin-top: 16px;">
-           My Figma prototype helped win multiple Fortune 500 enterprise client deals
+           By reducing cognitive load and focusing on actionable telematics data, I designed a mobile experience that transformed manual, reactive fleet monitoring into a proactive, real-time workflow.
        </div>
 
        <div class="footer-cta">
            <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
            <p class="footer-subtitle">I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery.<br>AI-powered workflows, fast iterations, real business impact.</p>
-           <a href="/contact/" class="btn-contact">Let’s design your product</a>
+           <a href="/contact/" class="btn-contact">Let's design your product</a>
        </div>
 
     </div>
   </div>
+</div>
+
+<div id="fab-up" class="fab-up">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
 <script>
@@ -273,6 +370,26 @@
       } else {
           body.classList.remove('night'); body.classList.add('day'); localStorage.setItem('theme', 'day');
       }
+  });
+
+  const headerWrapper = document.getElementById('header-wrapper');
+  const fabUp = document.getElementById('fab-up');
+
+  window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+          headerWrapper.classList.add('scrolled');
+      } else {
+          headerWrapper.classList.remove('scrolled');
+      }
+      if (window.scrollY > 400) {
+          fabUp.classList.add('visible');
+      } else {
+          fabUp.classList.remove('visible');
+      }
+  });
+
+  fabUp.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
 </body>
