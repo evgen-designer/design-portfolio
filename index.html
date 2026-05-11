@@ -237,8 +237,11 @@
     .btn-outline:hover { border-color: var(--text-color); }
     body.day .btn-outline { border-color: rgba(0,0,0,0.15); }
     body.night .btn-outline { border-color: rgba(255,255,255,0.2); }
-    .tc-image-card { flex: 1; background-color: var(--inner-bg); border-radius: 16px; border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    
+    .tc-image-card { flex: 1; background-color: var(--inner-bg); border-radius: 16px; border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
     .tc-image-card img { width: 100%; height: 100%; object-fit: cover; }
+    .tc-badge { position: absolute; top: 16px; right: 16px; background-color: #FFD500; color: #000; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; font-family: var(--font-body); }
+    body.night .tc-badge { background-color: #54D1FF; color: #000; }
     .img-left { object-position: left center !important; }
 
     .section-title { font-family: var(--font-body); font-size: 24px; font-weight: 500; line-height: 1.3; margin-top: 72px; margin-bottom: var(--spacing-main); }
@@ -400,22 +403,23 @@
   <div class="portfolio-card animated fadeIn two">
     <div class="tabs-container">
       <div class="tabs-scroll">
-        <button class="tab-btn" data-target="tab-gocanopy">GoCanopy</button>
+        <button class="tab-btn active" data-target="tab-gocanopy">GoCanopy</button>
         <button class="tab-btn" data-target="tab-mobius">MobiusLabs/Dropbox</button>
-        <button class="tab-btn active" data-target="tab-synthflow">Synthflow AI</button>
+        <button class="tab-btn" data-target="tab-synthflow">Synthflow AI</button>
         <button class="tab-btn" data-target="tab-bladeinsight">BladeInsight</button>
         <button class="tab-btn" data-target="tab-cargobull">Schmitz Cargobull</button>
         <button class="tab-btn" data-target="tab-polyagent">Polyagent AI</button>
       </div>
     </div>
 
-    <div id="tab-gocanopy" class="tab-content">
+    <div id="tab-gocanopy" class="tab-content active">
       <div class="tc-text-card">
         <h2>AI Investment Platform Design — GoCanopy (€2.1M funding)</h2>
         <p>Empowering enterprise investment teams to scale portfolio decisions with AI</p>
         <a href="/ai-investment-platform/" class="btn-outline">View project</a>
       </div>
       <div class="tc-image-card">
+        <div class="tc-badge">Drove multiple Fortune 500 deals</div>
         <img src="/images/gocanopy-01-1.png" alt="GoCanopy" class="img-left">
       </div>
     </div>
@@ -427,17 +431,19 @@
         <a href="/ai-sdk-mobius/" class="btn-outline">View project</a>
       </div>
       <div class="tc-image-card">
+        <div class="tc-badge">Increased demo usage in sales by 95%</div>
         <img src="/images/mobius-07.png" alt="MobiusLabs">
       </div>
     </div>
     
-    <div id="tab-synthflow" class="tab-content active">
+    <div id="tab-synthflow" class="tab-content">
       <div class="tc-text-card">
         <h2>AI Automation Platform Audit — Synthflow AI ($20M funding)</h2>
         <p>Simplified agent setup flow, improving completion speed</p>
         <a href="/ai-voice-agent-platform/" class="btn-outline">View project</a>
       </div>
       <div class="tc-image-card">
+        <div class="tc-badge">Uncovered dev-ready fixes via 4-hour audit</div>
         <img src="/images/synthflow-00-3.png" alt="Synthflow AI" class="img-left">
       </div>
     </div>
@@ -449,6 +455,7 @@
         <a href="/drone-inspection-software/" class="btn-outline">View project</a>
       </div>
       <div class="tc-image-card">
+        <div class="tc-badge">Improved operator task efficiency by 34%</div>
         <img src="/images/bi-02-1.png" alt="BladeInsight">
       </div>
     </div>    
@@ -460,7 +467,8 @@
         <a href="/schmitz-cargobull/" class="btn-outline">View project</a>
       </div>
       <div class="tc-image-card">
-        <img src="/images/cargobull-01.png" alt="Schmitz Cargobull">
+        <div class="tc-badge">Reduced fleet downtime by up to 30%</div>
+        <img src="/images/cargobull-01.png" alt="Schmitz Cargobull" class="img-left">
       </div>
     </div> 
 
@@ -471,6 +479,7 @@
         <a href="/ai-ux-research-polyagent/" class="btn-outline">View project</a>
       </div>
       <div class="tc-image-card">
+        <div class="tc-badge">Prevented 3-month AI MVP build</div>
         <img src="/images/polyagent-01.png" alt="Polyagent AI">
       </div>
     </div>
@@ -516,17 +525,22 @@
     </div>
 
     <div class="experience-section">
-      <h4 class="section-label">PREVIOUS EXPERIENCE</h4> 
+      <h4 class="section-label">EXPERIENCE</h4> 
       <div class="job-list">
           <div class="hover-tooltip" id="hover-tooltip">Loading tooltip...</div>
 
+          <div class="job-row" data-tooltip="Drove multiple Fortune 500 deals, helped to secure a €2.1M seed round, reduced manual data aggregation by 42%.">
+            <div class="job-company"><h3>GoCanopy Enterprise</h3><p>AI Fintech SaaS</p></div>  
+            <div class="job-details"><h4>Lead Product Designer</h4><p>2024-2026</p></div>
+          </div>
+
           <div class="job-row" data-tooltip="Reduced onboarding drop-off by 40% for an AI forecasting tool.">
-            <div class="job-company"><h3>Monocle</h3><p>AI E-commerce Inventory Platform</p></div>  
+            <div class="job-company"><h3>Monocle</h3><p>AI E-commerce Analytics Platform</p></div>  
             <div class="job-details"><h4>Senior Product Designer</h4><p>2024</p></div>
           </div>  
 
           <div class="job-row" data-tooltip="Achieved a 50% early-adopter conversion rate with a prototype of a new financial platform.">
-            <div class="job-company"><h3>Metapraxis</h3><p>AI Financial Platform</p></div>  
+            <div class="job-company"><h3>Metapraxis</h3><p>Enterprise Fintech SaaS</p></div>  
             <div class="job-details"><h4>Senior Product Designer</h4><p>2023</p></div>
           </div>
 
@@ -547,13 +561,13 @@
                     BladeInsight
                     <span class="badge-yellow">Acquired by SES Energy</span>
                 </h3>
-                <p>Industrial AI Software</p>
+                <p>Industrial Drone Inspection Software</p>
             </div>  
             <div class="job-details"><h4>Senior Product Designer</h4><p>2021-2022</p></div>
           </div>
 
           <div class="job-row" data-tooltip="Drove 1,828 downloads and 5-star ratings on both the App Store and Google Play within the first 8 months for a fleet management app.">
-            <div class="job-company"><h3>Schmitz Cargobull</h3><p>Fleet Management Software</p></div>
+            <div class="job-company"><h3>Schmitz Cargobull</h3><p>Telematics & IoT Platform</p></div>
             <div class="job-details"><h4>Senior UX/UI Designer</h4><p>2019-2020</p></div>
           </div>
 
